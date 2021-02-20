@@ -21,14 +21,14 @@ class ProgressTracker extends Component {
                     <div className="progress-marker"></div>
                     <div className="progress-text">
                         <h4 className="progress-title">Step 1</h4>
-                        Business Information
+                        Application Tracking Information
                     </div>
                 </li>
                 <li className={classNameStep2}>
                     <div className="progress-marker"></div>
                     <div className="progress-text">
                         <h4 className="progress-title">Step 2</h4>
-                        Job Information
+                       Client Information
                     </div>
                 </li>
                 <li className={classNameStep3}>

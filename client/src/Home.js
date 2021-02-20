@@ -5,43 +5,25 @@ function Home() {
         <div className="container">
             <div className="row">
                 <div className="col-md-12">
-                    <h1>WorkBC Wage Subsidy</h1>
-                    <p>The WorkBC Wage Subsidy program provides funding to eligible employers to hire, provide work experience and on-the-job training.</p>
-                    <p>Wage subsidy offers employers:</p>
+                    <h1>Access To Technology</h1>
+                    <p>Access to Technology (A2T) will provide basic laptops to eligible clients participating in specific training programs administered by SDPR, AEST and ISET, which:</p>
                     <ul>
-                        <li>A portion of employee wages</li>
-                        <li>Support for ongoing operations and expansion</li>
-                        <li>Disability supports to reduce work-related barriers for an employee</li>
-                        <li>An opportunity to:</li>
-                        <ul>
-                            <li>Re-hire laid off employees</li>
-                            <li>Hire new employees</li>
-                            <li>Better connect job seekers and employers to meet hiring needs</li>
-                        </ul>
+                        <li>Have an online learning component; and</li>
+                        <li>Lead to employment; and</li>
+                        <li>Are a minimum of 4 weeks in duration; and</li>
+                        <li>Are on the list of approved skills training and/or employment programs</li>
                     </ul>
-                    <p>In order to submit your application for Wage Subsidy, you will need the following information:</p>
-                    <ul>
-                        <li>Your CRA Business Number</li>
-                        <li>Your employee’s e-mail address (if you have an employee)</li>
-                    </ul>
-                    <p>Employers who need an employee can either:</p>
+                    <p>Approved eligible SDPR skills training and/or employment programs include:  WorkBC Skills Enhancement Services, WorkBC Project Based Labour Market Training and WorkBC Self Employment Services</p>
                 </div>
             </div>
             <div className="row">
                 <div className="col-md-6">
-                    <h3>Apply with their identified employee</h3>
+                    <h3>Apply on behalf of client</h3>
                     <p><a href="/haveEmployee" className="btn btn-lg btn-primary">Start</a><br/></p>
                 </div>
                 <div className="col-md-6">
-                    <h3>Apply to be matched to a WorkBC Client</h3>
+                    <h3>Verify Application Information</h3>
                     <p><a href="/needEmployee" className="btn btn-lg btn-primary">Start</a><br/></p>
-                </div>
-            </div>
-            <div className="row">
-                <div className="col-md-12">
-                    <hr></hr>
-                    <h3>Claim Form</h3>
-                    <p><a href="/claimForm" className="btn btn-lg btn-primary">Submit a claim</a><br/></p>
                 </div>
             </div>
         </div>
