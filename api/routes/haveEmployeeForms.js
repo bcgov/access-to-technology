@@ -11,13 +11,13 @@ var spauth = require('node-sp-auth')
 var request = require('request-promise')
 
 
-var HaveEmployeeValidationSchema = require('../schemas/HaveEmployeeValidationSchema')
+var ProviderIntakeValidationSchema = require('../schemas/ProviderIntakeValidationSchema')
 var generateHTMLEmail = require('../utils/htmlEmail')
 var notification = require('../utils/applicationReceivedEmail');
 var clean = require('../utils/clean')
 var confirmData = require('../utils/confirmationData');
-const { getHaveEmployeeSubmitted } = require('../utils/confirmationData');
-var {saveHaveEmployeeValues} = require("../utils/mongoOperations");
+const { getProviderIntakeSubmitted } = require('../utils/confirmationData');
+var {saveProviderIntakeValues} = require("../utils/mongoOperations");
 
 var confirmationEmail1 = process.env.CONFIRMATIONONE || process.env.OPENSHIFT_NODEJS_CONFIRMATIONONE || "";
 var confirmationBCC = process.env.CONFIRMATIONBCC || process.env.OPENSHIFT_NODEJS_CONFIRMATIONBCC || "";
@@ -96,7 +96,7 @@ async function sendEmails(values) {
             ],
             [
             ],
-            getHaveEmployeeSubmitted(values)
+            getProviderIntakeSubmitted(values)
           ) // html body
         };
         let message2 = {
@@ -110,7 +110,7 @@ async function sendEmails(values) {
           to: cNotifyEmail,// list of receivers
           bcc: confirmationBCC,
           subject: "A Wage Subsidy application has been received - " + values._id, // Subject line
-          html: notification.generateHaveEmployeeNotification(values) // html body
+          html: notification.generateProviderIntakeNotification(values) // html body
         };
         let message4 = {
           from: 'WorkBC Wage Subsidy <donotreply@gov.bc.ca>', // sender address
@@ -233,7 +233,7 @@ async function saveList(values, email) {
           "FormType": "wage",
           "ApplicationID" : values._id,
           "OperatingName":values.operatingName,
-          "BusinessNumber": values.businessNumber,
+          "applicationId": values.applicationId,
           "BusinessAddress1":values.businessAddress,
           "BusinessCity":values.businessCity,
           "BusinessProvince":values.businessProvince,
@@ -332,7 +332,7 @@ router.post('/', csrfProtection, async (req, res) => {
   clean(req.body);
   //console.log(req.body)
   
-  HaveEmployeeValidationSchema.validate(req.body, { abortEarly: false })
+  ProviderIntakeValidationSchema.validate(req.body, { abortEarly: false })
     .then(async function (value) {
 
       try {
@@ -351,7 +351,7 @@ router.post('/', csrfProtection, async (req, res) => {
                   console.log(saved)
                   // save values to mongo db
                   try {
-                    saveHaveEmployeeValues(value, email, saved);
+                    saveProviderIntakeValues(value, email, saved);
                   }
                   catch (error) {
                     console.log(error);
@@ -362,7 +362,7 @@ router.post('/', csrfProtection, async (req, res) => {
                   console.log(e)
                   //save failed one
                   try {
-                    saveHaveEmployeeValues(value, email, false);
+                    saveProviderIntakeValues(value, email, false);
                   }
                   catch (error) {
                     console.log(error);

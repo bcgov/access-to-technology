@@ -2,7 +2,7 @@ var strings = require("./strings")
 var formatDate = require("../utils/formatDate")
 
 module.exports = {
-    getHaveEmployeeSubmitted(values){
+    getProviderIntakeSubmitted(values){
         const businessFaxProvided = (typeof(values.businessFax) !== "undefined" && values.businessFax !== null && values.businessFax !== "");
         var data = [
             `The following information was received:`,
@@ -12,7 +12,7 @@ module.exports = {
             `<p>Operating Name:  ${strings.orEmpty(values.operatingName)}</p>`,
             `<hr />`,
             `<h5> Business Information</h5>`,
-            `<p>CRA Business Number:  ${strings.orEmpty(values.businessNumber)}</p>`,
+            `<p>CRA Business Number:  ${strings.orEmpty(values.applicationId)}</p>`,
             `<p>Address:  ${strings.orEmpty(values.businessAddress)}</p>`,
             `<p>City/Town:  ${strings.orEmpty(values.businessCity)}</p>`,
             `<p>Province:  ${strings.orEmpty(values.businessProvince)}</p>`,
@@ -172,7 +172,7 @@ module.exports = {
             `<p>Operating Name:  ${strings.orEmpty(values.operatingName)}</p>`,
             `<hr />`,
             `<h5> Business Information</h5>`,
-            `<p>CRA Business Number:  ${strings.orEmpty(values.businessNumber)}</p>`,
+            `<p>CRA Business Number:  ${strings.orEmpty(values.applicationId)}</p>`,
             `<p>Address:  ${strings.orEmpty(values.businessAddress)}</p>`,
             `<p>City/Town:  ${strings.orEmpty(values.businessCity)}</p>`,
             `<p>Province:  ${strings.orEmpty(values.businessProvince)}</p>`,

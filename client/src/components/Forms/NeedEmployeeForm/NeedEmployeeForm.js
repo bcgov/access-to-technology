@@ -121,7 +121,7 @@ class NeedEmployeeForm extends Component {
                                             workingWithWorkBCCentre: "",
                                             workbcCentre: "",
                                             operatingName:"",
-                                            businessNumber:"",
+                                            applicationId:"",
                                             businessAddress:"",
                                             businessCity:"",
                                             businessProvince:"",

@@ -1,13 +1,13 @@
 import React from 'react'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import Home from './Home'
-import HaveEmployeeForm from './components/Forms/HaveEmployeeForm/HaveEmployeeForm'
+import ProviderIntakeForm from './components/Forms/ProviderIntakeForm/ProviderIntakeForm'
 import NeedEmployeeForm from './components/Forms/NeedEmployeeForm/NeedEmployeeForm'
 import Thankyou from './Thankyou'
 import ClaimForm from './components/Forms/ClaimForm/ClaimForm'
 import ParticipantForm from './components/Forms/ParticipantForm/ParticipantForm'
 import ThankyouClaimForm from './components/Forms/ClaimForm/ThankyouClaimForm'
-import ThankYouHaveEmployee from './components/Forms/HaveEmployeeForm/thankyouHaveEmployee'
+import ThankYouProviderIntake from './components/Forms/ProviderIntakeForm/thankyouProviderIntake'
 import ThankYouNeedEmployee from './components/Forms/NeedEmployeeForm/thankyouNeedEmployee'
 
 
@@ -16,10 +16,10 @@ function Main() {
         <main role="main">
             <Router>
                 <Switch>
-                    <Route path="/haveEmployee">
-                        <HaveEmployeeForm />
+                    <Route path="/ProviderIntake">
+                        <ProviderIntakeForm />
                     </Route>
-                    <Route path="/thankyouHaveEmployee" component={ThankYouHaveEmployee}  />
+                    <Route path="/thankyouProviderIntake" component={ThankYouProviderIntake}  />
                     <Route path="/needEmployee">
                         <NeedEmployeeForm />
                     </Route>

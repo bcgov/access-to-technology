@@ -26,7 +26,7 @@ class thankyouNeedEmployee extends Component {
                                 <p>Operating Name:  {this.props.location.state !== undefined && this.props.location.state.operatingName}</p>
                                 
                                 <h5>Business Information</h5>
-                                <p>CRA Business Number:  {this.props.location.state !== undefined && this.props.location.state.businessNumber}</p>
+                                <p>CRA Business Number:  {this.props.location.state !== undefined && this.props.location.state.applicationId}</p>
                                 <p>Address:  {this.props.location.state !== undefined && this.props.location.state.businessAddress}</p>
                                 <p>City / Town:  {this.props.location.state !== undefined && this.props.location.state.businessCity}</p>
                                 <p>Province:  {this.props.location.state !== undefined && this.props.location.state.businessProvince}</p>

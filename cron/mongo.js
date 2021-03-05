@@ -31,7 +31,7 @@ module.exports = {
         return await client.connect()
     },
     */
-    getHaveEmployeeNotSP: async function () {
+    getProviderIntakeNotSP: async function () {
         return await connection
         .then(mClient => {
             // get a handle on the db
@@ -40,7 +40,7 @@ module.exports = {
         })
         .then(async db => {
         // add our values to db (they are always new)
-            return db.collection("HaveEmployee").find({savedToSP: false})
+            return db.collection("ProviderIntake").find({savedToSP: false})
                 //console.log(err)
                 //console.log(doc)
         }).then(async doc =>{
@@ -108,7 +108,7 @@ module.exports = {
             return result
         })     
     },
-    getHaveEmployeeNotReporting: async function () {
+    getProviderIntakeNotReporting: async function () {
         return await connection
         .then(mClient => {
             // get a handle on the db
@@ -117,7 +117,7 @@ module.exports = {
         })
         .then(async db => {
         // add our values to db (they are always new)
-            return db.collection("HaveEmployee").find({savedReporting: false})
+            return db.collection("ProviderIntake").find({savedReporting: false})
                 //console.log(err)
                 //console.log(doc)
         }).then(doc =>{

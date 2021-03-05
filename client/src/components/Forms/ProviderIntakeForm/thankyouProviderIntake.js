@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 
-class thankyouHaveEmployee extends Component {
+class thankyouProviderIntake extends Component {
     
     render() {
 
@@ -30,7 +30,7 @@ class thankyouHaveEmployee extends Component {
                                 <p>Organization Name:  {this.props.location.state !== undefined && this.props.location.state.operatingName}</p>
                                 
                                 <h5>Business Information</h5>
-                                <p>CRA Business Number:  {this.props.location.state !== undefined && this.props.location.state.businessNumber}</p>
+                                <p>CRA Business Number:  {this.props.location.state !== undefined && this.props.location.state.applicationId}</p>
                                 <p>Address:  {this.props.location.state !== undefined && this.props.location.state.businessAddress}</p>
                                 <p>City / Town:  {this.props.location.state !== undefined && this.props.location.state.businessCity}</p>
                                 <p>Province:  {this.props.location.state !== undefined && this.props.location.state.businessProvince}</p>
@@ -153,4 +153,4 @@ class thankyouHaveEmployee extends Component {
     }
 }
 
-export default thankyouHaveEmployee
+export default thankyouProviderIntake

@@ -6,13 +6,13 @@ import {customAlphabet} from 'nanoid'
 import FormStep1 from '../shared/FormStep1'
 import FormStep2 from '../shared/FormStep2'
 import FormStep3 from '../shared/FormStep3'
-import HaveEmployeeStep2 from './HaveEmployeeStep2'
+import ProviderIntakeStep2 from './ProviderIntakeStep2'
 import ProgressTracker from '../shared/ProgressTracker'
-import {HaveEmployeeValidationSchema} from './HaveEmployeeValidationSchema'
+import {ProviderIntakeValidationSchema} from './ProviderIntakeValidationSchema'
 import { FORM_URL } from '../../../constants/form'
 import { generateAlert } from '../shared/Alert'
 
-class HaveEmployeeForm extends Component {
+class ProviderIntakeForm extends Component {
     constructor(){
         super()
         const nanoid = customAlphabet('0123456789abcdefghijklmnopqrstuvwxyz',10)
@@ -27,19 +27,19 @@ class HaveEmployeeForm extends Component {
     }
 
     componentDidMount() {
-        fetch(FORM_URL.haveEmployeeForm, {
+        fetch(FORM_URL.ProviderIntakeForm, {
             credentials: "include"
         })
             .then(res => res.json())
             .then(
                 (result) => {
-                    //console.log(result.csrfToken)
+                    console.log(result.csrfToken)
                     this.setState({
                         _csrf: result.csrfToken,
                     })
                 },
                 (error) => {
-                    //console.log(error)
+                    console.log(error)
                     this.setState({
                         hasError: true
                     })
@@ -83,7 +83,7 @@ class HaveEmployeeForm extends Component {
         return null;
     }
 
-    nextButton(ca){
+    get nextButton(){
         let currentStep = this.state.currentStep;
 
         if(currentStep < 3){
@@ -92,7 +92,6 @@ class HaveEmployeeForm extends Component {
               className="btn btn-primary float-right" 
               type="button" 
               onClick={this._next}
-              disabled={ca === "" || this.state.hasError}
             >
             Next
             </button>        
@@ -116,97 +115,41 @@ class HaveEmployeeForm extends Component {
                                     _csrf: this.state._csrf,
                                     _id: this.state._id,
                                     _bEmailDomain: "",
-                                    _ca: "",
                                     //step 1
-                                    workingWithWorkBCCentre: "",
-                                    workbcCentre: "",
-                                    operatingName:"",
-                                    businessNumber:"",
-                                    businessAddress:"",
-                                    businessCity:"",
-                                    businessProvince:"",
-                                    businessPostal:"",
-                                    businessPhone:"",
-                                    businessFax:"",
-                                    businessEmail:"",
-                                    otherWorkAddress: false,
-                                    sectorType:"",
-                                    typeOfIndustry:"",
-                                    organizationSize:"",
-                                    cewsParticipation:"",
-                                    employeeDisplacement:"",
-                                    labourDispute:"",
-                                    unionConcurrence:"",
-                                    liabilityCoverage:"",
-                                    wageSubsidy:"",
-                                    WSBCCoverage:"",
-                                    lawCompliance: false,
-                                    eligibility: false,
+                                    applicationId:"",
+                                    serviceProviderName:"",
+                                    providerContractId:"",
+                                    serviceProviderPostal:"",
+                                    serviceProviderContact:"",
+                                    serviceProviderPhone:"",
+                                    serviceProviderEmail:"",
+                                    fundingSource:"",
+                                    trainingProgramISET:"",
+                                    trainingProgramAEST:"",
+                                    trainingProgramSDPR:"",
+                                    periodStart1:"",
+                                    periodEnd1:"",
+                                    clientAddress:"",
+                                    clientCity:"",
+                                    clientProvince:"",
+                                    clientPostal:"",
+                                    clientPhone:"",
+                                    clientFax:"",
+                                    clientEmail:"",
+                                    altShippingAddress: false,
 
                                     //step 1:pop-up fields
-                                    employeesClaimed:"",
-                                    WSBCNumber:"",
                                     addressAlt:"",
                                     cityAlt:"",
                                     provinceAlt:"BC",
                                     postalAlt:"",
                                     //step 2
-                                    operatingName0: "",
-                                    operatingName1: "",
-                                    operatingName2: "",
-                                    operatingName3: "",
-                                    operatingName4: "",
-                                    numberOfPositions0: "0",
-                                    numberOfPositions1: "0",
-                                    numberOfPositions2: "0",
-                                    numberOfPositions3: "0",
-                                    numberOfPositions4: "0",
-                                    position0Email0:"",
-                                    position0Email1:"",
-                                    position0Email2:"",
-                                    position0Email3:"",
-                                    position0Email4:"",
-                                    position1Email0:"",
-                                    position1Email1:"",
-                                    position1Email2:"",
-                                    position1Email3:"",
-                                    position2Email0:"",
-                                    position2Email1:"",
-                                    position2Email2:"",
-                                    position3Email0:"",
-                                    position3Email1:"",
-                                    position4Email0:"",
-                                    checkPositionInstances: "0",
-                                    startDate0:"",
-                                    startDate1:"",
-                                    startDate2:"",
-                                    startDate3:"",
-                                    startDate4:"",
-                                    hours0:"",
-                                    hours1:"",
-                                    hours2:"",
-                                    hours3:"",
-                                    hours4:"",
-                                    wage0:"",
-                                    wage1:"",
-                                    wage2:"",
-                                    wage3:"",
-                                    wage4:"",
-                                    duties0:"",
-                                    duties1:"",
-                                    duties2:"",
-                                    duties3:"",
-                                    duties4:"",
-                                    skills0:"",
-                                    skills1:"",
-                                    skills2:"",
-                                    skills3:"",
-                                    skills4:"",
-                                    workExperience0:"",
-                                    workExperience1:"",
-                                    workExperience2:"",
-                                    workExperience3:"",
-                                    workExperience4:"",
+                                    clientResidesInBC:"",
+                                    clientUnemployed:"",
+                                    registeredInApprovedProgram:"",
+                                    accessToComputerCurrently:"",
+                                    recieveAlternateFunding:"",
+                                    financialNeed:"",
                                     //step 3
                                     signatoryTitle:"",
                                     signatory1:"",
@@ -216,10 +159,10 @@ class HaveEmployeeForm extends Component {
 
                             }}
                             enableReinitialize={true}
-                            validationSchema={HaveEmployeeValidationSchema}
+                            validationSchema={ProviderIntakeValidationSchema}
                             onSubmit={(values, {resetForm, setErrors, setStatus, setSubmitting }) => {
                                 
-                                fetch(FORM_URL.haveEmployeeForm, {
+                                fetch(FORM_URL.ProviderIntakeForm, {
                                     method: "POST",
                                     credentials: 'include',
                                     headers: {
@@ -249,7 +192,7 @@ class HaveEmployeeForm extends Component {
                                             } 
                                             else if (resp.ok){
                                                 setSubmitting(false)
-                                                this.props.history.push('/thankYouHaveEmployee',values)
+                                                this.props.history.push('/thankYouProviderIntake',values)
                                             }
                                         }
                                     )
@@ -263,7 +206,7 @@ class HaveEmployeeForm extends Component {
                                     {
                                         this.state.currentStep === 1 && (
                                             <div className="alert alert-primary alert-dismissible fade show" role="alert">
-                                                    You will need to submit your identified job seeker email in step 2.
+                                                    You will need to submit your clients information in step 2.
                                                 <button type="button" className="close" data-dismiss="alert" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
@@ -278,7 +221,7 @@ class HaveEmployeeForm extends Component {
                                         currentStep={this.state.currentStep}
                                         {...props}
                                     />
-                                    <HaveEmployeeStep2
+                                    <ProviderIntakeStep2
                                         currentStep={this.state.currentStep}
                                         {...props}
                                     />
@@ -287,7 +230,7 @@ class HaveEmployeeForm extends Component {
                                         {...props}
                                     />
                                     {this.previousButton}
-                                    {this.nextButton(props.values._ca)}
+                                    {this.nextButton}
 
                                 </Form>
                             )}
@@ -300,4 +243,4 @@ class HaveEmployeeForm extends Component {
             )
         }
 }
-export default withRouter(HaveEmployeeForm);
+export default withRouter(ProviderIntakeForm);

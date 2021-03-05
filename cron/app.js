@@ -2,7 +2,7 @@ const cron = require('node-cron')
 const express = require('express')
 const spauth = require('node-sp-auth')
 const request = require('request-promise')
-var {getHaveEmployeeNotSP, getNeedEmployeeNotSP, getClaimNotSP, getHaveEmployeeNotReporting, getNeedEmployeeNotReporting, getClaimNotReporting, updateReporting, updateSavedToSP} = require('./mongo')
+var {getProviderIntakeNotSP, getNeedEmployeeNotSP, getClaimNotSP, getProviderIntakeNotReporting, getNeedEmployeeNotReporting, getClaimNotReporting, updateReporting, updateSavedToSP} = require('./mongo')
 var clean = require('./clean')
 var listWebURL = process.env.LISTWEBURL || process.env.OPENSHIFT_NODEJS_LISTWEBURL || ""
 var listUser = process.env.LISTUSER || process.env.OPENSHIFT_NODEJS_LISTUSER || ""
@@ -128,7 +128,7 @@ async function saveListClaim(values,ca) {
   }
 }
 
-async function saveListHaveEmployee(values,email,ca) {
+async function saveListProviderIntake(values,email,ca) {
   try{
     var headers;
   return await spr
@@ -168,7 +168,7 @@ async function saveListHaveEmployee(values,email,ca) {
           "FormType": "wage",
           "ApplicationID" : values.applicationID,
           "OperatingName":values.operatingName,
-          "BusinessNumber": values.businessNumber,
+          "applicationId": values.applicationId,
           "BusinessAddress1":values.businessAddress,
           "BusinessCity":values.businessCity,
           "BusinessProvince":values.businessProvince,
@@ -282,7 +282,7 @@ async function saveListNeedEmployee(values,ca) {
           "FormType": "wage",
           "ApplicationID" : values.applicationID,
           "OperatingName":values.operatingName,
-          "BusinessNumber": values.businessNumber,
+          "applicationId": values.applicationId,
           "BusinessAddress1":values.businessAddress,
           "BusinessCity":values.businessCity,
           "BusinessProvince":values.businessProvince,
@@ -366,20 +366,20 @@ cron.schedule('*/3 * * * *', async function() {
       adfsUrl: listADFS
   })
     
-    await getHaveEmployeeNotSP()
+    await getProviderIntakeNotSP()
     .then(async cursor => {
         var results = await cursor.toArray()
         console.log(results.length)
         for (const data of results){
           clean(data)
-          await saveListHaveEmployee(data,data.position0Email0,data.ca)
+          await saveListProviderIntake(data,data.position0Email0,data.ca)
               .then(function(saved){
                 console.log("saved")
                 console.log(saved)
                 // save values to mongo db
                 if (saved) {
                   try {
-                    updateSavedToSP("HaveEmployee",data._id);
+                    updateSavedToSP("ProviderIntake",data._id);
                   }
                   catch (error) {
                     console.log(error);
@@ -474,21 +474,21 @@ cron.schedule('*/3 * * * *', async function() {
               
         }
     })
-    await getHaveEmployeeNotReporting()
+    await getProviderIntakeNotReporting()
     .then(async cursor => {
         var results = await cursor.toArray()
         console.log("Have employee not saved to reporting")
         console.log(results.length)
         for (const data of results){
           clean(data)
-          await saveListHaveEmployee(data,data.position0Email0,"Reporting")
+          await saveListProviderIntake(data,data.position0Email0,"Reporting")
               .then(function(saved){
                 console.log("saved")
                 console.log(saved)
                 // save values to mongo db
                 if (saved) {
                   try {
-                    updateReporting("HaveEmployee",data._id);
+                    updateReporting("ProviderIntake",data._id);
                   }
                   catch (error) {
                     console.log(error);

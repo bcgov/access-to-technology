@@ -67,7 +67,7 @@ objects:
       server {
         listen 8080;
         root /var/www/html/build/;
-        location /api/haveEmployeeForm {
+        location /api/ProviderIntakeForm {
             proxy_pass ${API_URL};
         }
         location /api/needEmployeeForm {

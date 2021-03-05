@@ -23,19 +23,19 @@ function getClient() {
 
 
 module.exports = {
-    saveHaveEmployeeValues: function (values, email, savedToSP) {
+    saveProviderIntakeValues: function (values, email, savedToSP) {
         const client = getClient();
         client.connect().then(mClient => {
             // get a handle on the db
             let db = mClient.db();
             // add our values to db (they are always new)
-            db.collection("HaveEmployee").insertOne({
+            db.collection("ProviderIntake").insertOne({
                 applicationID       : values._id,// id is provided
                 ca                  : strings.orEmpty(values._ca),                                     
                 savedToSP           : savedToSP,
                 savedReporting      : false,  // default to false for now
                 operatingName       : strings.orEmpty(values.operatingName),
-                businessNumber      : strings.orEmpty(values.businessNumber),
+                applicationId      : strings.orEmpty(values.applicationId),
                 businessAddress     : strings.orEmpty(values.businessAddress),
                 businessCity        : strings.orEmpty(values.businessCity),
                 businessProvince    : strings.orEmpty(values.businessProvince),
@@ -97,7 +97,7 @@ module.exports = {
                 savedToSP           : savedToSP,
                 savedReporting      : false,  // default to false for now
                 operatingName       : strings.orEmpty(values.operatingName),
-                businessNumber      : strings.orEmpty(values.businessNumber),
+                applicationId      : strings.orEmpty(values.applicationId),
                 businessAddress     : strings.orEmpty(values.businessAddress),
                 businessCity        : strings.orEmpty(values.businessCity),
                 businessProvince    : strings.orEmpty(values.businessProvince),
