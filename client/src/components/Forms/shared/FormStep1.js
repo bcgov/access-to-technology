@@ -101,11 +101,10 @@ class FormStep1 extends Component {
                 </div>
                 <div className="form-row">
                     <div className="form-group col-md-6">
-                        <label className="col-form-label control-label" htmlFor="applicationId">Client Application ID <span
+                        <label className="col-form-label control-label" htmlFor="_id">Client Application ID <span
                         style={{ color: "red" }}>*</span></label>
-                        <Field className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "applicationId")}`} id="applicationId" name="applicationId"/>
-                        {feedBackInvalid(this.props.errors,this.props.touched,"applicationId")}
-                        <small className="text-muted" id="applicationId">  Expected format: BCXXXXXXXXX</small>
+                        <Field  readOnly className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "_id")}`} id="_id" name="_id"/>
+                        {feedBackInvalid(this.props.errors,this.props.touched,"_id")}
                     </div>
                     <div className="form-group col-md-6">
                         <label className="col-form-label control-label" htmlFor="serviceProviderName">Service Provider Name <span
@@ -131,7 +130,6 @@ class FormStep1 extends Component {
                             name="serviceProviderPostal"
                             onChange={e => {
                                 this.props.handleChange(e)
-                                this.props.setFieldValue("_ca","")
                             }}  
                         />
                         {feedBackInvalid(this.props.errors,this.props.touched,"serviceProviderPostal")}

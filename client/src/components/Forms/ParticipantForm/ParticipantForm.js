@@ -41,25 +41,44 @@ class ParticipantForm extends Component {
             )
     }
 
-    handleApplicationId(id, hasId, errors, touched) {
+    handleApplicationId(id, hasId, values, errors, touched) {
         if (id === "" || id.length !== 10) {
             //show non id handler
             return (
                 <div>
                     <p>Please follow the link provided to you via email, or provide the application ID below.</p>
                     <div className="form-group">
-                        <label className="col-form-label control-label" htmlFor="applicationId">Application ID <span
+                        <label className="col-form-label control-label" htmlFor="_id">Application ID <span
                             style={{ color: "red" }}>*</span></label>
                         <small className="text-muted" id="clientAddress1"> Please provide the 10 character ID.</small>
-                        <Field className={`form-control ${feedBackClassName(errors, touched, "applicationId")}`} id="applicationId" name="applicationId" />
-                        {feedBackInvalid(errors, touched, "applicationId")}
+                        <Field className={`form-control ${feedBackClassName(errors, touched, "_id")}`} id="_id" name="_id" />
+                        {feedBackInvalid(errors, touched, "_id")}
                     </div>
                 </div>
             )
         } else {
             //display the id
-            return (
-                <p>Application ID: {id}</p>
+            return (<div>
+                <div className="form=row">
+                    <p>Client Application ID: {id}</p>
+                </div>
+                <div className="form=row">
+                    <p>Client Name: {values.clientName}</p>
+                </div>
+                <div className="form=row">
+                    <p>Eligible Training Program: {values.eligibleTrainingProgram}</p>
+                </div>
+                <div className="form=row">
+                    <p>Training Start Date: {values.periodStart1}      Training End Date: {values.periodEnd1}</p>
+                </div><div className="form=row">
+                    {(values.altShippingAddress===false)?<p>Shipping Address: {values.clientAddress} {values.clientPostal} ,BC {values.clientCity}</p>: <p>Shipping Address: {values.addressAlt} {values.postalAlt} ,BC {values.cityAlt}</p>}
+                </div>
+               
+                <div className="form=row">
+                    <p>Email: {values.clientEmail}</p>
+                </div>
+                
+            </div>
             )
         }
     }
@@ -70,17 +89,14 @@ class ParticipantForm extends Component {
             <div className="container">
                 <div className="row">
                     <div className="col-md-12">
+                        
                     {this.state.hasError && (
                             generateAlert("alert-danger", "An error has occurred, please refresh the page. If the error persists, please try again later.")
-                        )}
+                        )} 
                         <Formik
                             initialValues={{
                                 _csrf: '',
-                                applicationId: (typeof this.props.match.params.id !== 'undefined') ? this.props.match.params.id : '',
-                                existingWorkBCClient: '',
-                                participantFirstName: '',
-                                participantLastName: '',
-                                participantDOB: '',
+                                _id: (typeof this.props.match.params.id !== 'undefined') ? this.props.match.params.id : '',
                                 participantConsent: false,
                             }}
                             validationSchema={ParticipantValidationSchema}
@@ -120,32 +136,41 @@ class ParticipantForm extends Component {
                             {({ values, errors, touched, isSubmitting }) => (
                                 <Form>
                                     <div className="form-group">
-                                        <h2 id="forms">Wage Subsidy Participant Form</h2>
+                                        <h2 id="forms">Access to Technology Client Form</h2>
                                     </div>
-                                    {this.handleApplicationId(values.applicationId, values.noOrgId, errors, touched)}
-                                    <div className="form-row">
-                                        <div className="form-group col-md-6">
-                                            <label className="col-form-label control-label" htmlFor="participantFirstName">First Name <span
-                                                style={{ color: "red" }}>*</span></label>
-                                            <Field className={`form-control ${feedBackClassName(errors, touched, "participantFirstName")}`} id="participantFirstName" name="participantFirstName" />
-                                            {feedBackInvalid(errors, touched, "participantFirstName")}
-                                        </div>
-                                        <div className="form-group col-md-6">
-                                            <label className="col-form-label control-label" htmlFor="participantLastName">Last Name <span
-                                                style={{ color: "red" }}>*</span></label>
-                                            <Field className={`form-control ${feedBackClassName(errors, touched, "participantLastName")}`} id="participantLastName" name="participantLastName" />
-                                            {feedBackInvalid(errors, touched, "participantLastName")}
-                                        </div>
+                                    <div className="form=row">
+                                        <p>The Ministry of Social Development and Poverty Reduction has received a request from (name of referring Service Provider).
+                                    To process your application for an A2T laptop, you must complete and submit this Client Notification and Agreement.<br/><br/>
+                                    Please be aware that delays in submitting your completed Client Notification and Agreement will result in delays in processing your
+                                    application and may negatively impact your eligibility to receive an A2T laptop.   You are encouraged to complete and submit this form as soon as possible.<br/><br />
+                                    If you have questions or require assistance to complete this form, please contact (name of referring Service Provider).<br/></p>
                                     </div>
-                                    <div className="form-group">
-                                        <label className="col-form-label control-label" htmlFor="participantDOB">Date of birth <span
-                                            style={{ color: "red" }}>*</span></label>
-                                        <DatePickerField
-                                            name="participantDOB"
-                                            className={`form-control ${feedBackClassName(errors, touched, "participantDOB")}`}
-                                        />
-                                        {feedBackInvalid(errors, touched, "participantDOB")}
-                                    </div>
+                                    {/* handleApplicationID handles all the pre populated values in future. */}
+                                    {this.handleApplicationId(values._id, values.noOrgId, values, errors, touched)}
+                                    
+                                    <p><b>Collection, Use and Disclosure of Personal Information</b><br/>
+                                        Personal information collected in this application is collected under the authority of section 26 (c) of the Freedom of Information and Protection of Privacy Act (“FOIPPA”) and is subject to all the provisions of that Act. The personal information collected will be used by the Ministry of Social Development and Poverty Reduction (“MSDPR”), its service providers and associates of its service providers to administer the Access to Technology Program (the “Program”), and may also be used to evaluate the effectiveness of the Access to Technology Program.
+                                        If you have any questions about the collection of your personal information, please contact the Records clerk of the Employment and Labour Market Services Division, MSDPR at WorkBCOESprivacy@gov.bc.ca.<br/><br/>
+                                        <b>Confirmation of Request</b><br/>
+                                        I am requesting a laptop from the Access to Technology Initiative and I understand and agree that:
+                                        <ul>
+                                            <li>I require the technology described in my Access to Technology (A2T) application for the purposes of participating in, and completing the eligible training program described this A2T application;</li>
+
+                                            <li>My use of the technology described in this A2T application is contingent upon my participation in the training described in this A2T application;</li>
+
+                                            <li>If I complete the training described in this A2T application to the satisfaction of (name of referring service provider ), I may keep the technology provided to me by the A2T program; and</li>
+
+                                            <li>If I do not complete the training described in this A2T application to the satisfaction of (name of referring service provider),  I must return the technology, in good working order to (name of referring service provider).</li>
+                                        </ul>
+                                        <b>Acceptable Uses Agreement:</b><br/>
+                                        I understand and agree that the laptop has been provided to me in order to attend training.  I will not use the laptop for:
+                                        <ul>
+                                            <li>sexual exploitation;</li>
+                                            <li>illegal activity;</li>
+                                            <li>promoting hate, discrimination, or illegal activity; and/or;</li>
+                                            <li>promoting a particular religious or political opinion;</li>
+                                        </ul></p>
+
                                     <CollectionNotice />
                                     <div className="form-group">
                                         <div className="form-check">

@@ -33,13 +33,13 @@ class ProviderIntakeForm extends Component {
             .then(res => res.json())
             .then(
                 (result) => {
-                    console.log(result.csrfToken)
+                   // console.log(result.csrfToken)
                     this.setState({
                         _csrf: result.csrfToken,
                     })
                 },
                 (error) => {
-                    console.log(error)
+                    //console.log(error)
                     this.setState({
                         hasError: true
                     })
@@ -116,7 +116,6 @@ class ProviderIntakeForm extends Component {
                                     _id: this.state._id,
                                     _bEmailDomain: "",
                                     //step 1
-                                    applicationId:"",
                                     serviceProviderName:"",
                                     providerContractId:"",
                                     serviceProviderPostal:"",
@@ -131,7 +130,7 @@ class ProviderIntakeForm extends Component {
                                     periodEnd1:"",
                                     clientAddress:"",
                                     clientCity:"",
-                                    clientProvince:"",
+                                    clientProvince:"British Columbia",
                                     clientPostal:"",
                                     clientPhone:"",
                                     clientFax:"",
@@ -148,11 +147,13 @@ class ProviderIntakeForm extends Component {
                                     clientUnemployed:"",
                                     registeredInApprovedProgram:"",
                                     accessToComputerCurrently:"",
-                                    recieveAlternateFunding:"",
+                                    receivingAlternateFunding:"",
                                     financialNeed:"",
                                     //step 3
                                     signatoryTitle:"",
                                     signatory1:"",
+                                    clientEligibility:false,
+                                    serviceProviderResponsibility:false,
                                     organizationConsent: false,
     
 

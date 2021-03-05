@@ -33,22 +33,6 @@ class FormStep3 extends Component {
                 <div className="form-group">
                     <br /><h2 id="forms">Declaration and Signature</h2>
                 </div>
-                {/* 
-                <div className="form-group">
-                    <label className="col-form-label control-label" htmlFor="signatoryTitle">Signing Authority Title <span
-                        style={{ color: "red" }}>*  </span></label>
-                    <small className="text-muted" id="signatoryTitle">Please enter the title of the organization signatory</small>
-                    <Field className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "signatoryTitle")}`}id="signatoryTitle" name="signatoryTitle" />
-                    {feedBackInvalid(this.props.errors,this.props.touched,"signatoryTitle")}
-                </div>
-                <div className="form-group">
-                    <label className="col-form-label control-label" htmlFor="signatory1">Signing Authority Full Name <span
-                        style={{ color: "red" }}>*  </span></label>
-                    <small className="text-muted" id="signatory1">Please enter the full name of the organization signatory</small>
-                    <Field className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "signatory1")}`} id="signatory1" name="signatory1" />
-                    {feedBackInvalid(this.props.errors,this.props.touched,"signatory1")}
-                </div>
-                */}
                 <div className="form-group">
                     <div className="form-check">
                         <Field type="checkbox" className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "clientEligibility")}`} id="clientEligibility" name="clientEligibility" />
@@ -83,8 +67,8 @@ class FormStep3 extends Component {
                 </div>
                 <div className="form-group">
                     <div className="form-check">
-                        <Field type="checkbox" className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "clientEligibility")}`} id="clientEligibility" name="clientEligibility" />
-                        {feedBackInvalid(this.props.errors, this.props.touched, "clientEligibility")}
+                        <Field type="checkbox" className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "serviceProviderResponsibility")}`} id="serviceProviderResponsibility" name="serviceProviderResponsibility" />
+                        {feedBackInvalid(this.props.errors, this.props.touched, "serviceProviderResponsibility")}
                         <label className="form-check-label" htmlFor="organizationConsent"><span style={{ color: "red" }}>*</span> I confirm that, I will:
                             <ul><li>Advise the A2T contractor of the outcome of the individual’s participation in the approved training described in this application, in the form and manner requested by the A2T contractor ; and</li>
                                 <li>If the individual named on this application does not complete the approved training described in this application to the satisfaction of </li>
@@ -96,6 +80,20 @@ class FormStep3 extends Component {
                                 <li>Upon request of the applicable funder (SDPR/AEST/ISET), provide documentation as required to demonstrate you have exercised due diligence in the assessment of client applications for an A2T laptop.</li></ul>
                         </label>
                     </div>
+                </div>
+                <div className="form-group">
+                    <label className="col-form-label control-label" htmlFor="signatoryTitle">Signing Authority Title <span
+                        style={{ color: "red" }}>*  </span></label>
+                    <small className="text-muted" id="signatoryTitle">Please enter the title of the organization signatory</small>
+                    <Field className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "signatoryTitle")}`}id="signatoryTitle" name="signatoryTitle" />
+                    {feedBackInvalid(this.props.errors,this.props.touched,"signatoryTitle")}
+                </div>
+                <div className="form-group">
+                    <label className="col-form-label control-label" htmlFor="signatory1">Signing Authority Full Name <span
+                        style={{ color: "red" }}>*  </span></label>
+                    <small className="text-muted" id="signatory1">Please enter the full name of the organization signatory</small>
+                    <Field className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "signatory1")}`} id="signatory1" name="signatory1" />
+                    {feedBackInvalid(this.props.errors,this.props.touched,"signatory1")}
                 </div>
                 <div className="form-group">
                     <div className="form-check">

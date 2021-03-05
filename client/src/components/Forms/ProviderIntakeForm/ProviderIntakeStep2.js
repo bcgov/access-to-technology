@@ -116,7 +116,6 @@ class ProviderIntakeStep2 extends Component {
                             name="clientAddress"
                             onChange={e => {
                                 this.props.handleChange(e)
-                                this.props.setFieldValue("_ca","")
                             }} 
                         />
                         {feedBackInvalid(this.props.errors,this.props.touched,"clientAddress")}
@@ -132,7 +131,6 @@ class ProviderIntakeStep2 extends Component {
                             name="clientCity"
                             onChange={e => {
                                 this.props.handleChange(e)
-                                this.props.setFieldValue("_ca","")
                             }} 
                         />
                         {feedBackInvalid(this.props.errors,this.props.touched,"clientCity")}
@@ -147,7 +145,6 @@ class ProviderIntakeStep2 extends Component {
                             name="clientProvince"
                             onChange={e => {
                                 this.props.handleChange(e)
-                                this.props.setFieldValue("_ca","")
                             }} 
                         >
                             <option value="BC">British Columbia</option>
@@ -164,7 +161,6 @@ class ProviderIntakeStep2 extends Component {
                             name="clientPostal"
                             onChange={e => {
                                 this.props.handleChange(e)
-                                this.props.setFieldValue("_ca","")
                             }}  
                         />
                         {feedBackInvalid(this.props.errors,this.props.touched,"clientPostal")}
@@ -288,26 +284,26 @@ class ProviderIntakeStep2 extends Component {
                     </div>
                 </div>
                 <div className="form-group">
-                    <label className="col-form-label control-label" htmlFor="recievingAlternateFunding">Is the client not receiving funding from another source for the purchase of the required technology? <span
+                    <label className="col-form-label control-label" htmlFor="receivingAlternateFunding">Is the client not receiving funding from another source for the purchase of the required technology? <span
                         style={{ color: "red" }}>*</span></label>
                     <div className="form-check">
                         <Field
-                            className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "recievingAlternateFunding")}`}
+                            className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "receivingAlternateFunding")}`}
                             type="radio"
-                            name="recievingAlternateFunding"
+                            name="receivingAlternateFunding"
                             value="yes"
                         />
-                        <label className="form-check-label" htmlFor="recievingAlternateFunding">Yes</label>
+                        <label className="form-check-label" htmlFor="receivingAlternateFunding">Yes</label>
                     </div>
                     <div className="form-check">
                         <Field
-                            className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "recievingAlternateFunding")}`}
+                            className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "receivingAlternateFunding")}`}
                             type="radio"
-                            name="recievingAlternateFunding"
+                            name="receivingAlternateFunding"
                             value="no"
                         />
-                        <label className="form-check-label" htmlFor="recievingAlternateFunding">No</label>
-                        {feedBackInvalid(this.props.errors,this.props.touched,"recievingAlternateFunding")}
+                        <label className="form-check-label" htmlFor="receivingAlternateFunding">No</label>
+                        {feedBackInvalid(this.props.errors,this.props.touched,"receivingAlternateFunding")}
                     </div>
                 </div>
                 <div className="form-group">
