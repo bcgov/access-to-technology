@@ -20,13 +20,14 @@ function Main() {
                         <ProviderIntakeForm />
                     </Route>
                     <Route path="/thankyouProviderIntake" component={ThankYouProviderIntake}  />
-                    <Route path="/needEmployee">
-                        <NeedEmployeeForm />
+                    <Route path="/participantForm">
+                        <ParticipantForm />
                     </Route>
-                    <Route path="/thankyouNeedEmployee" component={ThankYouNeedEmployee}  />
                     <Route path="/thankyou">
                         <Thankyou />
                     </Route>
+                    <Route path="/thankyouNeedEmployee" component={ThankYouNeedEmployee}  />
+
                     <Route path="/claimForm" component={ClaimForm}/>
                     <Route path="/thankyouClaimForm" component={ThankyouClaimForm} />
                     <Route path="/participantForm" component={ParticipantForm}/>

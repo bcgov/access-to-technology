@@ -2,20 +2,19 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { Formik, Form, Field } from 'formik'
 import { feedBackClassName, feedBackInvalid } from '../shared/ValidationMessages'
-import { DatePickerField } from '../shared/DatePickerField'
 import CollectionNotice from './CollectionNotice'
 import { ParticipantValidationSchema } from './ParticipantValidationSchema'
 import { FORM_URL } from '../../../constants/form'
-import { nanoid } from 'nanoid'
 import { generateAlert } from '../shared/Alert'
 
 class ParticipantForm extends Component {
 
     constructor() {
         super()
+        
         this.state = {
             _csrf: '',
-            _id: nanoid(10),
+            _id: '',
             hasError: false
         }
     }
@@ -27,13 +26,13 @@ class ParticipantForm extends Component {
             .then(res => res.json())
             .then(
                 (result) => {
-                    console.log(result.csrfToken)
+                   // console.log(result.csrfToken)
                     this.setState({
                         _csrf: result.csrfToken,
                     })
                 },
                 (error) => {
-                    console.log(error)
+                    //console.log(error)
                     this.setState({
                         hasError: true
                     })
@@ -60,7 +59,14 @@ class ParticipantForm extends Component {
             //display the id
             return (<div>
                 <div className="form=row">
-                    <p>Client Application ID: {id}</p>
+                <p>Please follow the link provided to you via email, and provide the application ID below.</p>
+                    <div className="form-group">
+                        <label className="col-form-label control-label" htmlFor="_id">Application ID <span
+                            style={{ color: "red" }}>*</span></label>
+                        <small className="text-muted" id="clientAddress1"> Please provide the 10 character ID.</small>
+                        <Field className={`form-control ${feedBackClassName(errors, touched, "_id")}`} id="_id" name="_id" />
+                        {feedBackInvalid(errors, touched, "_id")}
+                    </div>
                 </div>
                 <div className="form=row">
                     <p>Client Name: {values.clientName}</p>
@@ -100,7 +106,7 @@ class ParticipantForm extends Component {
                                 participantConsent: false,
                             }}
                             validationSchema={ParticipantValidationSchema}
-                            onSubmit={(values, actions) => {
+                            onSubmit={(values,  {resetForm, setErrors, setStatus, setSubmitting }) => {
                                 fetch(FORM_URL.clientForm, {
                                     method: "POST",
                                     credentials: "include",
@@ -114,20 +120,21 @@ class ParticipantForm extends Component {
                                     .then((
                                         resp => {
                                             if (resp.err) {
-                                                actions.setSubmitting(false);
-                                                actions.setErrors(resp.err);
+                                                alert("Please review your form, a field is incomplete.")
+                                                setSubmitting(false);
+                                                setErrors(resp.err);
                                                 this.setState({
                                                     hasError: true
                                                 })
                                             } else if (resp.emailErr) {
-                                                console.log("emailError")
-                                                actions.setSubmitting(false)
+                                                setSubmitting(false)
                                                 this.setState({
                                                     hasError: true
                                                 })
                                             }
                                             else if (resp.ok) {
-                                                actions.setSubmitting(false);
+                                                setSubmitting(false);
+                                                this.props.history.push('/thankYou',values)
                                             }
                                         }
                                     ));
@@ -152,7 +159,7 @@ class ParticipantForm extends Component {
                                         Personal information collected in this application is collected under the authority of section 26 (c) of the Freedom of Information and Protection of Privacy Act (“FOIPPA”) and is subject to all the provisions of that Act. The personal information collected will be used by the Ministry of Social Development and Poverty Reduction (“MSDPR”), its service providers and associates of its service providers to administer the Access to Technology Program (the “Program”), and may also be used to evaluate the effectiveness of the Access to Technology Program.
                                         If you have any questions about the collection of your personal information, please contact the Records clerk of the Employment and Labour Market Services Division, MSDPR at WorkBCOESprivacy@gov.bc.ca.<br/><br/>
                                         <b>Confirmation of Request</b><br/>
-                                        I am requesting a laptop from the Access to Technology Initiative and I understand and agree that:
+                                        I am requesting a laptop from the Access to Technology Initiative and I understand and agree that:  </p>
                                         <ul>
                                             <li>I require the technology described in my Access to Technology (A2T) application for the purposes of participating in, and completing the eligible training program described this A2T application;</li>
 
@@ -162,14 +169,15 @@ class ParticipantForm extends Component {
 
                                             <li>If I do not complete the training described in this A2T application to the satisfaction of (name of referring service provider),  I must return the technology, in good working order to (name of referring service provider).</li>
                                         </ul>
-                                        <b>Acceptable Uses Agreement:</b><br/>
-                                        I understand and agree that the laptop has been provided to me in order to attend training.  I will not use the laptop for:
+                                      <p>  <b>Acceptable Uses Agreement:</b><br/>
+                                        I understand and agree that the laptop has been provided to me in order to attend training.  I will not use the laptop for:  </p>
                                         <ul>
                                             <li>sexual exploitation;</li>
                                             <li>illegal activity;</li>
                                             <li>promoting hate, discrimination, or illegal activity; and/or;</li>
                                             <li>promoting a particular religious or political opinion;</li>
-                                        </ul></p>
+                                        </ul>
+                                  
 
                                     <CollectionNotice />
                                     <div className="form-group">

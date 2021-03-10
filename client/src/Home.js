@@ -23,7 +23,7 @@ function Home() {
                 </div>
                 <div className="col-md-6">
                     <h3>Verify Application Information</h3>
-                    <p><a href="/needEmployee" className="btn btn-lg btn-primary">Start</a><br/></p>
+                    <p><a href="/participantForm" className="btn btn-lg btn-primary">Start</a><br/></p>
                 </div>
             </div>
         </div>
