@@ -147,7 +147,7 @@ module.exports = {
         <p>Is there a labour stoppage or labour - management dispute in progress?  ${strings.orEmpty(values.labourDispute)}</p>
         <p>Is there Union concurrence?  ${strings.orEmpty(values.unionConcurrence)}</p>
         <p>Does your organization have 3rd Party liability coverage?  ${strings.orEmpty(values.liabilityCoverage)}</p>
-        <p>Is your organization currently receiving funding under a WorkBC Wage Subsidy agreement?  ${strings.orEmpty(values.wageSubsidy)}</p>`
+        <p>Is your organization currently receiving funding under a Access To Technology agreement?  ${strings.orEmpty(values.wageSubsidy)}</p>`
         if(wageSubsidizedAlready){
             html = html + `<p>How many employees is WorkBC currently subsidizing? ${strings.orEmpty(values.employeesClaimed)}</p>`
         }
@@ -266,7 +266,7 @@ module.exports = {
         <p>Is there a labour stoppage or labour - management dispute in progress?  ${strings.orEmpty(values.labourDispute)}</p>
         <p>Is there Union concurrence?  ${strings.orEmpty(values.unionConcurrence)}</p>
         <p>Does your organization have 3rd Party liability coverage?  ${strings.orEmpty(values.liabilityCoverage)}</p>
-        <p>Is your organization currently receiving funding under a WorkBC Wage Subsidy agreement?  ${strings.orEmpty(values.wageSubsidy)}</p>`
+        <p>Is your organization currently receiving funding under a Access To Technology agreement?  ${strings.orEmpty(values.wageSubsidy)}</p>`
         if(wageSubsidizedAlready){
             html = html + `<p>How many employees is WorkBC currently subsidizing? ${strings.orEmpty(values.employeesClaimed)}</p>`
         }

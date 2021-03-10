@@ -75,14 +75,14 @@ async function sendEmails(values) {
         console.log(cNotifyEmail)
         // send mail with defined transport object
         let message1 = {
-          from: 'WorkBC Wage Subsidy <donotreply@gov.bc.ca>', // sender address
+          from: 'Access To Technology <donotreply@gov.bc.ca>', // sender address
           to: mailingList,// list of receivers
           bcc: confirmationBCC,
           subject: "Application Confirmation - " + values._id, // Subject line
           html: generateHTMLEmail("Thank you, your application has been received",
             [
               `<b>Application ID: ${values._id}</b>`,
-              `Thank you for your interest in WorkBC Wage Subsidy services. Your application has been received and a WorkBC staff member will be in touch with you soon to confirm your business qualifies for WorkBC Wage Subsidy and to complete the application process. `,
+              `Thank you for your interest in Access To Technology services. Your application has been received and a WorkBC staff member will be in touch with you soon to confirm your business qualifies for Access To Technology and to complete the application process. `,
             ],
             [
             ],
@@ -90,13 +90,13 @@ async function sendEmails(values) {
           ) // html body
         };
         let message2 = {
-          from: 'WorkBC Wage Subsidy <donotreply@gov.bc.ca>', // sender address
+          from: 'Access To Technology <donotreply@gov.bc.ca>', // sender address
           to: listEmail,// list of receivers
           subject: "A Wage Subsidy application has been received - " + values._id, // Subject line
           html: notification.generateListNotification(values) // html body
         };
         let message3 = {
-          from: 'WorkBC Wage Subsidy <donotreply@gov.bc.ca>', // sender address
+          from: 'Access To Technology <donotreply@gov.bc.ca>', // sender address
           to: cNotifyEmail,// list of receivers
           bcc: confirmationBCC,
           subject: "A Wage Subsidy application has been received - " + values._id, // Subject line

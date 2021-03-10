@@ -117,7 +117,7 @@ var NeedEmployeeValidationSchema = yup.object().shape({
     wageSubsidy: yup.string()
         .oneOf(["yes",
             "no"], "Please select a valid field.")
-        .required("Please select an answer on whether your organization is receiving funding under a workBC wage subsidy agreement"),
+        .required("Please select an answer on whether your organization is receiving funding under a Access To Technology agreement"),
     WSBCCoverage: yup.string()
         .oneOf(["yes",
             "no"], "Please select a valid field.")

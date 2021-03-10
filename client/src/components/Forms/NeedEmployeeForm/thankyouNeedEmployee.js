@@ -19,7 +19,7 @@ class thankyouNeedEmployee extends Component {
                         <h1>Thank you, your application has been received</h1>
                         <h3>Application ID: {this.props.location.state !== undefined && this.props.location.state._id}</h3>
                         <button className="btn btn-success d-print-none" onClick={() => window.print()}>Print Confirmation</button><br /><br />
-                        <p>Thank you for your interest in WorkBC Wage Subsidy services. Your application has been received and a WorkBC staff member will be in touch with you soon to confirm your business qualifies for WorkBC Wage Subsidy and to complete the application process. </p>
+                        <p>Thank you for your interest in Access To Technology services. Your application has been received and a WorkBC staff member will be in touch with you soon to confirm your business qualifies for Access To Technology and to complete the application process. </p>
                         <br />
                         <hr />
                                 <p>Application ID:  {this.props.location.state !== undefined && this.props.location.state._id}</p>
@@ -58,7 +58,7 @@ class thankyouNeedEmployee extends Component {
                                 <p>Is there a labour stoppage or labour - management dispute in progress? {this.props.location.state !== undefined && this.props.location.state.labourDispute}</p>
                                 <p>Is there Union concurrence? {this.props.location.state !== undefined && this.props.location.state.unionConcurrence}</p>
                                 <p>Does your organization have 3rd Party liability coverage?  {this.props.location.state !== undefined && this.props.location.state.liabilityCoverage}</p>
-                                <p>Is your organization currently receiving funding under a WorkBC Wage Subsidy agreement?  {this.props.location.state !== undefined && this.props.location.state.wageSubsidy}</p>
+                                <p>Is your organization currently receiving funding under a Access To Technology agreement?  {this.props.location.state !== undefined && this.props.location.state.wageSubsidy}</p>
                                 {wageSubsidizedAlready ?(<div><p>How Many Employees is WorkBC currently Subsidizing? {this.props.location.state !== undefined && this.props.location.state.employeesClaimed.toString()}</p></div>):(<div></div>)}
                                 
                                 <p>{this.props.location.state !== undefined && this.props.location.state.operatingName} meets the eligibility criteria and acknowledges that all the obligations the employer owes to or has with respect to its other employees under the various 
