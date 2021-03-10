@@ -39,7 +39,7 @@ class ProviderIntakeForm extends Component {
                     })
                 },
                 (error) => {
-                    //console.log(error)
+                    console.log(error)
                     this.setState({
                         hasError: true
                     })
