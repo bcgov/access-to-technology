@@ -11,13 +11,13 @@ var spauth = require('node-sp-auth')
 var request = require('request-promise')
 
 
-var HaveEmployeeValidationSchema = require('../schemas/HaveEmployeeValidationSchema')
+var ProviderIntakeValidationSchema = require('../schemas/ProviderIntakeValidationSchema')
 var generateHTMLEmail = require('../utils/htmlEmail')
 var notification = require('../utils/applicationReceivedEmail');
 var clean = require('../utils/clean')
 var confirmData = require('../utils/confirmationData');
-const { getHaveEmployeeSubmitted } = require('../utils/confirmationData');
-var {saveHaveEmployeeValues} = require("../utils/mongoOperations");
+const { getProviderIntakeSubmitted } = require('../utils/confirmationData');
+var {saveProviderIntakeValues, saveClaimValues} = require("../utils/mongoOperations");
 
 var confirmationEmail1 = process.env.CONFIRMATIONONE || process.env.OPENSHIFT_NODEJS_CONFIRMATIONONE || "";
 var confirmationBCC = process.env.CONFIRMATIONBCC || process.env.OPENSHIFT_NODEJS_CONFIRMATIONBCC || "";
@@ -85,41 +85,41 @@ async function sendEmails(values) {
              // filter out empty addresses
         // send mail with defined transport object
         let message1 = {
-          from: 'WorkBC Wage Subsidy <donotreply@gov.bc.ca>', // sender address
+          from: 'WorkBC Access to Technology <donotreply@gov.bc.ca>', // sender address
           to: mailingList,// list of receivers
           bcc: confirmationBCC,
           subject: "Application Confirmation - " + values._id, // Subject line
           html: generateHTMLEmail("Thank you, your application has been received",
             [
               `<b>Application ID: ${values._id}</b>`,
-              `Thank you for your interest in WorkBC Wage Subsidy services. Your application has been received and a WorkBC staff member will be in touch with you soon to confirm your business qualifies for WorkBC Wage Subsidy and to complete the application process. `,
+              `Thank you for your interest in WorkBC Access to Technology. Your application has been received and a WorkBC staff member will be in touch with you soon to confirm your client qualifies for WorkBC Access to Technology and to complete the application process. `,
             ],
             [
             ],
-            getHaveEmployeeSubmitted(values)
+            getProviderIntakeSubmitted(values)
           ) // html body
         };
         let message2 = {
-          from: 'WorkBC Wage Subsidy <donotreply@gov.bc.ca>', // sender address
+          from: 'WorkBC Access to Technology<donotreply@gov.bc.ca>', // sender address
           to: listEmail,// list of receivers
-          subject: "A Wage Subsidy application has been received - " + values._id, // Subject line
+          subject: "A Access to Technology application has been received - " + values._id, // Subject line
           html: notification.generateListNotification(values) // html body
         };
         let message3 = {
-          from: 'WorkBC Wage Subsidy <donotreply@gov.bc.ca>', // sender address
+          from: 'WorkBC Access to Technology <donotreply@gov.bc.ca>', // sender address
           to: cNotifyEmail,// list of receivers
           bcc: confirmationBCC,
-          subject: "A Wage Subsidy application has been received - " + values._id, // Subject line
-          html: notification.generateHaveEmployeeNotification(values) // html body
+          subject: "A Access to Technology application has been received - " + values._id, // Subject line
+          html: notification.generateProviderIntakeNotification(values) // html body
         };
         let message4 = {
-          from: 'WorkBC Wage Subsidy <donotreply@gov.bc.ca>', // sender address
+          from: 'WorkBC Access to Technology <donotreply@gov.bc.ca>', // sender address
           bcc: positionEmails,// list of receivers
-          subject: "WorkBC Wage Subsidy Application - Next Steps", // Subject line
-          html: generateHTMLEmail("WorkBC Wage Subsidy Application - Next Steps",
+          subject: "WorkBC Access to Technology Application - Next Steps", // Subject line
+          html: generateHTMLEmail("WorkBC Access to Technology Application - Next Steps",
             [
               `Hello,`,
-              `You’re receiving this email because your future employer recently applied for a WorkBC Wage Subsidy.`,
+              `You’re receiving this email because your future employer recently applied for a WorkBC Access to Technology.`,
               `WorkBC is a provincial government service that helps residents of B.C. improve their skills, explore career options, and find employment.`,
             ],
             [
@@ -193,6 +193,7 @@ async function sendEmails(values) {
   }
 }
 
+//saving to sharepoint list.
 async function saveList(values, email) {
   try{
     var headers;
@@ -217,6 +218,7 @@ async function saveList(values, email) {
       //console.log(headers)
       headers['X-RequestDigest'] = response
       headers['Content-Type'] = "application/json;odata=verbose"
+      // change to local Access to Technology list
       var l = listWebURL + `Apps/WageSubsidy/_api/web/lists/getByTitle('Catchment${values._ca}')/items`
       console.log("webURL:")
       console.log(l)
@@ -229,55 +231,47 @@ async function saveList(values, email) {
             "type": `SP.Data.Catchment${values._ca}ListItem`
           },
           "Title": `${values.operatingName} - ${values._id}`,
-          "CatchmentNo": values._ca,
-          "FormType": "wage",
-          "ApplicationID" : values._id,
-          "OperatingName":values.operatingName,
-          "BusinessNumber": values.businessNumber,
-          "BusinessAddress1":values.businessAddress,
-          "BusinessCity":values.businessCity,
-          "BusinessProvince":values.businessProvince,
-          "BusinessPostal":values.businessPostal,
-          "BusinessPhone":values.businessPhone,
-          "BusinessFax":values.businessFax,
-          "BusinessEmail":values.businessEmail,
-          "OtherWorkAddress":values.otherWorkAddress,
-          "SectorType":values.sectorType,
-          "TypeOfIndustry":values.typeOfIndustry,
-          "OrganizationSize":values.organizationSize,
-          "CewsParticipation":values.cewsParticipation,
-          "EmployeeDisplacement":values.employeeDisplacement === "yes",
-          "LabourDispute":values.labourDispute === "yes",
-          "UnionConcurrence":values.unionConcurrence,
-          "LiabilityCoverage":values.liabilityCoverage === "yes",
-          "WageSubsidy":values.wageSubsidy === "yes",
-          "WSBCCoverage":values.WSBCCoverage === "yes",
-          "LawComplianceConsent": values.lawCompliance,
-          "OrgEligibilityConsent": values.eligibility,
-          "EmployeesClaimed": values.employeesClaimed,
-          "WSBCNumber": values.WSBCNumber,
-          "ProvinceAlt": values.provinceAlt,
-          "PostalAlt": values.postalAlt,
-          "ParticipantEmail0": email,
-          "OperatingName0": values.operatingName0,
-          "NumberOfPositions0": values.numberOfPositions0,
-          "StartDate0": values.startDate0,
-          "Hours0": values.hours0,
-          "Wage0": values.wage0,
-          "Duties0": values.duties0,
-          "Skills0": values.skills0,
-          "WorkExperience0": values.workExperience0,
-          "OperatingName1": values.operationName1,
-          "NumberOfPositions1": values.numberOfPositions1,
-          "Duties1": values.duties1,
-          "Skills1": values.skills1,
-          "WorkExperience1": values.workExperience1,
-          "StartDate1": values.startDate1,
-          "Hours1": values.hours1,
-          "Wage1": values.wage1,
-          "SignatoryTitle": values.signatoryTitle,
-          "Signatory1": values.signatory1,
-          "OrganizationConsent": values.organizationConsent
+          '_id': values._id,
+         ' _bEmailDomain': values._bEmailDomain,
+          //step 1
+         ' serviceProviderName': values.serviceProviderName,
+         ' providerContractId': values.providerContractId,
+          'serviceProviderPostal': values.serviceProviderPostal,
+          'serviceProviderContact': values.serviceProviderContact,
+          'serviceProviderPhone': values.serviceProviderPhone,
+          'serviceProviderEmail': values.serviceProviderEmail,
+          'fundingSource': values.fundingSource,
+          'trainingProgramISET': values.trainingProgramISET,
+          'trainingProgramAEST': values.trainingProgramAEST,
+          'trainingProgramSDPR': values.trainingProgramSDPR,
+          'periodStart1': values.periodStart1,
+          'periodEnd1': values.periodEnd1,
+          'clientAddress': values.clientAddress,
+          'clientCity': values.clientCity,
+          'clientProvince': values.clientProvince,
+          'clientPostal': values.clientPostal,
+          'clientPhone': values.clientPhone,
+          'clientEmail': values.clientEmail,
+          'altShippingAddress': values.altShippingAddress,
+
+          //step 1:pop-up fields
+          'addressAlt':values.addressAlt,
+          'cityAlt': values.cityAlt,
+          'provinceAlt':values.provinceAlt,
+          'postalAlt': values.postalAlt,
+          //step 2
+          'clientResidesInBC': values.clientResidesInBC,
+          'clientUnemployed': values.clientUnemployed,
+          'registeredInApprovedProgram': values.registeredInApprovedProgram,
+          'accessToComputerCurrently': values.accessToComputerCurrently,
+          'receivingAlternateFunding': values.receivingAlternateFunding,
+          'financialNeed': values.financialNeed,
+          //step 3
+          'signatoryTitle': values.signatoryTitle,
+          'signatory1': values.signatory1,
+          'clientEligibility': values.clientEligibility,
+          'serviceProviderResponsibility': values.serviceProviderResponsibility,
+         ' organizationConsent': values.organizationConsent,
           //"": values.,
         }
       })
@@ -332,7 +326,7 @@ router.post('/', csrfProtection, async (req, res) => {
   clean(req.body);
   //console.log(req.body)
   
-  HaveEmployeeValidationSchema.validate(req.body, { abortEarly: false })
+  ProviderIntakeValidationSchema.validate(req.body, { abortEarly: false })
     .then(async function (value) {
 
       try {
@@ -351,7 +345,7 @@ router.post('/', csrfProtection, async (req, res) => {
                   console.log(saved)
                   // save values to mongo db
                   try {
-                    saveHaveEmployeeValues(value, email, saved);
+                    saveProviderIntakeValues(value, email, saved);
                   }
                   catch (error) {
                     console.log(error);
@@ -362,7 +356,7 @@ router.post('/', csrfProtection, async (req, res) => {
                   console.log(e)
                   //save failed one
                   try {
-                    saveHaveEmployeeValues(value, email, false);
+                    saveProviderIntakeValues(value, email, false);
                   }
                   catch (error) {
                     console.log(error);

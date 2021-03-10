@@ -15,7 +15,7 @@ const corsOptions = {
     optionsSuccessStatus: 200,
 };
 
-var formRouter = require('./routes/haveEmployeeForms');
+var formRouter = require('./routes/ProviderIntakeForms');
 //var participantFormRouter = require('./routes/participantForm');
 var claimFormRouter = require('./routes/claimForm');
 var needEmployeeRouter = require('./routes/needEmployeeForm');
@@ -31,7 +31,7 @@ app.use(cookieParser());
 app.use(helmet());
 
 
-app.use('/api/haveEmployeeForm', formRouter)
+app.use('/api/ProviderIntakeForm', formRouter)
 //app.use('/api/participantForm',participantFormRouter)
 app.use('/api/claimForm', claimFormRouter)
 app.use('/api/needEmployeeForm', needEmployeeRouter);

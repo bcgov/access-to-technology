@@ -94,7 +94,7 @@ module.exports = {
         return html       
     },
 
-    generateHaveEmployeeNotification: function(values){
+    generateProviderIntakeNotification: function(values){
         const alternativeAddress = values.otherWorkAddress;
         const WorkSafeBCNumber = (values.WSBCCoverage === "yes");
         const employeePositions = (values.numberOfPositions1 > 0);
@@ -107,7 +107,7 @@ module.exports = {
         <p>CA:  ${strings.orEmpty(values._ca)}</p>
         <hr />
         <h5>Business Information</h5>
-        <p>CRA Business Number:  ${strings.orEmpty(values.businessNumber)}</p>
+        <p>CRA Business Number:  ${strings.orEmpty(values.applicationId)}</p>
         <p>Address:  ${strings.orEmpty(values.businessAddress)}</p>
         <p>City/Town:  ${strings.orEmpty(values.businessCity)}</p>
         <p>Province:  ${strings.orEmpty(values.businessProvince)}</p>
@@ -147,7 +147,7 @@ module.exports = {
         <p>Is there a labour stoppage or labour - management dispute in progress?  ${strings.orEmpty(values.labourDispute)}</p>
         <p>Is there Union concurrence?  ${strings.orEmpty(values.unionConcurrence)}</p>
         <p>Does your organization have 3rd Party liability coverage?  ${strings.orEmpty(values.liabilityCoverage)}</p>
-        <p>Is your organization currently receiving funding under a WorkBC Wage Subsidy agreement?  ${strings.orEmpty(values.wageSubsidy)}</p>`
+        <p>Is your organization currently receiving funding under a Access To Technology agreement?  ${strings.orEmpty(values.wageSubsidy)}</p>`
         if(wageSubsidizedAlready){
             html = html + `<p>How many employees is WorkBC currently subsidizing? ${strings.orEmpty(values.employeesClaimed)}</p>`
         }
@@ -226,7 +226,7 @@ module.exports = {
         <p>CA:  ${strings.orEmpty(values._ca)}</p>
         <hr />
         <h5>Business Information</h5>
-        <p>CRA Business Number:  ${strings.orEmpty(values.businessNumber)}</p>
+        <p>CRA Business Number:  ${strings.orEmpty(values.applicationId)}</p>
         <p>Address:  ${strings.orEmpty(values.businessAddress)}</p>
         <p>City/Town:  ${strings.orEmpty(values.businessCity)}</p>
         <p>Province:  ${strings.orEmpty(values.businessProvince)}</p>
@@ -266,7 +266,7 @@ module.exports = {
         <p>Is there a labour stoppage or labour - management dispute in progress?  ${strings.orEmpty(values.labourDispute)}</p>
         <p>Is there Union concurrence?  ${strings.orEmpty(values.unionConcurrence)}</p>
         <p>Does your organization have 3rd Party liability coverage?  ${strings.orEmpty(values.liabilityCoverage)}</p>
-        <p>Is your organization currently receiving funding under a WorkBC Wage Subsidy agreement?  ${strings.orEmpty(values.wageSubsidy)}</p>`
+        <p>Is your organization currently receiving funding under a Access To Technology agreement?  ${strings.orEmpty(values.wageSubsidy)}</p>`
         if(wageSubsidizedAlready){
             html = html + `<p>How many employees is WorkBC currently subsidizing? ${strings.orEmpty(values.employeesClaimed)}</p>`
         }

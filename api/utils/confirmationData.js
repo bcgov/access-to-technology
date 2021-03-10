@@ -2,7 +2,7 @@ var strings = require("./strings")
 var formatDate = require("../utils/formatDate")
 
 module.exports = {
-    getHaveEmployeeSubmitted(values){
+    getProviderIntakeSubmitted(values){
         const businessFaxProvided = (typeof(values.businessFax) !== "undefined" && values.businessFax !== null && values.businessFax !== "");
         var data = [
             `The following information was received:`,
@@ -12,7 +12,7 @@ module.exports = {
             `<p>Operating Name:  ${strings.orEmpty(values.operatingName)}</p>`,
             `<hr />`,
             `<h5> Business Information</h5>`,
-            `<p>CRA Business Number:  ${strings.orEmpty(values.businessNumber)}</p>`,
+            `<p>CRA Business Number:  ${strings.orEmpty(values.applicationId)}</p>`,
             `<p>Address:  ${strings.orEmpty(values.businessAddress)}</p>`,
             `<p>City/Town:  ${strings.orEmpty(values.businessCity)}</p>`,
             `<p>Province:  ${strings.orEmpty(values.businessProvince)}</p>`,
@@ -41,7 +41,7 @@ module.exports = {
             `<p>Is there a labour stoppage or labour - management dispute in progress?  ${strings.orEmpty(values.labourDispute)}</p>`,
             `<p>Is there Union concurrence?  ${strings.orEmpty(values.unionConcurrence)}</p>`,
             `<p>Does your organization have 3rd Party liability coverage?  ${strings.orEmpty(values.liabilityCoverage)}</p>`,
-            `<p>Is your organization currently receiving funding under a WorkBC Wage Subsidy agreement?  ${strings.orEmpty(values.wageSubsidy)}</p>`,
+            `<p>Is your organization currently receiving funding under a Access To Technology agreement?  ${strings.orEmpty(values.wageSubsidy)}</p>`,
             ((values.wageSubsidy === "yes") ?
             [`<p>How many employees is WorkBC currently subsidizing? ${strings.orEmpty(values.employeesClaimed)}</p>`]:[]),
 
@@ -172,7 +172,7 @@ module.exports = {
             `<p>Operating Name:  ${strings.orEmpty(values.operatingName)}</p>`,
             `<hr />`,
             `<h5> Business Information</h5>`,
-            `<p>CRA Business Number:  ${strings.orEmpty(values.businessNumber)}</p>`,
+            `<p>CRA Business Number:  ${strings.orEmpty(values.applicationId)}</p>`,
             `<p>Address:  ${strings.orEmpty(values.businessAddress)}</p>`,
             `<p>City/Town:  ${strings.orEmpty(values.businessCity)}</p>`,
             `<p>Province:  ${strings.orEmpty(values.businessProvince)}</p>`,
@@ -200,7 +200,7 @@ module.exports = {
             `<p>Is there a labour stoppage or labour - management dispute in progress?  ${strings.orEmpty(values.labourDispute)}</p>`,
             `<p>Is there Union concurrence?  ${strings.orEmpty(values.unionConcurrence)}</p>`,
             `<p>Does your organization have 3rd Party liability coverage?  ${strings.orEmpty(values.liabilityCoverage)}</p>`,
-            `<p>Is your organization currently receiving funding under a WorkBC Wage Subsidy agreement?  ${strings.orEmpty(values.wageSubsidy)}</p>`,
+            `<p>Is your organization currently receiving funding under a Access To Technology agreement?  ${strings.orEmpty(values.wageSubsidy)}</p>`,
             ((values.wageSubsidy === "yes") ?
             [`<p>How many employees is WorkBC currently subsidizing? ${strings.orEmpty(values.employeesClaimed)}</p>`]:[]),
             `<p>${strings.orEmpty(values.operatingName)} meets the eligibility criteria and acknowledges that all the obligations the employer owes to or has with respect to its other employees under the various listed statutes and all other applicable laws apply equally to an individual employed in a wage subsidy placement:  ${strings.orEmpty(values.eligibility)}</p>`,

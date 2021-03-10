@@ -74,7 +74,7 @@ async function sendEmails(values) {
         // send mail with defined transport object
         /*
         let message1 = {
-          from: 'WorkBC Wage Subsidy <donotreply@gov.bc.ca>', // sender address
+          from: 'Access To Technology <donotreply@gov.bc.ca>', // sender address
           to: cEmail,// list of receivers
           bcc: claimConfirmationBCC,
           subject: "Application Confirmation - ", // Subject line
@@ -85,13 +85,13 @@ async function sendEmails(values) {
         };
         */
         let message2 = {
-          from: 'WorkBC Wage Subsidy <donotreply@gov.bc.ca>', // sender address
+          from: 'Access To Technology <donotreply@gov.bc.ca>', // sender address
           to: claimListEmail,// list of receivers
           subject: "A Wage Subsidy Claim application has been received", // Subject line
           html: notification.generateListNotification(values) // html body
         };
         let message3 = {
-          from: 'WorkBC Wage Subsidy <donotreply@gov.bc.ca>', // sender address
+          from: 'Access To Technology <donotreply@gov.bc.ca>', // sender address
           to: cNotifyEmail,// list of receivers
           bcc: claimConfirmationBCC,
           subject: "A Wage Subsidy Claim application has been received", // Subject line
