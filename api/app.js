@@ -31,7 +31,7 @@ app.use(cookieParser());
 app.use(helmet());
 
 
-app.use('/api/ProviderIntakeForm', formRouter)
+app.use('/api/providerForm', formRouter)
 app.use('/api/participantForm',participantFormRouter)
 app.use('/api/claimForm', claimFormRouter)
 app.use('/api/needEmployeeForm', needEmployeeRouter);
