@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
+import {customAlphabet} from 'nanoid'
 import { Formik, Form, Field } from 'formik'
 import { feedBackClassName, feedBackInvalid } from '../shared/ValidationMessages'
 import CollectionNotice from './CollectionNotice'
@@ -11,10 +12,10 @@ class ParticipantForm extends Component {
 
     constructor() {
         super()
-        
+         const nanoid = customAlphabet('0123456789abcdefghijklmnopqrstuvwxyz',10)
         this.state = {
-            _csrf: this.state._csrf,
-            _id: '',
+            _csrf: '',
+            _id: nanoid(),
             hasError: false
         }
     }
@@ -101,7 +102,7 @@ class ParticipantForm extends Component {
                         )} 
                         <Formik
                             initialValues={{
-                                _csrf: '',
+                                _csrf: this.state._csrf,
                                 _id: (typeof this.props.match.params.id !== 'undefined') ? this.props.match.params.id : '',
                                 participantConsent: false,
                             }}
