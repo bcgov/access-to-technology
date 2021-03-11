@@ -47,8 +47,9 @@ class thankyouParticipant extends Component {
                                     </div>
                                  ) : (<div></div>) 
                                  }
-                                <p>Program Start Date:  {this.props.location.state !== undefined && this.props.location.state.periodStart1.toString()}</p>
-                                <p>Program End Date:  {this.props.location.state !== undefined && this.props.location.state.periodEnd1.toString()}</p>
+                                 
+                                <p>Program Start Date:  {this.props.location.state !== undefined && this.props.location.state.periodStart1}</p>
+                                <p>Program End Date:  {this.props.location.state !== undefined && this.props.location.state.periodEnd1}</p>
                                 
                                 <h5>Client Information</h5>
                                 <p>FullName:  {this.props.location.state !== undefined && this.props.location.state.clientName}</p>
