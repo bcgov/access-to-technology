@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const yup = require('yup');
 
 var { check, validationResult, matchedData } = require('express-validator')
 var nodemailer = require("nodemailer");
@@ -32,8 +33,6 @@ var listADFS = process.env.LISTADFS || process.env.OPENSHIFT_NODEJS_LISTADFS || 
 // send email func
 
 // get
-
-// post
 router.get('/', csrfProtection, (req, res) => {
     var token = req.csrfToken()
     res.cookie('XSRF-TOKEN', token)
@@ -42,10 +41,11 @@ router.get('/', csrfProtection, (req, res) => {
     });
   });
 
+//post
   router.post('/', csrfProtection, async (req, res) => {
     res.send({
       ok: "ok"
-    }) 
-  })
+    }); 
+  });
 
   module.exports = router;

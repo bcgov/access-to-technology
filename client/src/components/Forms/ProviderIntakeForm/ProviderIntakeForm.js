@@ -162,7 +162,6 @@ class ProviderIntakeForm extends Component {
                             enableReinitialize={true}
                             validationSchema={ProviderIntakeValidationSchema}
                             onSubmit={(values, {resetForm, setErrors, setStatus, setSubmitting }) => {
-                                
                                 fetch(FORM_URL.ProviderIntakeForm, {
                                     method: "POST",
                                     credentials: 'include',

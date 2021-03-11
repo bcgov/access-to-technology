@@ -9,6 +9,7 @@ import ParticipantForm from './components/Forms/ParticipantForm/ParticipantForm'
 import ThankyouClaimForm from './components/Forms/ClaimForm/ThankyouClaimForm'
 import ThankYouProviderIntake from './components/Forms/ProviderIntakeForm/thankyouProviderIntake'
 import ThankYouNeedEmployee from './components/Forms/NeedEmployeeForm/thankyouNeedEmployee'
+import ThankYouParticipant from './components/Forms/ParticipantForm/thankyouParticipant'
 
 
 function Main() {
@@ -20,17 +21,15 @@ function Main() {
                         <ProviderIntakeForm />
                     </Route>
                     <Route path="/thankyouProviderIntake" component={ThankYouProviderIntake}  />
+                    
                     <Route path="/participantForm">
                         <ParticipantForm />
                     </Route>
-                    <Route path="/thankyou">
-                        <Thankyou />
-                    </Route>
-                    <Route path="/thankyouNeedEmployee" component={ThankYouNeedEmployee}  />
+                    <Route path="/thankyouParticipant" component={ThankYouParticipant} />
 
+                    <Route path="/thankyouNeedEmployee" component={ThankYouNeedEmployee}  />
                     <Route path="/claimForm" component={ClaimForm}/>
                     <Route path="/thankyouClaimForm" component={ThankyouClaimForm} />
-                    <Route path="/participantForm" component={ParticipantForm}/>
                     <Route path="/">
                         <Home />
                     </Route>

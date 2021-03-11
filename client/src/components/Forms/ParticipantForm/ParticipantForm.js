@@ -134,7 +134,7 @@ class ParticipantForm extends Component {
                                             }
                                             else if (resp.ok) {
                                                 setSubmitting(false);
-                                                this.props.history.push('/thankYou',values)
+                                                this.props.history.push('/thankyouParticipant',values)
                                             }
                                         }
                                     ));
