@@ -16,7 +16,33 @@ class ParticipantForm extends Component {
         this.state = {
             _csrf: '',
             _id: nanoid(),
-            hasError: false
+            hasError: false,
+             //step 1
+             providerContractId:"",
+             serviceProviderContact:"",
+             serviceProviderPhone:"",
+             serviceProviderEmail:"",
+             fundingSource:"",
+             trainingProgramISET:"",
+             trainingProgramAEST:"",
+             trainingProgramSDPR:"",
+             periodStart1:"",
+             periodEnd1:"",
+             clientAddress:"",
+             clientCity:"",
+             clientProvince:"British Columbia",
+             clientPostal:"",
+             clientPhone:"",
+             clientFax:"",
+             clientEmail:"",
+             altShippingAddress: false,
+
+             //step 1:pop-up fields
+             addressAlt:"",
+             cityAlt:"",
+             provinceAlt:"BC",
+             postalAlt:"",
+            
         }
     }
 
@@ -134,7 +160,7 @@ class ParticipantForm extends Component {
                                             }
                                             else if (resp.ok) {
                                                 setSubmitting(false);
-                                                this.props.history.push('/thankYouParticipant',values)
+                                                this.props.history.push('/thankyouParticipant',values)
                                             }
                                         }
                                     ));
