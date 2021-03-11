@@ -101,12 +101,6 @@ class FormStep1 extends Component {
                 </div>
                 <div className="form-row">
                     <div className="form-group col-md-6">
-                        <label className="col-form-label control-label" htmlFor="_id">Client Application ID <span
-                        style={{ color: "red" }}>*</span></label>
-                        <Field  readOnly className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "_id")}`} id="_id" name="_id"/>
-                        {feedBackInvalid(this.props.errors,this.props.touched,"_id")}
-                    </div>
-                    <div className="form-group col-md-6">
                         <label className="col-form-label control-label" htmlFor="serviceProviderName">Service Provider Name <span
                             style={{ color: "red" }}>*</span></label>
                         <Field className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "serviceProviderName")}`} id="serviceProviderName" name="serviceProviderName" />
