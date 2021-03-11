@@ -37,7 +37,7 @@ router.get('/', csrfProtection, (req, res) => {
     res.cookie('XSRF-TOKEN', token)
     res.send({
       csrfToken: token
-    })
+    });
   })
 
 //post
