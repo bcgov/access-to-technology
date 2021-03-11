@@ -13,7 +13,7 @@ class ParticipantForm extends Component {
         super()
         
         this.state = {
-            _csrf: '',
+            _csrf: this.state._csrf,
             _id: '',
             hasError: false
         }
@@ -105,6 +105,7 @@ class ParticipantForm extends Component {
                                 _id: (typeof this.props.match.params.id !== 'undefined') ? this.props.match.params.id : '',
                                 participantConsent: false,
                             }}
+                            enableReinitialize={true}
                             validationSchema={ParticipantValidationSchema}
                             onSubmit={(values,  {resetForm, setErrors, setStatus, setSubmitting }) => {
                                 fetch(FORM_URL.clientForm, {
@@ -121,11 +122,9 @@ class ParticipantForm extends Component {
                                         resp => {
                                             if (resp.err) {
                                                 alert("Please review your form, a field is incomplete.")
-                                                setSubmitting(false);
-                                                setErrors(resp.err);
-                                                this.setState({
-                                                    hasError: true
-                                                })
+                                                setSubmitting(false)
+                                                setErrors(resp.err)
+
                                             } else if (resp.emailErr) {
                                                 setSubmitting(false)
                                                 this.setState({
@@ -134,7 +133,7 @@ class ParticipantForm extends Component {
                                             }
                                             else if (resp.ok) {
                                                 setSubmitting(false);
-                                                this.props.history.push('/thankyouParticipant',values)
+                                                this.props.history.push('/thankYouParticipant',values)
                                             }
                                         }
                                     ));

@@ -9,7 +9,6 @@ var csrfProtection = csrf({ cookie: true });
 var spauth = require('node-sp-auth')
 var request = require('request-promise')
 
-
 var ParticipantFormValidationSchema = require('../schemas/ParticipantFormValidationSchema')
 var generateHTMLEmail = require('../utils/htmlEmail')
 var notification = require('../utils/applicationReceivedEmail');
@@ -38,14 +37,14 @@ router.get('/', csrfProtection, (req, res) => {
     res.cookie('XSRF-TOKEN', token)
     res.send({
       csrfToken: token
-    });
-  });
+    })
+  })
 
 //post
   router.post('/', csrfProtection, async (req, res) => {
     res.send({
       ok: "ok"
-    }); 
-  });
+    })
+  })
 
   module.exports = router;
