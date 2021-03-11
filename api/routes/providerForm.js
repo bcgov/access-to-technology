@@ -323,9 +323,12 @@ router.get('/', csrfProtection, (req, res) => {
 router.post('/', csrfProtection, async (req, res) => {
   //clean the body
   //console.log(req.body)
-  clean(req.body);
+  res.send({
+    ok: "ok"
+  }) 
+  //clean(req.body);
   //console.log(req.body)
-  
+  /*
   ProviderIntakeValidationSchema.validate(req.body, { abortEarly: false })
     .then(async function (value) {
 
@@ -388,7 +391,7 @@ router.post('/', csrfProtection, async (req, res) => {
         err
       })
       return
-    })
+    })*/
     
 })
 

@@ -42,4 +42,10 @@ router.get('/', csrfProtection, (req, res) => {
     });
   });
 
+  router.post('/', csrfProtection, async (req, res) => {
+    res.send({
+      ok: "ok"
+    }) 
+  })
+
   module.exports = router;
