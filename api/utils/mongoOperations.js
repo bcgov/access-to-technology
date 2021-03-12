@@ -2,18 +2,29 @@
 const MongoClient = require('mongodb').MongoClient;
 const strings = require("./strings");
 
+let uri;
+if (!process.env.MONGO_USERNAME  || !process.env.MONGO_PASSWORD){
+    uri = `mongodb://${process.env.MONGO_CONNECTION_URI || 'localhost'}/${process.env.MONGO_DB_NAME || 'test'}`;
+} else {
+    uri = `mongodb://${process.env.MONGO_USERNAME || "superuser"}:${process.env.MONGO_PASSWORD || "password"}@${process.env.MONGO_CONNECTION_URI || 'localhost'}/${process.env.MONGO_DB_NAME || 'test'}`;
+}
+
+const client = new MongoClient(uri, { useUnifiedTopology: true });
+var connection = client.connect()
 
 // Private function to get a working client
 function getClient() {
     // i.e: 'mongodb://superuser:password@localhost/test'
     // don't have to do it this way to connect locally 
     // docs @ http://mongodb.github.io/node-mongodb-native/3.6/api/MongoClient.html
+    /*
     let uri;
     if (!process.env.MONGO_USERNAME  || !process.env.MONGO_PASSWORD){
         uri = `mongodb://${process.env.MONGO_CONNECTION_URI || 'localhost'}/${process.env.MONGO_DB_NAME || 'test'}`;
     } else {
         uri = `mongodb://${process.env.MONGO_USERNAME || "superuser"}:${process.env.MONGO_PASSWORD || "password"}@${process.env.MONGO_CONNECTION_URI || 'localhost'}/${process.env.MONGO_DB_NAME || 'test'}`;
     }
+    */
 
     
     let client = new MongoClient(uri, { useUnifiedTopology: true });
@@ -23,6 +34,7 @@ function getClient() {
 
 
 module.exports = {
+    /*
     saveProviderIntakeValues: function (values, email, savedToSP) {
         const client = getClient();
         client.connect().then(mClient => {
@@ -193,6 +205,19 @@ module.exports = {
                 totalMERCs       : strings.orEmpty(values.totalMERCs),
                 clientIssues1    : strings.orEmpty(values.clientIssues1),
                 signatory1       : strings.orEmpty(values.signatory1)
+            });
+        });
+    },
+    */
+    saveParticipantValues: async function (values, savedToSP) {
+        return await connection
+        .then(mClient => {
+            // get a handle on the db
+            return mClient.db();
+        }).then(async db => {
+            // add our values to db (they are always new)
+            return db.collection("Participant").insertOne({
+                applicationID: values._id,// id is provided
             });
         });
     },

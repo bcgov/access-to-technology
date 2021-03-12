@@ -15,6 +15,7 @@ var notification = require('../utils/applicationReceivedEmail');
 var clean = require('../utils/clean')
 var confirmData = require('../utils/confirmationData');
 const { getSubmitted } = require('../utils/confirmationData');
+var {saveParticipantValues} = require("../utils/mongoOperations");
 
 // env var info here...
 var confirmationEmail1 = process.env.CONFIRMATIONONE || process.env.OPENSHIFT_NODEJS_CONFIRMATIONONE || "";
@@ -42,9 +43,38 @@ router.get('/', csrfProtection, (req, res) => {
 
 //post
   router.post('/', csrfProtection, async (req, res) => {
-    res.send({
-      ok: "ok"
+    clean(req.body);
+    ParticipantFormValidationSchema.validate(req.body, { abortEarly: false })
+    .then(async function (value) {
+      try {
+        await saveParticipantValues(value)
+        .then(async r => {
+          // {n: 1, ok: 1}
+          // if (r.result.ok === 1)
+            //send email
+            //send ok response
+          console.log(r.result)
+        })
+      }
+      catch (error) {
+        console.log(error);
+        //send error back, stop submission
+      }
+      res.send({
+        ok: "ok"
+      })
+    }).catch(function(errors){
+      var err = {}
+      errors.inner.forEach(e => {
+        err[e.path] = e.message
+      })
+      res.send({
+        err
+      })
+      return      
     })
+    
+
   })
 
   module.exports = router;
