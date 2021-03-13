@@ -16,10 +16,12 @@ class ProviderIntakeForm extends Component {
     constructor(){
         super()
         const nanoid = customAlphabet('0123456789abcdefghijklmnopqrstuvwxyz',10)
+        const nanoid1 = customAlphabet('0123456789abcdefghijklmnopqrstuvwxyz',25);
         this.state={
             _csrf: '',
             currentStep: 1,
             _id: nanoid(),
+            _token: nanoid1(),
             hasError: false
         }
         this._next = this._next.bind(this)
@@ -114,6 +116,8 @@ class ProviderIntakeForm extends Component {
                             initialValues= {{
                                     _csrf: this.state._csrf,
                                     _id: this.state._id,
+                                    _token: this.state._token,
+
                                     _bEmailDomain: "",
                                     //step 1
                                     serviceProviderName:"",
