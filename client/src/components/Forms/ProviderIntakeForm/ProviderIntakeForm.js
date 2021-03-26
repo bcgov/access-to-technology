@@ -16,10 +16,12 @@ class ProviderIntakeForm extends Component {
     constructor(){
         super()
         const nanoid = customAlphabet('0123456789abcdefghijklmnopqrstuvwxyz',10)
+        const nanoid1 = customAlphabet('0123456789abcdefghijklmnopqrstuvwxyz',25);
         this.state={
             _csrf: '',
             currentStep: 1,
             _id: nanoid(),
+            _token: nanoid1(),
             hasError: false
         }
         this._next = this._next.bind(this)
@@ -114,6 +116,8 @@ class ProviderIntakeForm extends Component {
                             initialValues= {{
                                     _csrf: this.state._csrf,
                                     _id: this.state._id,
+                                    _token: this.state._token,
+
                                     _bEmailDomain: "",
                                     //step 1
                                     serviceProviderName:"",
@@ -128,7 +132,9 @@ class ProviderIntakeForm extends Component {
                                     trainingProgramSDPR:"",
                                     periodStart1:"",
                                     periodEnd1:"",
+                                    clientName:"",
                                     clientAddress:"",
+                                    clientAddress2:"",
                                     clientCity:"",
                                     clientProvince:"British Columbia",
                                     clientPostal:"",
@@ -143,17 +149,18 @@ class ProviderIntakeForm extends Component {
                                     provinceAlt:"BC",
                                     postalAlt:"",
                                     //step 2
-                                    clientResidesInBC:"",
+                                    telusInternetForGood:"",
+                                    /*clientResidesInBC:"",
                                     clientUnemployed:"",
                                     registeredInApprovedProgram:"",
                                     accessToComputerCurrently:"",
                                     receivingAlternateFunding:"",
-                                    financialNeed:"",
+                                    financialNeed:"",*/
                                     //step 3
-                                    signatoryTitle:"",
-                                    signatory1:"",
-                                    clientEligibility:false,
-                                    serviceProviderResponsibility:false,
+                                    //signatoryTitle:"",
+                                    //signatory1:"",
+                                    //clientEligibility:false,
+                                   // serviceProviderResponsibility:false,
                                     organizationConsent: false,
     
 

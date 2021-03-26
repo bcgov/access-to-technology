@@ -13,12 +13,15 @@ class ParticipantForm extends Component {
     constructor() {
         super()
          const nanoid = customAlphabet('0123456789abcdefghijklmnopqrstuvwxyz',10)
+         const nanoid1 = customAlphabet('0123456789abcdefghijklmnopqrstuvwxyz',25)
         this.state = {
             _csrf: '',
             _id: nanoid(),
+            _token: nanoid1(),
             hasError: false,
              //step 1
              providerContractId:"",
+             serviceProviderName:"",
              serviceProviderContact:"",
              serviceProviderPhone:"",
              serviceProviderEmail:"",
@@ -42,6 +45,7 @@ class ParticipantForm extends Component {
              cityAlt:"",
              provinceAlt:"BC",
              postalAlt:"",
+             participantConsent:false,
             
         }
     }
@@ -172,17 +176,17 @@ class ParticipantForm extends Component {
                                         <h2 id="forms">Access to Technology Client Form</h2>
                                     </div>
                                     <div className="form=row">
-                                        <p>The Ministry of Social Development and Poverty Reduction has received a request from (name of referring Service Provider).
+                                        <p>The Ministry of Social Development and Poverty Reduction has received a request from {`${values.serviceProviderName}`}.
                                     To process your application for an A2T laptop, you must complete and submit this Client Notification and Agreement.<br/><br/>
                                     Please be aware that delays in submitting your completed Client Notification and Agreement will result in delays in processing your
                                     application and may negatively impact your eligibility to receive an A2T laptop.   You are encouraged to complete and submit this form as soon as possible.<br/><br />
-                                    If you have questions or require assistance to complete this form, please contact (name of referring Service Provider).<br/></p>
+                                    If you have questions or require assistance to complete this form, please contact {`${values.serviceProviderName}`}.<br/></p>
                                     </div>
                                     {/* handleApplicationID handles all the pre populated values in future. */}
                                     {this.handleApplicationId(values._id, values.noOrgId, values, errors, touched)}
                                     
                                     <p><b>Collection, Use and Disclosure of Personal Information</b><br/>
-                                        Personal information collected in this application is collected under the authority of section 26 (c) of the Freedom of Information and Protection of Privacy Act (“FOIPPA”) and is subject to all the provisions of that Act. The personal information collected will be used by the Ministry of Social Development and Poverty Reduction (“MSDPR”), its service providers and associates of its service providers to administer the Access to Technology Program (the “Program”), and may also be used to evaluate the effectiveness of the Access to Technology Program.
+                                        Personal information collected in this application is collected under the authority of section 26 (c) of the Freedom of Information and Protection of Privacy Act (“FOIPPA”) and is subject to all the provisions of that Act. The personal information collected will be used by the Ministry of Social Development and Poverty Reduction (“MSDPR”), its service providers and associates of its service providers to administer the Access to Technology Program ({`${values.eligibleTrainingProgram}`}), and may also be used to evaluate the effectiveness of the Access to Technology Program.
                                         If you have any questions about the collection of your personal information, please contact the Records clerk of the Employment and Labour Market Services Division, MSDPR at WorkBCOESprivacy@gov.bc.ca.<br/><br/>
                                         <b>Confirmation of Request</b><br/>
                                         I am requesting a laptop from the Access to Technology Initiative and I understand and agree that:  </p>
@@ -191,9 +195,9 @@ class ParticipantForm extends Component {
 
                                             <li>My use of the technology described in this A2T application is contingent upon my participation in the training described in this A2T application;</li>
 
-                                            <li>If I complete the training described in this A2T application to the satisfaction of (name of referring service provider ), I may keep the technology provided to me by the A2T program; and</li>
+                                            <li>If I complete the training described in this A2T application to the satisfaction of {`${values.serviceProviderName}`}, I may keep the technology provided to me by the A2T program; and</li>
 
-                                            <li>If I do not complete the training described in this A2T application to the satisfaction of (name of referring service provider),  I must return the technology, in good working order to (name of referring service provider).</li>
+                                            <li>If I do not complete the training described in this A2T application to the satisfaction of {`${values.serviceProviderName}`},  I must return the technology, in good working order to (name of referring service provider).</li>
                                         </ul>
                                       <p>  <b>Acceptable Uses Agreement:</b><br/>
                                         I understand and agree that the laptop has been provided to me in order to attend training.  I will not use the laptop for:  </p>

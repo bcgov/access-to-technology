@@ -17,7 +17,7 @@ var notification = require('../utils/applicationReceivedEmail');
 var clean = require('../utils/clean')
 var confirmData = require('../utils/confirmationData');
 const { getProviderIntakeSubmitted } = require('../utils/confirmationData');
-var {saveProviderIntakeValues, saveClaimValues} = require("../utils/mongoOperations");
+var {saveProviderIntakeValues} = require("../utils/mongoOperations");
 
 var confirmationEmail1 = process.env.CONFIRMATIONONE || process.env.OPENSHIFT_NODEJS_CONFIRMATIONONE || "";
 var confirmationBCC = process.env.CONFIRMATIONBCC || process.env.OPENSHIFT_NODEJS_CONFIRMATIONBCC || "";
@@ -247,6 +247,7 @@ async function saveList(values, email) {
           'periodStart1': values.periodStart1,
           'periodEnd1': values.periodEnd1,
           'clientAddress': values.clientAddress,
+          'clientAddress2': values.clientAddress2,
           'clientCity': values.clientCity,
           'clientProvince': values.clientProvince,
           'clientPostal': values.clientPostal,
@@ -260,7 +261,8 @@ async function saveList(values, email) {
           'provinceAlt':values.provinceAlt,
           'postalAlt': values.postalAlt,
           //step 2
-          'clientResidesInBC': values.clientResidesInBC,
+          'telusInternetForGood': values.telusInternetForGood,
+          /*'clientResidesInBC': values.clientResidesInBC,
           'clientUnemployed': values.clientUnemployed,
           'registeredInApprovedProgram': values.registeredInApprovedProgram,
           'accessToComputerCurrently': values.accessToComputerCurrently,
@@ -268,10 +270,10 @@ async function saveList(values, email) {
           'financialNeed': values.financialNeed,
           //step 3
           'signatoryTitle': values.signatoryTitle,
-          'signatory1': values.signatory1,
+          'signatory1': values.signatory1,*/
           'clientEligibility': values.clientEligibility,
           'serviceProviderResponsibility': values.serviceProviderResponsibility,
-         ' organizationConsent': values.organizationConsent,
+         //' organizationConsent': values.organizationConsent,
           //"": values.,
         }
       })
@@ -323,8 +325,37 @@ router.get('/', csrfProtection, (req, res) => {
 router.post('/', csrfProtection, async (req, res) => {
   //clean the body
   //console.log(req.body)
-  res.send({
-    ok: "ok"
+  clean(req.body);
+  ProviderIntakeFormValidationSchema.validate(req.body, { abortEarly: false })
+    .then(async function (value) {
+      try {
+        await saveParticipantValues(value)
+        .then(async r => {
+          // {n: 1, ok: 1}
+          // if (r.result.ok === 1)
+            //send email
+            //send ok response
+          console.log(r.result)
+        })
+      }
+      catch (error) {
+        console.log(error);
+        //send error back, stop submission
+      }
+      res.send({
+        ok: "ok"
+      })
+    }).catch(function(errors){
+      var err = {}
+      errors.inner.forEach(e => {
+        err[e.path] = e.message
+      })
+      res.send({
+        err
+      })
+      return      
+    })
+
   }) 
   //clean(req.body);
   //console.log(req.body)
@@ -393,6 +424,5 @@ router.post('/', csrfProtection, async (req, res) => {
       return
     })*/
     
-})
 
 module.exports = router;

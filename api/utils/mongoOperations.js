@@ -218,6 +218,90 @@ module.exports = {
             // add our values to db (they are always new)
             return db.collection("Participant").insertOne({
                 applicationID: values._id,// id is provided
+                token: values._token,
+                 //step 1
+                serviceProviderName: values.serviceProviderName,
+                providerContractID: values.providerContractId,
+                serviceProviderContract: values.serviceProviderContact,
+                serviceProviderPhone: values.serviceProviderPhone,
+                serviceProviderEmail: values.serviceProviderEmail,
+                fundingSource: values.fundingSource,
+                trainingProgramISET: values.trainingProgramISET,
+                trainingProgramAEST: values.trainingProgramAEST,
+                trainingProgramSDPR: values.trainingProgramSDPR,
+                periodStart1: values.periodStart1,
+                periodEnd1: values.periodEnd1,
+                clientAddress: values.clientAddress,
+                clientCity: values.clientCity,
+                clientProvince:values.clientProvince,
+                clientPostal: values.clientPostal,
+                clientPhone: values.clientPhone,
+                clientFax: values.clientFax,
+                clientEmail: values.clientEmail,
+                altShippingAddress: values.altShippingAddress,
+
+                //step 1:pop-up fields
+                addressAlt: values.addressAlt,
+                cityAlt: values.cityAlt,
+                provinceAlt: values.provinceAlt,
+                postalAlt: values.postalAlt,
+                participantConsent: values.participantConsent,
+                
+            });
+        });
+    },
+    saveProviderIntakeValues: async function (values, savedToSP) {
+        return await connection
+        .then(mClient => {
+            // get a handle on the db
+            return mClient.db();
+        }).then(async db => {
+            // add our values to db (they are always new)
+            return db.collection("ProviderIntake").insertOne({
+                applicationID: values._id,// id is provided
+                token: values._token,
+                 //step 1
+                serviceProviderName: values.serviceProviderName,
+                providerContractID: values.providerContractId,
+                serviceProviderContract: values.serviceProviderContact,
+                serviceProviderPostal: values.serviceProviderPostal,
+                serviceProviderPhone: values.serviceProviderPhone,
+                serviceProviderEmail: values.serviceProviderEmail,
+                fundingSource: values.fundingSource,
+                trainingProgramISET: values.trainingProgramISET,
+                trainingProgramAEST: values.trainingProgramAEST,
+                trainingProgramSDPR: values.trainingProgramSDPR,
+                periodStart1: values.periodStart1,
+                periodEnd1: values.periodEnd1,
+                clientAddress: values.clientAddress,
+                clientCity: values.clientCity,
+                clientProvince:values.clientProvince,
+                clientPostal: values.clientPostal,
+                clientPhone: values.clientPhone,
+                clientFax: values.clientFax,
+                clientEmail: values.clientEmail,
+                altShippingAddress: values.altShippingAddress,
+
+                //step 1:pop-up fields
+                addressAlt: values.addressAlt,
+                cityAlt: values.cityAlt,
+                provinceAlt: values.provinceAlt,
+                postalAlt: values.postalAlt,
+                
+                //step 2
+                clientResidesInBC: values.clientResidesInBC,
+                clientUnemployed: values.clientUnemployed,
+                registeredInApprovedProgram:values.registeredInApprovedProgram,
+                accessToComputerCurrently: values.accessToComputerCurrently,
+                receivingAlternateFunding: values.receivingAlternateFunding,
+                financialNeed: values.financialNeed,
+                //step 3
+                signatoryTitle: values.signatoryTitle,
+                signatory1: values.signatory1,
+                clientEligibility: values.clientEligibility,
+                serviceProviderResponsibility: values.serviceProviderResponsibility,
+                organizationConsent: values.organizationConsent,
+                
             });
         });
     },

@@ -21,10 +21,10 @@ function Home() {
                     <h3>Apply on behalf of client</h3>
                     <p><a href="/ProviderIntake" className="btn btn-lg btn-primary">Start</a><br/></p>
                 </div>
-                <div className="col-md-6">
+                {/*<div className="col-md-6">
                     <h3>Verify Application Information</h3>
                     <p><a href="/participantForm" className="btn btn-lg btn-primary">Start</a><br/></p>
-                </div>
+                </div>*/}
             </div>
         </div>
     )
