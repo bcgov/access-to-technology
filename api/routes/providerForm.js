@@ -133,11 +133,18 @@ async function sendEmails(values) {
                   <li>CONFIRM that I need a laptop computer to participate in and complete the training program described above.</li>
                   <li>CONSENT to SDPR or its contracted A2T service provider collecting my personal information from and disclosing my personal information to <name of referring Service Provider> for the purposes of administering or evaluating the effectiveness of the A2T program.</li>
                   <li>ACKNOWLEDGE and AGREE that:
-                    <ol type="i">
-                      <li></li>
-                      <li></li>
-                      <li></li>
-                      <li></li>
+                    <ol type="a">
+                      <li>My receipt and use of a laptop computer provided to me through the A2T program is dependent on my participation in the training described above;</li>
+                      <li>If I complete the training described above to the satisfaction of <name of referring Service Provider> I may keep the laptop computer provided to me through the A2T program;</li>
+                      <li>If I do not complete the training above to the satisfaction of <name of referring Service Provider> I must return the laptop computer, in good working order, to the A2T contractor;</li>
+                      <li>I may not and will not use any laptop computer provided to me through the A2T program for the purposes of:
+                        <ol type="a">
+                          <li>sexual exploitation;</li>
+                          <li>promoting hate or discrimination;</li>
+                          <li>any other illegal activity; or</li>
+                          <li>promoting any illegal activity; and</li>
+                        </ol>
+                      </li>
                     </ol>
                   </li>
                 </ol>
