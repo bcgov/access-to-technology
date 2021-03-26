@@ -16,7 +16,7 @@ class FormStep1 extends Component {
         if (this.props.values.fundingSource === "ISET") {
             return (<div className="form-row">
                 <div className="form-group col-md-6">
-                    <label className="col-form-label control-label" htmlFor="trainingProgramISET">Approved Eligible Skills Training and Employment Program<span
+                    <label className="col-form-label control-label" htmlFor="trainingProgramISET">Eligible Skill And Training Program<span
                         style={{ color: "red" }}>*</span></label>
                     <Field
                         as="select"
@@ -38,7 +38,7 @@ class FormStep1 extends Component {
         else if (this.props.values.fundingSource === "AEST") {
             return (<div className="form-row">
                 <div className="form-group col-md-6">
-                    <label className="col-form-label control-label" htmlFor="trainingProgramAEST">Approved Eligible Skills Training and Employment Program<span
+                    <label className="col-form-label control-label" htmlFor="trainingProgramAEST">Eligible Skill And Training Program<span
                         style={{ color: "red" }}>*</span></label>
                     <Field
                         as="select"
@@ -60,7 +60,7 @@ class FormStep1 extends Component {
         else if (this.props.values.fundingSource === "SDPR") {
             return (<div className="form-row">
                 <div className="form-group col-md-6">
-                    <label className="col-form-label control-label" htmlFor="trainingProgramSDPR">Approved Eligible Skills Training and Employment Program<span
+                    <label className="col-form-label control-label" htmlFor="trainingProgramSDPR">Eligible Skill And Training Program<span
                         style={{ color: "red" }}>*</span></label>
                     <Field
                         as="select"
@@ -69,9 +69,9 @@ class FormStep1 extends Component {
                         name="trainingProgramSDPR"
                     >
                         <option value="">Please select</option>
-                        <option value="Skills Enhancement Training">Skills Enhancement Training</option>
-                        <option value="Project Based Labour Market Training">Project Based Labour Market Training</option>
-                        <option value="Self Employment Services">Self Employment Services</option>
+                        <option value="Short Duration Training">Short Duration Training</option>
+                        <option value="Occupational Skills Training">Occupational Skills Training</option>
+                        <option value="BC Adult Graduation Diploma">BC Adult Graduation Diploma</option>
                     </Field>
                     <small className="text-muted" id="trainingProgramSDPR">  This dropdown list here is determine by the funding source selected above</small>
                     {feedBackInvalid(this.props.errors, this.props.touched, "trainingProgramSDPR")}
@@ -97,56 +97,75 @@ class FormStep1 extends Component {
                     an application guide is also available <a href="https://www.workbc.ca/getmedia/3532dbe8-f084-4022-bd3c-8f9ebe422fa4/WS-Guide.aspx" target="_blank" rel="noopener noreferrer">here</a>.
                 </p>
                 <div className="form-group">
-                    <h2 id="forms">Application Tracking Information</h2>
+                    <h2 id="forms">Service Provider Information</h2>
                 </div>
                 <div className="form-row">
                     <div className="form-group col-md-6">
                         <label className="col-form-label control-label" htmlFor="serviceProviderName">Service Provider Name <span
                             style={{ color: "red" }}>*</span></label>
-                        <Field className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "serviceProviderName")}`} id="serviceProviderName" name="serviceProviderName" />
-                        {feedBackInvalid(this.props.errors,this.props.touched,"serviceProviderName")}
+                         <Field
+                                as="select"
+                                className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "serviceProviderName")}`}
+                                id="serviceProviderName" 
+                                name="serviceProviderName" 
+                            >
+                                <option value="">Please select</option>
+                                <option value="AEST Service Provider">AEST Service Provider</option>
+                                <option value="ISET Service Provider">ISET Service Provider</option>
+                                <option value="SDPR Service Provider">SDPR Service Provider</option>
+                            </Field>
+                            {feedBackInvalid(this.props.errors,this.props.touched,"serviceProviderName")}
                     </div>
                 </div>
                 <div className="form-row">
-                    <div className="form-group col-md-8">
-                        <label className="col-form-label control-label" htmlFor="providerContractId">Service Provider Contract Reference ID <span
-                            style={{ color: "red" }}>*</span></label>
-                        <Field className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "providerContractId")}`} id="providerContractId" name="providerContractId" />
-                        {feedBackInvalid(this.props.errors,this.props.touched,"providerContractId")}
+                 <div className="form-group col-md-6">
+                            <label className="col-form-label control-label" htmlFor="fundingSource">Funding Source <span
+                                style={{ color: "red" }}>*</span></label>
+                            <Field
+                                as="select"
+                                className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "fundingSource")}`}
+                                id="fundingSource" 
+                                name="fundingSource" 
+                            >
+                                <option value="">Please select</option>
+                                <option value="AEST">AEST</option>
+                                <option value="ISET">ISET</option>
+                                <option value="SDPR">SDPR</option>
+                            </Field>
+                            {feedBackInvalid(this.props.errors,this.props.touched,"fundingSource")}
                     </div>
+                </div>
+                <div className="form-row"> 
                     <div className="form-group col-md-4">
-                        <label className="col-form-label control-label" htmlFor="serviceProviderPostal">Postal Code <span
-                            style={{ color: "red" }}>*  </span></label>
-                        <small className="text-muted" id="serviceProviderPostal">  V0R2V5</small>
-                        <Field 
-                            className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "serviceProviderPostal")}`} 
-                            id="serviceProviderPostal" 
-                            name="serviceProviderPostal"
-                            onChange={e => {
-                                this.props.handleChange(e)
-                            }}  
-                        />
-                        {feedBackInvalid(this.props.errors,this.props.touched,"serviceProviderPostal")}
+                            <label className="col-form-label control-label" htmlFor="serviceProviderPostal">Postal Code <span
+                                style={{ color: "red" }}>*  </span></label>
+                            <small className="text-muted" id="serviceProviderPostal">  V0R2V5</small>
+                            <Field 
+                                className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "serviceProviderPostal")}`} 
+                                id="serviceProviderPostal" 
+                                name="serviceProviderPostal"
+                                onChange={e => {
+                                    this.props.handleChange(e)
+                                }}  
+                            />
+                            {feedBackInvalid(this.props.errors,this.props.touched,"serviceProviderPostal")}
                     </div>
                 </div>
                 <div className="form-row">
-                <div className="form-group col-md-8">
-                        <label className="col-form-label control-label" htmlFor="serviceProviderContact">Contact Name <span
-                            style={{ color: "red" }}>*</span></label>
-                        <Field className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "serviceProviderContact")}`} id="serviceProviderContact" name="serviceProviderContact" />
-                        {feedBackInvalid(this.props.errors,this.props.touched,"serviceProviderContact")}
-                    </div>
-                <div className="form-group col-md-4">
+                    <div className="form-group col-md-4">
+                            <label className="col-form-label control-label" htmlFor="serviceProviderContact">Contact Name <span
+                                style={{ color: "red" }}>*</span></label>
+                            <Field className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "serviceProviderContact")}`} id="serviceProviderContact" name="serviceProviderContact" />
+                            {feedBackInvalid(this.props.errors,this.props.touched,"serviceProviderContact")}
+                        </div>
+                    <div className="form-group col-md-4">
                             <label className="col-form-label control-label" htmlFor="serviceProviderPhone">Phone Number <span
                                 style={{ color: "red" }}>*</span></label>
                             <small className="text-muted" id="serviceProviderPhone">  250-555-5555</small>
                             <Field className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "serviceProviderPhone")}`} id="serviceProviderPhone" name="serviceProviderPhone" />
                             {feedBackInvalid(this.props.errors,this.props.touched,"serviceProviderPhone")}
                     </div>
-                   
-                </div>
-                <div className="form-row">
-                    <div className="form-group col-md-6">
+                    <div className="form-group col-md-4">
                             <label className="col-form-label control-label" htmlFor="serviceProviderEmail">E-mail Address <span
                                     style={{ color: "red" }}>*</span></label>
                             <small className="text-muted" id="serviceProviderEmail">  someone@example.com</small>
@@ -163,25 +182,17 @@ class FormStep1 extends Component {
                             />
                             {feedBackInvalid(this.props.errors,this.props.touched,"serviceProviderEmail")}
                     </div>
-                    <div className="form-group col-md-6">
-                            <label className="col-form-label control-label" htmlFor="fundingSource">Funding Source <span
-                                style={{ color: "red" }}>*</span></label>
-                            <Field
-                                as="select"
-                                className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "fundingSource")}`}
-                                id="fundingSource" 
-                                name="fundingSource" 
-                            >
-                                <option value="">Please select</option>
-                                <option value="AEST">AEST</option>
-                                <option value="ISET">ISET</option>
-                                <option value="SDPR">SDPR</option>
-                            </Field>
-                            {feedBackInvalid(this.props.errors,this.props.touched,"fundingSource")}
-                        </div>
+                </div>  
+                 <div className="form-row">
+                    <div className="form-group col-md-8">
+                        <label className="col-form-label control-label" htmlFor="providerContractId">Contract Reference ID <span
+                            style={{ color: "red" }}>*</span></label>
+                        <Field className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "providerContractId")}`} id="providerContractId" name="providerContractId" />
+                        {feedBackInvalid(this.props.errors,this.props.touched,"providerContractId")}
+                    </div>
                 </div>
                 <div className="form-group">
-                    <h2 id="forms">Client Program Information</h2>
+                    <h2 id="forms">Eligible Skill And Training Program Information</h2>
                 </div>
                 {this.ApplicableProgramForm}
                 <div className="form-row">

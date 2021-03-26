@@ -27,14 +27,14 @@ class thankyouProviderIntake extends Component {
                         <hr /> <h5>Application Tracking Information</h5>
                                 <p>Client Application ID:  {this.props.location.state !== undefined && this.props.location.state._id}</p>
                                 <p>Service Provider Name:  {this.props.location.state !== undefined && this.props.location.state.serviceProviderName}</p>
-                                <p>Service Provider Contract Reference ID:  {this.props.location.state !== undefined && this.props.location.state.serviceProviderId}</p>
+                                <p>Funding Source:  {this.props.location.state !== undefined && this.props.location.state.fundingSource}</p>
                                 <p>Service Provider Postal:  {this.props.location.state !== undefined && this.props.location.state.serviceProviderPostal}</p>
                                 <p>Contact Name:  {this.props.location.state !== undefined && this.props.location.state.serviceProviderContact}</p>
                                 <p>Email Address:  {this.props.location.state !== undefined && this.props.location.state.serviceProviderEmail}</p>
                                 <p>Phone Number:  {this.props.location.state !== undefined && this.props.location.state.serviceProviderPhone}</p>
-                                <p>Funding Source:  {this.props.location.state !== undefined && this.props.location.state.fundingSource}</p>
+                                <p>Contract Reference ID:  {this.props.location.state !== undefined && this.props.location.state.serviceProviderId}</p>
                                 
-                                <h5>Client Program Information</h5>
+                                <h5>Eligible Skill and Training Program Information</h5>
                                 {fundedISET ? (
                                     <div>
                                         <p>Approved Eligible Skills Training and Employment Program:  {this.props.location.state !== undefined && this.props.location.state.trainingProgramISET}</p>
@@ -56,12 +56,14 @@ class thankyouProviderIntake extends Component {
                                 
                                 <h5>Client Information</h5>
                                 <p>FullName:  {this.props.location.state !== undefined && this.props.location.state.clientName}</p>
-                                <p>Address:  {this.props.location.state !== undefined && this.props.location.state.clientAddress}</p>
+                                <p>Street Address:  {this.props.location.state !== undefined && this.props.location.state.clientAddress}</p>
+                                <p>Street Address 2:  {this.props.location.state !== undefined && this.props.location.state.clientAddress}</p>
                                 <p>City / Town:  {this.props.location.state !== undefined && this.props.location.state.clientCity}</p>
                                 <p>Province:  {this.props.location.state !== undefined && this.props.location.state.clientProvince}</p>
                                 <p>Postal:  {this.props.location.state !== undefined && this.props.location.state.clientPostal}</p>
                                 <p>Email Address:  {this.props.location.state !== undefined && this.props.location.state.clientEmail}</p>
                                 <p>Phone Number:  {this.props.location.state !== undefined && this.props.location.state.clientPhone}</p>
+                                <p>Telus Internet for Good Candidate:  {this.props.location.state !== undefined && this.props.location.state.telusInternetForGood}</p>
 
                                 {altShippingAddress ? (
                                     <div>
@@ -74,23 +76,23 @@ class thankyouProviderIntake extends Component {
                                  ) : (<div></div>) 
                                  }
 
-                                <h5>Client Eligibility and Need Assessment </h5>
+                             {/*}   <h5>Client Eligibility and Need Assessment </h5>
                                 <p>Is the Client a Resident of BC:  {this.props.location.state !== undefined && this.props.location.state.clientResidesInBC}</p>
                                 <p>is the client Unemployed or precariously employed:  {this.props.location.state !== undefined && this.props.location.state.clientUnemployed}</p>
                                 <p>Is the client participating in an approved eligible skills training and employment program:  {this.props.location.state !== undefined && this.props.location.state.registeredInApprovedProgram}</p>
                                 <p>Does the client not have access to a suitable computer and requires a computer to participate in online training:  {this.props.location.state !== undefined && this.props.location.state.accessToComputerCurrently}</p>
                                 <p>Is the client not receiving funding from another source for the purchase of the required technology :  {this.props.location.state !== undefined && this.props.location.state.ReceivingAlternateFunding}</p>
                                 <p>The service provider has confirmed the client has a demonstrated financial need to take part in this program : {this.props.location.state !== undefined && this.props.location.state.financialNeed}</p>
-                        
+                                */}
                                                           
                                 <h5>Declaration and Signature</h5>
-                                <p>Signing Authority Title:  {this.props.location.state !== undefined && this.props.location.state.signatory1}</p>
-                                <p>Signatory Authority Full Name:  {this.props.location.state !== undefined && this.props.location.state.signatoryTitle}</p>
+                               {/* <p>Signing Authority Title:  {this.props.location.state !== undefined && this.props.location.state.signatory1}</p>
+                                <p>Signatory Authority Full Name:  {this.props.location.state !== undefined && this.props.location.state.signatoryTitle}</p>*/}
                                 <p>Client Eligibility Attestation:  {this.props.location.state !== undefined && this.props.location.state.clientEligibility.toString()}</p>
                                 <p>Service Provider Responsibility Attestation:  {this.props.location.state !== undefined && this.props.location.state.serviceProviderResponsibility.toString()}</p>
-                                <p>I acknowledge and understand that by clicking the "submit" I am attaching my electronic signature to this form and that 
+                                {/*<p>I acknowledge and understand that by clicking the "submit" I am attaching my electronic signature to this form and that 
                                     by doing so I acquire the same rights, incur the same obligations and confer the same consent as I would by manually 
-                                    signing a physical copy of this form :  {this.props.location.state !== undefined && this.props.location.state.organizationConsent.toString()}</p>
+                            signing a physical copy of this form :  {this.props.location.state !== undefined && this.props.location.state.organizationConsent.toString()}</p>*/}
                         <hr />
                     </div>
                 </div>

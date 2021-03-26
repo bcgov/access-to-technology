@@ -247,6 +247,7 @@ async function saveList(values, email) {
           'periodStart1': values.periodStart1,
           'periodEnd1': values.periodEnd1,
           'clientAddress': values.clientAddress,
+          'clientAddress2': values.clientAddress2,
           'clientCity': values.clientCity,
           'clientProvince': values.clientProvince,
           'clientPostal': values.clientPostal,
@@ -260,7 +261,8 @@ async function saveList(values, email) {
           'provinceAlt':values.provinceAlt,
           'postalAlt': values.postalAlt,
           //step 2
-          'clientResidesInBC': values.clientResidesInBC,
+          'telusInternetForGood': values.telusInternetForGood,
+          /*'clientResidesInBC': values.clientResidesInBC,
           'clientUnemployed': values.clientUnemployed,
           'registeredInApprovedProgram': values.registeredInApprovedProgram,
           'accessToComputerCurrently': values.accessToComputerCurrently,
@@ -268,10 +270,10 @@ async function saveList(values, email) {
           'financialNeed': values.financialNeed,
           //step 3
           'signatoryTitle': values.signatoryTitle,
-          'signatory1': values.signatory1,
+          'signatory1': values.signatory1,*/
           'clientEligibility': values.clientEligibility,
           'serviceProviderResponsibility': values.serviceProviderResponsibility,
-         ' organizationConsent': values.organizationConsent,
+         //' organizationConsent': values.organizationConsent,
           //"": values.,
         }
       })

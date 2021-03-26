@@ -73,8 +73,8 @@ class ProviderIntakeStep2 extends Component {
                     <h2 id="forms">Client Information</h2>
                 </div>
                 <div className="form-row">
-                    <div className="form-group col-md-8">
-                        <label className="col-form-label control-label" htmlFor="clientName">Full Name <span
+                    <div className="form-group col-md-4">
+                        <label className="col-form-label control-label" htmlFor="clientName">Client Name <span
                             style={{ color: "red" }}>*</span></label>
                         <Field className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "clientName")}`} id="clientName" name="clientName" />
                         {feedBackInvalid(this.props.errors,this.props.touched,"clientName")}
@@ -86,7 +86,7 @@ class ProviderIntakeStep2 extends Component {
                             <Field className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "clientPhone")}`} id="clientPhone" name="clientPhone" />
                             {feedBackInvalid(this.props.errors,this.props.touched,"clientPhone")}
                     </div>
-                    <div className="form-group col-md-6">
+                    <div className="form-group col-md-4">
                         <label className="col-form-label control-label" htmlFor="clientEmail">E-mail Address <span
                                 style={{ color: "red" }}>*</span></label>
                         <small className="text-muted" id="clientEmail">  someone@example.com</small>
@@ -107,13 +107,28 @@ class ProviderIntakeStep2 extends Component {
                 </div>
                 <div className="form-row">
                     <div className="form-group col-md-12">
-                        <label className="col-form-label control-label" htmlFor="clientAddress">Home Address <span
+                        <label className="col-form-label control-label" htmlFor="clientAddress">Street Address 1 <span
                             style={{ color: "red" }}>*  </span></label>
                         <small className="text-muted" id="clientAddress">  123 Main St.</small>
                         <Field 
                             className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "clientAddress")}`} 
                             id="clientAddress" 
                             name="clientAddress"
+                            onChange={e => {
+                                this.props.handleChange(e)
+                            }} 
+                        />
+                        {feedBackInvalid(this.props.errors,this.props.touched,"clientAddress")}
+                    </div>
+                </div>
+                <div className="form-row">
+                    <div className="form-group col-md-12">
+                        <label className="col-form-label control-label" htmlFor="clientAddress2">Street Address 2 </label>
+                        <small className="text-muted" id="clientAddress2">   Apartment 207</small>
+                        <Field 
+                            className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "clientAddress2")}`} 
+                            id="clientAddress2" 
+                            name="clientAddress2"
                             onChange={e => {
                                 this.props.handleChange(e)
                             }} 
@@ -166,10 +181,7 @@ class ProviderIntakeStep2 extends Component {
                         {feedBackInvalid(this.props.errors,this.props.touched,"clientPostal")}
                     </div>
                 </div>
-               
-                <p className="small text-muted">Please note that the shipping address must be located in BC, in order to be eligible.</p>
     
-                
                 <div className="form-group">
                     <div className="form-check">
                         <Field type="checkbox" className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "altShippingAddress")}`} id="altShippingAddress" name="altShippingAddress"/>
@@ -183,6 +195,32 @@ class ProviderIntakeStep2 extends Component {
                     </div>
                 </div>
                 {this.shippingAddressForm}
+
+                <div className="form-row">
+                    <div className="form-group">
+                        <label className="col-form-label control-label" htmlFor="telusInternetForGood">Client is a candidate for <b>Telus Internet for Good</b> and would like to be considered for low income internet options <span
+                            style={{ color: "red" }}>*</span> </label>
+                        <div className="form-check">
+                            <Field
+                                className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "telusInternetForGood")}`}
+                                type="radio"
+                                name="telusInternetForGood"
+                                value="yes"
+                            />
+                            <label className="form-check-label" htmlFor="telusInternetForGood">Yes</label>
+                        </div>
+                        <div className="form-check">
+                            <Field
+                                className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "telusInternetForGood")}`}
+                                type="radio"
+                                name="telusInternetForGood"
+                                value="no"
+                            />
+                            <label className="form-check-label" htmlFor="telusInternetForGood">No</label>
+                        </div>
+                    </div>
+                </div>
+                {/*
                 <div className="form-group">
                     <h2 id="forms">Client Eligibility Questions</h2>
                 </div>
@@ -329,6 +367,7 @@ class ProviderIntakeStep2 extends Component {
                         {feedBackInvalid(this.props.errors,this.props.touched,"financialNeed")}
                     </div>
                 </div>
+                */}
             </div>
         )
     }

@@ -132,7 +132,9 @@ class ProviderIntakeForm extends Component {
                                     trainingProgramSDPR:"",
                                     periodStart1:"",
                                     periodEnd1:"",
+                                    clientName:"",
                                     clientAddress:"",
+                                    clientAddress2:"",
                                     clientCity:"",
                                     clientProvince:"British Columbia",
                                     clientPostal:"",
@@ -147,17 +149,18 @@ class ProviderIntakeForm extends Component {
                                     provinceAlt:"BC",
                                     postalAlt:"",
                                     //step 2
-                                    clientResidesInBC:"",
+                                    telusInternetForGood:"",
+                                    /*clientResidesInBC:"",
                                     clientUnemployed:"",
                                     registeredInApprovedProgram:"",
                                     accessToComputerCurrently:"",
                                     receivingAlternateFunding:"",
-                                    financialNeed:"",
+                                    financialNeed:"",*/
                                     //step 3
-                                    signatoryTitle:"",
-                                    signatory1:"",
-                                    clientEligibility:false,
-                                    serviceProviderResponsibility:false,
+                                    //signatoryTitle:"",
+                                    //signatory1:"",
+                                    //clientEligibility:false,
+                                   // serviceProviderResponsibility:false,
                                     organizationConsent: false,
     
 

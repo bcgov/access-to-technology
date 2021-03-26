@@ -45,6 +45,8 @@ export const ProviderIntakeValidationSchema = yup.object().shape({
     clientAddress: yup.string()
         .max(255,"Address too long")
         .required("please enter your clients address"),
+    clientAddress2: yup.string()
+        .max(255,"Address too long"),
     clientCity:yup.string()
         .max(100,"City name too long")
         .required("please enter your clients city"),
@@ -54,11 +56,11 @@ export const ProviderIntakeValidationSchema = yup.object().shape({
         .matches(/^[A-Za-z]\d[A-Za-z]\d[A-Za-z]\d$/,"Please enter a valid Postal Code")
         .required("Please enter a valid Postal Code"),
     altShippingAddress: yup.boolean(),
-    clientResidesInBC:yup.string()
+    telusInternetForGood:yup.string()
     .oneOf(["yes",
             "no"],"Please select a valid field.")
     .required("Please select an answer on whether the client resides in BC"),
-    clientUnemployed:yup.string()
+    /*clientUnemployed:yup.string()
     .oneOf(["yes",
             "no"],"Please select a valid field.")
     .required("Please select an answer on whether the client is precariously employed or unemployed"),
@@ -78,7 +80,7 @@ export const ProviderIntakeValidationSchema = yup.object().shape({
     .oneOf(["yes",
             "no"],"Please select a valid field.")
     .required("Please select an answer on whether client demonstrates a financial need to take part in this program"),
-
+    */
 
     //step 1:pop-up fields
     trainingProgramISET: yup.string()
@@ -117,17 +119,19 @@ export const ProviderIntakeValidationSchema = yup.object().shape({
             is: true,
             then: yup.string().matches(/^[A-Za-z]\d[A-Za-z]\d[A-Za-z]\d$/,"Please enter a valid Postal Code").required("Please enter a postal code.")
         }),  
-    signatoryTitle: yup.string()
+    /*signatoryTitle: yup.string()
         .required("Please enter the title of the organization signatory.")
         .test('match','Signatories must be different',function (signatoryTitle){
             return signatoryTitle !== this.options.parent.signatory1
         }),   
     signatory1: yup.string()
         .required("Please enter the full name of the organization signatory."),
+        */
     clientEligibility: yup.boolean()
         .oneOf([true],"Required"),
     serviceProviderResponsibility: yup.boolean()
         .oneOf([true],"Required"),
-    organizationConsent: yup.boolean()
+    /*organizationConsent: yup.boolean()
         .oneOf([true],"Required"),
+        */
 })
