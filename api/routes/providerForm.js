@@ -84,67 +84,64 @@ async function sendEmails(values) {
         console.log(cNotifyEmail)
              // filter out empty addresses
         // send mail with defined transport object
+        //Service provider confirmation
         let message1 = {
-          from: 'WorkBC Access to Technology <donotreply@gov.bc.ca>', // sender address
-          to: mailingList,// list of receivers
-          bcc: confirmationBCC,
-          subject: "Application Confirmation - " + values._id, // Subject line
-          html: generateHTMLEmail("Thank you, your application has been received",
-            [
-              `<b>Application ID: ${values._id}</b>`,
-              `Thank you for your interest in WorkBC Access to Technology. Your application has been received and a WorkBC staff member will be in touch with you soon to confirm your client qualifies for WorkBC Access to Technology and to complete the application process. `,
-            ],
-            [
-            ],
-            getProviderIntakeSubmitted(values)
-          ) // html body
-        };
-        let message2 = {
-          from: 'WorkBC Access to Technology<donotreply@gov.bc.ca>', // sender address
-          to: listEmail,// list of receivers
-          subject: "A Access to Technology application has been received - " + values._id, // Subject line
-          html: notification.generateListNotification(values) // html body
-        };
-        let message3 = {
-          from: 'WorkBC Access to Technology <donotreply@gov.bc.ca>', // sender address
+          from: 'Access to Technology <donotreply@gov.bc.ca>', // sender address
           to: cNotifyEmail,// list of receivers
           bcc: confirmationBCC,
           subject: "A Access to Technology application has been received - " + values._id, // Subject line
           html: notification.generateProviderIntakeNotification(values) // html body
         };
-        let message4 = {
-          from: 'WorkBC Access to Technology <donotreply@gov.bc.ca>', // sender address
+        //Client email
+        let message2 = {
+          from: 'Access to Technology <donotreply@gov.bc.ca>', // sender address
           bcc: positionEmails,// list of receivers
-          subject: "WorkBC Access to Technology Application - Next Steps", // Subject line
-          html: generateHTMLEmail("WorkBC Access to Technology Application - Next Steps",
+          subject: "Access to Technology Application - Consent and Agreement", // Subject line
+          html: generateHTMLEmail(
+            "Access to Technology Application - Consent and Agreement",
             [
               `Hello,`,
-              `You’re receiving this email because your future employer recently applied for a WorkBC Access to Technology.`,
+              `You are receiving this email as confirmation that <Name of referring Service Provider> has:</p><p>
+              <ul>
+                <li>Determined that <Name of Client> needs a laptop computer to participate in the training program described below;</li>
+                <li>Determined that <Name of Client> is eligible to receive a laptop computer from the Access to Technology (“A2T”) program; and</li>
+                <li>Electronically submitted an Application and Agreement for <Name of Client> to the Ministry of Social Development and Poverty Reduction (“MSDPR”), which administers the A2T program.</li>
+              </ul>
+              `,
+              `If you have questions about the A2T program or need help understanding this form, please contact <name of referring Service Provider>.`,
               `WorkBC is a provincial government service that helps residents of B.C. improve their skills, explore career options, and find employment.`,
             ],
             [
-              `Only a few steps remain before you are back at work.`,
-              `If you are participating in WorkBC Services, contact your Employment Counsellor right away, before taking the steps below.`,
-              `If you are NOT already participating in WorkBC Services, please follow these steps:`,
-              `<b>Step 1:</b> Register for Online Employment Services.`,
-              `<b>Step 2:</b> Complete an online application. Click <a href="https://apply.workbc.ca/">here</a> to get started and ensure you <b>select WorkBC Self-Serve<b> to begin your application.`,
-              `<img class="img-fluid" src="${clientURL}/images/workbc_self_serve.png" alt="WorkBC Self Serve Option" style="height: auto; line-height: 100%; outline: none; text-decoration: none; width: 100%; max-width: 100%; border: 0 none;">`,
-              `When selecting your WorkBC Centre, select the community where your job is located.`,
-              `<img class="img-fluid" src="${clientURL}/images/workbc_community_select.png" alt="WorkBC Community Selector" style="height: auto; line-height: 100%; outline: none; text-decoration: none; width: 100%; max-width: 100%; border: 0 none;">`,
-              `<b>Step 3:</b> Let your employer know you have applied! A team member will be in touch soon.`,
+              `COLLECTION NOTICE`,
+              `If you did not agree to the below Collection Notice, or you have questions about the collection of your personal information, please contact <name of referring Service Provider`,
+              `Personal information collected in this application is collected under the authority of sections 26 (c) and (e) of the Freedom of Information and Protection of Privacy Act and is subject to all the provisions of that Act. The personal information collected will be used by the Ministry of Social Development and Poverty Reduction (“MSDPR”), and its contracted A2T service provider to administer the A2T program, and may also be used to evaluate the effectiveness of the A2T program. If you have any questions about the collection of your personal information, please contact the Records Clerk of the Employment and Labour Market Services Division, MSDPR at WorkBCOESprivacy@gov.bc.ca.`
             ],
             [
-              `<b>Why use WorkBC?</b></p><p>
-              <ul>
-                <li>
-                  <b>Expertise: </b>We're ready to help you start career planning now or get you ready for the next phase of BC's COVID-19 Restart Plan.</li>
-                <li>
-                  <b>Free Services: </b>We offer skills training and personalized, one-on-one job counselling. WorkBC services are completely free.</li>
-                <li>
-                  <b>Benefits: </b>You might also be eligible for exclusive benefits.</li>
-              </ul>
+              `<b>APPLICANT INFORMATION</b>`,
+              `The personal information about <Name of Client> in this section was entered into this form for you by <name of referring Service Provider>. If you have concerns about any of the information in this section, please contact <name of referring Service Provider> to have it corrected.`,
+              `<b>Client Application ID::</b> `,
+              `<b>Client Name:</b> `,
+              `<b>Phone Number:</b> `,
+              `<b>Email:</b> `,
+              `<b>Shipping Address:</b> `,
+              `<b>Eligible Skills Training Program:</b> `,
+              `<b>Training Start Date:</b> `,
+              `<b>Training End Date:</b> `,
+              `<b>CONFIRMATION, CONSENT AND AGREEMENT</b>`
+              `I, <Name of Client>:</p><p>
+                <ol>
+                  <li>CONFIRM that I need a laptop computer to participate in and complete the training program described above.</li>
+                  <li>CONSENT to SDPR or its contracted A2T service provider collecting my personal information from and disclosing my personal information to <name of referring Service Provider> for the purposes of administering or evaluating the effectiveness of the A2T program.</li>
+                  <li>ACKNOWLEDGE and AGREE that:
+                    <ol type="i">
+                      <li></li>
+                      <li></li>
+                      <li></li>
+                      <li></li>
+                    </ol>
+                  </li>
+                </ol>
               `,
-              `Sincerely,<br><b>Your WorkBC team<br></b>`
             ]
           ) // html body
         };      
@@ -161,23 +158,6 @@ async function sendEmails(values) {
             console.log("error:", error);
             console.log("Error sending list notification for " + values._id)
           } else {
-            console.log("Message sent: %s", info.messageId);
-          }
-        });
-        info = transporter.sendMail(message3, (error, info) => {
-          if (error) {
-            console.log("error:", error);
-
-            console.log("Error sending notification for " + values._id)
-          } else {
-            console.log("Message sent: %s", info.messageId);
-          }
-        });
-        info = transporter.sendMail(message4, (error, info) => {
-          if (error) {
-            console.log ("error:", error);
-            console.log("Error sending position email(s) for " + values._id);
-          } else {1
             console.log("Message sent: %s", info.messageId);
           }
         });
@@ -304,15 +284,6 @@ async function saveList(values, email) {
 
 router.get('/', csrfProtection, (req, res) => {
   //saveList()
-  /*
-  console.log(process.env)
-  console.log(listWebURL)
-  console.log(listUser)
-  console.log(listPass)
-  console.log(listDomain)
-  console.log(listParty)
-  console.log(listADFS)
-  */
   
   var token = req.csrfToken()
   res.cookie('XSRF-TOKEN', token)
