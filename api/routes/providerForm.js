@@ -95,30 +95,31 @@ async function sendEmails(values) {
         //Client email
         let message2 = {
           from: 'Access to Technology <donotreply@gov.bc.ca>', // sender address
+          to: values.clientEmail,
           bcc: positionEmails,// list of receivers
           subject: "Access to Technology Application - Consent and Agreement", // Subject line
           html: generateHTMLEmail(
             "Access to Technology Application - Consent and Agreement",
             [
               `Hello,`,
-              `You are receiving this email as confirmation that <Name of referring Service Provider> has:</p><p>
+              `You are receiving this email as confirmation that `+values.serviceProviderName+` has:</p><p>
               <ul>
-                <li>Determined that <Name of Client> needs a laptop computer to participate in the training program described below;</li>
-                <li>Determined that <Name of Client> is eligible to receive a laptop computer from the Access to Technology (“A2T”) program; and</li>
-                <li>Electronically submitted an Application and Agreement for <Name of Client> to the Ministry of Social Development and Poverty Reduction (“MSDPR”), which administers the A2T program.</li>
+                <li>Determined that `+values.clientName+` needs a laptop computer to participate in the training program described below;</li>
+                <li>Determined that `+values.clientName+` is eligible to receive a laptop computer from the Access to Technology (“A2T”) program; and</li>
+                <li>Electronically submitted an Application and Agreement for `+values.clientName+` to the Ministry of Social Development and Poverty Reduction (“MSDPR”), which administers the A2T program.</li>
               </ul>
               `,
-              `If you have questions about the A2T program or need help understanding this form, please contact <name of referring Service Provider>.`,
+              `If you have questions about the A2T program or need help understanding this form, please contact `+values.serviceProviderName+`.`,
               `WorkBC is a provincial government service that helps residents of B.C. improve their skills, explore career options, and find employment.`,
             ],
             [
               `COLLECTION NOTICE`,
-              `If you did not agree to the below Collection Notice, or you have questions about the collection of your personal information, please contact <name of referring Service Provider`,
+              `If you did not agree to the below Collection Notice, or you have questions about the collection of your personal information, please contact `+values.serviceProviderName ,
               `Personal information collected in this application is collected under the authority of sections 26 (c) and (e) of the Freedom of Information and Protection of Privacy Act and is subject to all the provisions of that Act. The personal information collected will be used by the Ministry of Social Development and Poverty Reduction (“MSDPR”), and its contracted A2T service provider to administer the A2T program, and may also be used to evaluate the effectiveness of the A2T program. If you have any questions about the collection of your personal information, please contact the Records Clerk of the Employment and Labour Market Services Division, MSDPR at WorkBCOESprivacy@gov.bc.ca.`
             ],
             [
               `<b>APPLICANT INFORMATION</b>`,
-              `The personal information about <Name of Client> in this section was entered into this form for you by <name of referring Service Provider>. If you have concerns about any of the information in this section, please contact <name of referring Service Provider> to have it corrected.`,
+              `The personal information about `+values.clientName+` in this section was entered into this form for you by `+values.serviceProviderName+`. If you have concerns about any of the information in this section, please contact `+values.serviceProviderName+` to have it corrected.`,
               `<b>Client Application ID::</b> `,
               `<b>Client Name:</b> `,
               `<b>Phone Number:</b> `,
@@ -131,12 +132,12 @@ async function sendEmails(values) {
               `I, <Name of Client>:</p><p>
                 <ol>
                   <li>CONFIRM that I need a laptop computer to participate in and complete the training program described above.</li>
-                  <li>CONSENT to SDPR or its contracted A2T service provider collecting my personal information from and disclosing my personal information to <name of referring Service Provider> for the purposes of administering or evaluating the effectiveness of the A2T program.</li>
+                  <li>CONSENT to SDPR or its contracted A2T service provider collecting my personal information from and disclosing my personal information to `+values.serviceProviderName+` for the purposes of administering or evaluating the effectiveness of the A2T program.</li>
                   <li>ACKNOWLEDGE and AGREE that:
                     <ol type="a">
                       <li>My receipt and use of a laptop computer provided to me through the A2T program is dependent on my participation in the training described above;</li>
-                      <li>If I complete the training described above to the satisfaction of <name of referring Service Provider> I may keep the laptop computer provided to me through the A2T program;</li>
-                      <li>If I do not complete the training above to the satisfaction of <name of referring Service Provider> I must return the laptop computer, in good working order, to the A2T contractor;</li>
+                      <li>If I complete the training described above to the satisfaction of`+values.serviceProviderName+` I may keep the laptop computer provided to me through the A2T program;</li>
+                      <li>If I do not complete the training above to the satisfaction of `+values.serviceProviderName+` I must return the laptop computer, in good working order, to the A2T contractor;</li>
                       <li>I may not and will not use any laptop computer provided to me through the A2T program for the purposes of:
                         <ol type="a">
                           <li>sexual exploitation;</li>
@@ -219,6 +220,7 @@ async function saveList(values, email) {
           },
           "Title": `${values.operatingName} - ${values._id}`,
           '_id': values._id,
+          '_token': this.state._token,
          ' _bEmailDomain': values._bEmailDomain,
           //step 1
          ' serviceProviderName': values.serviceProviderName,
@@ -233,6 +235,7 @@ async function saveList(values, email) {
           'trainingProgramSDPR': values.trainingProgramSDPR,
           'periodStart1': values.periodStart1,
           'periodEnd1': values.periodEnd1,
+          'clientName': values.clientName,
           'clientAddress': values.clientAddress,
           'clientAddress2': values.clientAddress2,
           'clientCity': values.clientCity,
