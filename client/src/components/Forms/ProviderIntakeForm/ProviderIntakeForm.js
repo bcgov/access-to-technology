@@ -139,7 +139,6 @@ class ProviderIntakeForm extends Component {
                                     clientProvince:"British Columbia",
                                     clientPostal:"",
                                     clientPhone:"",
-                                    clientFax:"",
                                     clientEmail:"",
                                     altShippingAddress: false,
 
@@ -159,9 +158,9 @@ class ProviderIntakeForm extends Component {
                                     //step 3
                                     //signatoryTitle:"",
                                     //signatory1:"",
-                                    //clientEligibility:false,
-                                   // serviceProviderResponsibility:false,
-                                    organizationConsent: false,
+                                    clientEligibility:false,
+                                    serviceProviderResponsibility:false,
+                                    //organizationConsent: false,
     
 
 

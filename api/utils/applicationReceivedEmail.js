@@ -95,124 +95,71 @@ module.exports = {
     },
 
     generateProviderIntakeNotification: function(values){
-        const alternativeAddress = values.otherWorkAddress;
-        const WorkSafeBCNumber = (values.WSBCCoverage === "yes");
-        const employeePositions = (values.numberOfPositions1 > 0);
-        const wageSubsidizedAlready = (values.wageSubsidy === "yes");
-        const businessFaxProvided = (typeof(values.businessFax) !== "undefined" && values.businessFax !== null && values.businessFax !== "");
+        const alternativeAddress = values.altShippingAddress;
+        const fundedISET = (strings.orEmpty(values.fundingSource) === "ISET");
+        const fundedAEST = (strings.orEmpty(values.fundingSource) === "AEST");
+        const fundedSDPR = (strings.orEmpty(values.fundingSource)=== "SDPR");
+       
         var html = /*html*/`
-        <h2>Wage Subsidy application</h2>
+        <h2>Access To Technology Application</h2>
         <p>Application ID:  ${strings.orEmpty(values._id)}</p>
-        <p>Organization Name:  ${strings.orEmpty(values.operatingName)}</p>
-        <p>CA:  ${strings.orEmpty(values._ca)}</p>
+        <p>Service Provider Name:  ${strings.orEmpty(values.serviceProviderName)}</p>
+        <p>Funding Source:  ${strings.orEmpty(values.fundingSource)}</p>
+        <p>Service Provider Postal:  ${strings.orEmpty(values.serviceProviderPostal)}</p>
+        <p>Service Provider Contact:  ${strings.orEmpty(values.serviceProviderContact)}</p>
+        <p>Service Provider Phone:  ${strings.orEmpty(values.serviceProviderPhone)}</p>
+        <p>Service Provider Email:  ${strings.orEmpty(values.serviceProviderEmail)}</p>
+        <p>Contract Reference ID:  ${strings.orEmpty(values.ProviderContractID)}</p>
+
         <hr />
-        <h5>Business Information</h5>
-        <p>CRA Business Number:  ${strings.orEmpty(values.applicationId)}</p>
-        <p>Address:  ${strings.orEmpty(values.businessAddress)}</p>
-        <p>City/Town:  ${strings.orEmpty(values.businessCity)}</p>
-        <p>Province:  ${strings.orEmpty(values.businessProvince)}</p>
-        <p>Postal Code:  ${strings.orEmpty(values.businessPostal)}</p>
-        <p>Employer E-mail Address:  ${strings.orEmpty(values.businessEmail)}</p>
-        <p>Phone Number:  ${strings.orEmpty(values.businessPhone)}</p>
+        <h5>Eligible Training Program Information</h5>
+        ${fundedISET ? (
+            `<p>Eligible Training Program:  ${strings.orEmpty(values.trainingProgramISET)}</p>`
+         ) : (``) 
+         }
+         ${fundedAEST ? (
+            `<p>Eligible Training Program:  ${strings.orEmpty(values.trainingProgramAEST)}</p>`
+         ) : (``) 
+         }
+         ${fundedSDPR ? (
+            `<p>Eligible Training Program:  ${strings.orEmpty(values.trainingProgramSDPR)}</p>`
+         ) : (``) 
+         }
+         <p>Training Start Date:  ${strings.orEmpty(values.periodStart1)}</p>
+         <p>Training End Date:  ${strings.orEmpty(values.periodEnd1)}</p>
+         <hr />]
+
+        <h5>Client Information</h5>
+        <p>Client name:  ${strings.orEmpty(values.clientAddress)}</p>
+        <p>E-mail Address:  ${strings.orEmpty(values.clientEmail)}</p>
+        <p>Phone Number:  ${strings.orEmpty(values.clientPhone)}</p>
+        <p>Address:  ${strings.orEmpty(values.clientAddress)}</p>
+        <p>City/Town:  ${strings.orEmpty(values.clientCity)}</p>
+        <p>Province:  ${strings.orEmpty(values.clientProvince)}</p>
+        <p>Postal Code:  ${strings.orEmpty(values.clientPostal)}</p>
+        <p>Client Qualifies for Telus Internet for Good:  ${strings.orEmpty(values.telusInternetForGood)}</p>
+        <hr />
         `
-        if(businessFaxProvided){
-            html = html + `
-            <p>Fax:  ${strings.orEmpty(values.businessFax)}</p>
-            <hr />
-            `
-        }else{
-            html = html + `
-            <hr />
-            `   
-        }
-        
         if(alternativeAddress){
             html= html + `
-            <h5>Work Place Information(only if different from contact)</h5>
-            <p>Work Address:  ${strings.orEmpty(values.addressAlt)}</p>
+            <h5>Shipping Address Information(only if different from Home Address)</h5>
+            <p>Shipping Address:  ${strings.orEmpty(values.addressAlt)}</p>
             <p>City/Town:  ${strings.orEmpty(values.cityAlt)}</p>
             <p>Province:  ${strings.orEmpty(values.provinceAlt)}</p>
             <p>Postal Code:  ${strings.orEmpty(values.postalAlt)}</p>
             <hr />
             `
         }
+        
 
         html = html +`
-        <h5>Business Questions</h5>
-        <p>Type of Sector:  ${strings.orEmpty(values.sectorType)}</p>
-        <p>Type of Industry:  ${strings.orEmpty(values.typeOfIndustry)}</p>
-        <p>Size of Organization(number of employees):  ${strings.orEmpty(values.organizationSize)}</p>
-        <p>Are you actively participating in the Canada Emergency Wage Subsidy program?  ${strings.orEmpty(values.cewsParticipation)}</p>
-        <p>Will the subsidy result in the displacement of existing employees or volunteers?  ${strings.orEmpty(values.employeeDisplacement)}</p>
-        <p>Is there a labour stoppage or labour - management dispute in progress?  ${strings.orEmpty(values.labourDispute)}</p>
-        <p>Is there Union concurrence?  ${strings.orEmpty(values.unionConcurrence)}</p>
-        <p>Does your organization have 3rd Party liability coverage?  ${strings.orEmpty(values.liabilityCoverage)}</p>
-        <p>Is your organization currently receiving funding under a Access To Technology agreement?  ${strings.orEmpty(values.wageSubsidy)}</p>`
-        if(wageSubsidizedAlready){
-            html = html + `<p>How many employees is WorkBC currently subsidizing? ${strings.orEmpty(values.employeesClaimed)}</p>`
-        }
-
-        html = html + `<p>${strings.orEmpty(values.operatingName)} meets the eligibility criteria and acknowledges that all the obligations the employer owes to or has with 
-        respect to its other employees under the various listed statutes and all other applicable laws apply equally 
-        to an individual employed in a wage subsidy placement:      ${strings.orEmpty(values.eligibility)}</p>
-        <p>${strings.orEmpty(values.operatingName)} certifies that it is in full compliance with all applicable laws, including the Employment Standards Act, 
-        the Workers Compensation Act and the Human Rights Code:      ${strings.orEmpty(values.lawCompliance)}.</p>
-        <hr />
-        `
-        if(WorkSafeBCNumber){
-            html = html + `
-            <h5>WorkBC Insurance Coverage (only if has coverage)</h5>
-            <p>WorkSafe BC Number:  ${strings.orEmpty(values.WSBCNumber)}</p>
-            <hr />
-            `
-        }
-
-        html = html + `
-        <h5>Position 1 </h5>
-        <p>Position Title:  ${strings.orEmpty(values.operatingName0)}</p>
-        <p>Number of Available Positions:  ${strings.orEmpty(values.numberOfPositions0)}</p>
-        <p>Employee Email 1:  ${strings.orEmpty(values.position0Email0)}</p>
-        <p>Employee Email 2:  ${strings.orEmpty(values.position0Email1)}</p>
-        <p>Employee Email 3:  ${strings.orEmpty(values.position0Email2)}</p>
-        <p>Employee Email 4:  ${strings.orEmpty(values.position0Email3)}</p>
-        <p>Employee Email 5:  ${strings.orEmpty(values.position0Email4)}</p>
-        <p>Anticipated Start Date (DD/MM/YYYY):  ${formatDate(values.startDate0)}</p>
-        <p>Hours of Work Per Week: ${strings.orEmpty(values.hours0)}</p>
-        <p>Hourly Wage: ${strings.orEmpty(values.wage0)}</p>
-        <p>Description of Duties: ${strings.orEmpty(values.duties0)}</p>
-        <p>Skills: ${strings.orEmpty(values.skills0)}</p>
-        <p>Work Experience: ${strings.orEmpty(values.workExperience0)}</p>
-        `
-
-        if(employeePositions){
-            html = html + `
-            <h5>Position 2 (only if different from above) </h5>
-            <p>Position Title:  ${strings.orEmpty(values.operatingName1)}</p>
-            <p>Number of Available Positions:  ${strings.orEmpty(values.numberOfPositions1)}</p>
-            <p>Employee Email 1:  ${strings.orEmpty(values.position1Email0)}</p>
-            <p>Employee Email 2:  ${strings.orEmpty(values.position1Email1)}</p>
-            <p>Employee Email 3:  ${strings.orEmpty(values.position1Email2)}</p>
-            <p>Employee Email 4:  ${strings.orEmpty(values.position1Email3)}</p>
-            <p>Anticipated Start Date (DD/MM/YYYY):  ${formatDate(values.startDate1)}</p>
-            <p>Hours of Work Per Week: ${strings.orEmpty(values.hours1)}</p>
-            <p>Hourly Wage: ${strings.orEmpty(values.wage1)}</p>
-            <p>Description of Duties: ${strings.orEmpty(values.duties1)}</p>
-            <p>Skills: ${strings.orEmpty(values.skills1)}</p>
-            <p>Work Experience: ${strings.orEmpty(values.workExperience1)}</p>
-            <hr />     
-            `
-        }
-        html = html + `                  
-        <h5>Signatory names and Organization consent</h5>
-        <p>Signing Authority Full Name:  ${strings.orEmpty(values.signatory1)}</p>
-        <p>Signing Authority Title:  ${strings.orEmpty(values.signatoryTitle)}</p>
-        <p>I acknowledge and understand that by clicking the "submit" I am attaching 
-        my electronic signature to this form and that by doing so I acquire the same 
-        rights, incur the same obligations and confer the same consent as I would by 
-        manually signing a physical copy of this form:      ${strings.orEmpty(values.organizationConsent)}</p>        
-        `
+        <h5>Confirmation and Agreement</h5>
+        <p>Client Eligibility Confirmation:  ${strings.orEmpty(values.clientEligibility)}</p>
+        <p>Service Provider Responsibility Attestation:  ${strings.orEmpty(values.serviceProviderResponsibility)}</p>`
+       
         return html
     },
+
     generateNeedEmployeeNotification: function(values){
         const alternativeAddress = values.otherWorkAddress;
         const WorkSafeBCNumber = (values.WSBCCoverage === "yes");

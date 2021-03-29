@@ -68,6 +68,7 @@ async function sendEmails(values) {
         }
         var positionEmails;
         if (pEmail === ""){
+          //dont think we need  or replace for client email
           positionEmails = [values.position0Email0, values.position0Email1, values.position0Email2, 
             values.position0Email3, values.position0Email4, values.position1Email0, values.position1Email1, values.position1Email2,values.position1Email3].filter(e => e != null);
         } else {
@@ -75,6 +76,7 @@ async function sendEmails(values) {
         }
         console.log(positionEmails)
         var cNotifyEmail;
+        // this should also be provided in the form one email 
         if (notifyEmail === ""){
           cNotifyEmail = caEmails[Number(values._ca)]
         } else {
@@ -87,8 +89,8 @@ async function sendEmails(values) {
         //Service provider confirmation
         let message1 = {
           from: 'Access to Technology <donotreply@gov.bc.ca>', // sender address
-          to: cNotifyEmail,// list of receivers
-          bcc: confirmationBCC,
+          to: values.serviceProviderEmail,// list of receivers
+          bcc: `elmsd.webmaster@gov.bc.ca`,
           subject: "A Access to Technology application has been received - " + values._id, // Subject line
           html: notification.generateProviderIntakeNotification(values) // html body
         };
@@ -120,16 +122,16 @@ async function sendEmails(values) {
             [
               `<b>APPLICANT INFORMATION</b>`,
               `The personal information about `+values.clientName+` in this section was entered into this form for you by `+values.serviceProviderName+`. If you have concerns about any of the information in this section, please contact `+values.serviceProviderName+` to have it corrected.`,
-              `<b>Client Application ID::</b> `,
-              `<b>Client Name:</b> `,
-              `<b>Phone Number:</b> `,
-              `<b>Email:</b> `,
-              `<b>Shipping Address:</b> `,
-              `<b>Eligible Skills Training Program:</b> `,
-              `<b>Training Start Date:</b> `,
-              `<b>Training End Date:</b> `,
+              `<b>Client Application ID::</b>`+values._id,
+              `<b>Client Name:</b> `+values.clientName,
+              `<b>Phone Number:</b> `+values.clientPhone,
+              `<b>Email:</b> `+values.clientEmail,
+              `<b>Shipping Address:</b>`+values.altShippingAddress?(values.clientAddress+` `+values.clientAddress2+` `+values.clientProvince+`, `+values.clientPostal+` `+values.clientCity):(values.AddressAlt+` `+values.clientProvince+`, `+values.clientPostal+` `+values.clientCity):(values.clientAddress+` `+values.clientAddress2+values.provinceAlt+`, `+values.postalAlt+` `+values.cityAlt),
+              `<b>Eligible Skills Training Program:</b> `+(values.fundingSource === 'AEST'? values.trainingProgramAEST:``)+ ((values.fundingSource === 'ISET'?values.trainingProgramISET:`` )+ ((values.fundingSource === 'SDPR'? trainingProgramSDPR :`` ),
+              `<b>Training Start Date:</b> `+values.periodStart1,
+              `<b>Training End Date:</b> `+values.periodEnd1,
               `<b>CONFIRMATION, CONSENT AND AGREEMENT</b>`
-              `I, <Name of Client>:</p><p>
+              `I, `+values.clientName+`:</p><p>
                 <ol>
                   <li>CONFIRM that I need a laptop computer to participate in and complete the training program described above.</li>
                   <li>CONSENT to SDPR or its contracted A2T service provider collecting my personal information from and disclosing my personal information to `+values.serviceProviderName+` for the purposes of administering or evaluating the effectiveness of the A2T program.</li>
