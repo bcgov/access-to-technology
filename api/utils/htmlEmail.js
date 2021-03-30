@@ -129,13 +129,12 @@ module.exports = function (title, mainContent, boxContent, endContent) {
         }
 
 
-
+        /*<img class="img-fluid" border="0" width="800" height="78" id="Canada_BC_Banner_Bottom" src="${clientURL}/images/emailBannerBottom.png" alt="Canada BC Funding Acknowledgement" style="height: auto; line-height: 100%; outline: none; text-decoration: none; width: 100%; max-width: 100%; border: 0 none;">*/
   html += /*html*/ `</div>
               </td>
             </tr>
           </tbody>
         </table>
-          ${/*<img class="img-fluid" border="0" width="800" height="78" id="Canada_BC_Banner_Bottom" src="${clientURL}/images/emailBannerBottom.png" alt="Canada BC Funding Acknowledgement" style="height: auto; line-height: 100%; outline: none; text-decoration: none; width: 100%; max-width: 100%; border: 0 none;">*/ }
           </div>
               </td>
             </tr>
@@ -145,7 +144,7 @@ module.exports = function (title, mainContent, boxContent, endContent) {
           <tbody>
             <tr>
               <td height="24" style="border-spacing: 0px; border-collapse: collapse; line-height: 24px; font-size: 24px; width: 100%; height: 24px; margin: 0;" align="left">
-                 
+       
               </td>
             </tr>
           </tbody>
