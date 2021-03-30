@@ -120,7 +120,7 @@ async function sendEmails(values) {
             ],
             [
               `<b>APPLICANT INFORMATION</b>`,
-              `The personal information about ${values.clientName} in this section was entered into this form for you by ${values.serviceProviderName}. If you have concerns about any of the information in this section, please contact ${values.serviceProviderName} to have it corrected.`
+              `The personal information about ${values.clientName} in this section was entered into this form for you by ${values.serviceProviderName}. If you have concerns about any of the information in this section, please contact ${values.serviceProviderName} to have it corrected.`,
               `<b>Client Application ID::</b>${values._id}`,
               `<b>Client Name:</b> ${values.clientName}`,
               `<b>Phone Number:</b> ${values.clientPhone}`,
