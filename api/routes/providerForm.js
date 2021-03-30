@@ -126,7 +126,7 @@ async function sendEmails(values) {
               `<b>Client Name:</b> ${values.clientName}`,
               `<b>Phone Number:</b> ${values.clientPhone}`,
               `<b>Email:</b> ${values.clientEmail}`,
-              `<b>Shipping Address:</b>${values.altShippingAddress ? (`${values.clientAddress} ${values.clientAddress2} ${values.clientProvince}, ${values.clientPostal} ${values.clientCity}`):(`${strings.orEmpty(values.AddressAlt)} ${values.clientProvince}, ${strings.orEmpty(values.clientPostal)} ${strings.orEmpty(values.clientCity)}`)}`,
+              `<b>Shipping Address:</b>${values.altShippingAddress ? (`${strings.orEmpty(values.AddressAlt)} ${strings.orEmpty(values.clientProvince)}, ${strings.orEmpty(values.clientPostal)} ${strings.orEmpty(values.clientCity)}`):(`${strings.orEmpty(values.clientAddress)} ${strings.orEmpty(values.clientAddress2)} ${strings.orEmpty(values.clientProvince)}, ${strings.orEmpty(values.clientPostal)} ${strings.orEmpty(values.clientCity)}`)}`,
               `<b>Eligible Skills Training Program:</b> ${values.fundingSource === 'AEST'? `${strings.orEmpty(values.trainingProgramAEST)}`:`` + `${values.fundingSource}` === 'ISET'? `${strings.orEmpty(values.trainingProgramISET)}`:`` + `${values.fundingSource}` === 'SDPR'? `${strings.orEmpty(trainingProgramSDPR)}` :`` }`,
               `<b>Training Start Date:</b> ${values.periodStart1}`,
               `<b>Training End Date:</b> ${values.periodEnd1}`,
