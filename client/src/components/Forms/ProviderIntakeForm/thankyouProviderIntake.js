@@ -32,7 +32,7 @@ class thankyouProviderIntake extends Component {
                                 <p>Contact Name:  {this.props.location.state !== undefined && this.props.location.state.serviceProviderContact}</p>
                                 <p>Email Address:  {this.props.location.state !== undefined && this.props.location.state.serviceProviderEmail}</p>
                                 <p>Phone Number:  {this.props.location.state !== undefined && this.props.location.state.serviceProviderPhone}</p>
-                                <p>Contract Reference ID:  {this.props.location.state !== undefined && this.props.location.state.serviceProviderId}</p>
+                                <p>Contract Reference ID:  {this.props.location.state !== undefined && this.props.location.state.providerContractId}</p>
                                 
                                 <h5>Eligible Skill and Training Program Information</h5>
                                 {fundedISET ? (
