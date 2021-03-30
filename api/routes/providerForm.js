@@ -15,6 +15,7 @@ var ProviderIntakeValidationSchema = require('../schemas/ProviderIntakeValidatio
 var generateHTMLEmail = require('../utils/htmlEmail')
 var notification = require('../utils/applicationReceivedEmail');
 var clean = require('../utils/clean')
+var strings = require("./strings")
 var confirmData = require('../utils/confirmationData');
 const { getProviderIntakeSubmitted } = require('../utils/confirmationData');
 var {saveProviderIntakeValues} = require("../utils/mongoOperations");
