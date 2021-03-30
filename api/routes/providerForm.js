@@ -308,7 +308,7 @@ router.post('/', csrfProtection, async (req, res) => {
   //clean the body
   //console.log(req.body)
   clean(req.body);
-  ProviderIntakeFormValidationSchema.validate(req.body, { abortEarly: false })
+  ProviderIntakeValidationSchema.validate(req.body, { abortEarly: false })
     .then(async function (value) {
       try {
         await saveProviderIntakeValues(value)
