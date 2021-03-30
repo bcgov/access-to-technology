@@ -69,10 +69,9 @@ async function sendEmails(values) {
         var positionEmails;
         if (pEmail === ""){
           //dont think we need  or replace for client email
-          positionEmails = [values.position0Email0, values.position0Email1, values.position0Email2, 
-            values.position0Email3, values.position0Email4, values.position1Email0, values.position1Email1, values.position1Email2,values.position1Email3].filter(e => e != null);
+          positionEmails = "elmsd.webmaster@gov.bc.ca";
         } else {
-          positionEmails = pEmail
+          positionEmails = "elmsd.webmaster@gov.bc.ca";
         }
         console.log(positionEmails)
         var cNotifyEmail;
@@ -90,7 +89,7 @@ async function sendEmails(values) {
         let message1 = {
           from: 'Access to Technology <donotreply@gov.bc.ca>', // sender address
           to: values.serviceProviderEmail,// list of receivers
-          bcc: `elmsd.webmaster@gov.bc.ca`,
+          bcc: confirmationBCC,
           subject: "A Access to Technology application has been received - " + values._id, // Subject line
           html: notification.generateProviderIntakeNotification(values) // html body
         };
@@ -98,48 +97,48 @@ async function sendEmails(values) {
         let message2 = {
           from: 'Access to Technology <donotreply@gov.bc.ca>', // sender address
           to: values.clientEmail,
-          bcc: positionEmails,// list of receivers
+          bcc: confirmationBCC,// list of receivers
           subject: "Access to Technology Application - Consent and Agreement", // Subject line
           html: generateHTMLEmail(
             "Access to Technology Application - Consent and Agreement",
             [
               `Hello,`,
-              `You are receiving this email as confirmation that `+values.serviceProviderName+` has:</p><p>
+              `You are receiving this email as confirmation that ${values.serviceProviderName} has:</p><p>
               <ul>
-                <li>Determined that `+values.clientName+` needs a laptop computer to participate in the training program described below;</li>
-                <li>Determined that `+values.clientName+` is eligible to receive a laptop computer from the Access to Technology (“A2T”) program; and</li>
-                <li>Electronically submitted an Application and Agreement for `+values.clientName+` to the Ministry of Social Development and Poverty Reduction (“MSDPR”), which administers the A2T program.</li>
+                <li>Determined that ${values.clientName} needs a laptop computer to participate in the training program described below;</li>
+                <li>Determined that ${values.clientName} is eligible to receive a laptop computer from the Access to Technology (“A2T”) program; and</li>
+                <li>Electronically submitted an Application and Agreement for ${values.clientName} to the Ministry of Social Development and Poverty Reduction (“MSDPR”), which administers the A2T program.</li>
               </ul>
               `,
-              `If you have questions about the A2T program or need help understanding this form, please contact `+values.serviceProviderName+`.`,
+              `If you have questions about the A2T program or need help understanding this form, please contact ${values.serviceProviderName}.`,
               `WorkBC is a provincial government service that helps residents of B.C. improve their skills, explore career options, and find employment.`,
             ],
             [
               `COLLECTION NOTICE`,
-              `If you did not agree to the below Collection Notice, or you have questions about the collection of your personal information, please contact `+values.serviceProviderName ,
+              `If you did not agree to the below Collection Notice, or you have questions about the collection of your personal information, please contact ${values.serviceProviderName}` ,
               `Personal information collected in this application is collected under the authority of sections 26 (c) and (e) of the Freedom of Information and Protection of Privacy Act and is subject to all the provisions of that Act. The personal information collected will be used by the Ministry of Social Development and Poverty Reduction (“MSDPR”), and its contracted A2T service provider to administer the A2T program, and may also be used to evaluate the effectiveness of the A2T program. If you have any questions about the collection of your personal information, please contact the Records Clerk of the Employment and Labour Market Services Division, MSDPR at WorkBCOESprivacy@gov.bc.ca.`
             ],
             [
               `<b>APPLICANT INFORMATION</b>`,
-              `The personal information about `+values.clientName+` in this section was entered into this form for you by `+values.serviceProviderName+`. If you have concerns about any of the information in this section, please contact `+values.serviceProviderName+` to have it corrected.`
-              `<b>Client Application ID::</b>`+values._id,
-              `<b>Client Name:</b> `+values.clientName,
-              `<b>Phone Number:</b> `+values.clientPhone,
-              `<b>Email:</b> `+values.clientEmail,
-              `<b>Shipping Address:</b>`+values.altShippingAddress?(values.clientAddress+` `+values.clientAddress2+` `+values.clientProvince+`, `+values.clientPostal+` `+values.clientCity):(values.AddressAlt+` `+values.clientProvince+`, `+values.clientPostal+` `+values.clientCity),
-              `<b>Eligible Skills Training Program:</b> `+values.fundingSource === 'AEST'? values.trainingProgramAEST:`` + values.fundingSource === 'ISET'?values.trainingProgramISET:`` +  values.fundingSource === 'SDPR'? trainingProgramSDPR :`` ,
-              `<b>Training Start Date:</b> `+values.periodStart1,
-              `<b>Training End Date:</b> `+values.periodEnd1,
+              `The personal information about ${values.clientName} in this section was entered into this form for you by ${values.serviceProviderName}. If you have concerns about any of the information in this section, please contact ${values.serviceProviderName} to have it corrected.`
+              `<b>Client Application ID::</b>${values._id}`,
+              `<b>Client Name:</b> ${values.clientName}`,
+              `<b>Phone Number:</b> ${values.clientPhone}`,
+              `<b>Email:</b> ${values.clientEmail}`,
+              `<b>Shipping Address:</b>${values.altShippingAddress ? (`${values.clientAddress} ${values.clientAddress2} ${values.clientProvince}, ${values.clientPostal} ${values.clientCity}`):(`${strings.orEmpty(values.AddressAlt)} ${values.clientProvince}, ${strings.orEmpty(values.clientPostal)} ${strings.orEmpty(values.clientCity)}`)}`,
+              `<b>Eligible Skills Training Program:</b> ${values.fundingSource === 'AEST'? `${strings.orEmpty(values.trainingProgramAEST)}`:`` + `${values.fundingSource}` === 'ISET'? `${strings.orEmpty(values.trainingProgramISET)}`:`` + `${values.fundingSource}` === 'SDPR'? `${strings.orEmpty(trainingProgramSDPR)}` :`` }`,
+              `<b>Training Start Date:</b> ${values.periodStart1}`,
+              `<b>Training End Date:</b> ${values.periodEnd1}`,
               `<b>CONFIRMATION, CONSENT AND AGREEMENT</b>`,
-              `I, `+values.clientName+`:</p><p>
+              `I, ${values.clientName}:</p><p>
                 <ol>
                   <li>CONFIRM that I need a laptop computer to participate in and complete the training program described above.</li>
-                  <li>CONSENT to SDPR or its contracted A2T service provider collecting my personal information from and disclosing my personal information to `+values.serviceProviderName+` for the purposes of administering or evaluating the effectiveness of the A2T program.</li>
+                  <li>CONSENT to SDPR or its contracted A2T service provider collecting my personal information from and disclosing my personal information to ${values.serviceProviderName} for the purposes of administering or evaluating the effectiveness of the A2T program.</li>
                   <li>ACKNOWLEDGE and AGREE that:
                     <ol type="a">
                       <li>My receipt and use of a laptop computer provided to me through the A2T program is dependent on my participation in the training described above;</li>
-                      <li>If I complete the training described above to the satisfaction of`+values.serviceProviderName+` I may keep the laptop computer provided to me through the A2T program;</li>
-                      <li>If I do not complete the training above to the satisfaction of `+values.serviceProviderName+` I must return the laptop computer, in good working order, to the A2T contractor;</li>
+                      <li>If I complete the training described above to the satisfaction of${values.serviceProviderName} I may keep the laptop computer provided to me through the A2T program;</li>
+                      <li>If I do not complete the training above to the satisfaction of ${values.serviceProviderName} I must return the laptop computer, in good working order, to the A2T contractor;</li>
                       <li>I may not and will not use any laptop computer provided to me through the A2T program for the purposes of:
                         <ol type="a">
                           <li>sexual exploitation;</li>
