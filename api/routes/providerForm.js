@@ -121,16 +121,16 @@ async function sendEmails(values) {
             ],
             [
               `<b>APPLICANT INFORMATION</b>`,
-              `The personal information about `+values.clientName+` in this section was entered into this form for you by `+values.serviceProviderName+`. If you have concerns about any of the information in this section, please contact `+values.serviceProviderName+` to have it corrected.`,
+              `The personal information about `+values.clientName+` in this section was entered into this form for you by `+values.serviceProviderName+`. If you have concerns about any of the information in this section, please contact `+values.serviceProviderName+` to have it corrected.`
               `<b>Client Application ID::</b>`+values._id,
               `<b>Client Name:</b> `+values.clientName,
               `<b>Phone Number:</b> `+values.clientPhone,
               `<b>Email:</b> `+values.clientEmail,
-              `<b>Shipping Address:</b>`+values.altShippingAddress?(values.clientAddress+` `+values.clientAddress2+` `+values.clientProvince+`, `+values.clientPostal+` `+values.clientCity):(values.AddressAlt+` `+values.clientProvince+`, `+values.clientPostal+` `+values.clientCity):(values.clientAddress+` `+values.clientAddress2+values.provinceAlt+`, `+values.postalAlt+` `+values.cityAlt),
-              `<b>Eligible Skills Training Program:</b> `+(values.fundingSource === 'AEST'? values.trainingProgramAEST:``)+ ((values.fundingSource === 'ISET'?values.trainingProgramISET:`` )+ ((values.fundingSource === 'SDPR'? trainingProgramSDPR :`` ),
+              `<b>Shipping Address:</b>`+values.altShippingAddress?(values.clientAddress+` `+values.clientAddress2+` `+values.clientProvince+`, `+values.clientPostal+` `+values.clientCity):(values.AddressAlt+` `+values.clientProvince+`, `+values.clientPostal+` `+values.clientCity),
+              `<b>Eligible Skills Training Program:</b> `+values.fundingSource === 'AEST'? values.trainingProgramAEST:`` + values.fundingSource === 'ISET'?values.trainingProgramISET:`` +  values.fundingSource === 'SDPR'? trainingProgramSDPR :`` ,
               `<b>Training Start Date:</b> `+values.periodStart1,
               `<b>Training End Date:</b> `+values.periodEnd1,
-              `<b>CONFIRMATION, CONSENT AND AGREEMENT</b>`
+              `<b>CONFIRMATION, CONSENT AND AGREEMENT</b>`,
               `I, `+values.clientName+`:</p><p>
                 <ol>
                   <li>CONFIRM that I need a laptop computer to participate in and complete the training program described above.</li>
@@ -312,10 +312,18 @@ router.post('/', csrfProtection, async (req, res) => {
   ProviderIntakeFormValidationSchema.validate(req.body, { abortEarly: false })
     .then(async function (value) {
       try {
-        await saveParticipantValues(value)
+        await saveProviderIntakeValues(value)
         .then(async r => {
           // {n: 1, ok: 1}
-          // if (r.result.ok === 1)
+           if (r.result.ok === 1){
+              await sendEmails(value)
+              .then(async function (sent) {
+                console.log("emails Sent: "+ sent);
+              })
+              res.send({
+                ok: "ok"
+              })
+           }
             //send email
             //send ok response
           console.log(r.result)
@@ -325,9 +333,6 @@ router.post('/', csrfProtection, async (req, res) => {
         console.log(error);
         //send error back, stop submission
       }
-      res.send({
-        ok: "ok"
-      })
     }).catch(function(errors){
       var err = {}
       errors.inner.forEach(e => {
