@@ -109,7 +109,7 @@ module.exports = {
         <p>Service Provider Contact:  ${strings.orEmpty(values.serviceProviderContact)}</p>
         <p>Service Provider Phone:  ${strings.orEmpty(values.serviceProviderPhone)}</p>
         <p>Service Provider Email:  ${strings.orEmpty(values.serviceProviderEmail)}</p>
-        <p>Contract Reference ID:  ${strings.orEmpty(values.providerContractId)}</p>
+        <p>Contract Reference ID:  ${strings.orEmpty(values.ProviderContractID)}</p>
 
         <hr />
         <h5>Eligible Training Program Information</h5>
@@ -127,7 +127,7 @@ module.exports = {
          }
          <p>Training Start Date:  ${strings.orEmpty(values.periodStart1)}</p>
          <p>Training End Date:  ${strings.orEmpty(values.periodEnd1)}</p>
-         <hr />
+         <hr />]
 
         <h5>Client Information</h5>
         <p>Client name:  ${strings.orEmpty(values.clientAddress)}</p>
