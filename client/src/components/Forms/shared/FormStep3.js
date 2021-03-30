@@ -37,7 +37,7 @@ class FormStep3 extends Component {
                     <div className="form-check">
                         <Field type="checkbox" className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "clientEligibility")}`} id="clientEligibility" name="clientEligibility" />
                         {feedBackInvalid(this.props.errors, this.props.touched, "clientEligibility")}
-                        <label className="form-check-label" htmlFor="organizationConsent"><span style={{ color: "red" }}>*</span> {`${this.props.values.serviceProviderName}`} CONFIRMS that {`${this.props.values.clientName}`}:
+                        <label className="form-check-label" htmlFor="clientEligibility"><span style={{ color: "red" }}>*</span> {`${this.props.values.serviceProviderName}`} CONFIRMS that {`${this.props.values.clientName}`}:
                            <ol style={{listStyleType:"decimal"}}>
                                 <li >Is a resident of British Columbia;</li>
                                 <li >Is unemployed or precariously employed;</li>
@@ -105,7 +105,7 @@ class FormStep3 extends Component {
                     <div className="form-check">
                         <Field type="checkbox" className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "serviceProviderResponsibility")}`} id="serviceProviderResponsibility" name="serviceProviderResponsibility" />
                         {feedBackInvalid(this.props.errors, this.props.touched, "serviceProviderResponsibility")}
-                        <label className="form-check-label" htmlFor="organizationConsent"><span style={{ color: "red" }}>*</span> {`${this.props.values.serviceProviderName}`} ACKNOWLEDGES AND AGREES:
+                        <label className="form-check-label" htmlFor="serviceProviderResponsibility"><span style={{ color: "red" }}>*</span> {`${this.props.values.serviceProviderName}`} ACKNOWLEDGES AND AGREES:
                             <ol style={{listStyleType:"decimal"}}>
                                 <li >To advise the {`${this.props.values.fundingSource}`}  of the outcome of the individual’s participation in the approved training described in this application, in the form and manner requested by the {`${this.props.values.fundingSource}`} ; </li>
                                 <li >If {`${this.props.values.clientName}`}  does not complete the approved eligible training described in this application to the satisfaction of {`${this.props.values.serviceProviderName}`} ), to:</li>

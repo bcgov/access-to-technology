@@ -13,7 +13,28 @@ function Home() {
                         <li>Are a minimum of 4 weeks in duration; and</li>
                         <li>Are on the list of approved skills training and/or employment programs</li>
                     </ul>
-                    <p>Approved eligible SDPR skills training and/or employment programs include:  WorkBC Skills Enhancement Services, WorkBC Project Based Labour Market Training and WorkBC Self Employment Services</p>
+                    <p>Approved eligible training programs include:</p>
+                    <ul style={{listStyleType:"none"}}>
+                       <li><b>WorkBC Employment Services: </b>
+                        <ul>
+                            <li>Short Duration Training</li>
+                            <li>Occupational Skills Training</li>
+                            <li>BC Adult Graduation Diploma</li>
+                        </ul></li>
+                        <li><b>Workforce Innovation and Skills Training:  </b>
+                        <ul>
+                            <li>Skills Training for Employment</li>
+                            <li>ITA Funded Pre-Apprenticeship Training</li>
+                            <li>BladeRunners</li>
+                            <li>Indigenous Employment and Skills Training</li>
+                        </ul></li>
+                        <li><b>Indigenous Skills and Employment Training: </b>
+                        <ul>
+                            <li>Essential Skills (TBD)</li>
+                            <li>Skills Training (TBD)</li>
+                            <li>Pre-Apprenticeship (TBD)</li>
+                        </ul></li>
+                    </ul>
                 </div>
             </div>
             <div className="row">
