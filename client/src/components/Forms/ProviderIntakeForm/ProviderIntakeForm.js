@@ -131,6 +131,7 @@ class ProviderIntakeForm extends Component {
                                     trainingProgramSDPR:"",
                                     periodStart1:"",
                                     periodEnd1:"",
+                                    workBCCaseNumber:"",
                                     clientName:"",
                                     clientAddress:"",
                                     clientAddress2:"",

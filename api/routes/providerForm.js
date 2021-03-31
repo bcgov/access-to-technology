@@ -103,7 +103,7 @@ async function sendEmails(values) {
               `<b>Client Name:</b> ${values.clientName}`,
               `<b>Phone Number:</b> ${values.clientPhone}`,
               `<b>Email:</b> ${values.clientEmail}`,
-              `<b>Shipping Address:</b>${values.altShippingAddress ? (`${strings.orEmpty(values.AddressAlt)} ${strings.orEmpty(values.clientProvince)}, ${strings.orEmpty(values.clientPostal)} ${strings.orEmpty(values.clientCity)}`):(`${strings.orEmpty(values.clientAddress)} ${strings.orEmpty(values.clientAddress2)} ${strings.orEmpty(values.clientProvince)}, ${strings.orEmpty(values.clientPostal)} ${strings.orEmpty(values.clientCity)}`)}`,
+              `<b>Shipping Address:</b>${values.altShippingAddress ? (`${strings.orEmpty(values.AddressAlt)},  ${strings.orEmpty(values.clientCity)}, ${strings.orEmpty(values.clientProvince)}, ${strings.orEmpty(values.clientPostal)}`):(`${strings.orEmpty(values.clientAddress)} ${strings.orEmpty(values.clientAddress2)}, ${strings.orEmpty(values.clientCity)}, ${strings.orEmpty(values.clientProvince)}, ${strings.orEmpty(values.clientPostal)} `)}`,
               `<b>Eligible Skills Training Program:</b> ${values.fundingSource === 'AEST'? `${strings.orEmpty(values.trainingProgramAEST)}`:`` + `${values.fundingSource}` === 'ISET'? `${strings.orEmpty(values.trainingProgramISET)}`:`` + `${values.fundingSource}` === 'SDPR'? `${strings.orEmpty(trainingProgramSDPR)}` :`` }`,
               `<b>Training Start Date:</b> ${values.periodStart1}`,
               `<b>Training End Date:</b> ${values.periodEnd1}`,
@@ -115,14 +115,14 @@ async function sendEmails(values) {
                   <li>ACKNOWLEDGE and AGREE that:
                     <ol type="a">
                       <li>My receipt and use of a laptop computer provided to me through the A2T program is dependent on my participation in the training described above;</li>
-                      <li>If I complete the training described above to the satisfaction of${values.serviceProviderName} I may keep the laptop computer provided to me through the A2T program;</li>
+                      <li>If I complete the training described above to the satisfaction of ${values.serviceProviderName} I may keep the laptop computer provided to me through the A2T program;</li>
                       <li>If I do not complete the training above to the satisfaction of ${values.serviceProviderName} I must return the laptop computer, in good working order, to the A2T contractor;</li>
                       <li>I may not and will not use any laptop computer provided to me through the A2T program for the purposes of:
-                        <ol type="a">
+                        <ol type="i">
                           <li>sexual exploitation;</li>
                           <li>promoting hate or discrimination;</li>
                           <li>any other illegal activity; or</li>
-                          <li>promoting any illegal activity; and</li>
+                          <li>promoting any illegal activity;</li>
                         </ol>
                       </li>
                     </ol>

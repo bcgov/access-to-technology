@@ -151,6 +151,7 @@ class FormStep1 extends Component {
                             {feedBackInvalid(this.props.errors,this.props.touched,"serviceProviderPostal")}
                     </div>
                 </div>
+               
                 <div className="form-row">
                     <div className="form-group col-md-4">
                             <label className="col-form-label control-label" htmlFor="serviceProviderContact">Contact Name <span

@@ -55,6 +55,12 @@ class thankyouProviderIntake extends Component {
                                 <p>Program End Date:  {this.props.location.state !== undefined && this.props.location.state.periodEnd1.toString()}</p>
                                 
                                 <h5>Client Information</h5>
+                                {fundedSDPR ? (
+                                    <div>
+                                        <p>WorkBC Case Number:  {this.props.location.state !== undefined && this.props.location.state.workBCCaseNumber}</p>
+                                    </div>
+                                 ) : (<div></div>) 
+                                 }
                                 <p>FullName:  {this.props.location.state !== undefined && this.props.location.state.clientName}</p>
                                 <p>Street Address:  {this.props.location.state !== undefined && this.props.location.state.clientAddress}</p>
                                 <p>Street Address 2:  {this.props.location.state !== undefined && this.props.location.state.clientAddress}</p>
