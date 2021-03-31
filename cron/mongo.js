@@ -47,38 +47,6 @@ module.exports = {
             return doc
         })    
     },
-    getNeedEmployeeNotSP: async function () {
-        return await connection
-        .then(mClient => {
-            // get a handle on the db
-            return mClient.db();
-            //return db
-        })
-        .then(async db => {
-        // add our values to db (they are always new)
-            return db.collection("NeedEmployee").find({savedToSP: false})
-                //console.log(err)
-                //console.log(doc)
-        }).then(doc =>{
-            return doc
-        })          
-    },
-    getClaimNotSP: async function () {
-        return await connection
-        .then(mClient => {
-            // get a handle on the db
-            return mClient.db();
-            //return db
-        })
-        .then(async db => {
-        // add our values to db (they are always new)
-            return db.collection("Claim").find({savedToSP: false})
-                //console.log(err)
-                //console.log(doc)
-        }).then(doc =>{
-            return doc
-        })    
-    },
     updateSavedToSP: async function(collection,_id){
         return await connection
         .then(mClient => {
@@ -108,6 +76,7 @@ module.exports = {
             return result
         })     
     },
+    //unused
     getProviderIntakeNotReporting: async function () {
         return await connection
         .then(mClient => {
@@ -123,38 +92,6 @@ module.exports = {
         }).then(doc =>{
             return doc
         })   
-    },
-    getNeedEmployeeNotReporting: async function () {
-        return await connection
-        .then(mClient => {
-            // get a handle on the db
-            return mClient.db();
-            //return db
-        })
-        .then(async db => {
-        // add our values to db (they are always new)
-            return db.collection("NeedEmployee").find({savedReporting: false})
-                //console.log(err)
-                //console.log(doc)
-        }).then(doc =>{
-            return doc
-        })
-    },
-    getClaimNotReporting: async function () {
-        return await connection
-        .then(mClient => {
-            // get a handle on the db
-            return mClient.db();
-            //return db
-        })
-        .then(async db => {
-        // add our values to db (they are always new)
-            return db.collection("Claim").find({savedReporting: false})
-                //console.log(err)
-                //console.log(doc)
-        }).then(doc =>{
-            return doc
-        })
     },
     updateReporting: async function(collection,_id){
         return await connection

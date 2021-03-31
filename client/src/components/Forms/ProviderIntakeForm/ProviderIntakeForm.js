@@ -3,10 +3,9 @@ import {withRouter} from 'react-router-dom'
 import {Formik, Form} from 'formik'
 import '../../../utils/polyfills'
 import {customAlphabet} from 'nanoid'
-import FormStep1 from '../shared/FormStep1'
-import FormStep2 from '../shared/FormStep2'
-import FormStep3 from '../shared/FormStep3'
-import ProviderIntakeStep2 from './ProviderIntakeStep2'
+import FormStep1 from './ProviderIntakeFormStep1'
+import FormStep3 from './ProviderIntakeFormStep3'
+import ProviderIntakeStep2 from './ProviderIntakeFormStep2'
 import ProgressTracker from '../shared/ProgressTracker'
 import {ProviderIntakeValidationSchema} from './ProviderIntakeValidationSchema'
 import { FORM_URL } from '../../../constants/form'
@@ -106,7 +105,7 @@ class ProviderIntakeForm extends Component {
         return (
             <div className="container">
                 <div className="row">
-                    <h2>Identified Employee Form</h2>
+                    <h2>Intake Form</h2>
                     <div className="col-md-12">
                         <ProgressTracker currentStep={this.state.currentStep}/>
                         {this.state.hasError && (
@@ -220,10 +219,6 @@ class ProviderIntakeForm extends Component {
                                             )
                                     }
                                     <FormStep1 
-                                        currentStep={this.state.currentStep}
-                                        {...props}
-                                    />
-                                    <FormStep2
                                         currentStep={this.state.currentStep}
                                         {...props}
                                     />

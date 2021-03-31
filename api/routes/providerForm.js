@@ -3,39 +3,34 @@ var router = express.Router();
 const yup = require('yup')
 const yupPhone = require('yup-phone')
 
-var { check, validationResult, matchedData } = require('express-validator')
 var nodemailer = require("nodemailer");
 var csrf = require('csurf');
 var csrfProtection = csrf({ cookie: true });
 var spauth = require('node-sp-auth')
 var request = require('request-promise')
 
-
 var ProviderIntakeValidationSchema = require('../schemas/ProviderIntakeValidationSchema')
 var generateHTMLEmail = require('../utils/htmlEmail')
 var notification = require('../utils/applicationReceivedEmail');
 var clean = require('../utils/clean')
 var strings = require("../utils/strings")
-var confirmData = require('../utils/confirmationData');
-const { getProviderIntakeSubmitted } = require('../utils/confirmationData');
 var {saveProviderIntakeValues} = require("../utils/mongoOperations");
 
 var confirmationEmail1 = process.env.CONFIRMATIONONE || process.env.OPENSHIFT_NODEJS_CONFIRMATIONONE || "";
 var confirmationBCC = process.env.CONFIRMATIONBCC || process.env.OPENSHIFT_NODEJS_CONFIRMATIONBCC || "";
-var pEmail = process.env.PARTICIPANTEMAIL || process.env.OPENSHIFT_NODEJS_PARTICIPANTEMAIL || "";
+//for backup, TODO
 var listEmail = process.env.LISTEMAIL || process.env.OPENSHIFT_NODEJS_LISTEMAIL || "";
+//url for images on email, unused in this context
 var clientURL = process.env.CLIENTURL || process.env.OPENSHIFT_NODEJS_CLIENTURL || ""
+//for internal notifications, unused
 var notifyEmail = process.env.NOTIFYEMAIL || process.env.OPENSHIFT_NODEJS_NOTIFYEMAIL || "";
+//list protection
 var listWebURL = process.env.LISTWEBURL || process.env.OPENSHIFT_NODEJS_LISTWEBURL || ""
 var listUser = process.env.LISTUSER || process.env.OPENSHIFT_NODEJS_LISTUSER || ""
 var listPass = process.env.LISTPASS || process.env.OPENSHIFT_NODEJS_LISTPASS || ""
 var listDomain = process.env.LISTDOMAIN || process.env.OPENSHIFT_NODEJS_LISTDOMAIN || ""
 var listParty = process.env.LISTPARTY || process.env.OPENSHIFT_NODEJS_LISTPARTY || ""
 var listADFS = process.env.LISTADFS || process.env.OPENSHIFT_NODEJS_LISTADFS || ""
-var caEmails = process.env.CAEMAILS
-//use to have a .split(' ') on above
-
-console.log(caEmails)
 
 
 var spr = spauth.getAuth(listWebURL, {
@@ -67,24 +62,6 @@ async function sendEmails(values) {
         } else {
           mailingList = values.businessEmail
         }
-        var positionEmails;
-        if (pEmail === ""){
-          //dont think we need  or replace for client email
-          positionEmails = "elmsd.webmaster@gov.bc.ca";
-        } else {
-          positionEmails = "elmsd.webmaster@gov.bc.ca";
-        }
-        console.log(positionEmails)
-        var cNotifyEmail;
-        // this should also be provided in the form one email 
-        if (notifyEmail === ""){
-          cNotifyEmail = caEmails[Number(values._ca)]
-        } else {
-          cNotifyEmail = notifyEmail
-        }
-        console.log(values._ca)
-        console.log(cNotifyEmail)
-             // filter out empty addresses
         // send mail with defined transport object
         //Service provider confirmation
         let message1 = {
@@ -345,72 +322,6 @@ router.post('/', csrfProtection, async (req, res) => {
     })
 
   }) 
-  //clean(req.body);
-  //console.log(req.body)
-  /*
-  ProviderIntakeValidationSchema.validate(req.body, { abortEarly: false })
-    .then(async function (value) {
-
-      try {
-        await sendEmails(value)
-          .then(async function (sent) {
-            if (sent){
-              var pE = [
-                value.position0Email0, value.position0Email1, value.position0Email2, 
-                value.position0Email3, value.position0Email4, value.position1Email0, 
-                value.position1Email1, value.position1Email2,value.position1Email3].filter(e => e != null);
-              for (const email of pE){
-                console.log(email)
-                await saveList(value,email)
-                .then(function(saved){
-                  console.log("saved")
-                  console.log(saved)
-                  // save values to mongo db
-                  try {
-                    saveProviderIntakeValues(value, email, saved);
-                  }
-                  catch (error) {
-                    console.log(error);
-                  }
-                })
-                .catch(function(e){
-                  console.log("error")
-                  console.log(e)
-                  //save failed one
-                  try {
-                    saveProviderIntakeValues(value, email, false);
-                  }
-                  catch (error) {
-                    console.log(error);
-                  }
-                })               
-              }
-              res.send({
-                ok: "ok"
-              }) 
-            } else if (!sent) {
-              res.send({
-                emailErr: "emailErr"
-              })
-            }
-          }).catch(function (e) {
-            console.log(e)
-          })
-      } catch (error) {
-        console.log(error)
-      }
-      return
-    })
-    .catch(function (errors) {
-      var err = {}
-      errors.inner.forEach(e => {
-        err[e.path] = e.message
-      })
-      res.send({
-        err
-      })
-      return
-    })*/
     
 
 module.exports = router;

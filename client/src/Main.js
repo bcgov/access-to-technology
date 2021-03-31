@@ -2,13 +2,7 @@ import React from 'react'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import Home from './Home'
 import ProviderIntakeForm from './components/Forms/ProviderIntakeForm/ProviderIntakeForm'
-import NeedEmployeeForm from './components/Forms/NeedEmployeeForm/NeedEmployeeForm'
-import Thankyou from './Thankyou'
-import ClaimForm from './components/Forms/ClaimForm/ClaimForm'
-import ParticipantForm from './components/Forms/ParticipantForm/ParticipantForm'
-import ThankyouClaimForm from './components/Forms/ClaimForm/ThankyouClaimForm'
 import ThankYouProviderIntake from './components/Forms/ProviderIntakeForm/thankyouProviderIntake'
-import ThankYouNeedEmployee from './components/Forms/NeedEmployeeForm/thankyouNeedEmployee'
 import ThankYouParticipant from './components/Forms/ParticipantForm/thankyouParticipant'
 
 
@@ -17,19 +11,9 @@ function Main() {
         <main role="main">
             <Router>
                 <Switch>
-                    <Route path="/ProviderIntake">
-                        <ProviderIntakeForm />
-                    </Route>
+                    <Route path="/ProviderIntake" component={ProviderIntakeForm} />
                     <Route path="/thankyouProviderIntake" component={ThankYouProviderIntake}  />
-                    
-                    <Route path="/participantForm">
-                        <ParticipantForm />
-                    </Route>
                     <Route path="/thankyouParticipant" component={ThankYouParticipant} />
-
-                    <Route path="/thankyouNeedEmployee" component={ThankYouNeedEmployee}  />
-                    <Route path="/claimForm" component={ClaimForm}/>
-                    <Route path="/thankyouClaimForm" component={ThankyouClaimForm} />
                     <Route path="/">
                         <Home />
                     </Route>

@@ -202,6 +202,8 @@ class FormStep1 extends Component {
                         <DatePickerField
                             name="periodStart1"
                             className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "periodStart1")}`}
+                            minDate={new Date()}
+                            maxDate={new Date(2022,4,1)}
                         />
                         <small className="text-muted" id="periodStart1">  Note: Application end dates after march of 2022 do not qualify.</small>
                         {feedBackInvalid(this.props.errors, this.props.touched, "periodStart1")}
@@ -212,6 +214,8 @@ class FormStep1 extends Component {
                         <DatePickerField
                             name="periodEnd1"
                             className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "periodEnd1")}`}
+                            minDate={new Date()}
+                            maxDate={new Date(2022,4,1)}
                         />
 
                         {feedBackInvalid(this.props.errors, this.props.touched, "periodEnd1")}
