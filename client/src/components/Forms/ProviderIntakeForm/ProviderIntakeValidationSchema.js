@@ -34,6 +34,13 @@ export const ProviderIntakeValidationSchema = yup.object().shape({
         .required("Please Enter your clients program end date"),
     
     // STEP 2
+    workBCCaseNumber: yup.string().when('fundingSource', {
+        is: 'SDPR',
+        then: yup.string().test('valid','Please enter the clients WorkBC case number in format: XXX-XXX-XXXX',
+        value => (value + "").match(/^\w{3}-\w{3}-\w{4}$/gi))
+        .required(
+        "Please use the WorkBC case number format: XXX-XXX-XXXX.  All eligible WorkBC clients must be in an approved WorkBC Service, with an ICM Case number."),
+        otherwise: yup.string()}),
     clientName: yup.string()
         .required('Please enter the clients name'),
     clientPhone:yup.string()
@@ -128,9 +135,9 @@ export const ProviderIntakeValidationSchema = yup.object().shape({
         .required("Please enter the full name of the organization signatory."),
         */
     clientEligibility: yup.boolean()
-        .oneOf([true],"Required"),
+        .oneOf([true],"Please attest to the clients Eligibility"),
     serviceProviderResponsibility: yup.boolean()
-        .oneOf([true],"Required"),
+        .oneOf([true],"please confirm the Service Provider Responsibility"),
     /*organizationConsent: yup.boolean()
         .oneOf([true],"Required"),
         */

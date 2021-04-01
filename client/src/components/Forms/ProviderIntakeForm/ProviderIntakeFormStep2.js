@@ -10,7 +10,21 @@ class ProviderIntakeStep2 extends Component {
            
         }
     }
-
+    get WorkBCCaseNumber(){
+        if (this.props.values.fundingSource === "SDPR"){
+            return (<div className="form-row">
+             <div className="form-group col-md-4">
+                            <label className="col-form-label control-label" htmlFor="workBCCaseNumber">WorkBC Case Number <span
+                                style={{ color: "red" }}>*</span></label>
+                            <Field className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "workBCCaseNumber")}`} id="workBCCaseNumber" name="workBCCaseNumber" />
+                            {feedBackInvalid(this.props.errors,this.props.touched,"workBCCaseNumber")}
+            </div>
+        </div>)
+        }
+        else{
+            return(<div></div>)
+        }
+    }
     get shippingAddressForm(){
         if(this.props.values.altShippingAddress){
             return(<div>
@@ -72,6 +86,7 @@ class ProviderIntakeStep2 extends Component {
                 <div className="form-group">
                     <h2 id="forms">Client Information</h2>
                 </div>
+                {this.WorkBCCaseNumber}
                 <div className="form-row">
                     <div className="form-group col-md-4">
                         <label className="col-form-label control-label" htmlFor="clientName">Client Name <span

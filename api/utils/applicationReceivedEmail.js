@@ -59,6 +59,10 @@ module.exports = {
          <hr />
 
         <h5>Client Information</h5>
+        ${fundedSDPR ? (
+            `<p>WorkBC Case Number:  ${strings.orEmpty(values.workBCCaseNumber)}</p>`
+         ) : (``) 
+         }
         <p>Client name:  ${strings.orEmpty(values.clientAddress)}</p>
         <p>E-mail Address:  ${strings.orEmpty(values.clientEmail)}</p>
         <p>Phone Number:  ${strings.orEmpty(values.clientPhone)}</p>
