@@ -126,6 +126,10 @@ class FormStep1 extends Component {
                                 className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "fundingSource")}`}
                                 id="fundingSource" 
                                 name="fundingSource" 
+                                onChange={e => {
+                                    this.props.handleChange(e)
+                                    this.props.setFieldValue("trainingProgram", "")
+                                }}
                             >
                                 <option value="">Please select</option>
                                 <option value="AEST">AEST</option>
