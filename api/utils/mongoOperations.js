@@ -43,18 +43,17 @@ module.exports = {
         }).then(async db => {
             // add our values to db (they are always new)
             return db.collection("Participant").insertOne({
+                savedToSP: false,
                 applicationID: values._id,// id is provided
                 token: values._token,
                  //step 1
                 serviceProviderName: values.serviceProviderName,
                 providerContractID: values.providerContractId,
-                serviceProviderContract: values.serviceProviderContact,
+                serviceProviderContact: values.serviceProviderContact,
                 serviceProviderPhone: values.serviceProviderPhone,
                 serviceProviderEmail: values.serviceProviderEmail,
                 fundingSource: values.fundingSource,
-                trainingProgramISET: values.trainingProgramISET,
-                trainingProgramAEST: values.trainingProgramAEST,
-                trainingProgramSDPR: values.trainingProgramSDPR,
+                trainingProgram: values.trainingProgram,
                 periodStart1: values.periodStart1,
                 periodEnd1: values.periodEnd1,
                 clientAddress: values.clientAddress,
@@ -84,27 +83,28 @@ module.exports = {
         }).then(async db => {
             // add our values to db (they are always new)
             return db.collection("ProviderIntake").insertOne({
-                applicationID: values._id,// id is provided
-                token: values._token,
+                savedToSP: false,
+                applicationId: values._id,  // id is provided
+                _token: values._token,
                  //step 1
                 serviceProviderName: values.serviceProviderName,
                 providerContractID: values.providerContractId,
-                serviceProviderContract: values.serviceProviderContact,
+                serviceProviderContact: values.serviceProviderContact,
                 serviceProviderPostal: values.serviceProviderPostal,
                 serviceProviderPhone: values.serviceProviderPhone,
                 serviceProviderEmail: values.serviceProviderEmail,
                 fundingSource: values.fundingSource,
-                trainingProgramISET: values.trainingProgramISET,
-                trainingProgramAEST: values.trainingProgramAEST,
-                trainingProgramSDPR: values.trainingProgramSDPR,
+                trainingProgram: values.trainingProgram,
                 periodStart1: values.periodStart1,
                 periodEnd1: values.periodEnd1,
+                workBCCaseNumber: values.workBCCaseNumber,
+                clientName: values.clientName,
                 clientAddress: values.clientAddress,
+                clientAddress2:values.clientAddress2,
                 clientCity: values.clientCity,
                 clientProvince:values.clientProvince,
                 clientPostal: values.clientPostal,
                 clientPhone: values.clientPhone,
-                clientFax: values.clientFax,
                 clientEmail: values.clientEmail,
                 altShippingAddress: values.altShippingAddress,
 
@@ -113,20 +113,19 @@ module.exports = {
                 cityAlt: values.cityAlt,
                 provinceAlt: values.provinceAlt,
                 postalAlt: values.postalAlt,
-                
+               
                 //step 2
+                telusInternetForGood: values.telusInternetForGood,
+                /*
                 clientResidesInBC: values.clientResidesInBC,
                 clientUnemployed: values.clientUnemployed,
                 registeredInApprovedProgram:values.registeredInApprovedProgram,
                 accessToComputerCurrently: values.accessToComputerCurrently,
                 receivingAlternateFunding: values.receivingAlternateFunding,
-                financialNeed: values.financialNeed,
+                financialNeed: values.financialNeed,*/
                 //step 3
-                signatoryTitle: values.signatoryTitle,
-                signatory1: values.signatory1,
                 clientEligibility: values.clientEligibility,
                 serviceProviderResponsibility: values.serviceProviderResponsibility,
-                organizationConsent: values.organizationConsent,
                 
             });
         });

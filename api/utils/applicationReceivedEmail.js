@@ -42,18 +42,7 @@ module.exports = {
 
         <hr />
         <h5>Eligible Training Program Information</h5>
-        ${fundedISET ? (
-            `<p>Eligible Training Program:  ${strings.orEmpty(values.trainingProgramISET)}</p>`
-         ) : (``) 
-         }
-         ${fundedAEST ? (
-            `<p>Eligible Training Program:  ${strings.orEmpty(values.trainingProgramAEST)}</p>`
-         ) : (``) 
-         }
-         ${fundedSDPR ? (
-            `<p>Eligible Training Program:  ${strings.orEmpty(values.trainingProgramSDPR)}</p>`
-         ) : (``) 
-         }
+         <p>Eligible Training Program:  ${strings.orEmpty(values.trainingProgram)}</p>
          <p>Training Start Date:  ${strings.orEmpty(values.periodStart1)}</p>
          <p>Training End Date:  ${strings.orEmpty(values.periodEnd1)}</p>
          <hr />

@@ -104,7 +104,7 @@ async function sendEmails(values) {
               `<b>Phone Number:</b> ${values.clientPhone}`,
               `<b>Email:</b> ${values.clientEmail}`,
               `<b>Shipping Address:</b>${values.altShippingAddress ? (`${strings.orEmpty(values.AddressAlt)},  ${strings.orEmpty(values.clientCity)}, ${strings.orEmpty(values.clientProvince)}, ${strings.orEmpty(values.clientPostal)}`):(`${strings.orEmpty(values.clientAddress)} ${strings.orEmpty(values.clientAddress2)}, ${strings.orEmpty(values.clientCity)}, ${strings.orEmpty(values.clientProvince)}, ${strings.orEmpty(values.clientPostal)} `)}`,
-              `<b>Eligible Skills Training Program:</b> ${values.fundingSource === 'AEST'? `${strings.orEmpty(values.trainingProgramAEST)}`:`` + `${values.fundingSource}` === 'ISET'? `${strings.orEmpty(values.trainingProgramISET)}`:`` + `${values.fundingSource}` === 'SDPR'? `${strings.orEmpty(trainingProgramSDPR)}` :`` }`,
+              `<b>Eligible Skills Training Program:</b> ${values.trainingProgram} `,
               `<b>Training Start Date:</b> ${values.periodStart1}`,
               `<b>Training End Date:</b> ${values.periodEnd1}`,
               `<b>CONFIRMATION, CONSENT AND AGREEMENT</b>`,
@@ -174,7 +174,7 @@ async function saveList(values, email) {
         //console.log(response)
         headers = response
         return request.post({
-          url: listWebURL + 'Apps/WageSubsidy/_api/contextInfo',
+          url: listWebURL + '/A2TTest/_api/contextInfo',
           headers: headers,
           json: true,
         })
@@ -186,7 +186,7 @@ async function saveList(values, email) {
       headers['X-RequestDigest'] = response
       headers['Content-Type'] = "application/json;odata=verbose"
       // change to local Access to Technology list
-      var l = listWebURL + `Apps/WageSubsidy/_api/web/lists/getByTitle('Catchment${values._ca}')/items`
+      var l = listWebURL + `/A2TTest/_api/web/lists/getByTitle('IntakeForm')/items`
       console.log("webURL:")
       console.log(l)
       return request.post({
@@ -195,25 +195,23 @@ async function saveList(values, email) {
         json: true,
         body: {
           "__metadata": {
-            "type": `SP.Data.Catchment${values._ca}ListItem`
+            "type": `SP.Data.IntakeFormListItem`
           },
-          "Title": `${values.operatingName} - ${values._id}`,
-          '_id': values._id,
-          '_token': this.state._token,
-         ' _bEmailDomain': values._bEmailDomain,
+          "Title": `${values.serviceProviderName} - ${values.applicationId}`,
+          'applicationID': values.applicationId,
+          'applicationToken': values._token,
           //step 1
-         ' serviceProviderName': values.serviceProviderName,
-         ' providerContractId': values.providerContractId,
+          'serviceProviderName': values.serviceProviderName,
+          'providerContractId': values.providerContractID,
           'serviceProviderPostal': values.serviceProviderPostal,
           'serviceProviderContact': values.serviceProviderContact,
           'serviceProviderPhone': values.serviceProviderPhone,
           'serviceProviderEmail': values.serviceProviderEmail,
           'fundingSource': values.fundingSource,
-          'trainingProgramISET': values.trainingProgramISET,
-          'trainingProgramAEST': values.trainingProgramAEST,
-          'trainingProgramSDPR': values.trainingProgramSDPR,
-          'periodStart1': values.periodStart1,
-          'periodEnd1': values.periodEnd1,
+          'eligibleProgram': values.trainingProgram,
+          'periodStart1': typeof values.periodStart1 !== "undefined" ? new Date(values.periodStart1) : null,
+          'periodEnd1': typeof values.periodEnd1 !== "undefined" ? new Date(values.periodEnd1) : null,
+          'workBCCaseNumber': values.workBCCaseNumber,
           'clientName': values.clientName,
           'clientAddress': values.clientAddress,
           'clientAddress2': values.clientAddress2,
@@ -230,7 +228,7 @@ async function saveList(values, email) {
           'provinceAlt':values.provinceAlt,
           'postalAlt': values.postalAlt,
           //step 2
-          'telusInternetForGood': values.telusInternetForGood,
+          'telusInternetForGood': values.telusInternetForGood === "yes",
           /*'clientResidesInBC': values.clientResidesInBC,
           'clientUnemployed': values.clientUnemployed,
           'registeredInApprovedProgram': values.registeredInApprovedProgram,

@@ -31,7 +31,7 @@ async function saveListProviderIntake(values) {
         //console.log(response)
         headers = response
         return request.post({
-          url: listWebURL + 'Apps/WageSubsidy/_api/contextInfo',
+          url: listWebURL + '/A2TTest/_api/contextInfo',
           headers: headers,
           json: true,
         })
@@ -42,8 +42,8 @@ async function saveListProviderIntake(values) {
       //console.log(headers)
       headers['X-RequestDigest'] = response
       headers['Content-Type'] = "application/json;odata=verbose"
-      // change to local Access to Technology list
-      var l = listWebURL + `Apps/WageSubsidy/_api/web/lists/getByTitle('Catchment${values._ca}')/items`
+      // change to local AccesLs to Technology list
+      var l = listWebURL + `/A2TTest/_api/web/lists/getByTitle('IntakeForm')/items`
       console.log("webURL:")
       console.log(l)
       return request.post({
@@ -52,25 +52,23 @@ async function saveListProviderIntake(values) {
         json: true,
         body: {
           "__metadata": {
-            "type": `SP.Data.Catchment${values._ca}ListItem`
+            "type": `SP.Data.IntakeFormListItem`
           },
-          "Title": `${values.operatingName} - ${values._id}`,
-          '_id': values._id,
-          '_token': this.state._token,
-         ' _bEmailDomain': values._bEmailDomain,
+          "Title": `${values.serviceProviderName} - ${values.applicationId}`,
+          'applicationID': values.applicationId,
+          'applicationToken': values._token,
           //step 1
-         ' serviceProviderName': values.serviceProviderName,
-         ' providerContractId': values.providerContractId,
+          'serviceProviderName': values.serviceProviderName,
+          'providerContractId': values.providerContractID,
           'serviceProviderPostal': values.serviceProviderPostal,
           'serviceProviderContact': values.serviceProviderContact,
           'serviceProviderPhone': values.serviceProviderPhone,
           'serviceProviderEmail': values.serviceProviderEmail,
           'fundingSource': values.fundingSource,
-          'trainingProgramISET': values.trainingProgramISET,
-          'trainingProgramAEST': values.trainingProgramAEST,
-          'trainingProgramSDPR': values.trainingProgramSDPR,
-          'periodStart1': values.periodStart1,
-          'periodEnd1': values.periodEnd1,
+          'eligibleProgram': values.trainingProgram,
+          'periodStart1': typeof values.periodStart1 !== "undefined" ? new Date(values.periodStart1) : null,
+          'periodEnd1': typeof values.periodEnd1 !== "undefined" ? new Date(values.periodEnd1) : null,
+          'workBCCaseNumber': values.workBCCaseNumber,
           'clientName': values.clientName,
           'clientAddress': values.clientAddress,
           'clientAddress2': values.clientAddress2,
@@ -87,7 +85,7 @@ async function saveListProviderIntake(values) {
           'provinceAlt':values.provinceAlt,
           'postalAlt': values.postalAlt,
           //step 2
-          'telusInternetForGood': values.telusInternetForGood,
+          'telusInternetForGood': values.telusInternetForGood === "yes",
           /*'clientResidesInBC': values.clientResidesInBC,
           'clientUnemployed': values.clientUnemployed,
           'registeredInApprovedProgram': values.registeredInApprovedProgram,
@@ -113,11 +111,10 @@ async function saveListProviderIntake(values) {
       console.log("error in chain")
       //console.log(err);
       console.log(err.statusCode)
-      /*
-      if (err.statusCode == 403){
-        saveList(values)
+      if (err.statusCode !== 403){
+        console.log(err);
       }
-      */
+      
       return false
     })
   

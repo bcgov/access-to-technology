@@ -31,23 +31,8 @@ class thankyouParticipant extends Component {
                                 <p>Phone Number:  {this.props.location.state !== undefined && this.props.location.state.serviceProviderPhone}</p>
                                 
                                 <h5>Client Program Information</h5>
-                                {fundedISET ? (
-                                    <div>
-                                        <p>Approved Eligible Skills Training and Employment Program:  {this.props.location.state !== undefined && this.props.location.state.trainingProgramISET}</p>
-                                    </div>
-                                 ) : (<div></div>) 
-                                 }{fundedAEST ? (
-                                    <div>
-                                        <p>Approved Eligible Skills Training and Employment Program:  {this.props.location.state !== undefined && this.props.location.state.trainingProgramAEST}</p>
-                                    </div>
-                                 ) : (<div></div>) 
-                                 }{fundedSDPR ? (
-                                    <div>
-                                        <p>Approved Eligible Skills Training and Employment Program:  {this.props.location.state !== undefined && this.props.location.state.trainingProgramSDPR}</p>
-                                    </div>
-                                 ) : (<div></div>) 
-                                 }
-                                 
+                                
+                                <p>Approved Eligible Skills Training and Employment Program:  {this.props.location.state !== undefined && this.props.location.state.trainingProgram}</p> 
                                 <p>Program Start Date:  {this.props.location.state !== undefined && this.props.location.state.periodStart1}</p>
                                 <p>Program End Date:  {this.props.location.state !== undefined && this.props.location.state.periodEnd1}</p>
                                 

@@ -89,21 +89,8 @@ var ProviderIntakeValidationSchema = yup.object().shape({
     */
 
     //step 1:pop-up fields
-    trainingProgramISET: yup.string()
-    .when("fundingSource",{ 
-        is:"ISET",
-        then:yup.string().required('Please select your clients program.')
-        }),
-    trainingProgramAEST: yup.string()
-    .when("fundingSource",{ 
-        is:"AEST",
-        then:yup.string().required('Please select your clients program.')
-        }),
-    trainingProgramSDPR: yup.string()
-    .when("fundingSource",{ 
-        is:"SDPR",
-        then:yup.string().required('Please select your clients program.')
-        }),
+    trainingProgram: yup.string()
+       .oneOf(["Skills Training","Essential Skills Training","Pre-Apprenticeship Training" ,"Skills Training for Employment", "ITA Funded Pre-Apprenticeship Training","Indigenous Employment and Skills Training","Blade Runners","Short Duration Training","Occupational Skills Training","BC Adult Graduation Diploma"],"Please select an eligible training program"),
     addressAlt:yup.string()
         .when("altShippingAddress",{
             is:true,

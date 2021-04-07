@@ -16,13 +16,13 @@ class FormStep1 extends Component {
         if (this.props.values.fundingSource === "ISET") {
             return (<div className="form-row">
                 <div className="form-group col-md-6">
-                    <label className="col-form-label control-label" htmlFor="trainingProgramISET">Eligible Skill And Training Program<span
+                    <label className="col-form-label control-label" htmlFor="trainingProgram">Eligible Skill And Training Program<span
                         style={{ color: "red" }}>*</span></label>
                     <Field
                         as="select"
-                        className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "trainingProgramISET")}`}
-                        id="trainingProgramISET"
-                        name="trainingProgramISET"
+                        className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "trainingProgram")}`}
+                        id="trainingProgram"
+                        name="trainingProgram"
                     >
                         <option value="">Please select</option>
                         <option value="Skills Training">Skills Training</option>
@@ -30,21 +30,21 @@ class FormStep1 extends Component {
                         <option value="Pre-Apprenticeship Training">Pre-Apprenticeship Training</option>
                         <option value="Other">Other</option>
                     </Field>
-                    <small className="text-muted" id="trainingProgramISET">  This dropdown list here is determine by the funding source selected above</small>
-                    {feedBackInvalid(this.props.errors, this.props.touched, "trainingProgramISET")}
+                    <small className="text-muted" id="trainingProgram">  This dropdown list here is determine by the funding source selected above</small>
+                    {feedBackInvalid(this.props.errors, this.props.touched, "trainingProgram")}
                 </div>
             </div>)
         }
         else if (this.props.values.fundingSource === "AEST") {
             return (<div className="form-row">
                 <div className="form-group col-md-6">
-                    <label className="col-form-label control-label" htmlFor="trainingProgramAEST">Eligible Skill And Training Program<span
+                    <label className="col-form-label control-label" htmlFor="trainingProgram">Eligible Skill And Training Program<span
                         style={{ color: "red" }}>*</span></label>
                     <Field
                         as="select"
-                        className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "trainingProgramAEST")}`}
-                        id="trainingProgramAEST"
-                        name="trainingProgramAEST"
+                        className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "trainingProgram")}`}
+                        id="trainingProgram"
+                        name="trainingProgram"
                     >
                         <option value="">Please select</option>
                         <option value="Skills Training for Employment">Skills Training for Employment</option>
@@ -52,29 +52,29 @@ class FormStep1 extends Component {
                         <option value="Blade Runners">Blade Runners</option>
                         <option value="Indigenous Employment and Skills Training">Indigenous Employment and Skills Training</option>
                     </Field>
-                    <small className="text-muted" id="trainingProgramAEST"> This dropdown list here is determine by the funding source selected above</small>
-                    {feedBackInvalid(this.props.errors, this.props.touched, "trainingProgramAEST")}
+                    <small className="text-muted" id="trainingProgram"> This dropdown list here is determine by the funding source selected above</small>
+                    {feedBackInvalid(this.props.errors, this.props.touched, "trainingProgram")}
                 </div>
             </div>)
         }
         else if (this.props.values.fundingSource === "SDPR") {
             return (<div className="form-row">
                 <div className="form-group col-md-6">
-                    <label className="col-form-label control-label" htmlFor="trainingProgramSDPR">Eligible Skill And Training Program<span
+                    <label className="col-form-label control-label" htmlFor="trainingProgram">Eligible Skill And Training Program<span
                         style={{ color: "red" }}>*</span></label>
                     <Field
                         as="select"
-                        className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "trainingProgramSDPR")}`}
-                        id="trainingProgramSDPR"
-                        name="trainingProgramSDPR"
+                        className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "trainingProgram")}`}
+                        id="trainingProgram"
+                        name="trainingProgram"
                     >
                         <option value="">Please select</option>
                         <option value="Short Duration Training">Short Duration Training</option>
                         <option value="Occupational Skills Training">Occupational Skills Training</option>
                         <option value="BC Adult Graduation Diploma">BC Adult Graduation Diploma</option>
                     </Field>
-                    <small className="text-muted" id="trainingProgramSDPR">  This dropdown list here is determine by the funding source selected above</small>
-                    {feedBackInvalid(this.props.errors, this.props.touched, "trainingProgramSDPR")}
+                    <small className="text-muted" id="trainingProgram">  This dropdown list here is determine by the funding source selected above</small>
+                    {feedBackInvalid(this.props.errors, this.props.touched, "trainingProgram")}
                 </div>
             </div>)
         }
@@ -126,6 +126,10 @@ class FormStep1 extends Component {
                                 className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "fundingSource")}`}
                                 id="fundingSource" 
                                 name="fundingSource" 
+                                onChange={e => {
+                                    this.props.handleChange(e)
+                                    this.props.setFieldValue("trainingProgram", "")
+                                }}
                             >
                                 <option value="">Please select</option>
                                 <option value="AEST">AEST</option>
