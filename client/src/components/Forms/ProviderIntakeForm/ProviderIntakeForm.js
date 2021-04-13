@@ -116,8 +116,6 @@ class ProviderIntakeForm extends Component {
                                     _csrf: this.state._csrf,
                                     _id: this.state._id,
                                     _token: this.state._token,
-
-                                    _bEmailDomain: "",
                                     //step 1
                                     serviceProviderName:"",
                                     providerContractId:"",
@@ -126,9 +124,7 @@ class ProviderIntakeForm extends Component {
                                     serviceProviderPhone:"",
                                     serviceProviderEmail:"",
                                     fundingSource:"",
-                                    trainingProgramISET:"",
-                                    trainingProgramAEST:"",
-                                    trainingProgramSDPR:"",
+                                    trainingProgram:"",
                                     periodStart1:"",
                                     periodEnd1:"",
                                     workBCCaseNumber:"",

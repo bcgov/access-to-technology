@@ -16,6 +16,7 @@ class ProviderIntakeStep2 extends Component {
              <div className="form-group col-md-4">
                             <label className="col-form-label control-label" htmlFor="workBCCaseNumber">WorkBC Case Number <span
                                 style={{ color: "red" }}>*</span></label>
+                                 <small className="text-muted" id="serviceProviderPostal">XXX-XXX-XXXX</small>
                             <Field className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "workBCCaseNumber")}`} id="workBCCaseNumber" name="workBCCaseNumber" />
                             {feedBackInvalid(this.props.errors,this.props.touched,"workBCCaseNumber")}
             </div>

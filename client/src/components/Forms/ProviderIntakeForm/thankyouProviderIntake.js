@@ -35,22 +35,9 @@ class thankyouProviderIntake extends Component {
                                 <p>Contract Reference ID:  {this.props.location.state !== undefined && this.props.location.state.providerContractId}</p>
                                 
                                 <h5>Eligible Skill and Training Program Information</h5>
-                                {fundedISET ? (
                                     <div>
-                                        <p>Approved Eligible Skills Training and Employment Program:  {this.props.location.state !== undefined && this.props.location.state.trainingProgramISET}</p>
+                                        <p>Approved Eligible Skills Training and Employment Program:  {this.props.location.state !== undefined && this.props.location.state.trainingProgram}</p>
                                     </div>
-                                 ) : (<div></div>) 
-                                 }{fundedAEST ? (
-                                    <div>
-                                        <p>Approved Eligible Skills Training and Employment Program:  {this.props.location.state !== undefined && this.props.location.state.trainingProgramAEST}</p>
-                                    </div>
-                                 ) : (<div></div>) 
-                                 }{fundedSDPR ? (
-                                    <div>
-                                        <p>Approved Eligible Skills Training and Employment Program:  {this.props.location.state !== undefined && this.props.location.state.trainingProgramSDPR}</p>
-                                    </div>
-                                 ) : (<div></div>) 
-                                 }
                                 <p>Program Start Date:  {this.props.location.state !== undefined && this.props.location.state.periodStart1.toString()}</p>
                                 <p>Program End Date:  {this.props.location.state !== undefined && this.props.location.state.periodEnd1.toString()}</p>
                                 
@@ -63,7 +50,7 @@ class thankyouProviderIntake extends Component {
                                  }
                                 <p>FullName:  {this.props.location.state !== undefined && this.props.location.state.clientName}</p>
                                 <p>Street Address:  {this.props.location.state !== undefined && this.props.location.state.clientAddress}</p>
-                                <p>Street Address 2:  {this.props.location.state !== undefined && this.props.location.state.clientAddress}</p>
+                                <p>Street Address 2:  {this.props.location.state !== undefined && this.props.location.state.clientAddress2}</p>
                                 <p>City / Town:  {this.props.location.state !== undefined && this.props.location.state.clientCity}</p>
                                 <p>Province:  {this.props.location.state !== undefined && this.props.location.state.clientProvince}</p>
                                 <p>Postal:  {this.props.location.state !== undefined && this.props.location.state.clientPostal}</p>
