@@ -45,6 +45,7 @@ module.exports = {
          <p>Eligible Training Program:  ${strings.orEmpty(values.trainingProgram)}</p>
          <p>Training Start Date:  ${strings.orEmpty(values.periodStart1)}</p>
          <p>Training End Date:  ${strings.orEmpty(values.periodEnd1)}</p>
+         <p>BCEA or Federal on Reserve Client:  ${strings.orEmpty(values.BCEAorFederalOnReserve)}</p>
          <hr />
 
         <h5>Client Information</h5>

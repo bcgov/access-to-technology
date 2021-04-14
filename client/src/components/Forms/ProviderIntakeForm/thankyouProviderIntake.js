@@ -6,8 +6,6 @@ class thankyouProviderIntake extends Component {
     render() {
 
         const altShippingAddress = this.props.location.state !== undefined && this.props.location.state.altShippingAddress;
-        const fundedISET = (this.props.location.state !== undefined && (this.props.location.state.fundingSource === "ISET"));
-        const fundedAEST = (this.props.location.state !== undefined && (this.props.location.state.fundingSource === "AEST"));
         const fundedSDPR = (this.props.location.state !== undefined && (this.props.location.state.fundingSource === "SDPR"));
 
 
@@ -40,6 +38,7 @@ class thankyouProviderIntake extends Component {
                                     </div>
                                 <p>Program Start Date:  {this.props.location.state !== undefined && this.props.location.state.periodStart1.toString()}</p>
                                 <p>Program End Date:  {this.props.location.state !== undefined && this.props.location.state.periodEnd1.toString()}</p>
+                                <p>Client is BCEA or Federal on Reserve Individual:  {this.props.location.state !== undefined && this.props.location.state.BCEAorFederalOnReserve}</p>
                                 
                                 <h5>Client Information</h5>
                                 {fundedSDPR ? (

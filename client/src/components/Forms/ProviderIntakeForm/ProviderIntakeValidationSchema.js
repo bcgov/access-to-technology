@@ -1,6 +1,7 @@
 import * as yup from 'yup'
 import "yup-phone"
 import 'core-js/stable';
+import moment from 'moment'
 
 
 export const ProviderIntakeValidationSchema = yup.object().shape({
@@ -30,8 +31,12 @@ export const ProviderIntakeValidationSchema = yup.object().shape({
         .min(new Date(), "Date must be after today")
         .required("Please Enter your clients program start date"),
     periodEnd1: yup.date()
+        .min(moment(yup.ref('periodStart1')).add(28, 'days'), "Eligible programs must be at least 4 weeks in duration.")
         .max(new Date("2022-03-31 12:00:00"), "This is a limited time program must end before March 31 2022")
         .required("Please Enter your clients program end date"),
+    BCEAorFederalOnReserve:yup.string()
+        .oneOf(["yes"],"The client must be either BCEA or Federal On Reserve to be eligible for this program.")
+        .required("The client must be either BCEA or Federal On Reserve to be eligible for this program."),
     
     // STEP 2
     workBCCaseNumber: yup.string().when('fundingSource', {
@@ -66,7 +71,7 @@ export const ProviderIntakeValidationSchema = yup.object().shape({
     telusInternetForGood:yup.string()
     .oneOf(["yes",
             "no"],"Please select a valid field.")
-    .required("Please select an answer on whether the client resides in BC"),
+    .required("Please select an answer on whether the client is eligible for Telus internet for good."),
     /*clientUnemployed:yup.string()
     .oneOf(["yes",
             "no"],"Please select a valid field.")
@@ -92,6 +97,8 @@ export const ProviderIntakeValidationSchema = yup.object().shape({
     //step 1:pop-up fields
     trainingProgram: yup.string()
        .oneOf(["Skills Training","Essential Skills Training","Pre-Apprenticeship Training" ,"Skills Training for Employment", "ITA Funded Pre-Apprenticeship Training","Indigenous Employment and Skills Training","Blade Runners","Short Duration Training","Occupational Skills Training","BC Adult Graduation Diploma"],"Please select an eligible training program"),
+    
+    
     addressAlt:yup.string()
         .when("altShippingAddress",{
             is:true,

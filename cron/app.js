@@ -68,6 +68,7 @@ async function saveListProviderIntake(values) {
           'eligibleProgram': values.trainingProgram,
           'periodStart1': typeof values.periodStart1 !== "undefined" ? new Date(values.periodStart1) : null,
           'periodEnd1': typeof values.periodEnd1 !== "undefined" ? new Date(values.periodEnd1) : null,
+          'BCEAorFederalOnReserve':values.BCEAorFederalOnReserve === "yes",
           'workBCCaseNumber': values.workBCCaseNumber,
           'clientName': values.clientName,
           'clientAddress': values.clientAddress,
