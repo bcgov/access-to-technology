@@ -1,3 +1,5 @@
+var moment = require('moment')
+
 var yup = require('yup')
 require('yup-phone')
 
