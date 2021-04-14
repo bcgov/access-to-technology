@@ -1,5 +1,5 @@
 var moment = require('moment')
-
+require('core-js/stable')
 var yup = require('yup')
 require('yup-phone')
 
