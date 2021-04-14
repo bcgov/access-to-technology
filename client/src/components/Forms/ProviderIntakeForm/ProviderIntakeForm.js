@@ -11,6 +11,7 @@ import {ProviderIntakeValidationSchema} from './ProviderIntakeValidationSchema'
 import { FORM_URL } from '../../../constants/form'
 import { generateAlert } from '../shared/Alert'
 
+
 class ProviderIntakeForm extends Component {
     constructor(){
         super()
@@ -84,15 +85,25 @@ class ProviderIntakeForm extends Component {
         return null;
     }
 
-    get nextButton(){
+    nextButton(touched, errors){
         let currentStep = this.state.currentStep;
-
-        if(currentStep < 3){
+        var nextFlag = true;
+        console.log(parseInt(Object.keys(touched).length));
+        console.log(parseInt(Object.keys(errors).length))
+        if(currentStep === 1){
+            nextFlag = ((parseInt(Object.keys(errors).length) > 9 || (parseInt(Object.keys(errors).length) === 0 && parseInt(Object.keys(touched).length) === 0)));
+        }
+        else if(currentStep === 2){
+            nextFlag = (parseInt(Object.keys(errors).length) > 2 );
+        }
+        if(currentStep !== 3){
           return (
             <button 
               className="btn btn-primary float-right" 
               type="button" 
               onClick={this._next}
+              disabled={nextFlag}
+            
             >
             Next
             </button>        
@@ -127,6 +138,8 @@ class ProviderIntakeForm extends Component {
                                     trainingProgram:"",
                                     periodStart1:"",
                                     periodEnd1:"",
+                                    BCEAorFederalOnReserve:"",
+                                    //step2
                                     workBCCaseNumber:"",
                                     clientName:"",
                                     clientAddress:"",
@@ -138,12 +151,11 @@ class ProviderIntakeForm extends Component {
                                     clientEmail:"",
                                     altShippingAddress: false,
 
-                                    //step 1:pop-up fields
+                                    //step 2:pop-up fields
                                     addressAlt:"",
                                     cityAlt:"",
                                     provinceAlt:"BC",
                                     postalAlt:"",
-                                    //step 2
                                     telusInternetForGood:"",
                                     /*clientResidesInBC:"",
                                     clientUnemployed:"",
@@ -228,7 +240,7 @@ class ProviderIntakeForm extends Component {
                                         {...props}
                                     />
                                     {this.previousButton}
-                                    {this.nextButton}
+                                    {this.nextButton(props.touched, props.errors)}
 
                                 </Form>
                             )}

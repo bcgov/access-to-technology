@@ -119,7 +119,7 @@ class FormStep1 extends Component {
                 </div>
                 <div className="form-row">
                  <div className="form-group col-md-6">
-                            <label className="col-form-label control-label" htmlFor="fundingSource">Funding Source <span
+                            <label className="col-form-label control-label" htmlFor="fundingSource">Referring Ministry <span
                                 style={{ color: "red" }}>*</span></label>
                             <Field
                                 as="select"
@@ -197,7 +197,7 @@ class FormStep1 extends Component {
                     </div>
                 </div>
                 <div className="form-group">
-                    <h2 id="forms">Eligible Skill And Training Program Information</h2>
+                    <h2 id="forms">Eligibility</h2>
                 </div>
                 {this.ApplicableProgramForm}
                 <div className="form-row">
@@ -219,12 +219,36 @@ class FormStep1 extends Component {
                         <DatePickerField
                             name="periodEnd1"
                             className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "periodEnd1")}`}
-                            minDate={new Date()}
+                            minDate={new Date(this.props.values['periodStart1'])}
                             maxDate={new Date(2022,4,1)}
                         />
-
                         {feedBackInvalid(this.props.errors, this.props.touched, "periodEnd1")}
                     </div>
+                </div>
+                <div className="form-row">
+                    <div className="form-group">
+                        <label className="col-form-label control-label" htmlFor="BCEAorFederalOnReserve">Client is a <b>BCEA</b> or <b>Federal on Reserve Individual</b><span
+                            style={{ color: "red" }}>*</span> </label>
+                        <div className="form-check">
+                            <Field
+                                className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "BCEAorFederalOnReserve")}`}
+                                type="radio"
+                                name="BCEAorFederalOnReserve"
+                                value="yes"
+                            />
+                            <label className="form-check-label" htmlFor="BCEAorFederalOnReserve">Yes</label>
+                        </div>
+                        <div className="form-check">
+                            <Field
+                                className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "BCEAorFederalOnReserve")}`}
+                                type="radio"
+                                name="BCEAorFederalOnReserve"
+                                value="no"
+                            />
+                            <label className="form-check-label" htmlFor="BCEAorFederalOnReserve">No</label>
+                        </div>
+                        {feedBackInvalid(this.props.errors, this.props.touched, "BCEAorFederalOnReserve")}
+                    </div> 
                 </div>
             </div>
         )

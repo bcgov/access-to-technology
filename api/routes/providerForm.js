@@ -160,6 +160,9 @@ async function sendEmails(values) {
   }
 }
 
+//saving to sharepoint list.
+
+
 router.get('/', csrfProtection, (req, res) => {
   //saveList()
   

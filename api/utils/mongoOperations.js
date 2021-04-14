@@ -97,6 +97,7 @@ module.exports = {
                 trainingProgram: values.trainingProgram,
                 periodStart1: values.periodStart1,
                 periodEnd1: values.periodEnd1,
+                BCEAorFederalOnReserve: values.BCEAorFederalOnReserve,
                 workBCCaseNumber: values.workBCCaseNumber,
                 clientName: values.clientName,
                 clientAddress: values.clientAddress,
