@@ -35,8 +35,7 @@ export const ProviderIntakeValidationSchema = yup.object().shape({
         .max(new Date("2022-03-31 12:00:00"), "This is a limited time program must end before March 31 2022")
         .required("Please Enter your clients program end date"),
     BCEAorFederalOnReserve:yup.string()
-        .oneOf(["yes"],"The client must be either BCEA or Federal On Reserve to be eligible for this program.")
-        .required("The client must be either BCEA or Federal On Reserve to be eligible for this program."),
+        .oneOf(["yes"],"The client must be either BCEA or Federal On Reserve to be eligible for this program."),
     
     // STEP 2
     workBCCaseNumber: yup.string().when('fundingSource', {
@@ -97,14 +96,11 @@ export const ProviderIntakeValidationSchema = yup.object().shape({
     //step 1:pop-up fields
     trainingProgram: yup.string()
        .oneOf(["Skills Training","Essential Skills Training","Pre-Apprenticeship Training" ,"Skills Training for Employment", "ITA Funded Pre-Apprenticeship Training","Indigenous Employment and Skills Training","Blade Runners","Short Duration Training","Occupational Skills Training","BC Adult Graduation Diploma"],"Please select an eligible training program"),
-    
-    
     addressAlt:yup.string()
         .when("altShippingAddress",{
             is:true,
             then: yup.string().max(255,"Address too long, please use address line 2.").required("please enter your other work address")
-        }),
-       
+        }),    
     cityAlt: yup.string()
         .when("altShippingAddress", {
             is: true,
