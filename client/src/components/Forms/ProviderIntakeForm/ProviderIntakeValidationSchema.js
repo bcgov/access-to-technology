@@ -32,12 +32,13 @@ export const ProviderIntakeValidationSchema = yup.object().shape({
         .required("Please Enter your clients program start date"),
     periodEnd1: yup.date()
         .min(moment(yup.ref('periodStart1')).add(28, 'days'), "Eligible programs must be at least 4 weeks in duration.")
-        .max(new Date("2022-03-31 12:00:00"), "This is a limited time program must end before March 31 2022")
+        .max(new Date("2022-03-31"), "This is a limited time program must end before March 31 2022")
         .required("Please Enter your clients program end date"),
     BCEAorFederalOnReserve:yup.string()
         .oneOf(["yes"],"The client must be either BCEA or Federal On Reserve to be eligible for this program."),
     
     // STEP 2
+    
     workBCCaseNumber: yup.string().when('fundingSource', {
         is: 'SDPR',
         then: yup.string().test('valid','Please enter the clients WorkBC case number in format: XXX-XXX-XXXX',

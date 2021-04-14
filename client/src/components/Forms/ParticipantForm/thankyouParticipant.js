@@ -6,9 +6,9 @@ class thankyouParticipant extends Component {
     render() {
 
         const altShippingAddress = this.props.location.state !== undefined && this.props.location.state.altShippingAddress;
-        const fundedISET = (this.props.location.state !== undefined && (this.props.location.state.fundingSource === "ISET"));
-        const fundedAEST = (this.props.location.state !== undefined && (this.props.location.state.fundingSource === "AEST"));
-        const fundedSDPR = (this.props.location.state !== undefined && (this.props.location.state.fundingSource === "SDPR"));
+        //const fundedISET = (this.props.location.state !== undefined && (this.props.location.state.fundingSource === "ISET"));
+        //const fundedAEST = (this.props.location.state !== undefined && (this.props.location.state.fundingSource === "AEST"));
+        //const fundedSDPR = (this.props.location.state !== undefined && (this.props.location.state.fundingSource === "SDPR"));
 
 
         return (
