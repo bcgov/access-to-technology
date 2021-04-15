@@ -89,9 +89,15 @@ class ProviderIntakeForm extends Component {
         let currentStep = this.state.currentStep;
         var nextFlag = true;
         console.log(parseInt(Object.keys(touched).length));
-        console.log(parseInt(Object.keys(errors).length))
+        console.log(parseInt(Object.keys(errors).length));
+        console.log(errors);
+        console.log(errors['workBCCaseNumber']);
         if(currentStep === 1){
-            nextFlag = ((parseInt(Object.keys(errors).length) > 9 || (parseInt(Object.keys(errors).length) === 0 && parseInt(Object.keys(touched).length) === 0)));
+            if(errors['workBCCaseNumber'] === 'Please enter the clients WorkBC case number in format: XXX-XXX-XXXX'){
+                nextFlag = ((parseInt(Object.keys(errors).length) > 10 || (parseInt(Object.keys(errors).length) === 0 && parseInt(Object.keys(touched).length) === 0)));
+             }else{
+                nextFlag = ((parseInt(Object.keys(errors).length) > 9 || (parseInt(Object.keys(errors).length) === 0 && parseInt(Object.keys(touched).length) === 0)));
+             }
         }
         else if(currentStep === 2){
             nextFlag = (parseInt(Object.keys(errors).length) > 2 );
