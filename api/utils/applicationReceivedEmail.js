@@ -45,7 +45,7 @@ module.exports = {
          <p>Training Program End Date:  ${strings.orEmpty(values.periodEnd1)}</p>
         <h5>Client Eligibility</h5>
          <p>Client is unemployed or precariously employed:  ${strings.orEmpty(values.unemployed)}</p>
-         <p>Client is receiving assistance from an eligible program: <br/>  ${strings.orEmpty(values.BCEAorFederalOnReserve.join('<br/>'))}</p>
+         <p>Client is receiving at least one of the following forms of government assistance (choose all that apply): <br/>  ${strings.orEmpty(values.BCEAorFederalOnReserve.join('<br/>'))}</p>
          <hr />
 
         <h5>Client Information</h5>

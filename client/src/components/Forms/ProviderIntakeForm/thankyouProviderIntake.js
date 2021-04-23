@@ -40,7 +40,7 @@ class thankyouProviderIntake extends Component {
                                 <p>Program End Date:  {this.props.location.state !== undefined && this.props.location.state.periodEnd1.toString()}</p>
                                 <h5>Client Eligibility</h5>
                                 <p>Client is unemployed or precariously employed:  {this.props.location.state !== undefined && this.props.location.state.unemployed}</p>
-                                <p>Client is BCEA or Federal on Reserve Individual: <br/> {this.props.location.state !== undefined && this.props.location.state.BCEAorFederalOnReserve.join(" ")}</p>
+                                <p>Client is receiving at least one of the following forms of government assistance (choose all that apply): <br/> {this.props.location.state !== undefined && this.props.location.state.BCEAorFederalOnReserve.join(" ")}</p>
                                 
                                 <h5>Client Information</h5>
                                 {fundedSDPR ? (
