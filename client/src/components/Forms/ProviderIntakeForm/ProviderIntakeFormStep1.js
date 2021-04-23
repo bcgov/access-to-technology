@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {Field} from 'formik'
 import { feedBackClassName, feedBackInvalid } from '../shared/ValidationMessages'
 import { DatePickerField } from '../shared/DatePickerField'
+import moment from 'moment'
 
 
 class FormStep1 extends Component {
@@ -10,6 +11,68 @@ class FormStep1 extends Component {
         super()
         this.state = {
            
+        }
+    }
+    get ApplicableServiceProvider(){
+        if (this.props.values.fundingSource === "ISET") {
+            return (<div className="form-row">
+            <div className="form-group col-md-6">
+                <label className="col-form-label control-label" htmlFor="serviceProviderName">Service Provider Name <span
+                    style={{ color: "red" }}>*</span></label>
+                 <Field
+                        as="select"
+                        className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "serviceProviderName")}`}
+                        id="serviceProviderName" 
+                        name="serviceProviderName" 
+                    >
+                        <option value="">Please select</option>
+                        <option value="ISET Service Provider">ISET Service Provider</option>
+                    </Field>
+                    {feedBackInvalid(this.props.errors,this.props.touched,"serviceProviderName")}
+            </div>
+        </div>
+      )
+        }
+        else if (this.props.values.fundingSource === "AEST") {
+            return( <div className="form-row">
+            <div className="form-group col-md-6">
+                <label className="col-form-label control-label" htmlFor="serviceProviderName">Service Provider Name <span
+                    style={{ color: "red" }}>*</span></label>
+                 <Field
+                        as="select"
+                        className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "serviceProviderName")}`}
+                        id="serviceProviderName" 
+                        name="serviceProviderName" 
+                    >
+                        <option value="">Please select</option>
+                        <option value="AEST Service Provider">AEST Service Provider</option>
+                    </Field>
+                    {feedBackInvalid(this.props.errors,this.props.touched,"serviceProviderName")}
+            </div>
+        </div>
+      )
+        }
+        else if (this.props.values.fundingSource === "SDPR") {
+            return (<div className="form-row">
+            <div className="form-group col-md-6">
+                <label className="col-form-label control-label" htmlFor="serviceProviderName">Service Provider Name <span
+                    style={{ color: "red" }}>*</span></label>
+                 <Field
+                        as="select"
+                        className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "serviceProviderName")}`}
+                        id="serviceProviderName" 
+                        name="serviceProviderName" 
+                    >
+                        <option value="">Please select</option>
+                        <option value="SDPR Service Provider">SDPR Service Provider</option>
+                    </Field>
+                    {feedBackInvalid(this.props.errors,this.props.touched,"serviceProviderName")}
+            </div>
+        </div>
+      )
+        }
+        else{
+            return(<div>Please select a referring Ministry above to refine the your applicable service providers</div>);
         }
     }
     get ApplicableProgramForm(){
@@ -79,7 +142,7 @@ class FormStep1 extends Component {
             </div>)
         }
         else{
-            return(<div>Please select a funding source above</div>);
+            return(<div>Please select a referring Ministry above</div>);
         }
     }
   
@@ -93,29 +156,11 @@ class FormStep1 extends Component {
 
             <div>
                 <p>
-                    If you are having difficulty completing the application for Access to Technology, please contact your local <a href="https://www.workbc.ca/Employment-Services/WorkBC-Centres/Find-Your-WorkBC-Centre.aspx" target="_blank" rel="noopener noreferrer">WorkBC office</a>, 
-                    an application guide is also available <a href="https://www.workbc.ca/getmedia/3532dbe8-f084-4022-bd3c-8f9ebe422fa4/WS-Guide.aspx" target="_blank" rel="noopener noreferrer">here</a>.
+                If you are having difficulty completing the application for Access to Technology, please contact the Ministry of Social Development and Poverty Reduction <a href="https://www.workbc.ca/Employment-Services/WorkBC-Centres/Find-Your-WorkBC-Centre.aspx" target="_blank" rel="noopener noreferrer">(insert Email address for A2T)</a>. 
+                A Service Provider Guide is also available <a href="https://www.workbc.ca/getmedia/3532dbe8-f084-4022-bd3c-8f9ebe422fa4/WS-Guide.aspx" target="_blank" rel="noopener noreferrer">here</a>.
                 </p>
                 <div className="form-group">
                     <h2 id="forms">Service Provider Information</h2>
-                </div>
-                <div className="form-row">
-                    <div className="form-group col-md-6">
-                        <label className="col-form-label control-label" htmlFor="serviceProviderName">Service Provider Name <span
-                            style={{ color: "red" }}>*</span></label>
-                         <Field
-                                as="select"
-                                className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "serviceProviderName")}`}
-                                id="serviceProviderName" 
-                                name="serviceProviderName" 
-                            >
-                                <option value="">Please select</option>
-                                <option value="AEST Service Provider">AEST Service Provider</option>
-                                <option value="ISET Service Provider">ISET Service Provider</option>
-                                <option value="SDPR Service Provider">SDPR Service Provider</option>
-                            </Field>
-                            {feedBackInvalid(this.props.errors,this.props.touched,"serviceProviderName")}
-                    </div>
                 </div>
                 <div className="form-row">
                  <div className="form-group col-md-6">
@@ -129,6 +174,7 @@ class FormStep1 extends Component {
                                 onChange={e => {
                                     this.props.handleChange(e)
                                     this.props.setFieldValue("trainingProgram", "")
+                                    this.props.setFieldValue("serviceProviderName", "")
                                 }}
                             >
                                 <option value="">Please select</option>
@@ -139,6 +185,9 @@ class FormStep1 extends Component {
                             {feedBackInvalid(this.props.errors,this.props.touched,"fundingSource")}
                     </div>
                 </div>
+
+                {this.ApplicableServiceProvider}
+                
                 <div className="form-row"> 
                     <div className="form-group col-md-4">
                             <label className="col-form-label control-label" htmlFor="serviceProviderPostal">Postal Code <span
@@ -164,14 +213,14 @@ class FormStep1 extends Component {
                             {feedBackInvalid(this.props.errors,this.props.touched,"serviceProviderContact")}
                         </div>
                     <div className="form-group col-md-4">
-                            <label className="col-form-label control-label" htmlFor="serviceProviderPhone">Phone Number <span
+                            <label className="col-form-label control-label" htmlFor="serviceProviderPhone">Contact Phone Number <span
                                 style={{ color: "red" }}>*</span></label>
                             <small className="text-muted" id="serviceProviderPhone">  250-555-5555</small>
                             <Field className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "serviceProviderPhone")}`} id="serviceProviderPhone" name="serviceProviderPhone" />
                             {feedBackInvalid(this.props.errors,this.props.touched,"serviceProviderPhone")}
                     </div>
                     <div className="form-group col-md-4">
-                            <label className="col-form-label control-label" htmlFor="serviceProviderEmail">E-mail Address <span
+                            <label className="col-form-label control-label" htmlFor="serviceProviderEmail">Contact E-mail Address <span
                                     style={{ color: "red" }}>*</span></label>
                             <small className="text-muted" id="serviceProviderEmail">  someone@example.com</small>
                             <Field 
@@ -197,55 +246,113 @@ class FormStep1 extends Component {
                     </div>
                 </div>
                 <div className="form-group">
-                    <h2 id="forms">Eligibility</h2>
+                    <h2 id="forms">Program Eligibility</h2>
                 </div>
                 {this.ApplicableProgramForm}
                 <div className="form-row">
                     <div className="form-group col-md-6">
-                        <label className="col-form-label control-label" htmlFor="periodStart1">Program Start Date<span
+                        <label className="col-form-label control-label" htmlFor="periodStart1"> Training Program Start Date<span
                             style={{ color: "red" }}>*</span></label>
                         <DatePickerField
                             name="periodStart1"
                             className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "periodStart1")}`}
                             minDate={new Date()}
-                            maxDate={new Date(2022,4,1)}
+                            maxDate={new Date(2023,4,1)}
                         />
-                        <small className="text-muted" id="periodStart1">  Note: Application end dates after march of 2022 do not qualify.</small>
+                        <small className="text-muted" id="periodStart1">  Note: Program start dates after March 3 2023 do not qualify.</small>
                         {feedBackInvalid(this.props.errors, this.props.touched, "periodStart1")}
                     </div>
                     <div className="form-group col-md-6">
-                        <label className="col-form-label control-label" htmlFor="periodEnd1">Program End Date <span
+                        <label className="col-form-label control-label" htmlFor="periodEnd1"> Training Program End Date <span
                             style={{ color: "red" }}>*</span></label>
                         <DatePickerField
                             name="periodEnd1"
                             className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "periodEnd1")}`}
-                            minDate={new Date(this.props.values['periodStart1'])}
-                            maxDate={new Date(2022,4,1)}
+                            minDate={new Date (moment(this.props.values['periodStart1']).add(28, 'days'))}
+                            maxDate={new Date(2023,4,1)}
                         />
                         {feedBackInvalid(this.props.errors, this.props.touched, "periodEnd1")}
                     </div>
                 </div>
+                <div className="form-group">
+                    <h2 id="forms">Client Eligibility</h2>
+                </div>
                 <div className="form-row">
                     <div className="form-group">
-                        <label className="col-form-label control-label" htmlFor="BCEAorFederalOnReserve">Client is a <b>BCEA</b> or <b>Federal on Reserve Individual</b><span
+                        <label className="col-form-label control-label" htmlFor="unemployed">Client is unemployed or precariously employed
+                        <span
                             style={{ color: "red" }}>*</span> </label>
                         <div className="form-check">
                             <Field
-                                className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "BCEAorFederalOnReserve")}`}
+                                className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "unemployed")}`}
                                 type="radio"
-                                name="BCEAorFederalOnReserve"
+                                name="unemployed"
                                 value="yes"
                             />
-                            <label className="form-check-label" htmlFor="BCEAorFederalOnReserve">Yes</label>
+                            <label className="form-check-label" htmlFor="unemployed">Yes</label>
+                        </div>
+                        <div className="form-check">
+                            <Field
+                                className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "unemployed")}`}
+                                type="radio"
+                                name="unemployed"
+                                value="no"
+                            />
+                            <label className="form-check-label" htmlFor="unemployed">No</label>
+                        </div>
+                        {feedBackInvalid(this.props.errors, this.props.touched, "unemployed")}
+                    </div> 
+                </div>
+                <div className="form-row">
+                    <div className="form-group">
+                        <label className="col-form-label control-label" htmlFor="BCEAorFederalOnReserve">Client is receiving at least one of the following forms of government assistance (choose all that apply):    
+                        <span
+                            style={{ color: "red" }}>*</span> </label>
+                            
+                            <div className="form-check">
+                            <Field
+                                className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "BCEAorFederalOnReserve")}`}
+                                type="checkbox"
+                                name="BCEAorFederalOnReserve"
+                                value="Income Assistance or hardship assistance under the Employment and Assistance Act (British Columbia);"
+                            />
+                            <label className="form-check-label" htmlFor="BCEAorFederalOnReserve">Income Assistance or hardship assistance under the Employment and Assistance Act (British Columbia);</label>
                         </div>
                         <div className="form-check">
                             <Field
                                 className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "BCEAorFederalOnReserve")}`}
-                                type="radio"
+                                type="checkbox"
                                 name="BCEAorFederalOnReserve"
-                                value="no"
+                                value="Disability Assistance or hardship assistance under the Employment and Assistance for Persons with Disabilities Act (British Columbia);"
                             />
-                            <label className="form-check-label" htmlFor="BCEAorFederalOnReserve">No</label>
+                            <label className="form-check-label" htmlFor="BCEAorFederalOnReserve">Disability Assistance or hardship assistance under the Employment and Assistance for Persons with Disabilities Act (British Columbia);</label>
+                            </div>
+                        <div className="form-check">  
+                            <Field
+                                className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "BCEAorFederalOnReserve")}`}
+                                type="checkbox"
+                                name="BCEAorFederalOnReserve"
+                                value="Social Assistance provided by Indigenous Services Canada (ISC) for persons living on a First Nation Reserve;"
+                            />
+                            <label className="form-check-label" htmlFor="BCEAorFederalOnReserve">Social Assistance provided by Indigenous Services Canada (ISC) for persons living on a First Nation Reserve;</label>
+                            </div>
+                        <div className="form-check">
+                            <Field
+                                className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "BCEAorFederalOnReserve")}`}
+                                type="checkbox"
+                                name="BCEAorFederalOnReserve"
+                                value="An Affordable Childcare Benefit under the Childcare Subsidy Act (British Columbia);"
+                            />
+                            <label className="form-check-label" htmlFor="BCEAorFederalOnReserve">An Affordable Childcare Benefit under the Childcare Subsidy Act (British Columbia);</label>
+                            </div>
+                        <div className="form-check">
+                            <Field
+                                className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "BCEAorFederalOnReserve")}`}
+                                type="checkbox"
+                                name="BCEAorFederalOnReserve"
+                                value="Assistance from the British Columbia Ministry of Children and Family Development under an Agreement with a Young Adult."
+                            />
+                            <label className="form-check-label" htmlFor="BCEAorFederalOnReserve">Assistance from the British Columbia Ministry of Children and Family Development under an Agreement with a Young Adult.</label>
                         </div>
                         {feedBackInvalid(this.props.errors, this.props.touched, "BCEAorFederalOnReserve")}
                     </div> 

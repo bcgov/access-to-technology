@@ -90,13 +90,14 @@ class ProviderIntakeForm extends Component {
         var nextFlag = true;
         console.log(parseInt(Object.keys(touched).length));
         console.log(parseInt(Object.keys(errors).length));
+        console.log(this.state);
         console.log(errors);
         console.log(errors['workBCCaseNumber']);
         if(currentStep === 1){
             if(errors['workBCCaseNumber'] === 'Please enter the clients WorkBC case number in format: XXX-XXX-XXXX'){
-                nextFlag = ((parseInt(Object.keys(errors).length) > 10 || (parseInt(Object.keys(errors).length) === 0 && parseInt(Object.keys(touched).length) === 0)));
+                nextFlag = ((parseInt(Object.keys(errors).length) > 12 || (parseInt(Object.keys(errors).length) === 0 && parseInt(Object.keys(touched).length) === 0)));
              }else{
-                nextFlag = ((parseInt(Object.keys(errors).length) > 9 || (parseInt(Object.keys(errors).length) === 0 && parseInt(Object.keys(touched).length) === 0)));
+                nextFlag = ((parseInt(Object.keys(errors).length) > 11 || (parseInt(Object.keys(errors).length) === 0 && parseInt(Object.keys(touched).length) === 0)));
              }
         }
         else if(currentStep === 2){
@@ -144,10 +145,13 @@ class ProviderIntakeForm extends Component {
                                     trainingProgram:"",
                                     periodStart1:"",
                                     periodEnd1:"",
-                                    BCEAorFederalOnReserve:"",
+                                    unemployed:"",
+                                    BCEAorFederalOnReserve:[],
                                     //step2
                                     workBCCaseNumber:"",
                                     clientName:"",
+                                    clientLastName:"",
+                                    clientMiddleName:"",
                                     clientAddress:"",
                                     clientAddress2:"",
                                     clientCity:"",
@@ -159,6 +163,7 @@ class ProviderIntakeForm extends Component {
 
                                     //step 2:pop-up fields
                                     addressAlt:"",
+                                    addressAlt2:"",
                                     cityAlt:"",
                                     provinceAlt:"BC",
                                     postalAlt:"",

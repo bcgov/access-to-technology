@@ -8,7 +8,7 @@ var ProviderIntakeValidationSchema = yup.object().shape({
     //step 1
     //see what requirements are fo APP id but it will be generated anyways
     serviceProviderName: yup.string()
-        .required('Please enter the service provider name'),
+        .required('Please select a service provider name'),
     providerContractId: yup.string()
         .required('Please enter the service provider contract reference ID name'),
     serviceProviderPostal:yup.string()
@@ -17,26 +17,29 @@ var ProviderIntakeValidationSchema = yup.object().shape({
     serviceProviderContact: yup.string()
         .required('Please enter the service provider contact name'), 
     serviceProviderPhone:yup.string()
-        .test('Is-valid-phone','Invalid phone',
+        .test('Is-valid-phone','Invalid Phone Number',
         value => (value +"").match(/^\d{3}-\d{3}-\d{4}$/gi))
-        .required("Please enter phone."),
+        .required("Please enter a valid phone number."),
     serviceProviderEmail:yup.string().email("Please enter a valid email.")
         .required("Please enter email"),
     fundingSource:yup.string()
         .oneOf(["AEST",
                 "ISET",
                 "SDPR"],"Please select a valid field.")
-        .required('Please select your funding source.'),
+        .required('Please select your Referring Ministry.'),
     periodStart1: yup.date()
         .min(new Date(), "Date must be after today")
         .required("Please Enter your clients program start date"),
     periodEnd1: yup.date()
         .min(moment(yup.ref('periodStart1')).add(28, 'days'), "Eligible programs must be at least 4 weeks in duration.")
-        .max(new Date("2022-03-31"), "This is a limited time program must end before March 31 2022")
+        .max(new Date("2023-03-31"), "This is a limited time program must end before March 3 2023")
         .required("Please Enter your clients program end date"),
-    BCEAorFederalOnReserve:yup.string()
-        .oneOf(["yes"],"The client must be either BCEA or Federal On Reserve to be eligible for this program.")
-        .required("The client must be either BCEA or Federal On Reserve to be eligible for this program."),
+    unemployed:yup.string()
+        .oneOf(["yes"],"The client should be unemployed or precariously employed to be eligible for this program.")
+        .required("The client should be unemployed or precariously employed to be eligible for this program."),
+    BCEAorFederalOnReserve:yup.array()
+        //.oneOf(["yes"],"The client must be enrolled in one of the programs above to be eligible for this program.")
+        .required("The client must be enrolled in one of the programs above to be eligible for this program."),
     // STEP 2
     workBCCaseNumber: yup.string().when('fundingSource', {
         is: 'SDPR',
@@ -46,13 +49,24 @@ var ProviderIntakeValidationSchema = yup.object().shape({
         "Please use the WorkBC case number format: XXX-XXX-XXXX.  All eligible WorkBC clients must be in an approved WorkBC Service, with an ICM Case number."),
         otherwise: yup.string()}),
     clientName: yup.string()
-        .required('Please enter the clients name'),
+        .required('Please enter the clients First name'),
+    clientLastName: yup.string()
+        .required('Please enter the clients Last name'),
+    clientMiddleName: yup.string()
+        .required('Please enter the clients Middle name'),
     clientPhone:yup.string()
-        .test('Is-valid-phone','Invalid phone',
+        .test('Is-valid-phone','Invalid Phone Number',
         value => (value +"").match(/^\d{3}-\d{3}-\d{4}$/gi))
-        .required("Please enter phone."),
-    clientEmail:yup.string().email("Please enter a valid email.")
-        .required("Please enter email"),
+        .required("Please enter a valid phone number."),
+    clientEmail:yup.string()
+        .email("Please enter a valid email. ")
+        .required("Please enter email ")
+        .test('match','client email address cannot be the same as the service providers email address',function(clientEmail){
+            return (clientEmail !== this.options.parent.serviceProviderEmail)
+        })
+        .test('match','client email domain cannot be the same as the service providers',function(clientEmail){
+            return (String(clientEmail).split('@')[1] !== String(this.options.parent.serviceProviderEmail).split('@')[1])
+        }),
     clientAddress: yup.string()
         .max(255,"Address too long")
         .required("please enter your clients address"),
@@ -95,13 +109,15 @@ var ProviderIntakeValidationSchema = yup.object().shape({
 
     //step 1:pop-up fields
     trainingProgram: yup.string()
-       .oneOf(["Skills Training","Essential Skills Training","Pre-Apprenticeship Training" ,"Skills Training for Employment", "ITA Funded Pre-Apprenticeship Training","Indigenous Employment and Skills Training","Blade Runners","Short Duration Training","Occupational Skills Training","BC Adult Graduation Diploma"],"Please select an eligible training program"),
+        .required('Please select a an eligible training program'),
+    //.oneOf(["Skills Training","Essential Skills Training","Pre-Apprenticeship Training" ,"Skills Training for Employment", "ITA Funded Pre-Apprenticeship Training","Indigenous Employment and Skills Training","Blade Runners","Short Duration Training","Occupational Skills Training","BC Adult Graduation Diploma"],"Please select an eligible training program"),
     addressAlt:yup.string()
         .when("altShippingAddress",{
             is:true,
             then: yup.string().max(255,"Address too long, please use address line 2.").required("please enter your other work address")
         }),
-       
+        addressAlt2: yup.string()
+        .max(255,"Address too long"), 
     cityAlt: yup.string()
         .when("altShippingAddress", {
             is: true,

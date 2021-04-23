@@ -6,14 +6,15 @@ function Home() {
             <div className="row">
                 <div className="col-md-12">
                     <h1>Access To Technology</h1>
-                    <p>Access to Technology (A2T) will provide basic laptops to eligible clients participating in specific training programs administered by SDPR, AEST and ISET, which:</p>
+                    <p>Access to Technology (A2T) will provide basic laptops to eligible clients participating in specific 
+                        training programs administered by Social Development and Poverty Reduction (SDPR), Advanced Education and Skills Training (AEST) and Indigenous Skills Training for Employment (ISET), which:</p>
                     <ul>
                         <li>Have an online learning component; and</li>
                         <li>Lead to employment; and</li>
-                        <li>Are a minimum of 4 weeks in duration; and</li>
-                        <li>Are on the list of approved skills training and/or employment programs</li>
+                        <li>Are a minimum of 4 consecutive weeks in duration; and</li>
+                        <li>Are on the list of approved skills training programs</li>
                     </ul>
-                    <p>Approved eligible training programs include:</p>
+                    <p>Approved eligible skills training programs include:</p>
                     <ul style={{listStyleType:"none"}}>
                        <li><b>WorkBC Employment Services: </b>
                         <ul>
@@ -26,7 +27,7 @@ function Home() {
                             <li>Skills Training for Employment</li>
                             <li>ITA Funded Pre-Apprenticeship Training</li>
                             <li>BladeRunners</li>
-                            <li>Indigenous Employment and Skills Training</li>
+                            <li>Indigenous Skills Training and Education</li>
                         </ul></li>
                         <li><b>Indigenous Skills and Employment Training: </b>
                         <ul>
@@ -35,6 +36,14 @@ function Home() {
                             <li>Pre-Apprenticeship (TBD)</li>
                         </ul></li>
                     </ul>
+                    <p>For additional Service Provider Information see the <a href="https://www.workbc.ca/getmedia/3532dbe8-f084-4022-bd3c-8f9ebe422fa4/WS-Guide.aspx" target="_blank" rel="noopener noreferrer" >Access to Technology (A2T) Service Provider Guide</a></p>
+                    <p>In order to submit an application for a client to access the A2T Program, you will need the following: </p>
+                    <ol style={{listStyleType:"decimal"}}>
+                        <li>Confirmation of Client Eligibility </li>
+                        <li>Confirmation of Training Program Eligibility</li>
+                        <li>Training Program start and end dates</li>
+                        <li>Client Information (Name, Phone, Email, Shipping Address)</li>
+                    </ol>
                 </div>
             </div>
             <div className="row">
