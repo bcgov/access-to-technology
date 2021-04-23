@@ -67,6 +67,7 @@ module.exports = {
 
                 //step 1:pop-up fields
                 addressAlt: values.addressAlt,
+                addressAlt2: values.addressAlt2,
                 cityAlt: values.cityAlt,
                 provinceAlt: values.provinceAlt,
                 postalAlt: values.postalAlt,
@@ -97,9 +98,12 @@ module.exports = {
                 trainingProgram: values.trainingProgram,
                 periodStart1: values.periodStart1,
                 periodEnd1: values.periodEnd1,
+                unemployed: values.unemployed,
                 BCEAorFederalOnReserve: values.BCEAorFederalOnReserve,
                 workBCCaseNumber: values.workBCCaseNumber,
                 clientName: values.clientName,
+                clientLastName: values.clientLastName,
+                clientMiddleName: values.clientMiddleName,
                 clientAddress: values.clientAddress,
                 clientAddress2:values.clientAddress2,
                 clientCity: values.clientCity,
@@ -111,6 +115,7 @@ module.exports = {
 
                 //step 1:pop-up fields
                 addressAlt: values.addressAlt,
+                addressAlt2: values.addressAlt2,
                 cityAlt: values.cityAlt,
                 provinceAlt: values.provinceAlt,
                 postalAlt: values.postalAlt,

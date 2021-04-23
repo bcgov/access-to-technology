@@ -25,27 +25,27 @@ module.exports = {
 
     generateProviderIntakeNotification: function(values){
         const alternativeAddress = values.altShippingAddress;
-        const fundedISET = (strings.orEmpty(values.fundingSource) === "ISET");
-        const fundedAEST = (strings.orEmpty(values.fundingSource) === "AEST");
         const fundedSDPR = (strings.orEmpty(values.fundingSource)=== "SDPR");
        
         var html = /*html*/`
         <h2>Access To Technology Application</h2>
         <p>Application ID:  ${strings.orEmpty(values._id)}</p>
+        <p>Referring Ministry:  ${strings.orEmpty(values.fundingSource)}</p>
         <p>Service Provider Name:  ${strings.orEmpty(values.serviceProviderName)}</p>
-        <p>Funding Source:  ${strings.orEmpty(values.fundingSource)}</p>
         <p>Service Provider Postal:  ${strings.orEmpty(values.serviceProviderPostal)}</p>
         <p>Service Provider Contact:  ${strings.orEmpty(values.serviceProviderContact)}</p>
-        <p>Service Provider Phone:  ${strings.orEmpty(values.serviceProviderPhone)}</p>
-        <p>Service Provider Email:  ${strings.orEmpty(values.serviceProviderEmail)}</p>
+        <p>Contact Phone Number:  ${strings.orEmpty(values.serviceProviderPhone)}</p>
+        <p>Contact Email:  ${strings.orEmpty(values.serviceProviderEmail)}</p>
         <p>Contract Reference ID:  ${strings.orEmpty(values.providerContractId)}</p>
 
         <hr />
-        <h5>Eligible Training Program Information</h5>
-         <p>Eligible Training Program:  ${strings.orEmpty(values.trainingProgram)}</p>
-         <p>Training Start Date:  ${strings.orEmpty(values.periodStart1)}</p>
-         <p>Training End Date:  ${strings.orEmpty(values.periodEnd1)}</p>
-         <p>BCEA or Federal on Reserve Client:  ${strings.orEmpty(values.BCEAorFederalOnReserve)}</p>
+        <h5>Program Eligibility </h5>
+         <p>Eligible Skills Training Program:  ${strings.orEmpty(values.trainingProgram)}</p>
+         <p>Training Program Start Date:  ${strings.orEmpty(values.periodStart1)}</p>
+         <p>Training Program End Date:  ${strings.orEmpty(values.periodEnd1)}</p>
+        <h5>Client Eligibility</h5>
+         <p>Client is unemployed or precariously employed:  ${strings.orEmpty(values.unemployed)}</p>
+         <p>Client is receiving at least one of the following forms of government assistance (choose all that apply): <br/>  ${strings.orEmpty(values.BCEAorFederalOnReserve.join('<br/>'))}</p>
          <hr />
 
         <h5>Client Information</h5>
@@ -53,10 +53,13 @@ module.exports = {
             `<p>WorkBC Case Number:  ${strings.orEmpty(values.workBCCaseNumber)}</p>`
          ) : (``) 
          }
-        <p>Client name:  ${strings.orEmpty(values.clientAddress)}</p>
+        <p>Client First Name:  ${strings.orEmpty(values.clientName)}</p>
+        <p>Client Last Name:  ${strings.orEmpty(values.clientLastName)}</p>
+        <p>Client Middle Name:  ${strings.orEmpty(values.clientMiddleName)}</p>
         <p>E-mail Address:  ${strings.orEmpty(values.clientEmail)}</p>
         <p>Phone Number:  ${strings.orEmpty(values.clientPhone)}</p>
-        <p>Address:  ${strings.orEmpty(values.clientAddress)}</p>
+        <p>Street Address 1:  ${strings.orEmpty(values.clientAddress)}</p>
+        <p>Street Address 2:  ${strings.orEmpty(values.clientAddress2)}</p>
         <p>City/Town:  ${strings.orEmpty(values.clientCity)}</p>
         <p>Province:  ${strings.orEmpty(values.clientProvince)}</p>
         <p>Postal Code:  ${strings.orEmpty(values.clientPostal)}</p>
@@ -66,7 +69,8 @@ module.exports = {
         if(alternativeAddress){
             html= html + `
             <h5>Shipping Address Information(only if different from Home Address)</h5>
-            <p>Shipping Address:  ${strings.orEmpty(values.addressAlt)}</p>
+            <p>Street Address 1:  ${strings.orEmpty(values.addressAlt)}</p>
+            <p>Street Address 2:  ${strings.orEmpty(values.addressAlt2)}</p>
             <p>City/Town:  ${strings.orEmpty(values.cityAlt)}</p>
             <p>Province:  ${strings.orEmpty(values.provinceAlt)}</p>
             <p>Postal Code:  ${strings.orEmpty(values.postalAlt)}</p>

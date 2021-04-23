@@ -68,9 +68,12 @@ async function saveListProviderIntake(values) {
           'eligibleProgram': values.trainingProgram,
           'periodStart1': typeof values.periodStart1 !== "undefined" ? new Date(values.periodStart1) : null,
           'periodEnd1': typeof values.periodEnd1 !== "undefined" ? new Date(values.periodEnd1) : null,
-          'BCEAorFederalOnReserve':values.BCEAorFederalOnReserve === "yes",
+          'unemployed':values.unemployed === "yes",
+          'BCEAorFederalOnReserve':{'results': values.BCEAorFederalOnReserve},
           'workBCCaseNumber': values.workBCCaseNumber,
           'clientName': values.clientName,
+          'clientLastName': values.clientLastName,
+          'clientMiddleName': values.clientMiddleName,
           'clientAddress': values.clientAddress,
           'clientAddress2': values.clientAddress2,
           'clientCity': values.clientCity,
@@ -82,6 +85,7 @@ async function saveListProviderIntake(values) {
 
           //step 1:pop-up fields
           'addressAlt':values.addressAlt,
+          'addressAlt2':values.addressAlt2,
           'cityAlt': values.cityAlt,
           'provinceAlt':values.provinceAlt,
           'postalAlt': values.postalAlt,
@@ -111,7 +115,8 @@ async function saveListProviderIntake(values) {
       //item was not created
       console.log("error in chain")
       //console.log(err);
-      console.log(err.statusCode)
+      console.log("err status code:"+ err.statusCode);
+      console.log(err);
       if (err.statusCode !== 403){
         console.log(err);
       }

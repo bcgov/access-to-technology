@@ -53,7 +53,7 @@ class FormStep3 extends Component {
                                         <li >An Affordable Childcare Benefit under the Childcare Subsidy Act (British Columbia);</li>
                                         <li >Assistance from the British Columbia Ministry of Children and Family Development under an Agreement with a Young Adult.</li>
                                     </ol>
-                                <li >Has reviewed the Collection Notice and agreed to the collection of their personal information ; and</li>
+                                <li >Has reviewed the COLLECTION NOTICE and agreed to the collection of their personal information ; and</li>
 
                                 <div className="col-lg-12 pad">
                                     <div className="card card-secondary">
@@ -69,7 +69,7 @@ class FormStep3 extends Component {
                                         </div>
                                     </div>
                                 </div>
-                                <li key={9}>Has reviewed the Confirmation, Consent and Agreement and agreed to all associated terms.</li>
+                                <li key={9}>Has reviewed the CONFIRMATION, CONSENT AND AGREEMENT and agreed to all associated terms.</li>
                                     <div className="col-lg-12 pad">
                                         <div className="card card-secondary">
                                             <div className="card-header">

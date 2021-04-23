@@ -14,7 +14,7 @@ class thankyouProviderIntake extends Component {
             <div className="container">
                 <div className="row">
                     <div className="col-md-12">
-                        <h1>Thank you, your application has been received</h1>
+                        <h1>Your application has been received.</h1>
                         <h3>Application ID: {this.props.location.state !== undefined && this.props.location.state._id}</h3>
                         <button className="btn btn-success d-print-none" onClick={() => window.print()}>Print Confirmation</button><br /><br />
                         <p>Thank you for your interest in Access To Technology services. Your application has been received and a  staff member will be in touch with you soon to confirm your client qualifies for Access To Technology and to complete the application process. </p>
@@ -25,20 +25,22 @@ class thankyouProviderIntake extends Component {
                         <hr /> <h5>Application Tracking Information</h5>
                                 <p>Client Application ID:  {this.props.location.state !== undefined && this.props.location.state._id}</p>
                                 <p>Service Provider Name:  {this.props.location.state !== undefined && this.props.location.state.serviceProviderName}</p>
-                                <p>Funding Source:  {this.props.location.state !== undefined && this.props.location.state.fundingSource}</p>
+                                <p>Referring Ministry:  {this.props.location.state !== undefined && this.props.location.state.fundingSource}</p>
                                 <p>Service Provider Postal:  {this.props.location.state !== undefined && this.props.location.state.serviceProviderPostal}</p>
                                 <p>Contact Name:  {this.props.location.state !== undefined && this.props.location.state.serviceProviderContact}</p>
-                                <p>Email Address:  {this.props.location.state !== undefined && this.props.location.state.serviceProviderEmail}</p>
-                                <p>Phone Number:  {this.props.location.state !== undefined && this.props.location.state.serviceProviderPhone}</p>
+                                <p>Contact Email Address:  {this.props.location.state !== undefined && this.props.location.state.serviceProviderEmail}</p>
+                                <p>Contact Phone Number:  {this.props.location.state !== undefined && this.props.location.state.serviceProviderPhone}</p>
                                 <p>Contract Reference ID:  {this.props.location.state !== undefined && this.props.location.state.providerContractId}</p>
                                 
-                                <h5>Eligible Skill and Training Program Information</h5>
+                                <h5>Program Eligibility</h5>
                                     <div>
                                         <p>Approved Eligible Skills Training and Employment Program:  {this.props.location.state !== undefined && this.props.location.state.trainingProgram}</p>
                                     </div>
                                 <p>Program Start Date:  {this.props.location.state !== undefined && this.props.location.state.periodStart1.toString()}</p>
                                 <p>Program End Date:  {this.props.location.state !== undefined && this.props.location.state.periodEnd1.toString()}</p>
-                                <p>Client is BCEA or Federal on Reserve Individual:  {this.props.location.state !== undefined && this.props.location.state.BCEAorFederalOnReserve}</p>
+                                <h5>Client Eligibility</h5>
+                                <p>Client is unemployed or precariously employed:  {this.props.location.state !== undefined && this.props.location.state.unemployed}</p>
+                                <p>Client is receiving at least one of the following forms of government assistance (choose all that apply): <br/> {this.props.location.state !== undefined && this.props.location.state.BCEAorFederalOnReserve.join(" ")}</p>
                                 
                                 <h5>Client Information</h5>
                                 {fundedSDPR ? (
@@ -47,7 +49,9 @@ class thankyouProviderIntake extends Component {
                                     </div>
                                  ) : (<div></div>) 
                                  }
-                                <p>FullName:  {this.props.location.state !== undefined && this.props.location.state.clientName}</p>
+                                <p>Client First Name:  {this.props.location.state !== undefined && this.props.location.state.clientName}</p>
+                                <p>Client Last Name:  {this.props.location.state !== undefined && this.props.location.state.clientLastName}</p>
+                                <p>Client Middle Name:  {this.props.location.state !== undefined && this.props.location.state.clientMiddleName}</p>
                                 <p>Street Address:  {this.props.location.state !== undefined && this.props.location.state.clientAddress}</p>
                                 <p>Street Address 2:  {this.props.location.state !== undefined && this.props.location.state.clientAddress2}</p>
                                 <p>City / Town:  {this.props.location.state !== undefined && this.props.location.state.clientCity}</p>
@@ -60,7 +64,8 @@ class thankyouProviderIntake extends Component {
                                 {altShippingAddress ? (
                                     <div>
                                         <h5>Shipping Information (only if different from client home address)</h5>
-                                        <p>Work Address:  {this.props.location.state !== undefined && this.props.location.state.addressAlt}</p>
+                                        <p>Street Address 1:  {this.props.location.state !== undefined && this.props.location.state.addressAlt}</p>
+                                        <p>Street Address 2:  {this.props.location.state !== undefined && this.props.location.state.addressAlt2}</p>
                                         <p>City / Town:  {this.props.location.state !== undefined && this.props.location.state.cityAlt}</p>
                                         <p>Province:  {this.props.location.state !== undefined && this.props.location.state.provinceAlt}</p>
                                         <p>Postal:  {this.props.location.state !== undefined && this.props.location.state.postalAlt}</p>
