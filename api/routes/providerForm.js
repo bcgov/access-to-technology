@@ -25,21 +25,6 @@ var clientURL = process.env.CLIENTURL || process.env.OPENSHIFT_NODEJS_CLIENTURL 
 //for internal notifications, unused
 var notifyEmail = process.env.NOTIFYEMAIL || process.env.OPENSHIFT_NODEJS_NOTIFYEMAIL || "";
 //list protection
-var listWebURL = process.env.LISTWEBURL || process.env.OPENSHIFT_NODEJS_LISTWEBURL || ""
-var listUser = process.env.LISTUSER || process.env.OPENSHIFT_NODEJS_LISTUSER || ""
-var listPass = process.env.LISTPASS || process.env.OPENSHIFT_NODEJS_LISTPASS || ""
-var listDomain = process.env.LISTDOMAIN || process.env.OPENSHIFT_NODEJS_LISTDOMAIN || ""
-var listParty = process.env.LISTPARTY || process.env.OPENSHIFT_NODEJS_LISTPARTY || ""
-var listADFS = process.env.LISTADFS || process.env.OPENSHIFT_NODEJS_LISTADFS || ""
-
-
-var spr = spauth.getAuth(listWebURL, {
-  username: listUser,
-  password: listPass,
-  domain: listDomain,
-  relyingParty: listParty,
-  adfsUrl: listADFS
-})
 
 async function sendEmails(values) {
   try {
