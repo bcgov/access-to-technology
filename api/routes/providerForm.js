@@ -53,7 +53,7 @@ async function sendEmails(values) {
           from: 'Access to Technology <donotreply@gov.bc.ca>', // sender address
           to: values.serviceProviderEmail,// list of receivers
           bcc: confirmationBCC,
-          subject: "A Access to Technology application has been received - " + values._id, // Subject line
+          subject: "Confirmation: Access to Technology application ID #<" + values._id+">", // Subject line
           html: notification.generateProviderIntakeNotification(values) // html body
         };
         //Client email

@@ -231,30 +231,7 @@ class ProviderIntakeStep2 extends Component {
                 </div>
                 {this.shippingAddressForm}
 
-                <div className="form-row">
-                    <div className="form-group">
-                        <label className="col-form-label control-label" htmlFor="telusInternetForGood">Client is a candidate for <b>Telus Internet for Good</b> and would like to be considered for low income internet options <span
-                            style={{ color: "red" }}>*</span> </label>
-                        <div className="form-check">
-                            <Field
-                                className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "telusInternetForGood")}`}
-                                type="radio"
-                                name="telusInternetForGood"
-                                value="yes"
-                            />
-                            <label className="form-check-label" htmlFor="telusInternetForGood">Yes</label>
-                        </div>
-                        <div className="form-check">
-                            <Field
-                                className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "telusInternetForGood")}`}
-                                type="radio"
-                                name="telusInternetForGood"
-                                value="no"
-                            />
-                            <label className="form-check-label" htmlFor="telusInternetForGood">No</label>
-                        </div>
-                    </div>
-                </div>
+               
                 {/*
                 <div className="form-group">
                     <h2 id="forms">Client Eligibility Questions</h2>

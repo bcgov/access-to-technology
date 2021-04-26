@@ -90,7 +90,6 @@ async function saveListProviderIntake(values) {
           'provinceAlt':values.provinceAlt,
           'postalAlt': values.postalAlt,
           //step 2
-          'telusInternetForGood': values.telusInternetForGood === "yes",
           /*'clientResidesInBC': values.clientResidesInBC,
           'clientUnemployed': values.clientUnemployed,
           'registeredInApprovedProgram': values.registeredInApprovedProgram,

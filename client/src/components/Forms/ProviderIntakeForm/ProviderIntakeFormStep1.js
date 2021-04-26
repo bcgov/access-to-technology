@@ -72,7 +72,7 @@ class FormStep1 extends Component {
       )
         }
         else{
-            return(<div>Please select a referring Ministry above to refine the your applicable service providers</div>);
+            return(<div>Please select a referring Ministry above to refine your applicable service providers</div>);
         }
     }
     get ApplicableProgramForm(){
@@ -156,8 +156,7 @@ class FormStep1 extends Component {
 
             <div>
                 <p>
-                If you are having difficulty completing the application for Access to Technology, please contact the Ministry of Social Development and Poverty Reduction <a href="https://www.workbc.ca/Employment-Services/WorkBC-Centres/Find-Your-WorkBC-Centre.aspx" target="_blank" rel="noopener noreferrer">(insert Email address for A2T)</a>. 
-                A Service Provider Guide is also available <a href="https://www.workbc.ca/getmedia/3532dbe8-f084-4022-bd3c-8f9ebe422fa4/WS-Guide.aspx" target="_blank" rel="noopener noreferrer">here</a>.
+                If assistance is required in completing this application please refer to the A2T Service Provider Guide <a href="https://www.workbc.ca/Employment-Services/WorkBC-Centres/Find-Your-WorkBC-Centre.aspx" target="_blank" rel="noopener noreferrer">here</a>. 
                 </p>
                 <div className="form-group">
                     <h2 id="forms">Service Provider Information</h2>
@@ -187,7 +186,14 @@ class FormStep1 extends Component {
                 </div>
 
                 {this.ApplicableServiceProvider}
-                
+                <div className="form-row">
+                    <div className="form-group col-md-8">
+                        <label className="col-form-label control-label" htmlFor="providerContractId">Contract Reference ID <span
+                            style={{ color: "red" }}>*</span></label>
+                        <Field className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "providerContractId")}`} id="providerContractId" name="providerContractId" />
+                        {feedBackInvalid(this.props.errors,this.props.touched,"providerContractId")}
+                    </div>
+                </div>
                 <div className="form-row"> 
                     <div className="form-group col-md-4">
                             <label className="col-form-label control-label" htmlFor="serviceProviderPostal">Postal Code <span
@@ -237,14 +243,6 @@ class FormStep1 extends Component {
                             {feedBackInvalid(this.props.errors,this.props.touched,"serviceProviderEmail")}
                     </div>
                 </div>  
-                 <div className="form-row">
-                    <div className="form-group col-md-8">
-                        <label className="col-form-label control-label" htmlFor="providerContractId">Contract Reference ID <span
-                            style={{ color: "red" }}>*</span></label>
-                        <Field className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "providerContractId")}`} id="providerContractId" name="providerContractId" />
-                        {feedBackInvalid(this.props.errors,this.props.touched,"providerContractId")}
-                    </div>
-                </div>
                 <div className="form-group">
                     <h2 id="forms">Program Eligibility</h2>
                 </div>

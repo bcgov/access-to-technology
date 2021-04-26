@@ -81,10 +81,6 @@ var ProviderIntakeValidationSchema = yup.object().shape({
         .matches(/^[A-Za-z]\d[A-Za-z]\d[A-Za-z]\d$/,"Please enter a valid Postal Code")
         .required("Please enter a valid Postal Code"),
     altShippingAddress: yup.boolean(),
-    telusInternetForGood:yup.string()
-    .oneOf(["yes",
-            "no"],"Please select a valid field.")
-    .required("Please select an answer on whether the client is eligible for Telus internet for good."),
     /*clientUnemployed:yup.string()
     .oneOf(["yes",
             "no"],"Please select a valid field.")
