@@ -5,7 +5,7 @@ function Home() {
         <div className="container">
             <div className="row">
                 <div className="col-md-12">
-                    <h1>Access To Technology</h1>
+                    <h1>Access to Technology</h1>
                     <p>Access to Technology (A2T) will provide basic laptops to eligible clients participating in specific 
                         training programs administered by Social Development and Poverty Reduction (SDPR), Advanced Education and Skills Training (AEST) and Indigenous Skills Training for Employment (ISET), which:</p>
                     <ul>

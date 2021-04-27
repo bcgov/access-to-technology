@@ -121,7 +121,6 @@ module.exports = {
                 postalAlt: values.postalAlt,
                
                 //step 2
-                telusInternetForGood: values.telusInternetForGood,
                 /*
                 clientResidesInBC: values.clientResidesInBC,
                 clientUnemployed: values.clientUnemployed,

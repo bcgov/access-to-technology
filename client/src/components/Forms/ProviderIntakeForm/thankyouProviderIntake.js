@@ -17,7 +17,8 @@ class thankyouProviderIntake extends Component {
                         <h1>Your application has been received.</h1>
                         <h3>Application ID: {this.props.location.state !== undefined && this.props.location.state._id}</h3>
                         <button className="btn btn-success d-print-none" onClick={() => window.print()}>Print Confirmation</button><br /><br />
-                        <p>Thank you for your interest in Access To Technology services. Your application has been received and a  staff member will be in touch with you soon to confirm your client qualifies for Access To Technology and to complete the application process. </p>
+                        <p>Thank you for submitting an application for the Access to Technology (A2T) Program. The application will be reviewed, and eligible clients will receive an A2T laptop.    </p>
+                        <p>IMPORTANT NOTICE: If information on this application is incorrect,please contact <a href="mailto:elmsd.webmaster@gov.bc.ca" title="MSDPR Email Address">MSDPR Email Address</a> and include Application ID referenced above in the subject of the email.</p>
                         <p>
                             The following information was received:
                         </p>
@@ -59,7 +60,6 @@ class thankyouProviderIntake extends Component {
                                 <p>Postal:  {this.props.location.state !== undefined && this.props.location.state.clientPostal}</p>
                                 <p>Email Address:  {this.props.location.state !== undefined && this.props.location.state.clientEmail}</p>
                                 <p>Phone Number:  {this.props.location.state !== undefined && this.props.location.state.clientPhone}</p>
-                                <p>Telus Internet for Good Candidate:  {this.props.location.state !== undefined && this.props.location.state.telusInternetForGood}</p>
 
                                 {altShippingAddress ? (
                                     <div>

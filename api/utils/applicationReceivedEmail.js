@@ -28,7 +28,7 @@ module.exports = {
         const fundedSDPR = (strings.orEmpty(values.fundingSource)=== "SDPR");
        
         var html = /*html*/`
-        <h2>Access To Technology Application</h2>
+        <h2>Access to Technology Application</h2>
         <p>Application ID:  ${strings.orEmpty(values._id)}</p>
         <p>Referring Ministry:  ${strings.orEmpty(values.fundingSource)}</p>
         <p>Service Provider Name:  ${strings.orEmpty(values.serviceProviderName)}</p>
@@ -63,7 +63,6 @@ module.exports = {
         <p>City/Town:  ${strings.orEmpty(values.clientCity)}</p>
         <p>Province:  ${strings.orEmpty(values.clientProvince)}</p>
         <p>Postal Code:  ${strings.orEmpty(values.clientPostal)}</p>
-        <p>Client Qualifies for Telus Internet for Good:  ${strings.orEmpty(values.telusInternetForGood)}</p>
         <hr />
         `
         if(alternativeAddress){
