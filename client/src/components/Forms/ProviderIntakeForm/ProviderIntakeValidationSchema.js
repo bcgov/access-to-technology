@@ -69,6 +69,12 @@ export const ProviderIntakeValidationSchema = yup.object().shape({
         .test('match','client email domain cannot be the same as the service providers',function(clientEmail){
             return (String(clientEmail).split('@')[1] !== String(this.options.parent.serviceProviderEmail).split('@')[1])
         }),
+    clientConfirmationEmail:yup.string()
+        .email("Your confirmation email address must match the client email address ")
+        .required("Please enter the client confirmation email ")
+        .test('match', 'The confirmation email address must match the client email address',function(clientConfirmationEmail){
+            return (clientConfirmationEmail === this.options.parent.clientEmail)
+        }),
     clientAddress: yup.string()
         .max(255,"Address too long")
         .required("please enter your clients address"),

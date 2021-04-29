@@ -138,6 +138,24 @@ class ProviderIntakeStep2 extends Component {
                         {feedBackInvalid(this.props.errors,this.props.touched,"clientEmail")}
                        
                     </div>
+                    <div className="form-group col-md-4">
+                        <label className="col-form-label control-label" htmlFor="clientConfirmationEmail">Confirm E-mail Address <span
+                                style={{ color: "red" }}>*</span></label>
+                        <small className="text-muted" id="clientConfirmationEmail">  someone@example.com</small>
+                        <Field 
+                            className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "clientConfirmationEmail")}`} 
+                            id="clientConfirmationEmail" 
+                            name="clientConfirmationEmail" 
+                            onBlur={e => {
+                                this.props.handleBlur(e)
+                                if(!this.props.errors.clientConfirmationEmail) {
+                                    this.props.setFieldValue("_bEmailDomain", this.props.values.clientConfirmationEmail.substring(this.props.values.clientEmail.lastIndexOf("@") + 1))
+                                }
+                            }}
+                        />
+                        {feedBackInvalid(this.props.errors,this.props.touched,"clientConfirmationEmail")}
+                       
+                    </div>
                 
                 </div>
                 <div className="form-row">

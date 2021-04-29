@@ -95,9 +95,9 @@ class ProviderIntakeForm extends Component {
         console.log(errors['workBCCaseNumber']);
         if(currentStep === 1){
             if(errors['workBCCaseNumber'] === 'Please enter the clients WorkBC case number in format: XXX-XXX-XXXX'){
-                nextFlag = ((parseInt(Object.keys(errors).length) > 11 || (parseInt(Object.keys(errors).length) === 0 && parseInt(Object.keys(touched).length) === 0)));
+                nextFlag = ((parseInt(Object.keys(errors).length) > 12 || (parseInt(Object.keys(errors).length) === 0 && parseInt(Object.keys(touched).length) === 0)));
              }else{
-                nextFlag = ((parseInt(Object.keys(errors).length) > 10 || (parseInt(Object.keys(errors).length) === 0 && parseInt(Object.keys(touched).length) === 0)));
+                nextFlag = ((parseInt(Object.keys(errors).length) > 11 || (parseInt(Object.keys(errors).length) === 0 && parseInt(Object.keys(touched).length) === 0)));
              }
         }
         else if(currentStep === 2){
