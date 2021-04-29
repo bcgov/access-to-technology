@@ -38,8 +38,8 @@ export const ProviderIntakeValidationSchema = yup.object().shape({
         .oneOf(["yes"],"The client should be unemployed or precariously employed to be eligible for this program.")
         .required("The client should be unemployed or precariously employed to be eligible for this program."),
     BCEAorFederalOnReserve:yup.array()
-        //.oneOf(["yes"],"The client must be receiving one of the above forms of government asitance to be eligible for this program.")
-        .required("The client must be receiving one of the above forms of government asitance to be eligible for this program."),
+        //.oneOf(["yes"],"The client must be receiving one of the above forms of government assistance to be eligible for this program.")
+        .required("The client must be receiving one of the above forms of government assistance to be eligible for this program."),
     
     // STEP 2
     
