@@ -29,11 +29,11 @@ export const ProviderIntakeValidationSchema = yup.object().shape({
         .required('Please select your Referring Ministry.'),
     periodStart1: yup.date()
         .min(new Date(), "Date must be after today")
-        .required("Please Enter your clients program start date"),
+        .required("Please enter training program end date"),
     periodEnd1: yup.date()
         .min(moment(yup.ref('periodStart1')).add(28, 'days'), "Eligible programs must be at least 4 weeks in duration.")
         .max(new Date("2023-03-31"), "This is a limited time program must end before March 3 2023")
-        .required("Please Enter your clients program end date"),
+        .required("Please enter training program end date"),
     unemployed:yup.string()
         .oneOf(["yes"],"The client should be unemployed or precariously employed to be eligible for this program.")
         .required("The client should be unemployed or precariously employed to be eligible for this program."),
