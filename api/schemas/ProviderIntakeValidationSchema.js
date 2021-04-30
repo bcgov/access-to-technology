@@ -52,8 +52,7 @@ var ProviderIntakeValidationSchema = yup.object().shape({
         .required('Please enter the clients First name'),
     clientLastName: yup.string()
         .required('Please enter the clients Last name'),
-    clientMiddleName: yup.string()
-        .required('Please enter the clients Middle name'),
+    clientMiddleName: yup.string(),
     clientPhone:yup.string()
         .test('Is-valid-phone','Invalid Phone Number',
         value => (value +"").match(/^\d{3}-\d{3}-\d{4}$/gi))

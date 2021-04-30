@@ -41,8 +41,10 @@ function Home() {
                     <ol style={{listStyleType:"decimal"}}>
                         <li>Confirmation of Client Eligibility </li>
                         <li>Confirmation of Training Program Eligibility</li>
+                        <li>Service Provider Contract Reference ID</li>
                         <li>Training Program start and end dates</li>
                         <li>Client Information (Name, Phone, Email, Shipping Address)</li>
+                        <li>Contract Reference ID</li>
                     </ol>
                 </div>
             </div>

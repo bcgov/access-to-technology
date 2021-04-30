@@ -108,8 +108,7 @@ class ProviderIntakeStep2 extends Component {
                         {feedBackInvalid(this.props.errors,this.props.touched,"clientLastName")}
                     </div>
                     <div className="form-group col-md-4">
-                        <label className="col-form-label control-label" htmlFor="clientMiddleName">Client Middle Name(s) <span
-                            style={{ color: "red" }}>*</span></label>
+                        <label className="col-form-label control-label" htmlFor="clientMiddleName">Client Middle Name(s)</label>
                         <Field className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "clientMiddleName")}`} id="clientMiddleName" name="clientMiddleName" />
                         {feedBackInvalid(this.props.errors,this.props.touched,"clientMiddleName")}
                     </div>
