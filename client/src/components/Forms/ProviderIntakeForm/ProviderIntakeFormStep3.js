@@ -42,7 +42,7 @@ class FormStep3 extends Component {
                                 <li >Is a resident of British Columbia;</li>
                                 <li >Is unemployed or precariously employed;</li>
                                 <li >Has been approved to participate in the eligible skills training program indicated above; </li>
-                                <li >Requires a laptop computer to participate the eligible skills training program indicated above;</li>
+                                <li >Requires a laptop computer to participate in the eligible skills training program indicated above;</li>
                                 <li >Does not currently have access to the required laptop computer; </li>
                                 <li >Does not have the personal resources and has not and will not receive funding from another individual or organization for the purchase of the required laptop computer; </li>
                                 <li>Receives one or more of the following forms of government assistance:  </li>
@@ -55,7 +55,7 @@ class FormStep3 extends Component {
                                     </ol>
                                 <li >Has reviewed the COLLECTION NOTICE and agreed to the collection of their personal information ; and</li>
 
-                                <div className="col-lg-12 pad">
+                                <div className="col-md-12 pad">
                                     <div className="card card-secondary">
                                         <div className="card-header">
                                             <h4 className="my-0">COLLECTION NOTICE</h4>
@@ -70,13 +70,13 @@ class FormStep3 extends Component {
                                     </div>
                                 </div>
                                 <li key={9}>Has reviewed the CONFIRMATION, CONSENT AND AGREEMENT and agreed to all associated terms.</li>
-                                    <div className="col-lg-12 pad">
+                                    <div className="col-md-12 pad">
                                         <div className="card card-secondary">
                                             <div className="card-header">
-                                                <h4 className="my-0">CONSENT AND AGREEMENT</h4>
+                                                <h4 className="my-0">CONFIRMATION, CONSENT AND AGREEMENT</h4>
                                             </div>
                                             <div className="card-body">
-                                                <p className="card-text">As a participating client, I  </p>
+                                                <p className="card-text">I, {`${this.props.values.clientName}`} </p>
                                                 <ol style={{listStyleType:"decimal"}}>
                                                     <li >CONFIRM that I need a laptop computer to participate in and complete the training program described above.</li>
                                                     <li >CONSENT to SDPR or its contracted A2T service provider collecting my personal information from and disclosing my personal information to {`${this.props.values.serviceProviderName}`} for the purposes of administering or evaluating the effectiveness of the A2T program.</li>
@@ -107,14 +107,14 @@ class FormStep3 extends Component {
                         {feedBackInvalid(this.props.errors, this.props.touched, "serviceProviderResponsibility")}
                         <label className="form-check-label" htmlFor="serviceProviderResponsibility"><span style={{ color: "red" }}>*</span> {`${this.props.values.serviceProviderName}`} ACKNOWLEDGES AND AGREES:
                             <ol style={{listStyleType:"decimal"}}>
-                                <li >To advise the {`${this.props.values.fundingSource}`}  of the outcome of the individual’s participation in the approved training described in this application, in the form and manner requested by the {`${this.props.values.fundingSource}`} ; </li>
-                                <li >If {`${this.props.values.clientName}`}  does not complete the approved eligible training described in this application to the satisfaction of {`${this.props.values.serviceProviderName}`} ), to:</li>
+                                <li >To advise the Ministry of Social Development and Poverty Reduction("MSDPR") of the outcome of the individual’s participation in the approved training described in this application, in the form and manner requested by the {`${this.props.values.fundingSource}`}; </li>
+                                <li >If {`${this.props.values.clientName}`}  does not complete the approved eligible training described in this application to the satisfaction of {`${this.props.values.serviceProviderName}`} to:</li>
                                     <ol style={{listStyleType:"lower-alpha"}}>
-                                        <li >Advise the A2T contractor that the individual did not complete the training; and</li>
+                                        <li >Advise the MSDPR that the individual did not complete the training; and</li>
                                         <li >Exercise reasonable due diligence in notifying the individual of their obligation to return the laptop computer to the A2T contractor. </li>
                                     </ol>
-                                <li>If requested to do so by {`${this.props.values.fundingSource}`} , to provide documentation to demonstrate {`${this.props.values.serviceProviderName}`}  has applied the criteria described in the confirmation above to assess the eligibility of {`${this.props.values.clientName}`}  for the A2T program; and</li>
-                                <li>That by clicking the "submit" icon below, {`${this.props.values.serviceProviderContact}`} , an authorized signatory for {`${this.props.values.serviceProviderName}`}  is attaching their electronic signature to this form, which has the same effect as if {`${this.props.values.serviceProviderContact}`}  were to manually sign a physical copy of this form.</li>
+                                <li>If requested to do so by {`${this.props.values.fundingSource}`}, to provide documentation to demonstrate {`${this.props.values.serviceProviderName}`} has applied the criteria described in the confirmation above to assess the eligibility of {`${this.props.values.clientName}`} for the A2T program; and</li>
+                                <li>That by clicking the "submit" icon below, {`${this.props.values.serviceProviderContact}`}, an authorized signatory for {`${this.props.values.serviceProviderName}`}  is attaching their electronic signature to this form, which has the same effect as if {`${this.props.values.serviceProviderContact}`} were to manually sign a physical copy of this form.</li>
                             </ol>
                         </label>
                     </div>

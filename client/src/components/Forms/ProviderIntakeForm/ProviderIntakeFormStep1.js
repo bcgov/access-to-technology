@@ -79,7 +79,7 @@ class FormStep1 extends Component {
         if (this.props.values.fundingSource === "ISET") {
             return (<div className="form-row">
                 <div className="form-group col-md-6">
-                    <label className="col-form-label control-label" htmlFor="trainingProgram">Eligible Skill And Training Program<span
+                    <label className="col-form-label control-label" htmlFor="trainingProgram">Eligible Skills Training Program<span
                         style={{ color: "red" }}>*</span></label>
                     <Field
                         as="select"
@@ -101,7 +101,7 @@ class FormStep1 extends Component {
         else if (this.props.values.fundingSource === "AEST") {
             return (<div className="form-row">
                 <div className="form-group col-md-6">
-                    <label className="col-form-label control-label" htmlFor="trainingProgram">Eligible Skill And Training Program<span
+                    <label className="col-form-label control-label" htmlFor="trainingProgram">Eligible Skills Training Program<span
                         style={{ color: "red" }}>*</span></label>
                     <Field
                         as="select"
@@ -113,7 +113,7 @@ class FormStep1 extends Component {
                         <option value="Skills Training for Employment">Skills Training for Employment</option>
                         <option value="ITA Funded Pre-Apprenticeship Training">ITA Funded Pre-Apprenticeship Training</option>
                         <option value="Blade Runners">Blade Runners</option>
-                        <option value="Indigenous Employment and Skills Training">Indigenous Employment and Skills Training</option>
+                        <option value="Indigenous Skills Training and">Indigenous Skills Training and Education</option>
                     </Field>
                     <small className="text-muted" id="trainingProgram"> This dropdown list here is determine by the funding source selected above</small>
                     {feedBackInvalid(this.props.errors, this.props.touched, "trainingProgram")}
@@ -123,7 +123,7 @@ class FormStep1 extends Component {
         else if (this.props.values.fundingSource === "SDPR") {
             return (<div className="form-row">
                 <div className="form-group col-md-6">
-                    <label className="col-form-label control-label" htmlFor="trainingProgram">Eligible Skill And Training Program<span
+                    <label className="col-form-label control-label" htmlFor="trainingProgram">Eligible Skills Training Program<span
                         style={{ color: "red" }}>*</span></label>
                     <Field
                         as="select"
@@ -136,7 +136,7 @@ class FormStep1 extends Component {
                         <option value="Occupational Skills Training">Occupational Skills Training</option>
                         <option value="BC Adult Graduation Diploma">BC Adult Graduation Diploma</option>
                     </Field>
-                    <small className="text-muted" id="trainingProgram">  This dropdown list here is determine by the funding source selected above</small>
+                    <small className="text-muted" id="trainingProgram">  This dropdown list here is determined by the referring ministry selected above.</small>
                     {feedBackInvalid(this.props.errors, this.props.touched, "trainingProgram")}
                 </div>
             </div>)
@@ -213,20 +213,20 @@ class FormStep1 extends Component {
                
                 <div className="form-row">
                     <div className="form-group col-md-4">
-                            <label className="col-form-label control-label" htmlFor="serviceProviderContact">Contact Name <span
+                            <label className="col-form-label control-label" htmlFor="serviceProviderContact">Staff Name <span
                                 style={{ color: "red" }}>*</span></label>
                             <Field className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "serviceProviderContact")}`} id="serviceProviderContact" name="serviceProviderContact" />
                             {feedBackInvalid(this.props.errors,this.props.touched,"serviceProviderContact")}
                         </div>
                     <div className="form-group col-md-4">
-                            <label className="col-form-label control-label" htmlFor="serviceProviderPhone">Contact Phone Number <span
+                            <label className="col-form-label control-label" htmlFor="serviceProviderPhone">Phone Number <span
                                 style={{ color: "red" }}>*</span></label>
                             <small className="text-muted" id="serviceProviderPhone">  250-555-5555</small>
                             <Field className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "serviceProviderPhone")}`} id="serviceProviderPhone" name="serviceProviderPhone" />
                             {feedBackInvalid(this.props.errors,this.props.touched,"serviceProviderPhone")}
                     </div>
                     <div className="form-group col-md-4">
-                            <label className="col-form-label control-label" htmlFor="serviceProviderEmail">Contact E-mail Address <span
+                            <label className="col-form-label control-label" htmlFor="serviceProviderEmail">E-mail Address <span
                                     style={{ color: "red" }}>*</span></label>
                             <small className="text-muted" id="serviceProviderEmail">  someone@example.com</small>
                             <Field 
@@ -254,8 +254,8 @@ class FormStep1 extends Component {
                         <DatePickerField
                             name="periodStart1"
                             className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "periodStart1")}`}
-                            minDate={new Date (moment(new Date()).add(1,'days'))}
-                            maxDate={new Date(2023,4,1)}
+                            minDate={new Date(2021,7,1)}
+                            maxDate={new Date(2023,2,2)}
                         />
                         <small className="text-muted" id="periodStart1">  Note: Training program starts dates before August 1, 2021 or after March 3, 2023 do not qualify. ​</small>
                         {feedBackInvalid(this.props.errors, this.props.touched, "periodStart1")}
@@ -267,7 +267,7 @@ class FormStep1 extends Component {
                             name="periodEnd1"
                             className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "periodEnd1")}`}
                             minDate={new Date (moment(this.props.values['periodStart1']).add(28, 'days'))}
-                            maxDate={new Date(2023,4,1)}
+                            maxDate={new Date(2023,3,3)}
                         />
                         {feedBackInvalid(this.props.errors, this.props.touched, "periodEnd1")}
                     </div>

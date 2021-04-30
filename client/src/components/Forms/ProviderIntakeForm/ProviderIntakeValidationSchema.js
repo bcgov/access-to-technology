@@ -15,7 +15,7 @@ export const ProviderIntakeValidationSchema = yup.object().shape({
         .matches(/^[A-Za-z]\d[A-Za-z]\d[A-Za-z]\d$/,"Please enter a valid Postal Code")
         .required("Please enter a valid Postal Code"),   
     serviceProviderContact: yup.string()
-        .required('Please enter the service provider contact name'), 
+        .required('Please enter the service provider staff name'), 
     serviceProviderPhone:yup.string()
         .test('Is-valid-phone','Invalid Phone Number',
         value => (value +"").match(/^\d{3}-\d{3}-\d{4}$/gi))
@@ -28,11 +28,12 @@ export const ProviderIntakeValidationSchema = yup.object().shape({
                 "SDPR"],"Please select a valid field.")
         .required('Please select your Referring Ministry.'),
     periodStart1: yup.date()
-        .min(new Date(), "Date must be after today")
-        .required("Please enter training program end date"),
+        .min(new Date(2021,7,1), "Date must be after today")
+        .max(new Date("2023-03-3"), "This is a limited time program must start before March 3 2023")
+        .required("Please enter training program start date"),
     periodEnd1: yup.date()
         .min(moment(yup.ref('periodStart1')).add(28, 'days'), "Eligible programs must be at least 4 weeks in duration.")
-        .max(new Date("2023-03-31"), "This is a limited time program must end before March 3 2023")
+        .max(new Date("2023-04-3"), "This is a limited time program must end before March 3 2023")
         .required("Please enter training program end date"),
     unemployed:yup.string()
         .oneOf(["yes"],"The client should be unemployed or precariously employed to be eligible for this program.")
@@ -45,10 +46,8 @@ export const ProviderIntakeValidationSchema = yup.object().shape({
     
     workBCCaseNumber: yup.string().when('fundingSource', {
         is: 'SDPR',
-        then: yup.string().test('valid','Please enter the clients WorkBC case number in format: XXX-XXX-XXXX',
-        value => (value + "").match(/^\w{3}-\w{3}-\w{4}$/gi))
-        .required(
-        "Please use the WorkBC case number format: XXX-XXX-XXXX.  All eligible WorkBC clients must be in an approved WorkBC Service, with an ICM Case number."),
+        then: yup.string().required(
+        "Please enter the clients WorkBC ES case number"),
         otherwise: yup.string()}),
     clientName: yup.string()
         .required('Please enter the clients First name'),
@@ -62,11 +61,8 @@ export const ProviderIntakeValidationSchema = yup.object().shape({
     clientEmail:yup.string()
         .email("Please enter a valid email. ")
         .required("Please enter email ")
-        .test('match','client email address cannot be the same as the service providers email address',function(clientEmail){
+        .test('match',"Client email address cannot be the same as the service provider's email address",function(clientEmail){
             return (clientEmail !== this.options.parent.serviceProviderEmail)
-        })
-        .test('match','client email domain cannot be the same as the service providers',function(clientEmail){
-            return (String(clientEmail).split('@')[1] !== String(this.options.parent.serviceProviderEmail).split('@')[1])
         }),
     clientConfirmationEmail:yup.string()
         .email("Your confirmation email address must match the client email address ")
@@ -112,7 +108,7 @@ export const ProviderIntakeValidationSchema = yup.object().shape({
 
     //step 1:pop-up fields
     trainingProgram: yup.string()
-        .required('Please select a an eligible training program'),
+        .required('Please select an eligible skills training program'),
         //.oneOf(["Skills Training","Essential Skills Training","Pre-Apprenticeship Training" ,"Skills Training for Employment", "ITA Funded Pre-Apprenticeship Training","Indigenous Employment and Skills Training","Blade Runners","Short Duration Training","Occupational Skills Training","BC Adult Graduation Diploma"],"Please select an eligible training program"),
     addressAlt:yup.string()
         .when("altShippingAddress",{

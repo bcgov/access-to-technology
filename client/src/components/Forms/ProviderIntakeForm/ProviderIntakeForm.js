@@ -165,7 +165,7 @@ class ProviderIntakeForm extends Component {
                                     addressAlt:"",
                                     addressAlt2:"",
                                     cityAlt:"",
-                                    provinceAlt:"BC",
+                                    provinceAlt:"British Columbia",
                                     postalAlt:"",
                                     /*clientResidesInBC:"",
                                     clientUnemployed:"",
