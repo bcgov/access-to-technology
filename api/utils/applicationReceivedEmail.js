@@ -32,63 +32,63 @@ module.exports = {
         <h2>Access to Technology Application</h2>
         <p>Thank you for submitting an application for the Access to Technology (A2T) Program. The application will be reviewed, and eligible clients will receive an A2T laptop. Application details are included below for your reference.</p>
         <p>IMPORTANT NOTICE: If information on this application is incorrect, please contact <MSDPR Email Address> and include Application ID referenced above in the subject of the email.</p>
-        <p>Application ID:  ${strings.orEmpty(values._id)}</p>
-        <p>Referring Ministry:  ${strings.orEmpty(values.fundingSource)}</p>
-        <p>Service Provider Name:  ${strings.orEmpty(values.serviceProviderName)}</p>
-        <p>Contract Reference ID:  ${strings.orEmpty(values.providerContractId)}</p>
-        <p>Staff Name:  ${strings.orEmpty(values.serviceProviderContact)}</p>
-        <p>Service Provider Postal:  ${strings.orEmpty(values.serviceProviderPostal)}</p>
-        <p>Contact Phone Number:  ${strings.orEmpty(values.serviceProviderPhone)}</p>
-        <p>Contact Email:  ${strings.orEmpty(values.serviceProviderEmail)}</p>
+        <p><b>Application ID:</b>  ${strings.orEmpty(values._id)}</p>
+        <p><b>Referring Ministry:</b>  ${strings.orEmpty(values.fundingSource)}</p>
+        <p><b>Service Provider Name:</b>  ${strings.orEmpty(values.serviceProviderName)}</p>
+        <p><b>Contract Reference ID:</b>  ${strings.orEmpty(values.providerContractId)}</p>
+        <p><b>Staff Name:</b>  ${strings.orEmpty(values.serviceProviderContact)}</p>
+        <p><b>Service Provider Postal:</b>  ${strings.orEmpty(values.serviceProviderPostal)}</p>
+        <p><b>Contact Phone Number:</b>  ${strings.orEmpty(values.serviceProviderPhone)}</p>
+        <p><b>Contact Email:</b>  ${strings.orEmpty(values.serviceProviderEmail)}</p>
        
         <hr />
-        <h5>Program Eligibility </h5>
-         <p>Eligible Skills Training Program:  ${strings.orEmpty(values.trainingProgram)}</p>
-         <p>Training Program Start Date:  ${strings.orEmpty(moment(values.periodStart1).format('MMMM Do YYYY'))}</p>
-         <p>Training Program End Date:  ${strings.orEmpty(moment(values.periodEnd1).format('MMMM Do YYYY'))}</p>
-        <h5>Client Eligibility</h5>
-         <p>Client is unemployed or precariously employed:  ${strings.orEmpty(values.unemployed)}</p>
-         <p>Select which of the following form(s) of government assistance the client is receiving (choose all that apply): <br/>  ${strings.orEmpty(values.BCEAorFederalOnReserve.join('<br/>'))}</p>
+        <h3>Program Eligibility </h3>
+         <p><b>Eligible Skills Training Program:</b>  ${strings.orEmpty(values.trainingProgram)}</p>
+         <p><b>Training Program Start Date:</b>  ${strings.orEmpty(moment(values.periodStart1).format('MMMM Do YYYY'))}</p>
+         <p><b>Training Program End Date:</b>  ${strings.orEmpty(moment(values.periodEnd1).format('MMMM Do YYYY'))}</p>
+        <h3>Client Eligibility</h3>
+         <p><b>Client is unemployed or precariously employed:</b>  ${strings.orEmpty(values.unemployed)}</p>
+         <p><b>Select which of the following form(s) of government assistance the client is receiving (choose all that apply):</b> <br/>  ${strings.orEmpty(values.BCEAorFederalOnReserve.join('<br/>'))}</p>
          <hr />
 
-        <h5>Client Information</h5>
+        <h3>Client Information</h3>
         ${fundedSDPR ? (
-            `<p>WorkBC Case Number:  ${strings.orEmpty(values.workBCCaseNumber)}</p>`
+            `<p><b>WorkBC Case Number:</b>  ${strings.orEmpty(values.workBCCaseNumber)}</p>`
          ) : (``) 
          }
-        <p>Client First Name:  ${strings.orEmpty(values.clientName)}</p>
-        <p>Client Last Name:  ${strings.orEmpty(values.clientLastName)}</p>
-        <p>Client Middle Name:  ${strings.orEmpty(values.clientMiddleName)}</p>
-        <p>Phone Number:  ${strings.orEmpty(values.clientPhone)}</p>
-        <p>E-mail Address:  ${strings.orEmpty(values.clientEmail)}</p>
-        <p>Street Address 1:  ${strings.orEmpty(values.clientAddress)}</p>
-        <p>Street Address 2:  ${strings.orEmpty(values.clientAddress2)}</p>
-        <p>City/Town:  ${strings.orEmpty(values.clientCity)}</p>
-        <p>Province:  ${strings.orEmpty(values.clientProvince)}</p>
-        <p>Postal Code:  ${strings.orEmpty(values.clientPostal)}</p>
+        <p><b>Client First Name:</b>  ${strings.orEmpty(values.clientName)}</p>
+        <p><b>Client Last Name:</b>  ${strings.orEmpty(values.clientLastName)}</p>
+        <p><b>Client Middle Name:</b>  ${strings.orEmpty(values.clientMiddleName)}</p>
+        <p><b>Phone Number:</b>  ${strings.orEmpty(values.clientPhone)}</p>
+        <p><b>E-mail Address:</b>  ${strings.orEmpty(values.clientEmail)}</p>
+        <p><b>Street Address 1:</b>  ${strings.orEmpty(values.clientAddress)}</p>
+        <p><b>Street Address 2:</b>  ${strings.orEmpty(values.clientAddress2)}</p>
+        <p><b>City/Town:</b>  ${strings.orEmpty(values.clientCity)}</p>
+        <p><b>Province:</b>  ${strings.orEmpty(values.clientProvince)}</p>
+        <p><b>Postal Code:</b>  ${strings.orEmpty(values.clientPostal)}</p>
         <hr />
         `
         if(alternativeAddress){
             html= html + `
             <h5>Shipping Address Information(only if different from Home Address)</h5>
-            <p>Street Address 1:  ${strings.orEmpty(values.addressAlt)}</p>
-            <p>Street Address 2:  ${strings.orEmpty(values.addressAlt2)}</p>
-            <p>City/Town:  ${strings.orEmpty(values.cityAlt)}</p>
-            <p>Province:  ${strings.orEmpty(values.provinceAlt)}</p>
-            <p>Postal Code:  ${strings.orEmpty(values.postalAlt)}</p>
+            <p><b>Street Address 1:</b>  ${strings.orEmpty(values.addressAlt)}</p>
+            <p><b>Street Address 2:</b>  ${strings.orEmpty(values.addressAlt2)}</p>
+            <p><b>City/Town:</b>  ${strings.orEmpty(values.cityAlt)}</p>
+            <p><b>Province:</b>  ${strings.orEmpty(values.provinceAlt)}</p>
+            <p><b>Postal Code:</b>  ${strings.orEmpty(values.postalAlt)}</p>
             <hr />
             `
         }
         
 
         html = html +`
-        <h5>Confirmation and Agreement</h5>
-        <p>Client Eligibility Confirmation:  ${strings.orEmpty(values.clientEligibility)}</p>
-        <p>Service Provider Responsibility Attestation:  ${strings.orEmpty(values.serviceProviderResponsibility)}</p>
+        <h3>Confirmation and Agreement</h3>
+        <p><b>Client Eligibility Confirmation:</b>  ${strings.orEmpty(values.clientEligibility)}</p>
+        <p><b>Service Provider Responsibility Attestation:</b>  ${strings.orEmpty(values.serviceProviderResponsibility)}</p>
         <p>${strings.orEmpty(values.serviceProviderName)} ACKNOWLEDGES AND AGREES:</p>
         <ol style={{listStyleType:"decimal"}}>
-        <li>To advise the Ministry of Social Development and Poverty Reduction("MSDPR") of the outcome of the individual’s participation in the approved training described in this application, in the form and manner requested by the ${strings.orEmpty(values.fundingSource)}; </li>
-        <li>If ${strings.orEmpty(values.clientName)} does not complete the approved eligible training described in this application to the satisfaction of ${strings.orEmpty(values.serviceProviderName)} ), to:</li>
+        <li>To advise the Ministry of Social Development and Poverty Reduction ("MSDPR") of the outcome of the individual’s participation in the approved training described in this application, in the form and manner requested by the ${strings.orEmpty(values.fundingSource)}; </li>
+        <li>If ${strings.orEmpty(values.clientName)} does not complete the approved eligible training described in this application to the satisfaction of ${strings.orEmpty(values.serviceProviderName)}, to:</li>
             <ol style={{listStyleType:"lower-alpha"}}>
                 <li >Advise the MSDPR that the individual did not complete the training; and</li>
                 <li >Exercise reasonable due diligence in notifying the individual of their obligation to return the laptop computer to the A2T contractor. </li>

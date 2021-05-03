@@ -1,7 +1,6 @@
 import * as yup from 'yup'
 import "yup-phone"
 import 'core-js/stable';
-import moment from 'moment'
 
 
 export const ProviderIntakeValidationSchema = yup.object().shape({
