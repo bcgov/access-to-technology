@@ -16,7 +16,6 @@ class ProviderIntakeStep2 extends Component {
              <div className="form-group col-md-4">
                             <label className="col-form-label control-label" htmlFor="workBCCaseNumber">WorkBC Case Number <span
                                 style={{ color: "red" }}>*</span></label>
-                                 <small className="text-muted" id="serviceProviderPostal">XXX-XXX-XXXX</small>
                             <Field className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "workBCCaseNumber")}`} id="workBCCaseNumber" name="workBCCaseNumber" />
                             {feedBackInvalid(this.props.errors,this.props.touched,"workBCCaseNumber")}
             </div>
@@ -30,7 +29,7 @@ class ProviderIntakeStep2 extends Component {
         if(this.props.values.altShippingAddress){
             return(<div>
                 <div className="form-group">
-                    <br /><h2 id="forms">Shipping Address(If different from address above)</h2>
+                    <br /><h2 id="forms">Shipping Address (If different from address above)</h2>
                 </div>
                 <div className="form-group">
                     <label className="col-form-label control-label" htmlFor="addressAlt">Street Address 1 <span
@@ -41,7 +40,7 @@ class ProviderIntakeStep2 extends Component {
                 </div>
                 <div className="form-group">
                     <label className="col-form-label control-label" htmlFor="addressAlt2">Street Address 2 </label>
-                    <small className="text-muted" id="addressAlt2">  Apartment</small>
+                    <small className="text-muted" id="addressAlt2">   Apartment 207</small>
                     <Field className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "addressAlt2")}`} id="addressAlt" name="addressAlt" />
                     {feedBackInvalid(this.props.errors,this.props.touched,"addressAlt2")}
                 </div>
@@ -86,10 +85,7 @@ class ProviderIntakeStep2 extends Component {
         return (
 
             <div>
-                <p>
-                    If you are having difficulty completing the application for Access to Technology, please contact your local <a href="https://www.workbc.ca/Employment-Services/WorkBC-Centres/Find-Your-WorkBC-Centre.aspx" target="_blank" rel="noopener noreferrer">WorkBC office</a>, 
-                    an application guide is also available <a href="https://www.workbc.ca/getmedia/3532dbe8-f084-4022-bd3c-8f9ebe422fa4/WS-Guide.aspx" target="_blank" rel="noopener noreferrer">here</a>.
-                </p>
+                <p>If assistance is required in completing this application please refer to the A2T Service Provider Guide <a href="https://www.workbc.ca/Employment-Services/WorkBC-Centres/Find-Your-WorkBC-Centre.aspx" target="_blank" rel="noopener noreferrer">here</a>.</p>
                 <div className="form-group">
                     <h2 id="forms">Client Information</h2>
                 </div>
@@ -108,8 +104,7 @@ class ProviderIntakeStep2 extends Component {
                         {feedBackInvalid(this.props.errors,this.props.touched,"clientLastName")}
                     </div>
                     <div className="form-group col-md-4">
-                        <label className="col-form-label control-label" htmlFor="clientMiddleName">Client Middle Name(s) <span
-                            style={{ color: "red" }}>*</span></label>
+                        <label className="col-form-label control-label" htmlFor="clientMiddleName">Client Middle Name(s)</label>
                         <Field className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "clientMiddleName")}`} id="clientMiddleName" name="clientMiddleName" />
                         {feedBackInvalid(this.props.errors,this.props.touched,"clientMiddleName")}
                     </div>
@@ -120,6 +115,8 @@ class ProviderIntakeStep2 extends Component {
                             <Field className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "clientPhone")}`} id="clientPhone" name="clientPhone" />
                             {feedBackInvalid(this.props.errors,this.props.touched,"clientPhone")}
                     </div>
+                </div>
+                <div className="form-row">
                     <div className="form-group col-md-4">
                         <label className="col-form-label control-label" htmlFor="clientEmail">E-mail Address <span
                                 style={{ color: "red" }}>*</span></label>
@@ -243,7 +240,7 @@ class ProviderIntakeStep2 extends Component {
                             className="form-check-label" 
                             htmlFor="altShippingAddress"
                         >
-                      The clients shipping address is different from their Street address.
+                      The client's shipping address is different from their Street address.
                         </label>
                     </div>
                 </div>

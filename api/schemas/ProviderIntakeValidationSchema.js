@@ -1,16 +1,15 @@
-var moment = require('moment')
 require('core-js/stable')
 var yup = require('yup')
 require('yup-phone')
 
 
 var ProviderIntakeValidationSchema = yup.object().shape({
-    //step 1
+     //step 1
     //see what requirements are fo APP id but it will be generated anyways
     serviceProviderName: yup.string()
-        .required('Please select a service provider name'),
+        .required('Please enter the service provider name'),
     providerContractId: yup.string()
-        .required('Please enter the service provider contract reference ID name'),
+        .required('Please enter the service provider contract reference ID'),
     serviceProviderPostal:yup.string()
         .matches(/^[A-Za-z]\d[A-Za-z]\d[A-Za-z]\d$/,"Please enter a valid Postal Code")
         .required("Please enter a valid Postal Code"),   
@@ -28,32 +27,28 @@ var ProviderIntakeValidationSchema = yup.object().shape({
                 "SDPR"],"Please select a valid field.")
         .required('Please select your Referring Ministry.'),
     periodStart1: yup.date()
-        .min(new Date(), "Date must be after today")
         .required("Please Enter your clients program start date"),
     periodEnd1: yup.date()
-        .min(moment(yup.ref('periodStart1')).add(28, 'days'), "Eligible programs must be at least 4 weeks in duration.")
-        .max(new Date("2023-03-31"), "This is a limited time program must end before March 3 2023")
         .required("Please Enter your clients program end date"),
     unemployed:yup.string()
         .oneOf(["yes"],"The client should be unemployed or precariously employed to be eligible for this program.")
         .required("The client should be unemployed or precariously employed to be eligible for this program."),
     BCEAorFederalOnReserve:yup.array()
-        //.oneOf(["yes"],"The client must be enrolled in one of the programs above to be eligible for this program.")
-        .required("The client must be enrolled in one of the programs above to be eligible for this program."),
+        .required("The client must be receiving one of the above forms of government asitance to be eligible for this program."),
+    
     // STEP 2
+    
     workBCCaseNumber: yup.string().when('fundingSource', {
         is: 'SDPR',
-        then: yup.string().test('valid','Please enter the clients WorkBC case number in format: XXX-XXX-XXXX',
-        value => (value + "").match(/^\w{3}-\w{3}-\w{4}$/gi))
+        then: yup.string()
         .required(
-        "Please use the WorkBC case number format: XXX-XXX-XXXX.  All eligible WorkBC clients must be in an approved WorkBC Service, with an ICM Case number."),
+        "Please use the WorkBC ES case number.  All eligible WorkBC clients must be in an approved WorkBC Service, with an ICM Case number."),
         otherwise: yup.string()}),
     clientName: yup.string()
         .required('Please enter the clients First name'),
     clientLastName: yup.string()
         .required('Please enter the clients Last name'),
-    clientMiddleName: yup.string()
-        .required('Please enter the clients Middle name'),
+    clientMiddleName: yup.string(),
     clientPhone:yup.string()
         .test('Is-valid-phone','Invalid Phone Number',
         value => (value +"").match(/^\d{3}-\d{3}-\d{4}$/gi))
@@ -63,9 +58,6 @@ var ProviderIntakeValidationSchema = yup.object().shape({
         .required("Please enter email ")
         .test('match','client email address cannot be the same as the service providers email address',function(clientEmail){
             return (clientEmail !== this.options.parent.serviceProviderEmail)
-        })
-        .test('match','client email domain cannot be the same as the service providers',function(clientEmail){
-            return (String(clientEmail).split('@')[1] !== String(this.options.parent.serviceProviderEmail).split('@')[1])
         }),
     clientAddress: yup.string()
         .max(255,"Address too long")
@@ -81,38 +73,16 @@ var ProviderIntakeValidationSchema = yup.object().shape({
         .matches(/^[A-Za-z]\d[A-Za-z]\d[A-Za-z]\d$/,"Please enter a valid Postal Code")
         .required("Please enter a valid Postal Code"),
     altShippingAddress: yup.boolean(),
-    /*clientUnemployed:yup.string()
-    .oneOf(["yes",
-            "no"],"Please select a valid field.")
-    .required("Please select an answer on whether the client is precariously employed or unemployed"),
-   registeredInApprovedProgram:yup.string()
-    .oneOf(["yes",
-            "no"],"Please select a valid field.")
-    .required("Please select an answer on whether the client is registered in an approved program"),
-   accessToComputerCurrently:yup.string()
-    .oneOf(["yes",
-            "no"],"Please select a valid field.")
-    .required("Please select an answer on whether the client already has access to a suitable computer or not"),
-    receivingAlternateFunding:yup.string()
-    .oneOf(["yes",
-            "no"],"Please select a valid field.")
-    .required("Please select an answer on whether client is receiving funding from another source for the purchase of the required technology"),
-    financialNeed: yup.string()
-    .oneOf(["yes",
-            "no"],"Please select a valid field.")
-    .required("Please select an answer on whether client demonstrates a financial need to take part in this program"),
-    */
-
     //step 1:pop-up fields
     trainingProgram: yup.string()
         .required('Please select a an eligible training program'),
-    //.oneOf(["Skills Training","Essential Skills Training","Pre-Apprenticeship Training" ,"Skills Training for Employment", "ITA Funded Pre-Apprenticeship Training","Indigenous Employment and Skills Training","Blade Runners","Short Duration Training","Occupational Skills Training","BC Adult Graduation Diploma"],"Please select an eligible training program"),
+        //.oneOf(["Skills Training","Essential Skills Training","Pre-Apprenticeship Training" ,"Skills Training for Employment", "ITA Funded Pre-Apprenticeship Training","Indigenous Employment and Skills Training","Blade Runners","Short Duration Training","Occupational Skills Training","BC Adult Graduation Diploma"],"Please select an eligible training program"),
     addressAlt:yup.string()
         .when("altShippingAddress",{
             is:true,
             then: yup.string().max(255,"Address too long, please use address line 2.").required("please enter your other work address")
-        }),
-        addressAlt2: yup.string()
+        }),   
+    addressAlt2: yup.string()
         .max(255,"Address too long"), 
     cityAlt: yup.string()
         .when("altShippingAddress", {
@@ -129,14 +99,6 @@ var ProviderIntakeValidationSchema = yup.object().shape({
             is: true,
             then: yup.string().matches(/^[A-Za-z]\d[A-Za-z]\d[A-Za-z]\d$/,"Please enter a valid Postal Code").required("Please enter a postal code.")
         }),  
-    /*signatoryTitle: yup.string()
-        .required("Please enter the title of the organization signatory.")
-        .test('match','Signatories must be different',function (signatoryTitle){
-            return signatoryTitle !== this.options.parent.signatory1
-        }),   
-    signatory1: yup.string()
-        .required("Please enter the full name of the organization signatory."),
-        */
     clientEligibility: yup.boolean()
         .oneOf([true],"Please attest to the clients Eligibility"),
     serviceProviderResponsibility: yup.boolean()

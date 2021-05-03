@@ -26,7 +26,7 @@ class thankyouParticipant extends Component {
                         <br />
                         <hr /> <h5>Application Tracking Information</h5>
                                 <p>Client Application ID:  {this.props.location.state !== undefined && this.props.location.state._id}</p>
-                                <p>Contact Name:  {this.props.location.state !== undefined && this.props.location.state.serviceProviderContact}</p>
+                                <p>Staff Name:  {this.props.location.state !== undefined && this.props.location.state.serviceProviderContact}</p>
                                 <p>Email Address:  {this.props.location.state !== undefined && this.props.location.state.serviceProviderEmail}</p>
                                 <p>Phone Number:  {this.props.location.state !== undefined && this.props.location.state.serviceProviderPhone}</p>
                                 
