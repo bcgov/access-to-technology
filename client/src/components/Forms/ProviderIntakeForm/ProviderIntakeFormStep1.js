@@ -225,6 +225,8 @@ class FormStep1 extends Component {
                             <Field className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "serviceProviderPhone")}`} id="serviceProviderPhone" name="serviceProviderPhone" />
                             {feedBackInvalid(this.props.errors,this.props.touched,"serviceProviderPhone")}
                     </div>
+                </div>
+                <div className="form-row">
                     <div className="form-group col-md-4">
                             <label className="col-form-label control-label" htmlFor="serviceProviderEmail">E-mail Address <span
                                     style={{ color: "red" }}>*</span></label>
@@ -241,6 +243,21 @@ class FormStep1 extends Component {
                                 }}
                             />
                             {feedBackInvalid(this.props.errors,this.props.touched,"serviceProviderEmail")}
+                    </div>
+                    <div className="form-group col-md-4">
+                        <label className="col-form-label control-label" htmlFor="serviceProviderConfirmationEmail">Confirm E-mail Address <span
+                                style={{ color: "red" }}>*</span></label>
+                        <small className="text-muted" id="serviceProviderConfirmationEmail">  someone@example.com</small>
+                        <Field 
+                            className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "serviceProviderConfirmationEmail")}`} 
+                            id="serviceProviderConfirmationEmail" 
+                            name="serviceProviderConfirmationEmail" 
+                            onBlur={e => {
+                                this.props.handleBlur(e)
+                            }}
+                        />
+                        {feedBackInvalid(this.props.errors,this.props.touched,"serviceProviderConfirmationEmail")}
+                       
                     </div>
                 </div>  
                 <div className="form-group">
@@ -267,7 +284,7 @@ class FormStep1 extends Component {
                             name="periodEnd1"
                             className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "periodEnd1")}`}
                             minDate={new Date (moment(this.props.values['periodStart1']).add(28, 'days'))}
-                            maxDate={new Date(2023,3,3)}
+                            maxDate={new Date(2023,4,3)}
                         />
                         {feedBackInvalid(this.props.errors, this.props.touched, "periodEnd1")}
                     </div>

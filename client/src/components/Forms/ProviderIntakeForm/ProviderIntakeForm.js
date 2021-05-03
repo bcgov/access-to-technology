@@ -94,7 +94,7 @@ class ProviderIntakeForm extends Component {
         console.log(errors);
         console.log(errors['workBCCaseNumber']);
         if(currentStep === 1){
-            if(errors['workBCCaseNumber'] === 'Please enter the clients WorkBC case number in format: XXX-XXX-XXXX'){
+            if(errors['workBCCaseNumber'] === 'Please use the WorkBC ES case number.  All eligible WorkBC clients must be in an approved WorkBC Service, with an ICM Case number.'){
                 nextFlag = ((parseInt(Object.keys(errors).length) > 11 || (parseInt(Object.keys(errors).length) === 0 && parseInt(Object.keys(touched).length) === 0)));
              }else{
                 nextFlag = ((parseInt(Object.keys(errors).length) > 10 || (parseInt(Object.keys(errors).length) === 0 && parseInt(Object.keys(touched).length) === 0)));
@@ -141,6 +141,7 @@ class ProviderIntakeForm extends Component {
                                     serviceProviderContact:"",
                                     serviceProviderPhone:"",
                                     serviceProviderEmail:"",
+                                    serviceProviderConfirmationEmail:"",
                                     fundingSource:"",
                                     trainingProgram:"",
                                     periodStart1:"",
@@ -159,6 +160,7 @@ class ProviderIntakeForm extends Component {
                                     clientPostal:"",
                                     clientPhone:"",
                                     clientEmail:"",
+                                    clientConfirmationEmail:"",
                                     altShippingAddress: false,
 
                                     //step 2:pop-up fields

@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const yup = require('yup')
 const yupPhone = require('yup-phone')
+var moment = require('moment')
 
 var nodemailer = require("nodemailer");
 var csrf = require('csurf');
@@ -53,7 +54,7 @@ async function sendEmails(values) {
           from: 'Access to Technology <donotreply@gov.bc.ca>', // sender address
           to: values.serviceProviderEmail,// list of receivers
           bcc: confirmationBCC,
-          subject: "Confirmation: Access to Technology application ID #<" + values._id+">", // Subject line
+          subject: "Confirmation: Access to Technology Application ID #" + values._id, // Subject line
           html: notification.generateProviderIntakeNotification(values) // html body
         };
         //Client email
@@ -61,39 +62,40 @@ async function sendEmails(values) {
           from: 'Access to Technology <donotreply@gov.bc.ca>', // sender address
           to: values.clientEmail,
           bcc: confirmationBCC,// list of receivers
-          subject: `Confirmation: Access to Technology application ID #<${values._id}>`, // Subject line
+          subject: `Confirmation: Access to Technology Application ID #${values._id}`, // Subject line
           html: generateHTMLEmail(
             "Access to Technology Application",
             [
-              `Hello,`,
-              `You are receiving this email as confirmation that ${values.serviceProviderName} has electronically submitted an A2T</p><p>
-                <p>Application and Agreement on your behalf to the Ministry of Social Development and Poverty Reduction (“SDPR”), which administers the A2T program to support eligible clients participating in eligible skills training programs. </p>
-                <p>If you have questions about next steps or need help understanding this form, please contact ${values.serviceProviderName}.</p>
-                <p>If you did not agree to the below Collection Notice, or you have questions about the collection of your personal information, please contact ${values.serviceProviderName}.</p>
+              `Hello ${values.clientName},`,
+              `<p>You are receiving this email as confirmation that ${values.serviceProviderName} has electronically submitted an A2T Application and Agreement on your behalf to the Ministry of Social Development and Poverty Reduction (“SDPR”), which administers the A2T program to support eligible clients participating in eligible skills training programs.</p>
+               <p>If you have questions about the A2T Program, please contact: </p>
               `,
-              `COLLECTION NOTICE`,
-              `If you did not agree to the below Collection Notice, or you have questions about the collection of your personal information, please contact ${values.serviceProviderName}` ,
+              `<b>Service Provider:</b> ${values.serviceProviderName}`,
+              `<b>Staff Name:</b> ${values.serviceProviderContact}`,
+              `<b>Contact Email Address:</b> ${values.serviceProviderEmail}`,
+              `<b>Contact Phone Number:</b> ${values.serviceProviderPhone}`,
+              ,
+              `<b>COLLECTION NOTICE</b>`,
+              `If you did not agree to the below Collection Notice, or you have questions about the collection of your personal information, please contact ${values.serviceProviderName}.` ,
+              ``,
             ],
             [
               `COLLECTION NOTICE`,
-              `Personal information collected in this application is collected under the authority of sections 26 (c) and (e) of the Freedom of Information and Protection of Privacy Act and is subject to all the provisions of that Act. The personal information collected will be used by the Ministry of Social Development and Poverty Reduction (“MSDPR”), and its contracted A2T service provider to administer the A2T program, and may also be used to evaluate the effectiveness of the A2T program. If you have any questions about the collection of your personal information, please contact the Records Clerk of the Employment and Labour Market Services Division, MSDPR at WorkBCOESprivacy@gov.bc.ca.`
+              `Personal information collected in this application is collected under the authority of sections 26 (c) and (e) of the Freedom of Information and Protection of Privacy Act and is subject to all the provisions of that Act. The personal information collected will be used by the Ministry of Social Development and Poverty Reduction (“MSDPR”), and its contracted A2T service provider to administer the A2T program, and may also be used to evaluate the effectiveness of the A2T program. If you have any questions about the collection of your personal information, please contact the Records Clerk of the Employment and Labour Market Services Division, MSDPR at WorkBCOESprivacy@gov.bc.ca.`,
+              ``,
             ],
             [
               `<b>APPLICANT INFORMATION</b>`,
-              `The personal information in this section, about ${values.clientName} was entered into this form for you by ${values.serviceProviderName}. If you have concerns about any of the information in this section, please contact ${values.serviceProviderName} to have it corrected.`,
-              `<b>Client Application ID:</b>${values._id}`,
-              `<b>Client First Name:</b> ${values.clientName}`,
-              `<b>Client Last Name:</b> ${values.clientLastName}`,
-              `<b>Client Middle Name:</b> ${values.clientMiddleName}`,
+              `Please review the information in this section and contact ${values.serviceProviderName} if corrections are needed.`,
+              `<b>Client Application ID:</b> ${values._id}`,
+              `<b>Shipping Address:</b> ${values.altShippingAddress ? (`${strings.orEmpty(values.addressAlt)} ${strings.orEmpty(values.addressAlt2)},  ${strings.orEmpty(values.cityAlt)}, ${strings.orEmpty(values.provinceAlt)}, ${strings.orEmpty(values.postalAlt)}`):(`${strings.orEmpty(values.clientAddress)} ${strings.orEmpty(values.clientAddress2)}, ${strings.orEmpty(values.clientCity)}, ${strings.orEmpty(values.clientProvince)}, ${strings.orEmpty(values.clientPostal)} `)}`,
               `<b>Phone Number:</b> ${values.clientPhone}`,
-              `<b>Email:</b> ${values.clientEmail}`,
-              `<b>Shipping Address:</b>${values.altShippingAddress ? (`${strings.orEmpty(values.addressAlt)} ${strings.orEmpty(values.addressAlt2)},  ${strings.orEmpty(values.cityAlt)}, ${strings.orEmpty(values.provinceAlt)}, ${strings.orEmpty(values.postalAlt)}`):(`${strings.orEmpty(values.clientAddress)} ${strings.orEmpty(values.clientAddress2)}, ${strings.orEmpty(values.clientCity)}, ${strings.orEmpty(values.clientProvince)}, ${strings.orEmpty(values.clientPostal)} `)}`,
               `<b>Eligible Skills Training Program:</b> ${values.trainingProgram} `,
-              `<b>Training Program Start Date:</b> ${values.periodStart1}`,
-              `<b>Training Program End Date:</b> ${values.periodEnd1}`,
+              `<b>Training Program Start Date:</b> ${moment(values.periodStart1).format('MMMM Do YYYY')}`,
+              `<b>Training Program End Date:</b> ${moment(values.periodEnd1).format('MMMM Do YYYY')}`,
               `<b>CONFIRMATION, CONSENT AND AGREEMENT</b>`,
-              `If you did not agree to the below CONFIRMATION, CONSENT AND AGREEMENT, or you have questions about the terms of this agreement, please contact AEST Service Provider.`,
-              `I, ${values.clientName} ${values.clientLastName}:</p><p>
+              `If you did not agree to the below CONFIRMATION, CONSENT AND AGREEMENT, or you have questions about the terms of this agreement, please contact ${values.serviceProviderName}.`,
+              `I, ${values.clientName}:</p><p>
                 <ol>
                   <li>CONFIRM that I need a laptop computer to participate in and complete the training program described above.</li>
                   <li>CONSENT to SDPR or its contracted A2T service provider collecting my personal information from and disclosing my personal information to ${values.serviceProviderName} for the purposes of administering or evaluating the effectiveness of the A2T program.</li>
@@ -107,7 +109,7 @@ async function sendEmails(values) {
                           <li>sexual exploitation;</li>
                           <li>promoting hate or discrimination;</li>
                           <li>any other illegal activity; or</li>
-                          <li>promoting any illegal activity;</li>
+                          <li>promoting any illegal activity.</li>
                         </ol>
                       </li>
                     </ol>

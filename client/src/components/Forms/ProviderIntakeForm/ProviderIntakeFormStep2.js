@@ -115,6 +115,8 @@ class ProviderIntakeStep2 extends Component {
                             <Field className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "clientPhone")}`} id="clientPhone" name="clientPhone" />
                             {feedBackInvalid(this.props.errors,this.props.touched,"clientPhone")}
                     </div>
+                </div>
+                <div className="form-row">
                     <div className="form-group col-md-4">
                         <label className="col-form-label control-label" htmlFor="clientEmail">E-mail Address <span
                                 style={{ color: "red" }}>*</span></label>

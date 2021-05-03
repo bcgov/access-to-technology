@@ -25,20 +25,22 @@ class thankyouProviderIntake extends Component {
                         <br />
                         <hr /> <h5>Application Tracking Information</h5>
                                 <p>Client Application ID:  {this.props.location.state !== undefined && this.props.location.state._id}</p>
-                                <p>Service Provider Name:  {this.props.location.state !== undefined && this.props.location.state.serviceProviderName}</p>
                                 <p>Referring Ministry:  {this.props.location.state !== undefined && this.props.location.state.fundingSource}</p>
-                                <p>Service Provider Postal:  {this.props.location.state !== undefined && this.props.location.state.serviceProviderPostal}</p>
+                                <p>Service Provider Name:  {this.props.location.state !== undefined && this.props.location.state.serviceProviderName}</p>
+                                <p>Contract Reference ID:  {this.props.location.state !== undefined && this.props.location.state.providerContractId}</p>
                                 <p>Staff Name:  {this.props.location.state !== undefined && this.props.location.state.serviceProviderContact}</p>
+                                <p>Service Provider Postal:  {this.props.location.state !== undefined && this.props.location.state.serviceProviderPostal}</p>
                                 <p>Contact Email Address:  {this.props.location.state !== undefined && this.props.location.state.serviceProviderEmail}</p>
                                 <p>Contact Phone Number:  {this.props.location.state !== undefined && this.props.location.state.serviceProviderPhone}</p>
-                                <p>Contract Reference ID:  {this.props.location.state !== undefined && this.props.location.state.providerContractId}</p>
+                               
                                 
                                 <h5>Program Eligibility</h5>
-                                    <div>
-                                        <p>Approved Eligible Skills Training and Employment Program:  {this.props.location.state !== undefined && this.props.location.state.trainingProgram}</p>
-                                    </div>
+                                <div>
+                                    <p>Approved Eligible Skills Training and Employment Program:  {this.props.location.state !== undefined && this.props.location.state.trainingProgram}</p>
+                                </div>
                                 <p>Training Program Start Date:  {this.props.location.state !== undefined && this.props.location.state.periodStart1.toString()}</p>
                                 <p>Training Program End Date:  {this.props.location.state !== undefined && this.props.location.state.periodEnd1.toString()}</p>
+                                
                                 <h5>Client Eligibility</h5>
                                 <p>Client is unemployed or precariously employed:  {this.props.location.state !== undefined && this.props.location.state.unemployed}</p>
                                 <p>Select which of the following form(s) of government assistance the client is receiving (choose all that apply): <br/> {this.props.location.state !== undefined && this.props.location.state.BCEAorFederalOnReserve.join(" ")}</p>
@@ -53,13 +55,14 @@ class thankyouProviderIntake extends Component {
                                 <p>Client First Name:  {this.props.location.state !== undefined && this.props.location.state.clientName}</p>
                                 <p>Client Last Name:  {this.props.location.state !== undefined && this.props.location.state.clientLastName}</p>
                                 <p>Client Middle Name:  {this.props.location.state !== undefined && this.props.location.state.clientMiddleName}</p>
+                                <p>Phone Number:  {this.props.location.state !== undefined && this.props.location.state.clientPhone}</p>
+                                <p>Email Address:  {this.props.location.state !== undefined && this.props.location.state.clientEmail}</p>
                                 <p>Street Address:  {this.props.location.state !== undefined && this.props.location.state.clientAddress}</p>
                                 <p>Street Address 2:  {this.props.location.state !== undefined && this.props.location.state.clientAddress2}</p>
                                 <p>City / Town:  {this.props.location.state !== undefined && this.props.location.state.clientCity}</p>
                                 <p>Province:  {this.props.location.state !== undefined && this.props.location.state.clientProvince}</p>
                                 <p>Postal:  {this.props.location.state !== undefined && this.props.location.state.clientPostal}</p>
-                                <p>Email Address:  {this.props.location.state !== undefined && this.props.location.state.clientEmail}</p>
-                                <p>Phone Number:  {this.props.location.state !== undefined && this.props.location.state.clientPhone}</p>
+                               
 
                                 {altShippingAddress ? (
                                     <div>
