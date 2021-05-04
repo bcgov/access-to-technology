@@ -33,9 +33,9 @@ export const ProviderIntakeValidationSchema = yup.object().shape({
                 "SDPR"],"Please select a valid field.")
         .required('Please select your Referring Ministry'),
     periodStart1: yup.date()
-        .required("Please Enter your clients program start date"),
+        .required("Please enter your clients program start date"),
     periodEnd1: yup.date()
-        .required("Please Enter your clients program end date"),
+        .required("Please enter your clients program end date"),
     unemployed:yup.string()
         .oneOf(["yes"],"The client should be unemployed or precariously employed to be eligible for this program")
         .required("The client should be unemployed or precariously employed to be eligible for this program"),
