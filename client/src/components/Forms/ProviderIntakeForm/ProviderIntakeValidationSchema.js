@@ -115,7 +115,7 @@ export const ProviderIntakeValidationSchema = yup.object().shape({
     addressAlt:yup.string()
         .when("altShippingAddress",{
             is:true,
-            then: yup.string().max(255,"Address too long, please use address line 2.").required("please enter client's shipping address")
+            then: yup.string().max(255,"Address too long, please use address line 2.").required("Please enter client's shipping address")
         }),   
     addressAlt2: yup.string()
         .max(255,"Address too long"), 
