@@ -53,7 +53,7 @@ class FormStep3 extends Component {
                                         <li >An Affordable Childcare Benefit under the Childcare Subsidy Act (British Columbia);</li>
                                         <li >Assistance from the British Columbia Ministry of Children and Family Development under an Agreement with a Young Adult.</li>
                                     </ol>
-                                <li >Has reviewed the COLLECTION NOTICE and agreed to the collection of their personal information ; and</li>
+                                <li >Has reviewed the COLLECTION NOTICE and agreed to the collection of their personal information; and</li>
 
                                 <div className="col-md-12 pad">
                                     <div className="card card-secondary">
@@ -107,7 +107,7 @@ class FormStep3 extends Component {
                         {feedBackInvalid(this.props.errors, this.props.touched, "serviceProviderResponsibility")}
                         <label className="form-check-label" htmlFor="serviceProviderResponsibility"><span style={{ color: "red" }}>*</span> {`${this.props.values.serviceProviderName}`} ACKNOWLEDGES AND AGREES:
                             <ol style={{listStyleType:"decimal"}}>
-                                <li >To advise the Ministry of Social Development and Poverty Reduction("MSDPR") of the outcome of the individual’s participation in the approved training described in this application, in the form and manner requested by the {`${this.props.values.fundingSource}`}; </li>
+                                <li >To advise the Ministry of Social Development and Poverty Reduction ("MSDPR") of the outcome of the individual’s participation in the approved training described in this application, in the form and manner requested by the MSDPR; </li>
                                 <li >If {`${this.props.values.clientName}`}  does not complete the approved eligible training described in this application to the satisfaction of {`${this.props.values.serviceProviderName}`} to:</li>
                                     <ol style={{listStyleType:"lower-alpha"}}>
                                         <li >Advise the MSDPR that the individual did not complete the training; and</li>

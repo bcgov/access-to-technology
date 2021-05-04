@@ -36,7 +36,7 @@ function Home() {
                             <li>Pre-Apprenticeship (TBD)</li>
                         </ul></li>
                     </ul>
-                    <p>For additional Service Provider Information see the <a href="https://www.workbc.ca/getmedia/3532dbe8-f084-4022-bd3c-8f9ebe422fa4/WS-Guide.aspx" target="_blank" rel="noopener noreferrer" >Access to Technology (A2T) Service Provider Guide</a></p>
+                    <p>For additional Service Provider Information see the <a href="https://www.workbc.ca/getmedia/3532dbe8-f084-4022-bd3c-8f9ebe422fa4/WS-Guide.aspx" target="_blank" rel="noopener noreferrer" >Access to Technology (A2T) Service Provider Guide</a>.</p>
                     <p>In order to submit an application for a client to access the A2T Program, you will need the following: </p>
                     <ol style={{listStyleType:"decimal"}}>
                         <li>Service Provider Contract Reference ID</li>

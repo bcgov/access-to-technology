@@ -32,12 +32,13 @@ module.exports = {
         <h2>Access to Technology Application</h2>
         <p>Thank you for submitting an application for the Access to Technology (A2T) Program. The application will be reviewed, and eligible clients will receive an A2T laptop. Application details are included below for your reference.</p>
         <p>IMPORTANT NOTICE: If information on this application is incorrect, please contact <MSDPR Email Address> and include Application ID referenced above in the subject of the email.</p>
+        <h3>Application Tracking Information</h3>
         <p><b>Application ID:</b>  ${strings.orEmpty(values._id)}</p>
         <p><b>Referring Ministry:</b>  ${strings.orEmpty(values.fundingSource)}</p>
         <p><b>Service Provider Name:</b>  ${strings.orEmpty(values.serviceProviderName)}</p>
         <p><b>Contract Reference ID:</b>  ${strings.orEmpty(values.providerContractId)}</p>
         <p><b>Staff Name:</b>  ${strings.orEmpty(values.serviceProviderContact)}</p>
-        <p><b>Service Provider Postal:</b>  ${strings.orEmpty(values.serviceProviderPostal)}</p>
+        <p><b>Service Provider Postal Code:</b>  ${strings.orEmpty(values.serviceProviderPostal)}</p>
         <p><b>Contact Phone Number:</b>  ${strings.orEmpty(values.serviceProviderPhone)}</p>
         <p><b>Contact Email:</b>  ${strings.orEmpty(values.serviceProviderEmail)}</p>
        
@@ -87,7 +88,7 @@ module.exports = {
         <p><b>Service Provider Responsibility Attestation:</b>  ${strings.orEmpty(values.serviceProviderResponsibility)}</p>
         <p>${strings.orEmpty(values.serviceProviderName)} ACKNOWLEDGES AND AGREES:</p>
         <ol style={{listStyleType:"decimal"}}>
-        <li>To advise the Ministry of Social Development and Poverty Reduction ("MSDPR") of the outcome of the individual’s participation in the approved training described in this application, in the form and manner requested by the ${strings.orEmpty(values.fundingSource)}; </li>
+        <li>To advise the Ministry of Social Development and Poverty Reduction ("MSDPR") of the outcome of the individual’s participation in the approved training described in this application, in the form and manner requested by the MSDPR; </li>
         <li>If ${strings.orEmpty(values.clientName)} does not complete the approved eligible training described in this application to the satisfaction of ${strings.orEmpty(values.serviceProviderName)}, to:</li>
             <ol style={{listStyleType:"lower-alpha"}}>
                 <li >Advise the MSDPR that the individual did not complete the training; and</li>
