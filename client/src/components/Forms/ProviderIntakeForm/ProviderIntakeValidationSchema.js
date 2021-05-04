@@ -33,9 +33,9 @@ export const ProviderIntakeValidationSchema = yup.object().shape({
                 "SDPR"],"Please select a valid field.")
         .required('Please select your Referring Ministry'),
     periodStart1: yup.date()
-        .required("Please Enter your clients program start date"),
+        .required("Please enter your clients program start date"),
     periodEnd1: yup.date()
-        .required("Please Enter your clients program end date"),
+        .required("Please enter your clients program end date"),
     unemployed:yup.string()
         .oneOf(["yes"],"The client should be unemployed or precariously employed to be eligible for this program")
         .required("The client should be unemployed or precariously employed to be eligible for this program"),
@@ -115,7 +115,7 @@ export const ProviderIntakeValidationSchema = yup.object().shape({
     addressAlt:yup.string()
         .when("altShippingAddress",{
             is:true,
-            then: yup.string().max(255,"Address too long, please use address line 2.").required("please enter client's shipping address")
+            then: yup.string().max(255,"Address too long, please use address line 2.").required("Please enter client's shipping address")
         }),   
     addressAlt2: yup.string()
         .max(255,"Address too long"), 

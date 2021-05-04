@@ -115,7 +115,7 @@ class FormStep1 extends Component {
                         <option value="Blade Runners">Blade Runners</option>
                         <option value="Indigenous Skills Training and">Indigenous Skills Training and Education</option>
                     </Field>
-                    <small className="text-muted" id="trainingProgram"> This dropdown list here is determine by the funding source selected above</small>
+                    <small className="text-muted" id="trainingProgram"> This dropdown list is determine by the Referring Ministry selected above.</small>
                     {feedBackInvalid(this.props.errors, this.props.touched, "trainingProgram")}
                 </div>
             </div>)
@@ -136,7 +136,7 @@ class FormStep1 extends Component {
                         <option value="Occupational Skills Training">Occupational Skills Training</option>
                         <option value="BC Adult Graduation Diploma">BC Adult Graduation Diploma</option>
                     </Field>
-                    <small className="text-muted" id="trainingProgram">  This dropdown list here is determined by the referring ministry selected above.</small>
+                    <small className="text-muted" id="trainingProgram">  This dropdown list is determine by the Referring Ministry selected above.</small>
                     {feedBackInvalid(this.props.errors, this.props.touched, "trainingProgram")}
                 </div>
             </div>)
