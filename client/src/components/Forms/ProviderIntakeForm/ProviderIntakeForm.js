@@ -94,7 +94,7 @@ class ProviderIntakeForm extends Component {
         console.log(errors);
         console.log(errors['workBCCaseNumber']);
         if(currentStep === 1){
-            if(errors['workBCCaseNumber'] === 'Please use the WorkBC ES case number.  All eligible WorkBC clients must be in an approved WorkBC Service, with an ICM Case number.'){
+            if(errors['workBCCaseNumber'] === 'Please use the WorkBC ES case number.  All eligible WorkBC clients must be in an approved WorkBC Service, with an ICM Case number'){
                 nextFlag = ((parseInt(Object.keys(errors).length) > 11 || (parseInt(Object.keys(errors).length) === 0 && parseInt(Object.keys(touched).length) === 0)));
              }else{
                 nextFlag = ((parseInt(Object.keys(errors).length) > 10 || (parseInt(Object.keys(errors).length) === 0 && parseInt(Object.keys(touched).length) === 0)));
