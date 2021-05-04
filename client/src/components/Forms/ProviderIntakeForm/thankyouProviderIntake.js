@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import moment from 'moment'
 
 
 class thankyouProviderIntake extends Component {
@@ -23,58 +24,65 @@ class thankyouProviderIntake extends Component {
                             The following information was received:
                         </p>
                         <br />
-                        <hr /> <h3>Application Tracking Information</h3>
-                                <p><b>Application ID:</b>  {this.props.location.state !== undefined && this.props.location.state._id}</p>
-                                <p><b>Referring Ministry:</b>  {this.props.location.state !== undefined && this.props.location.state.fundingSource}</p>
-                                <p><b>Service Provider Name:</b>  {this.props.location.state !== undefined && this.props.location.state.serviceProviderName}</p>
-                                <p><b>Contract Reference ID:</b>  {this.props.location.state !== undefined && this.props.location.state.providerContractId}</p>
-                                <p><b>Staff Name:</b>  {this.props.location.state !== undefined && this.props.location.state.serviceProviderContact}</p>
-                                <p><b>Service Provider Postal Code:</b>  {this.props.location.state !== undefined && this.props.location.state.serviceProviderPostal}</p>
-                                <p><b>Contact Email Address:</b>  {this.props.location.state !== undefined && this.props.location.state.serviceProviderEmail}</p>
-                                <p><b>Contact Phone Number:</b>  {this.props.location.state !== undefined && this.props.location.state.serviceProviderPhone}</p>
-                               
-                                
+                        <hr /> 
+                            <div className="row">
+                                <div className="col-md-6">
+                                <h3>Client Information</h3>
+                                        {fundedSDPR ? (
+                                            <div>
+                                                <p><b>WorkBC Case Number:</b>  {this.props.location.state !== undefined && this.props.location.state.workBCCaseNumber}</p>
+                                            </div>
+                                        ) : (<div></div>) 
+                                        }
+                                        <p><b>Client First Name:</b>  {this.props.location.state !== undefined && this.props.location.state.clientName}</p>
+                                        <p><b>Client Last Name:</b>  {this.props.location.state !== undefined && this.props.location.state.clientLastName}</p>
+                                        <p><b>Client Middle Name:</b>  {this.props.location.state !== undefined && this.props.location.state.clientMiddleName}</p>
+                                        <p><b>Phone Number:</b>  {this.props.location.state !== undefined && this.props.location.state.clientPhone}</p>
+                                        <p><b>Email Address:</b>  {this.props.location.state !== undefined && this.props.location.state.clientEmail}</p>
+                                        <p><b>Street Address:</b>  {this.props.location.state !== undefined && this.props.location.state.clientAddress}</p>
+                                        <p><b>Street Address 2:</b>  {this.props.location.state !== undefined && this.props.location.state.clientAddress2}</p>
+                                        <p><b>City / Town:</b>  {this.props.location.state !== undefined && this.props.location.state.clientCity}</p>
+                                        <p><b>Province:</b>  {this.props.location.state !== undefined && this.props.location.state.clientProvince}</p>
+                                        <p><b>Postal:</b>  {this.props.location.state !== undefined && this.props.location.state.clientPostal}</p>
+                                    
+
+                                        {altShippingAddress ? (
+                                            <div>
+                                                <h3>Shipping Information (only if different from client home address)</h3>
+                                                <p><b>Street Address 1:</b>  {this.props.location.state !== undefined && this.props.location.state.addressAlt}</p>
+                                                <p><b>Street Address 2:</b>  {this.props.location.state !== undefined && this.props.location.state.addressAlt2}</p>
+                                                <p><b>City / Town:</b>  {this.props.location.state !== undefined && this.props.location.state.cityAlt}</p>
+                                                <p><b>Province:</b>  {this.props.location.state !== undefined && this.props.location.state.provinceAlt}</p>
+                                                <p><b>Postal Code:</b>  {this.props.location.state !== undefined && this.props.location.state.postalAlt}</p>
+                                            </div>
+                                        ) : (<div></div>) 
+                                        }
+                                </div>
+                                <div className="col-md-6">
+                                    <h3>Application Tracking Information</h3>
+                                        <p><b>Application ID:</b>  {this.props.location.state !== undefined && this.props.location.state._id}</p>
+                                        <p><b>Referring Ministry:</b>  {this.props.location.state !== undefined && this.props.location.state.fundingSource}</p>
+                                        <p><b>Service Provider Name:</b>  {this.props.location.state !== undefined && this.props.location.state.serviceProviderName}</p>
+                                        <p><b>Contract Reference ID:</b>  {this.props.location.state !== undefined && this.props.location.state.providerContractId}</p>
+                                        <p><b>Staff Name:</b>  {this.props.location.state !== undefined && this.props.location.state.serviceProviderContact}</p>
+                                        <p><b>Service Provider Postal Code:</b>  {this.props.location.state !== undefined && this.props.location.state.serviceProviderPostal}</p>
+                                        <p><b>Contact Email Address:</b>  {this.props.location.state !== undefined && this.props.location.state.serviceProviderEmail}</p>
+                                        <p><b>Contact Phone Number:</b>  {this.props.location.state !== undefined && this.props.location.state.serviceProviderPhone}</p>
+                                </div>
+                            </div>
+                                <br></br>
                                 <h3>Program Eligibility</h3>
                                 <div>
                                     <p><b>Approved Eligible Skills Training and Employment Program:</b>  {this.props.location.state !== undefined && this.props.location.state.trainingProgram}</p>
                                 </div>
-                                <p><b>Training Program Start Date:</b>  {this.props.location.state !== undefined && this.props.location.state.periodStart1.toString()}</p>
-                                <p><b>Training Program End Date:</b>  {this.props.location.state !== undefined && this.props.location.state.periodEnd1.toString()}</p>
+                                <p><b>Training Program Start Date:</b>  {this.props.location.state !== undefined && moment(this.props.location.state.periodStart1).format('MMMM Do YYYY').toString()}</p>
+                                <p><b>Training Program End Date:</b>  {this.props.location.state !== undefined && moment(this.props.location.state.periodEnd1).format('MMMM Do YYYY').toString()}</p>
                                 
                                 <h3>Client Eligibility</h3>
                                 <p><b>Client is unemployed or precariously employed:</b>  {this.props.location.state !== undefined && this.props.location.state.unemployed}</p>
                                 <p><b>Select which of the following form(s) of government assistance the client is receiving (choose all that apply):</b> <br/> {this.props.location.state !== undefined && this.props.location.state.BCEAorFederalOnReserve.join(" ")}</p>
                                 
-                                <h3>Client Information</h3>
-                                {fundedSDPR ? (
-                                    <div>
-                                        <p><b>WorkBC Case Number:</b>  {this.props.location.state !== undefined && this.props.location.state.workBCCaseNumber}</p>
-                                    </div>
-                                 ) : (<div></div>) 
-                                 }
-                                <p><b>Client First Name:</b>  {this.props.location.state !== undefined && this.props.location.state.clientName}</p>
-                                <p><b>Client Last Name:</b>  {this.props.location.state !== undefined && this.props.location.state.clientLastName}</p>
-                                <p><b>Client Middle Name:</b>  {this.props.location.state !== undefined && this.props.location.state.clientMiddleName}</p>
-                                <p><b>Phone Number:</b>  {this.props.location.state !== undefined && this.props.location.state.clientPhone}</p>
-                                <p><b>Email Address:</b>  {this.props.location.state !== undefined && this.props.location.state.clientEmail}</p>
-                                <p><b>Street Address:</b>  {this.props.location.state !== undefined && this.props.location.state.clientAddress}</p>
-                                <p><b>Street Address 2:</b>  {this.props.location.state !== undefined && this.props.location.state.clientAddress2}</p>
-                                <p><b>City / Town:</b>  {this.props.location.state !== undefined && this.props.location.state.clientCity}</p>
-                                <p><b>Province:</b>  {this.props.location.state !== undefined && this.props.location.state.clientProvince}</p>
-                                <p><b>Postal:</b>  {this.props.location.state !== undefined && this.props.location.state.clientPostal}</p>
-                               
-
-                                {altShippingAddress ? (
-                                    <div>
-                                        <h3>Shipping Information (only if different from client home address)</h3>
-                                        <p><b>Street Address 1:</b>  {this.props.location.state !== undefined && this.props.location.state.addressAlt}</p>
-                                        <p><b>Street Address 2:</b>  {this.props.location.state !== undefined && this.props.location.state.addressAlt2}</p>
-                                        <p><b>City / Town:</b>  {this.props.location.state !== undefined && this.props.location.state.cityAlt}</p>
-                                        <p><b>Province:</b>  {this.props.location.state !== undefined && this.props.location.state.provinceAlt}</p>
-                                        <p><b>Postal Code:</b>  {this.props.location.state !== undefined && this.props.location.state.postalAlt}</p>
-                                    </div>
-                                 ) : (<div></div>) 
-                                 }
+                              
 
                              {/*}   <h5>Client Eligibility and Need Assessment </h5>
                                 <p>Is the Client a Resident of BC:  {this.props.location.state !== undefined && this.props.location.state.clientResidesInBC}</p>

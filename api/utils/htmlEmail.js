@@ -135,7 +135,7 @@ module.exports = function (title, mainContent, boxContent, endContent) {
             </tr>
           </tbody>
         </table>
-        <img class="img-fluid" border="0" width="800" height="78" id="Canada_BC_Banner_Bottom" src="${clientURL}/images/WDAFundingEmailBottomBanner.jpg" alt="Canada BC Funding Acknowledgement" style="height: auto; line-height: 100%; outline: none; text-decoration: none; width: 100%; max-width: 100%; border: 0 none;">
+        <img class="img-fluid" border="0" width="800" height="78" id="Canada_BC_Banner_Bottom" src="${clientURL}/images/WDAFundingEmailBottomBanner.png" alt="Canada BC Funding Acknowledgement" style="height: auto; line-height: 100%; outline: none; text-decoration: none; width: 100%; max-width: 100%; border: 0 none;">
           </div>
               </td>
             </tr>

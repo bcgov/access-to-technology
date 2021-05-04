@@ -67,7 +67,7 @@ async function sendEmails(values) {
             "Access to Technology Application",
             [
               `Hello ${values.clientName},`,
-              `<p>You are receiving this email as confirmation that ${values.serviceProviderName} has electronically submitted an A2T Application and Agreement on your behalf to the Ministry of Social Development and Poverty Reduction (“MSDPR”), which administers the A2T program to support eligible clients participating in eligible skills training programs.</p>
+              `<p>You are receiving this email as confirmation that ${values.serviceProviderName} has electronically submitted an Access to Technology (A2T) Application and Agreement on your behalf to the Ministry of Social Development and Poverty Reduction (“MSDPR”), which administers the A2T program to support eligible clients participating in eligible skills training programs.</p>
                <p>If you have questions about the A2T Program, please contact: </p>
               `,
               `<b>Service Provider:</b> ${values.serviceProviderName}`,
