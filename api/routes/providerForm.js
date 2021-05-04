@@ -67,7 +67,7 @@ async function sendEmails(values) {
             "Access to Technology Application",
             [
               `Hello ${values.clientName},`,
-              `<p>You are receiving this email as confirmation that ${values.serviceProviderName} has electronically submitted an A2T Application and Agreement on your behalf to the Ministry of Social Development and Poverty Reduction (“SDPR”), which administers the A2T program to support eligible clients participating in eligible skills training programs.</p>
+              `<p>You are receiving this email as confirmation that ${values.serviceProviderName} has electronically submitted an A2T Application and Agreement on your behalf to the Ministry of Social Development and Poverty Reduction (“MSDPR”), which administers the A2T program to support eligible clients participating in eligible skills training programs.</p>
                <p>If you have questions about the A2T Program, please contact: </p>
               `,
               `<b>Service Provider:</b> ${values.serviceProviderName}`,
@@ -87,7 +87,7 @@ async function sendEmails(values) {
             [
               `<b>APPLICANT INFORMATION</b>`,
               `Please review the information in this section and contact ${values.serviceProviderName} if corrections are needed.`,
-              `<b>Client Application ID:</b> ${values._id}`,
+              `<b>Application ID:</b> ${values._id}`,
               `<b>Shipping Address:</b> ${values.altShippingAddress ? (`${strings.orEmpty(values.addressAlt)} ${strings.orEmpty(values.addressAlt2)},  ${strings.orEmpty(values.cityAlt)}, ${strings.orEmpty(values.provinceAlt)}, ${strings.orEmpty(values.postalAlt)}`):(`${strings.orEmpty(values.clientAddress)} ${strings.orEmpty(values.clientAddress2)}, ${strings.orEmpty(values.clientCity)}, ${strings.orEmpty(values.clientProvince)}, ${strings.orEmpty(values.clientPostal)} `)}`,
               `<b>Phone Number:</b> ${values.clientPhone}`,
               `<b>Eligible Skills Training Program:</b> ${values.trainingProgram} `,
@@ -98,7 +98,7 @@ async function sendEmails(values) {
               `I, ${values.clientName}:</p><p>
                 <ol>
                   <li>CONFIRM that I need a laptop computer to participate in and complete the training program described above.</li>
-                  <li>CONSENT to SDPR or its contracted A2T service provider collecting my personal information from and disclosing my personal information to ${values.serviceProviderName} for the purposes of administering or evaluating the effectiveness of the A2T program.</li>
+                  <li>CONSENT to MSDPR or its contracted A2T service provider collecting my personal information from and disclosing my personal information to ${values.serviceProviderName} for the purposes of administering or evaluating the effectiveness of the A2T program.</li>
                   <li>ACKNOWLEDGE and AGREE that:
                     <ol type="a">
                       <li>My receipt and use of a laptop computer provided to me through the A2T program is dependent on my participation in the training described above;</li>
