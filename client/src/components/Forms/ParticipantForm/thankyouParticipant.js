@@ -19,7 +19,7 @@ class thankyouParticipant extends Component {
                         <h1>Thank you, your application has been received</h1>
                         <h3>Application ID: {this.props.location.state !== undefined && this.props.location.state._id}</h3>
                         <button className="btn btn-success d-print-none" onClick={() => window.print()}>Print Confirmation</button><br /><br />
-                        <p>Thank you for your interest in Access To Technology services. Your application has been received and a staff member will be in touch with you soon to confirm your client qualifies for Access To Technology and to complete the application process. </p>
+                        <p>Thank you for your interest in Access to Technology services. Your application has been received and a staff member will be in touch with you soon to confirm your client qualifies fortAccess to Technology and to complete the application process. </p>
                         <p>
                             The following information was received:
                         </p>
