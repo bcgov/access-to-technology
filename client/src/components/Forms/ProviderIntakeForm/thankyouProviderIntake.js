@@ -19,7 +19,7 @@ class thankyouProviderIntake extends Component {
                         <h3>Application ID: {this.props.location.state !== undefined && this.props.location.state._id}</h3>
                         <button className="btn btn-success d-print-none" onClick={() => window.print()}>Print Confirmation</button><br /><br />
                         <p>Thank you for submitting an application for the Access to Technology (A2T) Program. The application will be reviewed, and eligible clients will receive an A2T laptop.    </p>
-                        <p>IMPORTANT NOTICE: If information on this application is incorrect, please contact <a href="mailto:elmsd.webmaster@gov.bc.ca" title="MSDPR Email Address">MSDPR Email Address</a> and include Application ID referenced above in the subject of the email.</p>
+                        <p>IMPORTANT NOTICE: If information on this application is incorrect, please contact <a href="mailto:elmsd.webmaster@gov.bc.ca" title="MSDPR Email Address">MSDPR Email Address</a> and include the Application ID referenced above in the subject of the email.</p>
                         <p>
                             The following information was received:
                         </p>
@@ -73,7 +73,7 @@ class thankyouProviderIntake extends Component {
                                 <br></br>
                                 <h3>Program Eligibility</h3>
                                 <div>
-                                    <p><b>Approved Eligible Skills Training and Employment Program:</b>  {this.props.location.state !== undefined && this.props.location.state.trainingProgram}</p>
+                                    <p><b>Approved Eligible Skills Training Program:</b>  {this.props.location.state !== undefined && this.props.location.state.trainingProgram}</p>
                                 </div>
                                 <p><b>Training Program Start Date:</b>  {this.props.location.state !== undefined && moment(this.props.location.state.periodStart1).format('MMMM Do YYYY').toString()}</p>
                                 <p><b>Training Program End Date:</b>  {this.props.location.state !== undefined && moment(this.props.location.state.periodEnd1).format('MMMM Do YYYY').toString()}</p>
