@@ -24,9 +24,21 @@ class thankyouProviderIntake extends Component {
                             The following information was received:
                         </p>
                         <br />
-                        <hr /> 
                             <div className="row">
-                                <div className="col-md-6">
+                            <div className="col-md-6">
+                                    <h3>Application Tracking Information</h3>
+                                        <p><b>Application ID:</b>  {this.props.location.state !== undefined && this.props.location.state._id}</p>
+                                        <br />
+                                    <h3>Service Provider Information</h3>
+                                        <p><b>Referring Ministry:</b>  {this.props.location.state !== undefined && this.props.location.state.fundingSource}</p>
+                                        <p><b>Service Provider Name:</b>  {this.props.location.state !== undefined && this.props.location.state.serviceProviderName}</p>
+                                        <p><b>Contract Reference ID:</b>  {this.props.location.state !== undefined && this.props.location.state.providerContractId}</p>
+                                        <p><b>Staff Name:</b>  {this.props.location.state !== undefined && this.props.location.state.serviceProviderContact}</p>
+                                        <p><b>Service Provider Postal Code:</b>  {this.props.location.state !== undefined && this.props.location.state.serviceProviderPostal}</p>
+                                        <p><b>Contact Email Address:</b>  {this.props.location.state !== undefined && this.props.location.state.serviceProviderEmail}</p>
+                                        <p><b>Contact Phone Number:</b>  {this.props.location.state !== undefined && this.props.location.state.serviceProviderPhone}</p>
+                            </div>
+                            <div className="col-md-6">
                                 <h3>Client Information</h3>
                                         {fundedSDPR ? (
                                             <div>
@@ -43,7 +55,7 @@ class thankyouProviderIntake extends Component {
                                         <p><b>Street Address 2:</b>  {this.props.location.state !== undefined && this.props.location.state.clientAddress2}</p>
                                         <p><b>City / Town:</b>  {this.props.location.state !== undefined && this.props.location.state.clientCity}</p>
                                         <p><b>Province:</b>  {this.props.location.state !== undefined && this.props.location.state.clientProvince}</p>
-                                        <p><b>Postal:</b>  {this.props.location.state !== undefined && this.props.location.state.clientPostal}</p>
+                                        <p><b>Postal Code:</b>  {this.props.location.state !== undefined && this.props.location.state.clientPostal}</p>
                                     
 
                                         {altShippingAddress ? (
@@ -58,19 +70,11 @@ class thankyouProviderIntake extends Component {
                                         ) : (<div></div>) 
                                         }
                                 </div>
-                                <div className="col-md-6">
-                                    <h3>Application Tracking Information</h3>
-                                        <p><b>Application ID:</b>  {this.props.location.state !== undefined && this.props.location.state._id}</p>
-                                        <p><b>Referring Ministry:</b>  {this.props.location.state !== undefined && this.props.location.state.fundingSource}</p>
-                                        <p><b>Service Provider Name:</b>  {this.props.location.state !== undefined && this.props.location.state.serviceProviderName}</p>
-                                        <p><b>Contract Reference ID:</b>  {this.props.location.state !== undefined && this.props.location.state.providerContractId}</p>
-                                        <p><b>Staff Name:</b>  {this.props.location.state !== undefined && this.props.location.state.serviceProviderContact}</p>
-                                        <p><b>Service Provider Postal Code:</b>  {this.props.location.state !== undefined && this.props.location.state.serviceProviderPostal}</p>
-                                        <p><b>Contact Email Address:</b>  {this.props.location.state !== undefined && this.props.location.state.serviceProviderEmail}</p>
-                                        <p><b>Contact Phone Number:</b>  {this.props.location.state !== undefined && this.props.location.state.serviceProviderPhone}</p>
-                                </div>
+                               
+                               
                             </div>
                                 <br></br>
+                                <hr />
                                 <h3>Program Eligibility</h3>
                                 <div>
                                     <p><b>Approved Eligible Skills Training Program:</b>  {this.props.location.state !== undefined && this.props.location.state.trainingProgram}</p>
@@ -92,7 +96,7 @@ class thankyouProviderIntake extends Component {
                                 <p>Is the client not receiving funding from another source for the purchase of the required technology :  {this.props.location.state !== undefined && this.props.location.state.ReceivingAlternateFunding}</p>
                                 <p>The service provider has confirmed the client has a demonstrated financial need to take part in this program : {this.props.location.state !== undefined && this.props.location.state.financialNeed}</p>
                                 */}
-                                                          
+                                <hr />                          
                                 <h3>Declaration and Signature</h3>
                                {/* <p>Signing Authority Title:  {this.props.location.state !== undefined && this.props.location.state.signatory1}</p>
                                 <p>Signatory Authority Full Name:  {this.props.location.state !== undefined && this.props.location.state.signatoryTitle}</p>*/}
