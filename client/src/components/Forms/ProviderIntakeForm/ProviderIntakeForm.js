@@ -123,7 +123,7 @@ class ProviderIntakeForm extends Component {
         return (
             <div className="container">
                 <div className="row">
-                    <h2>Intake Form</h2>
+                    <h2> Access to Technology (A2T) Intake Form</h2>
                     <div className="col-md-12">
                         <ProgressTracker currentStep={this.state.currentStep}/>
                         {this.state.hasError && (
