@@ -196,7 +196,7 @@ class FormStep1 extends Component {
                 </div>
                 <div className="form-row"> 
                     <div className="form-group col-md-4">
-                            <label className="col-form-label control-label" htmlFor="serviceProviderPostal">Postal Code <span
+                            <label className="col-form-label control-label" htmlFor="serviceProviderPostal">Service Provider Postal Code <span
                                 style={{ color: "red" }}>*  </span></label>
                             <small className="text-muted" id="serviceProviderPostal">  V0R2V5</small>
                             <Field 
