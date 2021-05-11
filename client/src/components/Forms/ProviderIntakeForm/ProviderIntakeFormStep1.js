@@ -113,7 +113,6 @@ class FormStep1 extends Component {
                         <option value="Skills Training for Employment">Skills Training for Employment</option>
                         <option value="ITA Funded Pre-Apprenticeship Training">ITA Funded Pre-Apprenticeship Training</option>
                         <option value="Blade Runners">Blade Runners</option>
-                        <option value="Indigenous Skills Training and Education">Indigenous Skills Training and Education</option>
                     </Field>
                     <small className="text-muted" id="trainingProgram"> This dropdown list is determined by the Referring Ministry selected above.</small>
                     {feedBackInvalid(this.props.errors, this.props.touched, "trainingProgram")}
