@@ -82,7 +82,7 @@ async function saveListProviderIntake(values) {
           'clientPhone': values.clientPhone,
           'clientEmail': values.clientEmail,
           'altShippingAddress': values.altShippingAddress,
-
+          // insert duplicate info response here 
           //step 1:pop-up fields
           'addressAlt':values.addressAlt,
           'addressAlt2':values.addressAlt2,

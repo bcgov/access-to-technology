@@ -42,7 +42,6 @@ function Home() {
                                     <li>Skills Training for Employment</li>
                                     <li>ITA Funded Pre-Apprenticeship Training</li>
                                     <li>BladeRunners</li>
-                                    <li>Indigenous Skills Training and Education</li>
                                 </ul>
                                <b className="text-primary">Indigenous Skills and Employment Training: </b>
                                 <ul>
