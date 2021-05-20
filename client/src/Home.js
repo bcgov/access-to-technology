@@ -8,7 +8,7 @@ function Home() {
                     <h1>Access to Technology</h1>
                 <div className="row">
                     <div className="col-md-6">
-                        <p>Access to Technology (A2T) will provide basic laptops to eligible clients participating in specific 
+                    <p>Access to Technology (A2T) will provide basic laptops to eligible clients participating in specific 
                             training programs administered by Social Development and Poverty Reduction (SDPR), Advanced Education and Skills Training (AEST) and Indigenous Skills Training for Employment (ISET), which:</p>
                         <ul>
                             <li>Have an online learning component; and</li>
@@ -27,29 +27,30 @@ function Home() {
                         </ol>
                    
                     </div>
-                    <div className="col-md-6">
-                        <p>Approved eligible skills training programs include:</p>
-                        <ul style={{listStyleType:"none"}}>
-                        <li><b>WorkBC Employment Services: </b>
-                            <ul>
-                                <li>Short Duration Training</li>
-                                <li>Occupational Skills Training</li>
-                                <li>BC Adult Graduation Diploma</li>
-                            </ul></li>
-                            <li><b>Workforce Innovation and Skills Training:  </b>
-                            <ul>
-                                <li>Skills Training for Employment</li>
-                                <li>ITA Funded Pre-Apprenticeship Training</li>
-                                <li>BladeRunners</li>
-                                <li>Indigenous Skills Training and Education</li>
-                            </ul></li>
-                            <li><b>Indigenous Skills and Employment Training: </b>
-                            <ul>
-                                <li>Essential Skills (TBD)</li>
-                                <li>Skills Training (TBD)</li>
-                                <li>Pre-Apprenticeship (TBD)</li>
-                            </ul></li>
-                        </ul>
+                    <div className="jumbotron">
+                        <div className="col-md-6">
+                            <p><b>Approved eligible skills training programs include:</b></p>
+                            
+                            <b className="text-primary">WorkBC Employment Services: </b>
+                                <ul>
+                                    <li>Short Duration Training</li>
+                                    <li>Occupational Skills Training</li>
+                                    <li>BC Adult Graduation Diploma</li>
+                                </ul>
+                                <b className="text-primary">Workforce Innovation and Skills Training:  </b>
+                                <ul>
+                                    <li>Skills Training for Employment</li>
+                                    <li>ITA Funded Pre-Apprenticeship Training</li>
+                                    <li>BladeRunners</li>
+                                </ul>
+                               <b className="text-primary">Indigenous Skills and Employment Training: </b>
+                                <ul>
+                                    <li>Essential Skills (TBD)</li>
+                                    <li>Skills Training (TBD)</li>
+                                    <li>Pre-Apprenticeship (TBD)</li>
+                                </ul>
+                           
+                        </div>
                     </div>
                 </div>
             </div>

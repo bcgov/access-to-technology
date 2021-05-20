@@ -113,7 +113,6 @@ class FormStep1 extends Component {
                         <option value="Skills Training for Employment">Skills Training for Employment</option>
                         <option value="ITA Funded Pre-Apprenticeship Training">ITA Funded Pre-Apprenticeship Training</option>
                         <option value="Blade Runners">Blade Runners</option>
-                        <option value="Indigenous Skills Training and Education">Indigenous Skills Training and Education</option>
                     </Field>
                     <small className="text-muted" id="trainingProgram"> This dropdown list is determined by the Referring Ministry selected above.</small>
                     {feedBackInvalid(this.props.errors, this.props.touched, "trainingProgram")}
@@ -196,7 +195,7 @@ class FormStep1 extends Component {
                 </div>
                 <div className="form-row"> 
                     <div className="form-group col-md-4">
-                            <label className="col-form-label control-label" htmlFor="serviceProviderPostal">Postal Code <span
+                            <label className="col-form-label control-label" htmlFor="serviceProviderPostal">Service Provider Postal Code <span
                                 style={{ color: "red" }}>*  </span></label>
                             <small className="text-muted" id="serviceProviderPostal">  V0R2V5</small>
                             <Field 

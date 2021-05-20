@@ -41,7 +41,7 @@ class ProviderIntakeStep2 extends Component {
                 <div className="form-group">
                     <label className="col-form-label control-label" htmlFor="addressAlt2">Street Address 2 </label>
                     <small className="text-muted" id="addressAlt2">   Apartment 207</small>
-                    <Field className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "addressAlt2")}`} id="addressAlt" name="addressAlt" />
+                    <Field className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "addressAlt2")}`} id="addressAlt2" name="addressAlt2" />
                     {feedBackInvalid(this.props.errors,this.props.touched,"addressAlt2")}
                 </div>
                 <div className="form-row">
