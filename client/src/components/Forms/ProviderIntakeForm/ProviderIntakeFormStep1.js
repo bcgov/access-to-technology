@@ -270,7 +270,7 @@ class FormStep1 extends Component {
                         <DatePickerField
                             name="periodStart1"
                             className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "periodStart1")}`}
-                            minDate={new Date(2021,7,1)}
+                            minDate={new Date(2021,7,15)}
                             maxDate={new Date(2023,2,2)}
                         />
                         <small className="text-muted" id="periodStart1">  Note: Training program starts dates before August 1, 2021 or after March 3, 2023 do not qualify. ​</small>
