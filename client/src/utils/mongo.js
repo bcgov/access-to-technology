@@ -40,15 +40,14 @@ module.exports = {
         })
         .then(async db => {
         // add our values to db (they are always new)
-            return db.collection("ProviderIntake").find({savedToSP: false, clientConsent:false})
+            return db.collection("ProviderIntake").find({savedToSP: false})
                 //console.log(err)
                 //console.log(doc)
         }).then(async doc =>{
             return doc
         })    
     },
-    
-    getProviderIntakeConsentNotSP: async function () {
+    getProviderIntakeConsent: async function (id, token) {
         return await connection
         .then(mClient => {
             // get a handle on the db
@@ -57,14 +56,13 @@ module.exports = {
         })
         .then(async db => {
         // add our values to db (they are always new)
-            return db.collection("ProviderIntake").find({savedToSP: false, clientConsent:true})
-                //console.log(err)
-                //console.log(doc)
+            return db.collection("ProviderIntake").find({applicationId: id, _token: token})
+               // console.log(err)
+               // console.log(doc)
         }).then(async doc =>{
             return doc
         })    
     },
-   
     updateSavedToSP: async function(collection,_id){
         return await connection
         .then(mClient => {
@@ -94,36 +92,7 @@ module.exports = {
             return result
         })     
     },
-    
-    updateConsentToFalse: async function(collection,_id){
-        return await connection
-        .then(mClient => {
-            // get a handle on the db
-            return mClient.db();
-            //return db
-        })
-        .then(async db => {
-        // add our values to db (they are always new)
-            return db.collection(collection).updateOne(
-                {
-                    _id: _id
-                },
-                { 
-                    $set : {
-                    clientConsent: false
-                    }
-                },
-                {
-                    upsert: false
-                }
-
-            )
-                //console.log(err)
-                //console.log(doc)
-        }).then(result =>{
-            return result
-        })     
-    },
+    //unused
     getProviderIntakeNotReporting: async function () {
         return await connection
         .then(mClient => {
@@ -169,18 +138,5 @@ module.exports = {
             return result
         })   
     }
-    /*
-    printValues: function(collection) {
-        const client = new MongoClient(uri, { useUnifiedTopology: true });
-        connection.then(mc => {
-            const db = mc.db("test");
-            let cursor = db.collection(collection).find({});
 
-            const iterateFunc = doc => console.log(JSON.stringify(doc, null, 4));
-            const errorFunc = error => console.log(error);
-            
-            cursor.forEach(iterateFunc, errorFunc);
-        });
-    }
-    */
 };

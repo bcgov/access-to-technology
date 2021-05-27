@@ -6,7 +6,7 @@ var ParticipantFormValidationSchema = yup.object().shape({
         .required("Please enter the application ID.")
         .min(10, "Must be 10 characters")
         .max(10, "Must be 10 characters"),
-    participantConsent: yup.boolean()
+    clientConsent: yup.boolean()
         .oneOf([true],"You must agree before submitting.")
 });
 
