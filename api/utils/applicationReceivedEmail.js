@@ -31,7 +31,7 @@ module.exports = {
         var html = /*html*/`
         <h2>Access to Technology Application</h2>
         <p>Thank you for submitting an application for the Access to Technology (A2T) Program. The application will be reviewed, and eligible clients will receive an A2T laptop. Application details are included below for your reference.</p>
-        <p>IMPORTANT NOTICE: If information on this application is incorrect, please contact <a href="mailto:elmsd.webmaster@gov.bc.ca" title="MSDPR Email Address">MSDPR Email Address</a> and include the Application ID referenced above in the subject of the email.</p>
+        <p>IMPORTANT NOTICE: If information on this application is incorrect, please contact <a href="mailto:AccessToTechnology@gov.bc.ca" title="A2T Email Address">Access To Technology</a> and include the Application ID referenced above in the subject of the email.</p>
         <h3>Application Tracking Information</h3>
         <p><b>Application ID:</b>  ${strings.orEmpty(values._id)}</p>
         <hr />
