@@ -5,59 +5,25 @@ class thankyouParticipant extends Component {
     
     render() {
 
-        const altShippingAddress = this.props.location.state !== undefined && this.props.location.state.altShippingAddress;
-        //const fundedISET = (this.props.location.state !== undefined && (this.props.location.state.fundingSource === "ISET"));
-        //const fundedAEST = (this.props.location.state !== undefined && (this.props.location.state.fundingSource === "AEST"));
-        //const fundedSDPR = (this.props.location.state !== undefined && (this.props.location.state.fundingSource === "SDPR"));
-
-
         return (
             
             <div className="container">
                 <div className="row">
                     <div className="col-md-12">
-                        <h1>Thank you, your application has been received</h1>
+                        <h1>Thank you, your consent has been received!</h1>
                         <h3>Application ID: {this.props.location.state !== undefined && this.props.location.state._id}</h3>
-                        <button className="btn btn-success d-print-none" onClick={() => window.print()}>Print Confirmation</button><br /><br />
-                        <p>Thank you for your interest in Access to Technology services. Your application has been received and a staff member will be in touch with you soon to confirm your client qualifies fortAccess to Technology and to complete the application process. </p>
-                        <p>
-                            The following information was received:
-                        </p>
-                        <br />
-                        <hr /> <h5>Application Tracking Information</h5>
-                                <p>Client Application ID:  {this.props.location.state !== undefined && this.props.location.state._id}</p>
-                                <p>Staff Name:  {this.props.location.state !== undefined && this.props.location.state.serviceProviderContact}</p>
-                                <p>Email Address:  {this.props.location.state !== undefined && this.props.location.state.serviceProviderEmail}</p>
-                                <p>Phone Number:  {this.props.location.state !== undefined && this.props.location.state.serviceProviderPhone}</p>
-                                
-                                <h5>Client Program Information</h5>
-                                
-                                <p>Approved Eligible Skills Training and Employment Program:  {this.props.location.state !== undefined && this.props.location.state.trainingProgram}</p> 
-                                <p>Program Start Date:  {this.props.location.state !== undefined && this.props.location.state.periodStart1}</p>
-                                <p>Program End Date:  {this.props.location.state !== undefined && this.props.location.state.periodEnd1}</p>
-                                
-                                <h5>Client Information</h5>
-                                <p>FullName:  {this.props.location.state !== undefined && this.props.location.state.clientName}</p>
-                                <p>Address:  {this.props.location.state !== undefined && this.props.location.state.clientAddress}</p>
-                                <p>City / Town:  {this.props.location.state !== undefined && this.props.location.state.clientCity}</p>
-                                <p>Province:  {this.props.location.state !== undefined && this.props.location.state.clientProvince}</p>
-                                <p>Postal:  {this.props.location.state !== undefined && this.props.location.state.clientPostal}</p>
-                                <p>Email Address:  {this.props.location.state !== undefined && this.props.location.state.clientEmail}</p>
-                                <p>Phone Number:  {this.props.location.state !== undefined && this.props.location.state.clientPhone}</p>
-
-                                {altShippingAddress ? (
-                                    <div>
-                                        <h5>Shipping Information (only if different from client home address)</h5>
-                                        <p>Work Address:  {this.props.location.state !== undefined && this.props.location.state.addressAlt}</p>
-                                        <p>City / Town:  {this.props.location.state !== undefined && this.props.location.state.cityAlt}</p>
-                                        <p>Province:  {this.props.location.state !== undefined && this.props.location.state.provinceAlt}</p>
-                                        <p>Postal:  {this.props.location.state !== undefined && this.props.location.state.postalAlt}</p>
-                                    </div>
-                                 ) : (<div></div>) 
-                                 }
-
-                        <hr />
+                        <p>Thank you for your interest in Access to Technology services. You should receive an email when your application has been approved. Your laptop will ship within 4 weeks of your program start date </p>
                     </div>
+                </div>
+                <div className="row">
+                <div class="col-lg-8">
+                    <div>
+                        <div class="alert alert-dismissible alert-success">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            <strong>Well done!</strong> <br/>Your Consent Was Successfully Received
+                        </div>
+                    </div>
+                </div>
                 </div>
             </div>
         )

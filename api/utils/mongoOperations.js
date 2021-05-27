@@ -35,45 +35,32 @@ function getClient() {
 
 module.exports = {
     //Deprecated participant values get saved at provider form
-    saveParticipantValues: async function (values, savedToSP) {
+    saveParticipantValues: async function (values) {
         return await connection
         .then(mClient => {
             // get a handle on the db
             return mClient.db();
         }).then(async db => {
             // add our values to db (they are always new)
-            return db.collection("Participant").insertOne({
-                savedToSP: false,
-                applicationID: values._id,// id is provided
-                token: values._token,
-                 //step 1
-                serviceProviderName: values.serviceProviderName,
-                providerContractID: values.providerContractId,
-                serviceProviderContact: values.serviceProviderContact,
-                serviceProviderPhone: values.serviceProviderPhone,
-                serviceProviderEmail: values.serviceProviderEmail,
-                fundingSource: values.fundingSource,
-                trainingProgram: values.trainingProgram,
-                periodStart1: values.periodStart1,
-                periodEnd1: values.periodEnd1,
-                clientAddress: values.clientAddress,
-                clientCity: values.clientCity,
-                clientProvince:values.clientProvince,
-                clientPostal: values.clientPostal,
-                clientPhone: values.clientPhone,
-                clientFax: values.clientFax,
-                clientEmail: values.clientEmail,
-                altShippingAddress: values.altShippingAddress,
+            return db.collection("ProviderIntake").updateOne(
+                {
+                    applicationId: values._id,
+                    _token: values._token
+                },
+                { 
+                    $set : {
+                        clientSignature: values.clientSignature,
+                        clientConsent: true,
+                        clientConsentDate: values.clientConsentDate,
+                        savedToSP:false,
+                    }
+                },
+                {
+                    upsert: false
+                }
 
-                //step 1:pop-up fields
-                addressAlt: values.addressAlt,
-                addressAlt2: values.addressAlt2,
-                cityAlt: values.cityAlt,
-                provinceAlt: values.provinceAlt,
-                postalAlt: values.postalAlt,
-                participantConsent: values.participantConsent,
-                
-            });
+            )
+                 
         });
     },
     saveProviderIntakeValues: async function (values, savedToSP) {
@@ -88,6 +75,7 @@ module.exports = {
                 applicationId: values._id,  // id is provided
                 _token: values._token,
                  //step 1
+                 // create new field Array of comparator values
                 serviceProviderName: values.serviceProviderName,
                 providerContractID: values.providerContractId,
                 serviceProviderContact: values.serviceProviderContact,
@@ -131,6 +119,8 @@ module.exports = {
                 //step 3
                 clientEligibility: values.clientEligibility,
                 serviceProviderResponsibility: values.serviceProviderResponsibility,
+                clientConsent:false,
+                
                 
             });
         });

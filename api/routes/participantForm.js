@@ -50,10 +50,17 @@ router.get('/', csrfProtection, (req, res) => {
         await saveParticipantValues(value)
         .then(async r => {
           // {n: 1, ok: 1}
-          // if (r.result.ok === 1)
-            //send email
+          if (r.result.ok === 1 && r.result.n === 1){
+            console.log("success");
+          }
+          else{
+            console.log("Not In Mongo");
+            res.send({
+              err: "Not Found"
+            })
+          }
             //send ok response
-          console.log(r.result)
+          console.log(r.result);
         })
       }
       catch (error) {
