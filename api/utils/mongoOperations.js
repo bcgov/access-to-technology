@@ -32,8 +32,12 @@ function getClient() {
 }
 
 function myTrim(x) {
-    var str =  x.replace(/^\s+|\s+$/gm,'');
-    return str.replace(/\s+/g, ' ')
+    if(x !== undefined){
+        let str =  x.replace(/^\s+|\s+$/gm,'');
+        return str.replace(/\s+/g, ' ');
+    } else{
+        return x;
+    }
 }
 
 module.exports = {
