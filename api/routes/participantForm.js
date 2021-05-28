@@ -54,7 +54,6 @@ router.get('/', csrfProtection, (req, res) => {
             console.log("success");
           }
           else{
-            console.log("Not In Mongo");
             res.send({
               err: "Not Found"
             })

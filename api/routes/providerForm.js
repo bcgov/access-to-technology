@@ -67,22 +67,16 @@ async function sendEmails(values) {
             "Access to Technology Application",
             [
               `Hello ${values.clientName},`,
-              `<p>You are receiving this email as confirmation that ${values.serviceProviderName} has electronically submitted an Access to Technology (A2T) Application and Agreement on your behalf to the Ministry of Social Development and Poverty Reduction (“MSDPR”), which administers the A2T program to support eligible clients participating in eligible skills training programs.</p>
-               <p>If you have questions about the A2T Program, please contact: </p>
-              `,
+              `<p>You are receiving this email as confirmation that ${values.serviceProviderName} has electronically submitted an Access to Technology (A2T) Application and Agreement on your behalf to the Ministry of Social Development and Poverty Reduction (“MSDPR”), which administers the A2T program to support eligible clients participating in eligible skills training programs.</p>`,
+              `<p>Visit the link below to complete your consent form and complete the application</p>`,
+              `</p><td bgcolor="#38598a" style="padding: 12px 18px 12px 18px; border-radius:3px" align="center"><a href="https://access-to-technology-dev.apps.silver.devops.gov.bc.ca/clientConsent/${values._id}/${values._token}" style="font-size: 16px; font-family: Helvetica, Arial, sans-serif; font-weight: normal; color: #ffffff; text-decoration: none; display: inline-block;" >Consent Form</a></td><p>`,
+              
+              `<p>A copy of the Confirmation, Consent and Aggreement is included in this email below for your records. If you have questions about the A2T Program, please contact: </p>`,
               `<b>Service Provider:</b> ${values.serviceProviderName}`,
               `<b>Staff Name:</b> ${values.serviceProviderContact}`,
               `<b>Contact Email Address:</b> ${values.serviceProviderEmail}`,
               `<b>Contact Phone Number:</b> ${values.serviceProviderPhone}`,
               ,
-              `<b>COLLECTION NOTICE</b>`,
-              `If you did not agree to the below Collection Notice, or you have questions about the collection of your personal information, please contact ${values.serviceProviderName}.` ,
-              ``,
-            ],
-            [
-              `COLLECTION NOTICE`,
-              `Personal information collected in this application is collected under the authority of sections 26 (c) and (e) of the Freedom of Information and Protection of Privacy Act and is subject to all the provisions of that Act. The personal information collected will be used by the Ministry of Social Development and Poverty Reduction (“MSDPR”), and its contracted A2T service provider to administer the A2T program, and may also be used to evaluate the effectiveness of the A2T program. If you have any questions about the collection of your personal information, please contact the Records Clerk of the Employment and Labour Market Services Division, MSDPR at WorkBCOESprivacy@gov.bc.ca.`,
-              ``,
             ],
             [
               `<b>APPLICANT INFORMATION</b>`,
@@ -94,8 +88,6 @@ async function sendEmails(values) {
               `<b>Training Program Start Date:</b> ${moment(values.periodStart1).format('MMMM Do YYYY')}`,
               `<b>Training Program End Date:</b> ${moment(values.periodEnd1).format('MMMM Do YYYY')}`,
               `<b>CONFIRMATION, CONSENT AND AGREEMENT</b>`,
-              `<p>Visit the link below to complete your application</p>`,
-              `<a href="https://access-to-technology-dev.apps.silver.devops.gov.bc.ca/clientConsent/${values._id}/${values._token}" >Consent Form</a>`,
               `If you did not agree to the below CONFIRMATION, CONSENT AND AGREEMENT, or you have questions about the terms of this agreement, please contact ${values.serviceProviderName}.`,
               `I, ${values.clientName}:</p><p>
                 <ol>
@@ -118,6 +110,11 @@ async function sendEmails(values) {
                   </li>
                 </ol>
               `,
+            ],
+            [
+              `COLLECTION NOTICE`,
+              `Personal information collected in this application is collected under the authority of sections 26 (c) and (e) of the Freedom of Information and Protection of Privacy Act and is subject to all the provisions of that Act. The personal information collected will be used by the Ministry of Social Development and Poverty Reduction (“MSDPR”), and its contracted A2T service provider to administer the A2T program, and may also be used to evaluate the effectiveness of the A2T program. If you have any questions about the collection of your personal information, please contact the Records Clerk of the Employment and Labour Market Services Division, MSDPR at WorkBCOESprivacy@gov.bc.ca.`,
+              ``,
             ]
           ) // html body
         };      

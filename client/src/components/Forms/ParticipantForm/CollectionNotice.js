@@ -6,7 +6,11 @@ function CollectionNotice() {
             <div className="col-md-12">
                 <h4>Collection Notice</h4>
                 <p className="small">
-                Personal information collected on this form is collected under the authority of sections 26 (c) and (e) of the Freedom of Information and Protection of Privacy Act (FOIPPA) and is subject to all of the provisions of that Act. The personal information collected may be used by the Ministry of Social Development and Poverty Reduction, its service providers and associates of those service providers to verify your eligibility to participate in the Work Experience Opportunities Grant program and to administer and evaluate the effectiveness of Grants. If you have any questions about the collection, use or disclosure of your personal information, please contact the Records clerk of the Employment and Labour Market Services Division, Ministry of Social Development and Poverty Reduction at <a href="mailto:WorkBCOESprivacy@gov.bc.ca">WorkBCOESprivacy@gov.bc.ca</a>.
+                Personal information collected in this application is collected under the authority of sections 26 (c) and (e) of the Freedom of Information and 
+                Protection of Privacy Act and is subject to all the provisions of that Act. The personal information collected will be used by the Ministry of 
+                Social Development and Poverty Reduction (“MSDPR”), and its contracted A2T service provider to administer the A2T program, and may also be used 
+                to evaluate the effectiveness of the A2T program. If you have any questions about the collection of your personal information, please contact the 
+                Records Clerk of the Employment and Labour Market Services Division, MSDPR at<a href="mailto:WorkBCOESprivacy@gov.bc.ca">WorkBCOESprivacy@gov.bc.ca</a>.
                 </p>
             </div>
         </div>

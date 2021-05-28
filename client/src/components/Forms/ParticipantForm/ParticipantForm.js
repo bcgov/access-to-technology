@@ -15,9 +15,9 @@ class ParticipantForm extends Component {
     constructor() {
         super()
         var key = []
-        var re = pathToRegexp('/clientConsent/:id/:token', key)
-        var sample = window.location.href.split("https://access-to-technology-dev.apps.silver.devops.gov.bc.ca")[1]
-        var content = re.exec(sample) //[clientConsent, id, token]]
+        var re = pathToRegexp('/:id/:token', key)
+        var sample = window.location.href.split("/clientConsent")[1]
+        var content = re.exec(sample) //[/id/token/, id, token]]
         var id = content[1];
         var token1 = content[2];
         
@@ -34,12 +34,12 @@ class ParticipantForm extends Component {
     
     componentDidMount() {
         fetch(FORM_URL.clientForm, {
-            credentials: "include"
+            credentials: "include",
         })
             .then(res => res.json())
             .then(
                 (result) => {
-                   // console.log(result.csrfToken)
+                   console.log(result)
                     this.setState({
                         _csrf: result.csrfToken,
                     })
@@ -73,11 +73,11 @@ class ParticipantForm extends Component {
               <Form>
                                   
                                 <div className="form=row">
-                                      <p>The Ministry of Social Development and Poverty Reduction has received a request from {`${values.serviceProviderName}`}.
-                                  To process your application for an A2T laptop, you must complete and submit this Client Notification and Agreement.<br/><br/>
-                                  Please be aware that delays in submitting your completed Client Notification and Agreement will result in delays in processing your
-                                  application and may negatively impact your eligibility to receive an A2T laptop.   You are encouraged to complete and submit this form as soon as possible.<br/><br />
-                                  If you have questions or require assistance to complete this form, please contact {`${values.serviceProviderName}`}.<br/></p>
+                                <p>The Ministry of Social Development and Poverty Reduction has received a request from a service provider.
+                                  To process your application for an A2T laptop, you must complete and submit this Client Consent and Agreement.<br/><br/>
+                                  Please be aware that delays in submitting your completed Client Consent and Agreement will result in delays in processing your
+                                  application and may negatively impact your eligibility to receive an A2T laptop. You are encouraged to complete and submit this form as soon as possible.<br/><br />
+                                  If you have questions or require assistance to complete this form, please contact your service provider via the email provided in your previous confirmation email.<br/></p>
                                   </div>
                                   {/* handleApplicationID handles all the pre populated values in future. */}
                                  
@@ -85,31 +85,32 @@ class ParticipantForm extends Component {
                                       <div className="form-group">
                                       <h3 id="forms">Application ID: {this.state._id}</h3>
                                   </div>
-                                  <p><b>Collection, Use and Disclosure of Personal Information</b><br/>
-                                      Personal information collected in this application is collected under the authority of section 26 (c) of the Freedom of Information and Protection of Privacy Act (“FOIPPA”) and is subject to all the provisions of that Act. The personal information collected will be used by the Ministry of Social Development and Poverty Reduction (“MSDPR”), its service providers and associates of its service providers to administer the Access to Technology Program ({`${values.eligibleTrainingProgram}`}), and may also be used to evaluate the effectiveness of the Access to Technology Program.
-                                      If you have any questions about the collection of your personal information, please contact the Records clerk of the Employment and Labour Market Services Division, MSDPR at WorkBCOESprivacy@gov.bc.ca.<br/><br/>
-                                      <b>Confirmation of Request</b><br/>
-                                      I am requesting a laptop from the Access to Technology Initiative and I understand and agree that:  </p>
-                                      <ul>
-                                          <li>I require the technology described in my Access to Technology (A2T) application for the purposes of participating in, and completing the eligible training program described this A2T application;</li>
-
-                                          <li>My use of the technology described in this A2T application is contingent upon my participation in the training described in this A2T application;</li>
-
-                                          <li>If I complete the training described in this A2T application to the satisfaction of {`${values.serviceProviderName}`}, I may keep the technology provided to me by the A2T program; and</li>
-
-                                          <li>If I do not complete the training described in this A2T application to the satisfaction of {`${values.serviceProviderName}`},  I must return the technology, in good working order to (name of referring service provider).</li>
-                                      </ul>
-                                    <p>  <b>Acceptable Uses Agreement:</b><br/>
-                                      I understand and agree that the laptop has been provided to me in order to attend training.  I will not use the laptop for:  </p>
-                                      <ul>
-                                          <li>sexual exploitation;</li>
-                                          <li>illegal activity;</li>
-                                          <li>promoting hate, discrimination, or illegal activity; and/or;</li>
-                                          <li>promoting a particular religious or political opinion;</li>
-                                      </ul>
-                                
-
+                                 <p> <b>CONFIRMATION, CONSENT AND AGREEMENT</b><br/>
+                                    I, {values.clientSignature},</p>
+                                    <p>
+                                        <ol>
+                                        <li>CONFIRM that I need a laptop computer to participate in and complete the training program described in my application.</li>
+                                        <li>CONSENT to MSDPR or its contracted A2T service provider collecting my personal information from and disclosing my personal information to the service provider for the purposes of administering or evaluating the effectiveness of the A2T program.</li>
+                                        <li>ACKNOWLEDGE and AGREE that:
+                                            <ol type="a">
+                                            <li>My receipt and use of a laptop computer provided to me through the A2T program is dependent on my participation in the training described in my application;</li>
+                                            <li>If I complete the training described in my application to the satisfaction of the service provider I may keep the laptop computer provided to me through the A2T program;</li>
+                                            <li>If I do not complete the training specified in my application to the satisfaction of the service provider I must return the laptop computer, in good working order, to the A2T contractor;</li>
+                                            <li>I may not and will not use any laptop computer provided to me through the A2T program for the purposes of:
+                                                <ol type="i">
+                                                <li>sexual exploitation;</li>
+                                                <li>promoting hate or discrimination;</li>
+                                                <li>any other illegal activity; or</li>
+                                                <li>promoting any illegal activity.</li>
+                                                </ol>
+                                            </li>
+                                            </ol>
+                                        </li>
+                                        </ol>
+                                    </p>
+                        
                                   <CollectionNotice />
+
                                   <div className="form-row">
                                   <div className="form-group col-md-8">
                                   <label className="col-form-label control-label" htmlFor="clientSignature">Please enter your full name <span
@@ -178,6 +179,7 @@ class ParticipantForm extends Component {
                                 clientConsentDate:new Date(),
                                 clientSignature:'',
                                 clientConsent:false,
+                                serviceProviderName:'',
                             }}
                             enableReinitialize={true}
                             validationSchema={ParticipantValidationSchema}
