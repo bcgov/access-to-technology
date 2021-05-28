@@ -16,7 +16,7 @@ class ParticipantForm extends Component {
         super()
         var key = []
         var re = pathToRegexp('/clientConsent/:id/:token', key)
-        var sample = window.location.href.split("localhost:3000")[1]
+        var sample = window.location.href.split("https://access-to-technology-dev.apps.silver.devops.gov.bc.ca")[1]
         var content = re.exec(sample) //[clientConsent, id, token]]
         var id = content[1];
         var token1 = content[2];
