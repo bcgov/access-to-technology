@@ -273,7 +273,7 @@ class FormStep1 extends Component {
                             minDate={new Date(2021,7,15)}
                             maxDate={new Date(2023,2,2)}
                         />
-                        <small className="text-muted" id="periodStart1">  Note: Training program starts dates before August 1, 2021 or after March 3, 2023 do not qualify. ​</small>
+                        <small className="text-muted" id="periodStart1">  Note: Training program starts dates before August 15, 2021 or after March 3, 2023 do not qualify. ​</small>
                         {feedBackInvalid(this.props.errors, this.props.touched, "periodStart1")}
                     </div>
                     <div className="form-group col-md-6">

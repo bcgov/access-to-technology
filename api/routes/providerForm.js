@@ -95,7 +95,7 @@ async function sendEmails(values) {
               `<b>Training Program End Date:</b> ${moment(values.periodEnd1).format('MMMM Do YYYY')}`,
               `<b>CONFIRMATION, CONSENT AND AGREEMENT</b>`,
               `<p>Visit the link below to complete your application</p>`,
-              `<a href="https://access-to-technology-dev.apps.silver.devops.gov.bc.ca/clientConsent/${values._id}/${values._token}" target="_blank" >Consent Form</a>`,
+              `<a href="https://access-to-technology-dev.apps.silver.devops.gov.bc.ca/clientConsent/${values._id}/${values._token}" >Consent Form</a>`,
               `If you did not agree to the below CONFIRMATION, CONSENT AND AGREEMENT, or you have questions about the terms of this agreement, please contact ${values.serviceProviderName}.`,
               `I, ${values.clientName}:</p><p>
                 <ol>
