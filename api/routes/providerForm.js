@@ -69,7 +69,7 @@ async function sendEmails(values) {
               `Hello ${values.clientName},`,
               `<p>You are receiving this email as confirmation that ${values.serviceProviderName} has electronically submitted an Access to Technology (A2T) Application and Agreement on your behalf to the Ministry of Social Development and Poverty Reduction (“MSDPR”), which administers the A2T program to support eligible clients participating in eligible skills training programs.</p>`,
               `<p>Visit the link below to complete your consent form and complete the application</p>`,
-              `<a href="https://access-to-technology-dev.apps.silver.devops.gov.bc.ca/clientConsent/${values._id}/${values._token}" style="padding: 8px 12px; bgcolor: #294266; background-color: #294266; border: 1px solid #294266; border-radius: 2px; font-family: Helvetica, Arial, sans-serif; font-size: 14px; color: #294266; text-decoration: none; font-weight: bold; display: inline-block;" ><span style="color:#ffffff;">Consent Form</span></a>`,
+              `<a href="https://access-to-technology-dev.apps.silver.devops.gov.bc.ca/clientConsent/${values._id}/${values._token}" style="padding: 8px 12px; bgcolor: #ffffff; background-color: #ffffff; border: 1px solid #294266; border-radius: 2px; font-family: Helvetica, Arial, sans-serif; font-size: 14px; color: #294266 ! important; text-decoration: none; font-weight: bold; display: inline-block;" >Consent Form</a>`,
               
               `<p>A copy of the Confirmation, Consent and Aggreement is included in this email below for your records. If you have questions about the A2T Program, please contact: </p>`,
               `<b>Service Provider:</b> ${values.serviceProviderName}`,
