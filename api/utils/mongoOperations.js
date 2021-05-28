@@ -31,7 +31,10 @@ function getClient() {
     return client;
 }
 
-
+function myTrim(x) {
+    var str =  x.replace(/^\s+|\s+$/gm,'');
+    return str.replace(/\s+/g, ' ')
+}
 
 module.exports = {
     //Deprecated participant values get saved at provider form
@@ -76,12 +79,12 @@ module.exports = {
                 _token: values._token,
                  //step 1
                  // create new field Array of comparator values
-                serviceProviderName: values.serviceProviderName,
-                providerContractID: values.providerContractId,
-                serviceProviderContact: values.serviceProviderContact,
-                serviceProviderPostal: values.serviceProviderPostal,
-                serviceProviderPhone: values.serviceProviderPhone,
-                serviceProviderEmail: values.serviceProviderEmail,
+                serviceProviderName: myTrim(values.serviceProviderName),
+                providerContractID: myTrim(values.providerContractId),
+                serviceProviderContact: myTrim(values.serviceProviderContact),
+                serviceProviderPostal: myTrim(values.serviceProviderPostal),
+                serviceProviderPhone: myTrim(values.serviceProviderPhone),
+                serviceProviderEmail: myTrim(values.serviceProviderEmail),
                 fundingSource: values.fundingSource,
                 trainingProgram: values.trainingProgram,
                 periodStart1: values.periodStart1,
@@ -89,16 +92,16 @@ module.exports = {
                 unemployed: values.unemployed,
                 BCEAorFederalOnReserve: values.BCEAorFederalOnReserve,
                 workBCCaseNumber: values.workBCCaseNumber,
-                clientName: values.clientName,
-                clientLastName: values.clientLastName,
-                clientMiddleName: values.clientMiddleName,
-                clientAddress: values.clientAddress,
-                clientAddress2:values.clientAddress2,
-                clientCity: values.clientCity,
+                clientName: myTrim(values.clientName),
+                clientLastName: myTrim(values.clientLastName),
+                clientMiddleName: myTrim(values.clientMiddleName),
+                clientAddress: myTrim(values.clientAddress),
+                clientAddress2:myTrim(values.clientAddress2),
+                clientCity: myTrim(values.clientCity),
                 clientProvince:values.clientProvince,
                 clientPostal: values.clientPostal,
                 clientPhone: values.clientPhone,
-                clientEmail: values.clientEmail,
+                clientEmail: myTrim(values.clientEmail),
                 altShippingAddress: values.altShippingAddress,
 
                 //step 1:pop-up fields
