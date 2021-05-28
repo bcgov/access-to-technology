@@ -69,16 +69,13 @@ async function sendEmails(values) {
               `Hello ${values.clientName},`,
               `<p>You are receiving this email as confirmation that ${values.serviceProviderName} has electronically submitted an Access to Technology (A2T) Application and Agreement on your behalf to the Ministry of Social Development and Poverty Reduction (“MSDPR”), which administers the A2T program to support eligible clients participating in eligible skills training programs.</p>`,
               `<p>Visit the link below to complete your consent form and complete the application</p>`,
-              `</p><td bgcolor="#38598a" style="padding: 12px 18px 12px 18px; border-radius:3px" align="center"><a href="https://access-to-technology-dev.apps.silver.devops.gov.bc.ca/clientConsent/${values._id}/${values._token}" style="font-size: 16px; font-family: Helvetica, Arial, sans-serif; font-weight: normal; color: #ffffff; text-decoration: none; display: inline-block;" >Consent Form</a></td><p>`,
+              `<a href="https://access-to-technology-dev.apps.silver.devops.gov.bc.ca/clientConsent/${values._id}/${values._token}" style="padding: 8px 12px; bgcolor: #294266; background-color: #294266; border: 1px solid #294266; border-radius: 2px; font-family: Helvetica, Arial, sans-serif; font-size: 14px; color: #ffffff; text-decoration: none; font-weight: bold; display: inline-block;" >Consent Form</a>`,
               
               `<p>A copy of the Confirmation, Consent and Aggreement is included in this email below for your records. If you have questions about the A2T Program, please contact: </p>`,
               `<b>Service Provider:</b> ${values.serviceProviderName}`,
               `<b>Staff Name:</b> ${values.serviceProviderContact}`,
               `<b>Contact Email Address:</b> ${values.serviceProviderEmail}`,
-              `<b>Contact Phone Number:</b> ${values.serviceProviderPhone}`,
-              ,
-            ],
-            [
+              `<b>Contact Phone Number:</b> ${values.serviceProviderPhone}<br/>`,
               `<b>APPLICANT INFORMATION</b>`,
               `Please review the information in this section and contact ${values.serviceProviderName} if corrections are needed.`,
               `<b>Application ID:</b> ${values._id}`,
@@ -87,6 +84,8 @@ async function sendEmails(values) {
               `<b>Eligible Skills Training Program:</b> ${values.trainingProgram} `,
               `<b>Training Program Start Date:</b> ${moment(values.periodStart1).format('MMMM Do YYYY')}`,
               `<b>Training Program End Date:</b> ${moment(values.periodEnd1).format('MMMM Do YYYY')}`,
+            ],
+            [
               `<b>CONFIRMATION, CONSENT AND AGREEMENT</b>`,
               `If you did not agree to the below CONFIRMATION, CONSENT AND AGREEMENT, or you have questions about the terms of this agreement, please contact ${values.serviceProviderName}.`,
               `I, ${values.clientName}:</p><p>
@@ -151,7 +150,6 @@ async function sendEmails(values) {
 
 router.get('/', csrfProtection, (req, res) => {
   //saveList()
-  
   var token = req.csrfToken()
   res.cookie('XSRF-TOKEN', token)
   res.send({
