@@ -70,7 +70,19 @@ module.exports = {
                  
         });
     },
-    saveProviderIntakeValues: async function (values, savedToSP) {
+
+    getParticipantValues: async function (values) {
+        return await connection
+        .then(mClient => {
+            // get a handle on the db
+            return mClient.db();
+        }).then(async db => {
+            // get our values from db 
+            return db.collection("ProviderIntake").find({applicationId: values.id, _token: values.token});
+            console.log(err)  
+        });
+    },
+    saveProviderIntakeValues: async function (values) {
         return await connection
         .then(mClient => {
             // get a handle on the db

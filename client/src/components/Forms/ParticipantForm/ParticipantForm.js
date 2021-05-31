@@ -24,14 +24,14 @@ class ParticipantForm extends Component {
         this.state = {
             _csrf: '',
             _id: id,
+            clientFirstName:'',
+            serviceProviderName:'',
             hasError: false,
              _token: token1,      
         }
        
     }
-    
-   
-    
+
     componentDidMount() {
         fetch(FORM_URL.clientForm, {
             credentials: "include",
@@ -51,6 +51,30 @@ class ParticipantForm extends Component {
                     })
                 }
             )
+        this.getContext(this.state)
+    }
+
+    getContext(values){
+        console.log("running...")
+        fetch(FORM_URL.clientForm+"/getData/"+this.state._id+"/"+this.state._token,  {
+            credentials: "include",
+        }).then(res => res.json())
+        .then(
+            (result) => {
+                console.log(result)
+                this.setState({
+                    serviceProviderName: result.serviceProvider,
+                    clientFirstName: result.clientFirstName
+                })
+
+            },
+            (error) => {
+                console.log(error)
+                this.setState({
+                    hasError: true
+                })
+            }
+        )
     }
   
     handleSubmit = (event) => {
@@ -67,7 +91,7 @@ class ParticipantForm extends Component {
                 </div>
             )
         } else {
-            //display the id
+           
             return (<div>
               
               <Form>
@@ -86,8 +110,8 @@ class ParticipantForm extends Component {
                                       <h3 id="forms">Application ID: {this.state._id}</h3>
                                   </div>
                                  <p> <b>CONFIRMATION, CONSENT AND AGREEMENT</b><br/>
-                                    I, {values.clientSignature},</p>
-                                    <p>
+                                    I, {this.state.clientFirstName},</p>
+                                    
                                         <ol>
                                         <li>CONFIRM that I need a laptop computer to participate in and complete the training program described in my application.</li>
                                         <li>CONSENT to MSDPR or its contracted A2T service provider collecting my personal information from and disclosing my personal information to the service provider for the purposes of administering or evaluating the effectiveness of the A2T program.</li>
@@ -107,7 +131,7 @@ class ParticipantForm extends Component {
                                             </ol>
                                         </li>
                                         </ol>
-                                    </p>
+                                    
                         
                                   <CollectionNotice />
 

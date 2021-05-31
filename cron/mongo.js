@@ -56,7 +56,7 @@ module.exports = {
             //return db
         })
         .then(async db => {
-        // add our values to db (they are always new)
+        // get our values from db 
             return db.collection("ProviderIntake").find({savedToSP: false, clientConsent:true})
                 //console.log(err)
                 //console.log(doc)
