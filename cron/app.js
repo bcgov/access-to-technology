@@ -165,7 +165,7 @@ async function saveListProviderIntake(values) {
       //item was not created
       console.log("error in chain")
       //console.log(err);
-      sendEmail(values, "Add Attempt Error - Application Could Not Be Added to SharePoint")
+      //sendEmail(values, "Add Attempt Error - Application Could Not Be Added to SharePoint")
       console.log("err status code:"+ err.statusCode);
       console.log(err);
       if (err.statusCode !== 403){
