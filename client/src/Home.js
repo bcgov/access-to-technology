@@ -9,7 +9,7 @@ function Home() {
                 <div className="row">
                     <div className="col-md-6">
                     <p>Access to Technology (A2T) will provide basic laptops to eligible clients participating in specific 
-                            training programs administered by Social Development and Poverty Reduction (SDPR), Advanced Education and Skills Training (AEST) and Indigenous Skills Training for Employment (ISET), which:</p>
+                            training programs administered by Social Development and Poverty Reduction (SDPR), Advanced Education and Skills Training (AEST) and Indigenous Skills and Employment Training (ISET), which:</p>
                         <ul>
                             <li>Have an online learning component; and</li>
                             <li>Lead to employment; and</li>
@@ -19,7 +19,6 @@ function Home() {
                         <p>For additional Service Provider Information see the <a href="https://www.workbc.ca/getmedia/3532dbe8-f084-4022-bd3c-8f9ebe422fa4/WS-Guide.aspx" target="_blank" rel="noopener noreferrer" >Access to Technology (A2T) Service Provider Guide</a>.</p>
                         <p>In order to submit an application for a client to access the A2T Program, you will need the following: </p>
                         <ol style={{listStyleType:"decimal"}}>
-                            <li>Service Provider Contract Reference ID</li>
                             <li>Confirmation of Client Eligibility </li>
                             <li>Confirmation of Training Program Eligibility</li>
                             <li>Training Program start and end dates</li>
@@ -27,9 +26,8 @@ function Home() {
                         </ol>
                    
                     </div>
-                    <div className="jumbotron">
-                        <div className="col-md-6">
-                            <p><b>Approved eligible skills training programs include:</b></p>
+                    <div className="jumbotron col-md-6">
+                            <p><b>Approved skills training programs include:</b></p>
                             
                             <b className="text-primary">WorkBC Employment Services: </b>
                                 <ul>
@@ -44,13 +42,8 @@ function Home() {
                                     <li>BladeRunners</li>
                                 </ul>
                                <b className="text-primary">Indigenous Skills and Employment Training: </b>
-                                <ul>
-                                    <li>Essential Skills (TBD)</li>
-                                    <li>Skills Training (TBD)</li>
-                                    <li>Pre-Apprenticeship (TBD)</li>
-                                </ul>
-                           
-                        </div>
+                                    <p>Skills training programs, as identified by each participating ISET Service Provider, and confirmed with MSDPR.</p>
+                                
                     </div>
                 </div>
             </div>
