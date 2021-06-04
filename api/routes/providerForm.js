@@ -79,7 +79,7 @@ async function sendEmails(values) {
               `<b>APPLICANT INFORMATION</b>`,
               `Please review the information in this section and contact ${values.serviceProviderName} if corrections are needed.`,
               `<b>Application ID:</b> ${values._id}`,
-              `<b>Shipping Address:</b> ${values.altShippingAddress ? (`${strings.orEmpty(values.addressAlt)} ${strings.orEmpty(values.addressAlt2)},  ${strings.orEmpty(values.cityAlt)}, ${strings.orEmpty(values.provinceAlt)}, ${strings.orEmpty(values.postalAlt)}`):(`${strings.orEmpty(values.clientAddress)} ${strings.orEmpty(values.clientAddress2)}, ${strings.orEmpty(values.clientCity)}, ${strings.orEmpty(values.clientProvince)}, ${strings.orEmpty(values.clientPostal)} `)}`,
+              `<b>Shipping Address:</b> ${values.altShippingAddress ? (`${strings.orEmpty(values.recipientName)}, ${strings.orEmpty(values.clientAddress)} ${strings.orEmpty(values.clientAddress2)}, ${strings.orEmpty(values.clientCity)}, ${strings.orEmpty(values.clientProvince)}, ${strings.orEmpty(values.clientPostal)}`):(`${strings.orEmpty(values.clientAddress)} ${strings.orEmpty(values.clientAddress2)}, ${strings.orEmpty(values.clientCity)}, ${strings.orEmpty(values.clientProvince)}, ${strings.orEmpty(values.clientPostal)} `)}`,
               `<b>Phone Number:</b> ${values.clientPhone}`,
               `<b>Eligible Skills Training Program:</b> ${values.trainingProgram} `,
               `<b>Training Program Start Date:</b> ${moment(values.periodStart1).format('MMMM Do YYYY')}`,

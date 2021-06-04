@@ -121,10 +121,6 @@ module.exports = {
 
                 //step 1:pop-up fields
                 addressAlt: values.addressAlt,
-                addressAlt2: values.addressAlt2,
-                cityAlt: values.cityAlt,
-                provinceAlt: values.provinceAlt,
-                postalAlt: values.postalAlt,
                
                 //step 2
                 /*
