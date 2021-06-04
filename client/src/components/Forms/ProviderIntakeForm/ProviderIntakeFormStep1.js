@@ -185,14 +185,6 @@ class FormStep1 extends Component {
                 </div>
 
                 {this.ApplicableServiceProvider}
-                <div className="form-row">
-                    <div className="form-group col-md-8">
-                        <label className="col-form-label control-label" htmlFor="providerContractId">Contract Reference ID <span
-                            style={{ color: "red" }}>*</span></label>
-                        <Field className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "providerContractId")}`} id="providerContractId" name="providerContractId" />
-                        {feedBackInvalid(this.props.errors,this.props.touched,"providerContractId")}
-                    </div>
-                </div>
                 <div className="form-row"> 
                     <div className="form-group col-md-4">
                             <label className="col-form-label control-label" htmlFor="serviceProviderPostal">Service Provider Postal Code <span
@@ -283,7 +275,7 @@ class FormStep1 extends Component {
                             name="periodEnd1"
                             className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "periodEnd1")}`}
                             minDate={new Date (moment(this.props.values['periodStart1']).add(28, 'days'))}
-                            maxDate={new Date(2023,4,3)}
+                            
                         />
                         {feedBackInvalid(this.props.errors, this.props.touched, "periodEnd1")}
                     </div>

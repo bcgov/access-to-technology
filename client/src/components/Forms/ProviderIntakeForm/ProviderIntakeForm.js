@@ -136,7 +136,6 @@ class ProviderIntakeForm extends Component {
                                     _token: this.state._token,
                                     //step 1
                                     serviceProviderName:"",
-                                    providerContractId:"",
                                     serviceProviderPostal:"",
                                     serviceProviderContact:"",
                                     serviceProviderPhone:"",

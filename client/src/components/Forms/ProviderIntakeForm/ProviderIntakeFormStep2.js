@@ -155,6 +155,23 @@ class ProviderIntakeStep2 extends Component {
                     </div>
                 
                 </div>
+                <div className="form-group">
+                    <h2 id="forms">Shipping Information</h2>
+                </div>
+                <div className="form-row">
+                    <div className="form-group">
+                        <div className="form-check">
+                            <Field type="checkbox" className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "altShippingAddress")}`} id="altShippingAddress" name="altShippingAddress"/>
+                            {feedBackInvalid(this.props.errors,this.props.touched,"altShippingAddress")}
+                            <label 
+                                className="form-check-label" 
+                                htmlFor="altShippingAddress"
+                            >
+                                The laptop is being shipped to the care of another individual.
+                            </label>
+                        </div>
+                    </div>
+                </div>
                 <div className="form-row">
                     <div className="form-group col-md-12">
                         <label className="col-form-label control-label" htmlFor="clientAddress">Street Address 1 <span
@@ -231,20 +248,7 @@ class ProviderIntakeStep2 extends Component {
                         {feedBackInvalid(this.props.errors,this.props.touched,"clientPostal")}
                     </div>
                 </div>
-    
-                <div className="form-group">
-                    <div className="form-check">
-                        <Field type="checkbox" className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "altShippingAddress")}`} id="altShippingAddress" name="altShippingAddress"/>
-                        {feedBackInvalid(this.props.errors,this.props.touched,"altShippingAddress")}
-                        <label 
-                            className="form-check-label" 
-                            htmlFor="altShippingAddress"
-                        >
-                      The client's shipping address is different from their Street address.
-                        </label>
-                    </div>
-                </div>
-                {this.shippingAddressForm}
+                
 
                
                 {/*

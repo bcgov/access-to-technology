@@ -8,8 +8,6 @@ export const ProviderIntakeValidationSchema = yup.object().shape({
     //see what requirements are fo APP id but it will be generated anyways
     serviceProviderName: yup.string()
         .required('Please select the service provider name'),
-    providerContractId: yup.string()
-        .required('Please enter the service provider contract reference ID'),
     serviceProviderPostal:yup.string()
         .matches(/^[A-Za-z]\d[A-Za-z]\d[A-Za-z]\d$/,"Please enter a valid Postal Code")
         .required("Please enter a valid Postal Code"),   

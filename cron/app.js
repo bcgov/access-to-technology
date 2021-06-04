@@ -109,7 +109,6 @@ async function saveListProviderIntake(values) {
           'applicationToken': values._token,
           //step 1
           'serviceProviderName': values.serviceProviderName,
-          'providerContractId': values.providerContractID,
           'serviceProviderPostal': values.serviceProviderPostal,
           'serviceProviderContact': values.serviceProviderContact,
           'serviceProviderPhone': values.serviceProviderPhone,

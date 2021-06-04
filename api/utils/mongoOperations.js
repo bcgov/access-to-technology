@@ -96,7 +96,6 @@ module.exports = {
                  //step 1
                  // create new field Array of comparator values
                 serviceProviderName: myTrim(values.serviceProviderName),
-                providerContractID: myTrim(values.providerContractId),
                 serviceProviderContact: myTrim(values.serviceProviderContact),
                 serviceProviderPostal: myTrim(values.serviceProviderPostal),
                 serviceProviderPhone: myTrim(values.serviceProviderPhone),
