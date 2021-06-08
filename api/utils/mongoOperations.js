@@ -120,7 +120,7 @@ module.exports = {
                 altShippingAddress: values.altShippingAddress,
 
                 //step 1:pop-up fields
-                addressAlt: values.addressAlt,
+                recipientName: values.recipientName,
                
                 //step 2
                 /*
