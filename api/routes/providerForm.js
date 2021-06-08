@@ -68,16 +68,15 @@ async function sendEmails(values) {
             [
               `Hello ${values.clientName},`,
               `<p>You are receiving this email as confirmation that ${values.serviceProviderName} has electronically submitted an Access to Technology (A2T) Application and Agreement on your behalf to the Ministry of Social Development and Poverty Reduction (“MSDPR”), which administers the A2T program to support eligible clients participating in eligible skills training programs.</p>`,
-              `<p>Visit the link below to complete your consent form and complete the application</p>`,
-              `<a href="https://access-to-technology-dev.apps.silver.devops.gov.bc.ca/clientConsent/${values._id}/${values._token}" style="padding: 8px 12px; bgcolor: #ffffff; background-color: #ffffff; border: 1px solid #294266; border-radius: 2px; font-family: Helvetica, Arial, sans-serif; font-size: 14px; color: #294266 ! important; text-decoration: none; font-weight: bold; display: inline-block;" >Consent Form</a>`,
+              `<p><b style="color:'red'">IMPORTANT</b>: to complete your application, you must visit the link below to provide your consent and complete the agreement.  Without your consent and agreement, the application cannot be processed.</p>`,
+              `<a href="https://access-to-technology-dev.apps.silver.devops.gov.bc.ca/clientConsent/${values._id}/${values._token}" style="padding: 8px 12px; bgcolor: #ffffff; background-color: #ffffff; border: 2px solid #294266; border-radius: 2px; font-family: Helvetica, Arial, sans-serif; font-size: 14px; color: #294266 ! important; text-decoration: none; font-weight: bold; display: inline-block;" >Consent Form</a>`,
               
-              `<p>A copy of the Confirmation, Consent and Aggreement is included in this email below for your records. If you have questions about the A2T Program, please contact: </p>`,
+              `<p>A copy of your application information is included below for your records. Please review this information and contact your Service Provider if you have questions and/or if any of the information is not correct:</p>`,
               `<b>Service Provider:</b> ${values.serviceProviderName}`,
               `<b>Staff Name:</b> ${values.serviceProviderContact}`,
               `<b>Contact Email Address:</b> ${values.serviceProviderEmail}`,
               `<b>Contact Phone Number:</b> ${values.serviceProviderPhone}<br/>`,
               `<b>APPLICANT INFORMATION</b>`,
-              `Please review the information in this section and contact ${values.serviceProviderName} if corrections are needed.`,
               `<b>Application ID:</b> ${values._id}`,
               `<b>Shipping Address:</b> ${values.altShippingAddress ? (`${strings.orEmpty(values.recipientName)}, ${strings.orEmpty(values.clientAddress)} ${strings.orEmpty(values.clientAddress2)}, ${strings.orEmpty(values.clientCity)}, ${strings.orEmpty(values.clientProvince)}, ${strings.orEmpty(values.clientPostal)}`):(`${strings.orEmpty(values.clientAddress)} ${strings.orEmpty(values.clientAddress2)}, ${strings.orEmpty(values.clientCity)}, ${strings.orEmpty(values.clientProvince)}, ${strings.orEmpty(values.clientPostal)} `)}`,
               `<b>Phone Number:</b> ${values.clientPhone}`,
@@ -87,7 +86,6 @@ async function sendEmails(values) {
             ],
             [
               `<b>CONFIRMATION, CONSENT AND AGREEMENT</b>`,
-              `If you did not agree to the below CONFIRMATION, CONSENT AND AGREEMENT, or you have questions about the terms of this agreement, please contact ${values.serviceProviderName}.`,
               `I, ${values.clientName}:</p><p>
                 <ol>
                   <li>CONFIRM that I need a laptop computer to participate in and complete the training program described above.</li>
@@ -111,8 +109,8 @@ async function sendEmails(values) {
               `,
             ],
             [
-              `COLLECTION NOTICE`,
-              `Personal information collected in this application is collected under the authority of sections 26 (c) and (e) of the Freedom of Information and Protection of Privacy Act and is subject to all the provisions of that Act. The personal information collected will be used by the Ministry of Social Development and Poverty Reduction (“MSDPR”), and its contracted A2T service provider to administer the A2T program, and may also be used to evaluate the effectiveness of the A2T program. If you have any questions about the collection of your personal information, please contact the Records Clerk of the Employment and Labour Market Services Division, MSDPR at WorkBCOESprivacy@gov.bc.ca.`,
+              `<b>COLLECTION NOTICE</b>`,
+              `Personal information collected in this application is collected under the authority of sections 26 (c) and (e) of the Freedom of Information and Protection of Privacy Act or Parts 3 and 4 of the Personal Information Protection Act and is subject to all the provisions of the applicable Act. The personal information collected will be used by the Ministry of Social Development and Poverty Reduction (“MSDPR”), and its contracted A2T service provider to administer the A2T program, and may also be used to evaluate the effectiveness of the A2T program. If you have any questions about the collection of your personal information, please contact the Records Clerk of the Employment and Labour Market Services Division, MSDPR at WorkBCOESprivacy@gov.bc.ca.`,
               ``,
             ]
           ) // html body

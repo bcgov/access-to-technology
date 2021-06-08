@@ -24,26 +24,34 @@ class FormStep1 extends Component {
                         className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "serviceProviderName")}`}
                         id="serviceProviderName" 
                         name="serviceProviderName" 
+                        onChange={e => {
+                            this.props.handleChange(e)
+                            this.props.setFieldValue("trainingProgram", "")
+                        }}
                     >
                         <option value="">Please select</option>
-                        <option value="ACCESS - Aboriginal Community Career Employment Services Society">ACCESS - Aboriginal Community Career Employment Services Society</option>
-                        <option value="CCATEC - Cariboo Chilcotin Aboriginal Training Employment Centre">CCATEC - Cariboo Chilcotin Aboriginal Training Employment Centre</option>
-                        <option value="CSETS - Coast Salish Employment and Training Society">CSETS - Coast Salish Employment and Training Society</option>
                         <option value="KNC - Ktunaxa Nation Council">KNC - Ktunaxa Nation Council</option>
-                        <option value="Lil'wat Nation - Lil'wat Nation">Lil'wat Nation - Lil'wat Nation</option>
-                        <option value="MCFNTS - Mid Coast First Nations Training Society">MCFNTS - Mid Coast First Nations Training Society</option>
                         <option value="MNBC - Métis Nation of British Columbia">MNBC - Métis Nation of British Columbia</option>
-                        <option value="MSTETS - Musqueam, Squamish, Tsleil-Waututh Training Society">MSTETS - Musqueam, Squamish, Tsleil-Waututh Training Society</option>
                         <option value="NENAS - North-East Native Advancing Society">NENAS - North-East Native Advancing Society</option>
                         <option value="NETP - Nuu-chah-nulth Employment and Training Program">NETP - Nuu-chah-nulth Employment and Training Program</option>
-                        <option value="NLG - Nisga'a Lisims Government">NLG - Nisga'a Lisims Government</option>
                         <option value="NVIATS - North Vancouver Island Aboriginal Training Society">NVIATS - North Vancouver Island Aboriginal Training Society</option>
-                        <option value="OTDC - Okanagan Training and Development Council">OTDC - Okanagan Training and Development Council</option>
                         <option value="PGNAETA - Prince George Nechako Aboriginal Employment and Training Association">PGNAETA - Prince George Nechako Aboriginal Employment and Training Association</option>
-                        <option value="SASET - Sto:lo Aboriginal Skills and Employment Training">SASET - Sto:lo Aboriginal Skills and Employment Training</option>
-                        <option value="SNTC - Shuswap Nation Tribal Council (formerly Central Interior Partners in Human Resource Development) ">SNTC - Shuswap Nation Tribal Council (formerly Central Interior Partners in Human Resource Development) </option>
-                        <option value="TFN - Tsawwassen First Nation">TFN - Tsawwassen First Nation</option>
+                        <option value="SNTC - Shuswap Nation Tribal Council (formerly Central Interior Partners in Human Resource Development)">SNTC - Shuswap Nation Tribal Council (formerly Central Interior Partners in Human Resource Development)</option>
                         <option value="TRICORP - Tribal Resources Investment Corporation">TRICORP - Tribal Resources Investment Corporation</option>
+                        <option value="LTC - Lillooet Tribal Council">LTC - Lillooet Tribal Council</option>
+                        
+                        {/*<option value="ACCESS - Aboriginal Community Career Employment Services Society">ACCESS - Aboriginal Community Career Employment Services Society</option>
+                        <option value="CCATEC - Cariboo Chilcotin Aboriginal Training Employment Centre">CCATEC - Cariboo Chilcotin Aboriginal Training Employment Centre</option>
+                        <option value="CSETS - Coast Salish Employment and Training Society">CSETS - Coast Salish Employment and Training Society</option>
+                        <option value="Lil'wat Nation - Lil'wat Nation">Lil'wat Nation - Lil'wat Nation</option>
+                        <option value="MCFNTS - Mid Coast First Nations Training Society">MCFNTS - Mid Coast First Nations Training Society</option>
+                        <option value="MSTETS - Musqueam, Squamish, Tsleil-Waututh Training Society">MSTETS - Musqueam, Squamish, Tsleil-Waututh Training Society</option>
+                        <option value="NLG - Nisga'a Lisims Government">NLG - Nisga'a Lisims Government</option>
+                        <option value="OTDC - Okanagan Training and Development Council">OTDC - Okanagan Training and Development Council</option>
+                        <option value="SASET - Sto:lo Aboriginal Skills and Employment Training">SASET - Sto:lo Aboriginal Skills and Employment Training</option>
+                        <option value="TFN - Tsawwassen First Nation">TFN - Tsawwassen First Nation</option>
+                        */}
+                       
 
                     </Field>
                     {feedBackInvalid(this.props.errors,this.props.touched,"serviceProviderName")}
@@ -61,6 +69,10 @@ class FormStep1 extends Component {
                         className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "serviceProviderName")}`}
                         id="serviceProviderName" 
                         name="serviceProviderName" 
+                        onChange={e => {
+                            this.props.handleChange(e)
+                            this.props.setFieldValue("trainingProgram", "")
+                        }}
                     >
                         <option value="">Please select</option>
                         <option value="Thompson Rivers University">Thompson Rivers University</option>
@@ -74,10 +86,8 @@ class FormStep1 extends Component {
                         <option value="Camosun College/Vancouver Island University">Camosun College/Vancouver Island University</option>
                         <option value="Thompson Rivers University (Williams Lake)">Thompson Rivers University (Williams Lake)</option>
                         <option value="Ktunaxa">Ktunaxa</option>
-                        <option value="PGNAETA">PGNAETA</option>
                         <option value="JHSP">JHSP</option>
                         <option value="ACCESS">ACCESS</option>
-                        <option value="EMBERS ">EMBERS </option>
                         <option value="DCCSSS">DCCSSS</option>
                         <option value="Kopar Administration Ltd.">Kopar Administration Ltd.</option>
                         <option value="Cariboo Chilcotin Aboriginal Training Employment Centre (CCATEC)">Cariboo Chilcotin Aboriginal Training Employment Centre (CCATEC)</option>
@@ -119,6 +129,10 @@ class FormStep1 extends Component {
                         className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "serviceProviderName")}`}
                         id="serviceProviderName" 
                         name="serviceProviderName" 
+                        onChange={e => {
+                            this.props.handleChange(e)
+                            this.props.setFieldValue("trainingProgram", "")
+                        }}
                     >
                         <option value="">Please select</option>
                         <option value="1 - ES  - Vancouver Island North ">1 - ES  - Vancouver Island North </option>
@@ -179,7 +193,9 @@ class FormStep1 extends Component {
     }
     get ApplicableProgramForm(){
         if (this.props.values.fundingSource === "ISET") {
-            return (<div className="form-row">
+            console.log(this.props.values.serviceProviderName)
+            if(this.props.values.serviceProviderName === "KNC - Ktunaxa Nation Council"){
+                return (<div className="form-row">
                 <div className="form-group col-md-6">
                     <label className="col-form-label control-label" htmlFor="trainingProgram">Eligible Skills Training Program<span
                         style={{ color: "red" }}>*</span></label>
@@ -190,15 +206,179 @@ class FormStep1 extends Component {
                         name="trainingProgram"
                     >
                         <option value="">Please select</option>
-                        <option value="Skills Training">Skills Training</option>
-                        <option value="Essential Skills Training">Essential Skills Training</option>
-                        <option value="Pre-Apprenticeship Training">Pre-Apprenticeship Training</option>
-                        <option value="Other">Other</option>
+                        <option value="Individualualized Training">Individualualized Training</option>
+                        <option value="Cohort-Based: BladeRunners">Cohort-Based:  BladeRunners</option>
+
                     </Field>
-                    <small className="text-muted" id="trainingProgram">  This dropdown list is determined by the Referring Ministry selected above.</small>
+                    <small className="text-muted" id="trainingProgram">  This dropdown list is determined by the Referring Ministry and Service Provider Name selected above.</small>
                     {feedBackInvalid(this.props.errors, this.props.touched, "trainingProgram")}
                 </div>
             </div>)
+            }
+            else if(this.props.values.serviceProviderName === "NENAS - North-East Native Advancing Society"){
+                return (<div className="form-row">
+                <div className="form-group col-md-6">
+                    <label className="col-form-label control-label" htmlFor="trainingProgram">Eligible Skills Training Program<span
+                        style={{ color: "red" }}>*</span></label>
+                    <Field
+                        as="select"
+                        className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "trainingProgram")}`}
+                        id="trainingProgram"
+                        name="trainingProgram"
+                    >
+                        <option value="">Please select</option>
+                        <option value="Individualized Training">Individualized Training</option>
+                        <option value="Cohort-Based: (CERT) Career Employment and Readiness Training">Cohort-Based:  (CERT) Career Employment and Readiness Training</option>
+                        <option value="Cohort-Based: (OLES) Essential Skills Training">Cohort-Based:  (OLES) Essential Skills Training</option>
+                        <option value="Cohort-Based: BladeRunners">Cohort-Based: BladeRunners</option>
+                        <option value="Cohort-Based: Industry-Specific and/or Trades Training ">Cohort-Based:  Industry-Specific and/or Trades Training </option>
+
+
+                    </Field>
+                    <small className="text-muted" id="trainingProgram">  This dropdown list is determined by the Referring Ministry and Service Provider Name selected above.</small>
+                    {feedBackInvalid(this.props.errors, this.props.touched, "trainingProgram")}
+                </div>
+            </div>)
+            }
+            else if(this.props.values.serviceProviderName === "MNBC - Métis Nation of British Columbia"){
+                return (<div className="form-row">
+                <div className="form-group col-md-6">
+                    <label className="col-form-label control-label" htmlFor="trainingProgram">Eligible Skills Training Program<span
+                        style={{ color: "red" }}>*</span></label>
+                    <Field
+                        as="select"
+                        className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "trainingProgram")}`}
+                        id="trainingProgram"
+                        name="trainingProgram"
+                    >
+                        <option value="">Please select</option>
+                        <option value="Individualized Training">Individualized Training</option>
+                        <option value="Cohort-Based: Microsoft Office and Accounting/Bookkeeping Training">Cohort-Based: Microsoft Office and Accounting/Bookkeeping Training</option>
+                    </Field>
+                    <small className="text-muted" id="trainingProgram">  This dropdown list is determined by the Referring Ministry and Service Provider Name selected above.</small>
+                    {feedBackInvalid(this.props.errors, this.props.touched, "trainingProgram")}
+                </div>
+            </div>)
+            }
+            else if(this.props.values.serviceProviderName === "NETP - Nuu-chah-nulth Employment and Training Program"){
+                return (<div className="form-row">
+                <div className="form-group col-md-6">
+                    <label className="col-form-label control-label" htmlFor="trainingProgram">Eligible Skills Training Program<span
+                        style={{ color: "red" }}>*</span></label>
+                    <Field
+                        as="select"
+                        className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "trainingProgram")}`}
+                        id="trainingProgram"
+                        name="trainingProgram"
+                    >
+                        <option value="">Please select</option>
+                        <option value="Individualized Training">Individualized Training</option>
+                        <option value="Cohort-Based: Trades Training">Cohort-Based: Trades Training</option>
+                        <option value="Cohort-Based: In-House Training">Cohort-Based: In-House Training</option>
+
+                    </Field>
+                    <small className="text-muted" id="trainingProgram">  This dropdown list is determined by the Referring Ministry and Service Provider Name selected above.</small>
+                    {feedBackInvalid(this.props.errors, this.props.touched, "trainingProgram")}
+                </div>
+            </div>)
+            }
+            else if(this.props.values.serviceProviderName === "NVIATS - North Vancouver Island Aboriginal Training Society"){
+                return (<div className="form-row">
+                <div className="form-group col-md-6">
+                    <label className="col-form-label control-label" htmlFor="trainingProgram">Eligible Skills Training Program<span
+                        style={{ color: "red" }}>*</span></label>
+                    <Field
+                        as="select"
+                        className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "trainingProgram")}`}
+                        id="trainingProgram"
+                        name="trainingProgram"
+                    >
+                        <option value="">Please select</option>
+                        <option value="Individualized Training">Individualized Training</option>
+                        <option value="Cohort-Based: Fishing Master IV Program">Cohort-Based: Fishing Master IV Program</option>
+                        <option value="Cohort-Based: Health Care Assistant Program">Cohort-Based: Health Care Assistant Program</option>
+
+
+                    </Field>
+                    <small className="text-muted" id="trainingProgram">  This dropdown list is determined by the Referring Ministry and Service Provider Name selected above.</small>
+                    {feedBackInvalid(this.props.errors, this.props.touched, "trainingProgram")}
+                </div>
+            </div>)
+            }
+            else if(this.props.values.serviceProviderName === "PGNAETA - Prince George Nechako Aboriginal Employment and Training Association"){
+                return (<div className="form-row">
+                <div className="form-group col-md-6">
+                    <label className="col-form-label control-label" htmlFor="trainingProgram">Eligible Skills Training Program<span
+                        style={{ color: "red" }}>*</span></label>
+                    <Field
+                        as="select"
+                        className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "trainingProgram")}`}
+                        id="trainingProgram"
+                        name="trainingProgram"
+                    >
+                        <option value="">Please select</option>
+                        <option value="Individualized Training">Individualized Training</option>
+                        <option value="Cohort-Based: Aboriginal Employment Gateway">Cohort-Based: Aboriginal Employment Gateway</option>
+                        <option value="Cohort-Based: Aboriginal Gateway Training Centre Trades">Cohort-Based: Aboriginal Gateway Training Centre Trades</option>
+                        <option value="Cohort-Based: 18 First Nations Labour Market Training Programs ">Cohort-Based: 18 First Nations Labour Market Training Programs </option>
+                        <option value="Cohort-Based: Urban Aboriginal Working Group ">Cohort-Based: Urban Aboriginal Working Group </option>
+
+
+                    </Field>
+                    <small className="text-muted" id="trainingProgram">  This dropdown list is determined by the Referring Ministry and Service Provider Name selected above.</small>
+                    {feedBackInvalid(this.props.errors, this.props.touched, "trainingProgram")}
+                </div>
+            </div>)
+            }
+            else if(this.props.values.serviceProviderName === "TRICORP - Tribal Resources Investment Corporation"){
+                return (<div className="form-row">
+                <div className="form-group col-md-6">
+                    <label className="col-form-label control-label" htmlFor="trainingProgram">Eligible Skills Training Program<span
+                        style={{ color: "red" }}>*</span></label>
+                    <Field
+                        as="select"
+                        className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "trainingProgram")}`}
+                        id="trainingProgram"
+                        name="trainingProgram"
+                    >
+                        <option value="">Please select</option>
+                        <option value="Individualized Training">Individualized Training</option>
+                        <option value="Cohort-Based: Long Term Training Coures">Cohort-Based: Long Term Training Coures</option>
+                        <option value="Cohort-Based: Short Term Training Courses">Cohort-Based: Short Term Training Courses</option>
+
+
+
+                    </Field>
+                    <small className="text-muted" id="trainingProgram">  This dropdown list is determined by the Referring Ministry and Service Provider Name selected above.</small>
+                    {feedBackInvalid(this.props.errors, this.props.touched, "trainingProgram")}
+                </div>
+            </div>)
+            }
+            else if(this.props.values.serviceProviderName === "SNTC - Shuswap Nation Tribal Council (formerly Central Interior Partners in Human Resource Development)" || this.props.values.serviceProviderName === "LTC - Lillooet Tribal Council"){
+                return (<div className="form-row">
+                <div className="form-group col-md-6">
+                    <label className="col-form-label control-label" htmlFor="trainingProgram">Eligible Skills Training Program<span
+                        style={{ color: "red" }}>*</span></label>
+                    <Field
+                        as="select"
+                        className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "trainingProgram")}`}
+                        id="trainingProgram"
+                        name="trainingProgram"
+                    >
+                        <option value="">Please select</option>
+                        <option value="Individualized Training">Individualized Training</option>
+
+
+                    </Field>
+                    <small className="text-muted" id="trainingProgram">  This dropdown list is determined by the Referring Ministry and Service Provider Name selected above.</small>
+                    {feedBackInvalid(this.props.errors, this.props.touched, "trainingProgram")}
+                </div>
+            </div>)
+            }
+            else{
+                return(<div>Please select a referring Ministry above to refine your applicable service providers</div>);
+            }
+           
         }
         else if (this.props.values.fundingSource === "AEST") {
             return (<div className="form-row">
@@ -214,7 +394,7 @@ class FormStep1 extends Component {
                         <option value="">Please select</option>
                         <option value="Skills Training for Employment">Skills Training for Employment</option>
                         <option value="ITA Funded Pre-Apprenticeship Training">ITA Funded Pre-Apprenticeship Training</option>
-                        <option value="Blade Runners">Blade Runners</option>
+                        <option value="BladeRunners">BladeRunners</option>
                     </Field>
                     <small className="text-muted" id="trainingProgram"> This dropdown list is determined by the Referring Ministry selected above.</small>
                     {feedBackInvalid(this.props.errors, this.props.touched, "trainingProgram")}
@@ -257,7 +437,7 @@ class FormStep1 extends Component {
 
             <div>
                 <p>
-                If assistance is required in completing this application please refer to the A2T Service Provider Guide <a href="https://www.workbc.ca/Employment-Services/WorkBC-Centres/Find-Your-WorkBC-Centre.aspx" target="_blank" rel="noopener noreferrer">here</a>. 
+                If assistance is required in completing this application please refer to the <a href="https://www.workbc.ca/Employment-Services/WorkBC-Centres/Find-Your-WorkBC-Centre.aspx" target="_blank" rel="noopener noreferrer">A2T Service Provider Guide</a>. 
                 </p>
                 <div className="form-group">
                     <h2 id="forms">Service Provider Information</h2>
@@ -368,7 +548,7 @@ class FormStep1 extends Component {
                             minDate={new Date(2021,7,15)}
                             maxDate={new Date(2023,2,2)}
                         />
-                        <small className="text-muted" id="periodStart1"> Note: Training program starts dates before August 15, 2021 or after March 3, 2023 do not qualify. ​</small>
+                        <small className="text-muted" id="periodStart1"> Note: Training program starts dates before August 15, 2021 do not qualify.</small>
                         {feedBackInvalid(this.props.errors, this.props.touched, "periodStart1")}
                     </div>
                     <div className="form-group col-md-6">

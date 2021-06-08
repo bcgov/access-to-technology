@@ -68,16 +68,7 @@ class FormStep3 extends Component {
                                         </div>
                                     </div>
                                 </div>
-                                <li key={9}>Has reviewed this intake form and agreed to all terms and conditions set out in this part.</li>
-                                    <div className="col-md-12 pad">
-                                        <div className="card card-secondary">
-                                            <div className="card-header">
-                                                <h4 className="my-0">CONFIRMATION, CONSENT AND AGREEMENT</h4>
-                                            </div>
-                                            <div className="card-body">
-                                                <p className="card-text"></p>
-                                                <ol style={{listStyleType:"decimal"}}>
-                                                    <li>Has acknowledged and Agree that:</li>
+                                <li key={9}>Has acknowledged and Agree that:
                                                     <ol style={{listStyleType:"lower-alpha"}}>
                                                     <li >Their receipt and use of a laptop computer provided to them through the A2T program is dependent on their participation in the training described above;</li>
                                                     <li >If they complete the training described above to the satisfaction of {`${this.props.values.serviceProviderName}`} they may keep the laptop computer provided to them through the A2T program;</li>
@@ -89,11 +80,9 @@ class FormStep3 extends Component {
                                                          <li>any other illegal activity; or</li>
                                                          <li>promoting any illegal activity.</li>
                                                         </ol>
-                                                    </ol>
-                                                </ol>
-                                            </div>
-                                        </div>
-                                    </div>
+                                                    </ol>          
+                                </li>     
+                                <li key={10}>Has reviewed this application and agreed to all terms and conditions set out in this part.</li>
                             </ol>
                         </label>
                     </div>
