@@ -136,7 +136,6 @@ class ProviderIntakeForm extends Component {
                                     _token: this.state._token,
                                     //step 1
                                     serviceProviderName:"",
-                                    providerContractId:"",
                                     serviceProviderPostal:"",
                                     serviceProviderContact:"",
                                     serviceProviderPhone:"",
@@ -164,11 +163,7 @@ class ProviderIntakeForm extends Component {
                                     altShippingAddress: false,
 
                                     //step 2:pop-up fields
-                                    addressAlt:"",
-                                    addressAlt2:"",
-                                    cityAlt:"",
-                                    provinceAlt:"British Columbia",
-                                    postalAlt:"",
+                                    recipientName:"",
                                     /*clientResidesInBC:"",
                                     clientUnemployed:"",
                                     registeredInApprovedProgram:"",

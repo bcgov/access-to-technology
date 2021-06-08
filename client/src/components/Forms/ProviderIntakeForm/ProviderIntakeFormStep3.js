@@ -40,7 +40,6 @@ class FormStep3 extends Component {
                         <label className="form-check-label" htmlFor="clientEligibility"><span style={{ color: "red" }}>*</span> {`${this.props.values.serviceProviderName}`} CONFIRMS that {`${this.props.values.clientName}`}:
                            <ol style={{listStyleType:"decimal"}}>
                                 <li >Is a resident of British Columbia;</li>
-                                <li >Is unemployed or precariously employed;</li>
                                 <li >Has been approved to participate in the eligible skills training program indicated above; </li>
                                 <li >Requires a laptop computer to participate in the eligible skills training program indicated above;</li>
                                 <li >Does not currently have access to the required laptop computer; </li>
@@ -50,7 +49,6 @@ class FormStep3 extends Component {
                                         <li >Income assistance or hardship assistance under the Employment and Assistance Act (British Columbia);</li>
                                         <li >Disability assistance or hardship assistance under the Employment and Assistance for Persons with Disabilities Act (British Columbia);</li>
                                         <li >Social assistance provided by Indigenous Services Canada (ISC) for persons living on a First Nation Reserve;</li>
-                                        <li >An Affordable Childcare Benefit under the Childcare Subsidy Act (British Columbia);</li>
                                         <li >Assistance from the British Columbia Ministry of Children and Family Development under an Agreement with a Young Adult.</li>
                                     </ol>
                                 <li >Has reviewed the COLLECTION NOTICE and agreed to the collection of their personal information; and</li>
@@ -61,42 +59,30 @@ class FormStep3 extends Component {
                                             <h4 className="my-0">COLLECTION NOTICE</h4>
                                         </div>
                                         <div className="card-body">
-                                            <p className="card-text">Personal information collected in this application is collected under the authority of sections 26 (c) and (e) of the Freedom of Information and 
-                                                Protection of Privacy Act and is subject to all the provisions of that Act. The personal information collected will be used by the Ministry of 
-                                                Social Development and Poverty Reduction (“MSDPR”), and its contracted A2T service provider to administer the A2T program, and may also be used 
-                                                to evaluate the effectiveness of the A2T program. If you have any questions about the collection of your personal information, please contact the 
-                                                Records Clerk of the Employment and Labour Market Services Division, MSDPR at WorkBCOESprivacy@gov.bc.ca.</p>
+                                            <p className="card-text">Personal information collected in this application is collected under the authority of sections 26 (c) and (e)
+                                             of the Freedom of Information and Protection of Privacy Act or Parts 3 and 4 of the Personal Information Protection Act and is subject
+                                              to all the provisions of the applicable Act. The personal information collected will be used by the Ministry of Social Development and 
+                                              Poverty Reduction (“MSDPR”), and its contracted A2T service provider to administer the A2T program, and may also be used to evaluate the 
+                                              effectiveness of the A2T program. If you have any questions about the collection of your personal information, please contact the Records 
+                                              Clerk of the Employment and Labour Market Services Division, MSDPR at WorkBCOESprivacy@gov.bc.ca.</p>
                                         </div>
                                     </div>
                                 </div>
-                                <li key={9}>Has reviewed the CONFIRMATION, CONSENT AND AGREEMENT and agreed to all associated terms.</li>
-                                    <div className="col-md-12 pad">
-                                        <div className="card card-secondary">
-                                            <div className="card-header">
-                                                <h4 className="my-0">CONFIRMATION, CONSENT AND AGREEMENT</h4>
-                                            </div>
-                                            <div className="card-body">
-                                                <p className="card-text">I, {`${this.props.values.clientName}`} </p>
-                                                <ol style={{listStyleType:"decimal"}}>
-                                                    <li >CONFIRM that I need a laptop computer to participate in and complete the training program described above.</li>
-                                                    <li >CONSENT to SDPR or its contracted A2T service provider collecting my personal information from and disclosing my personal information to {`${this.props.values.serviceProviderName}`} for the purposes of administering or evaluating the effectiveness of the A2T program.</li>
-                                                    <li >ACKNOWLEDGE and AGREE that:</li>
+                                <li key={9}>Has acknowledged and Agree that:
                                                     <ol style={{listStyleType:"lower-alpha"}}>
-                                                    <li>My receipt and use of a laptop computer provided to me through the A2T program is dependent on my participation in the training described above;</li>
-                                                    <li>If I complete the training described above to the satisfaction of {`${this.props.values.serviceProviderName}`} I may keep the laptop computer provided to me through the A2T program;</li>
-                                                    <li>If I do not complete the training above to the satisfaction of {`${this.props.values.serviceProviderName}`} I must return the laptop computer, in good working order, to the A2T contractor;</li>
-                                                    <li>I may not and will not use any laptop computer provided to me through the A2T program for the purposes of:</li>
+                                                    <li >Their receipt and use of a laptop computer provided to them through the A2T program is dependent on their participation in the training described above;</li>
+                                                    <li >If they complete the training described above to the satisfaction of {`${this.props.values.serviceProviderName}`} they may keep the laptop computer provided to them through the A2T program;</li>
+                                                    <li >If they do not complete the training above to the satisfaction of {`${this.props.values.serviceProviderName}`} they must return the laptop computer, in good working order, to the A2T contractor;</li>
+                                                    <li>They may not and will not use any laptop computer provided to them through the A2T program for the purposes of:</li>
                                                     <ol style={{listStyleType:"lower-roman"}}>
                                                         <li> sexual exploitation;</li>
                                                          <li>promoting hate or discrimination; </li>
                                                          <li>any other illegal activity; or</li>
                                                          <li>promoting any illegal activity.</li>
                                                         </ol>
-                                                    </ol>
-                                                </ol>
-                                            </div>
-                                        </div>
-                                    </div>
+                                                    </ol>          
+                                </li>     
+                                <li key={10}>Has reviewed this application and agreed to all terms and conditions set out in this part.</li>
                             </ol>
                         </label>
                     </div>

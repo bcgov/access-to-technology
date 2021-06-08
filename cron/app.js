@@ -109,7 +109,6 @@ async function saveListProviderIntake(values) {
           'applicationToken': values._token,
           //step 1
           'serviceProviderName': values.serviceProviderName,
-          'providerContractId': values.providerContractID,
           'serviceProviderPostal': values.serviceProviderPostal,
           'serviceProviderContact': values.serviceProviderContact,
           'serviceProviderPhone': values.serviceProviderPhone,
@@ -135,10 +134,6 @@ async function saveListProviderIntake(values) {
           // insert duplicate info response here 
           //step 1:pop-up fields
           'addressAlt':values.addressAlt,
-          'addressAlt2':values.addressAlt2,
-          'cityAlt': values.cityAlt,
-          'provinceAlt':values.provinceAlt,
-          'postalAlt': values.postalAlt,
           //step 2
           /*'clientResidesInBC': values.clientResidesInBC,
           'clientUnemployed': values.clientUnemployed,
@@ -318,7 +313,7 @@ async function updateListProviderIntake(values) {
     }
   }
 
-cron.schedule('*/1 * * * *', async function() {
+cron.schedule('*/3 * * * *', async function() {
     console.log('running a task every 3 minutes');
     //console.log('running a task every 10 seconds');
     spr = spauth.getAuth(listWebURL, {

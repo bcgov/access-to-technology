@@ -38,7 +38,6 @@ module.exports = {
         <h3>Service Provider Information</h3>
         <p><b>Referring Ministry:</b>  ${strings.orEmpty(values.fundingSource)}</p>
         <p><b>Service Provider Name:</b>  ${strings.orEmpty(values.serviceProviderName)}</p>
-        <p><b>Contract Reference ID:</b>  ${strings.orEmpty(values.providerContractId)}</p>
         <p><b>Staff Name:</b>  ${strings.orEmpty(values.serviceProviderContact)}</p>
         <p><b>Service Provider Postal Code:</b>  ${strings.orEmpty(values.serviceProviderPostal)}</p>
         <p><b>Contact Email:</b>  ${strings.orEmpty(values.serviceProviderEmail)}</p>
@@ -74,12 +73,8 @@ module.exports = {
         `
         if(alternativeAddress){
             html= html + `
-            <h5>Shipping Address Information(only if different from Home Address)</h5>
-            <p><b>Street Address 1:</b>  ${strings.orEmpty(values.addressAlt)}</p>
-            <p><b>Street Address 2:</b>  ${strings.orEmpty(values.addressAlt2)}</p>
-            <p><b>City/Town:</b>  ${strings.orEmpty(values.cityAlt)}</p>
-            <p><b>Province:</b>  ${strings.orEmpty(values.provinceAlt)}</p>
-            <p><b>Postal Code:</b>  ${strings.orEmpty(values.postalAlt)}</p>
+            <h5>Laptop will be delivered to the recipient below as per clients request:</h5>
+            <p><b>Recipients Name 1:</b>  ${strings.orEmpty(values.recipientName)}</p>
             <hr />
             `
         }

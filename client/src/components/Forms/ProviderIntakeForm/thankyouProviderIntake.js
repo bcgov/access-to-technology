@@ -18,7 +18,7 @@ class thankyouProviderIntake extends Component {
                         <h1>Your Application has been received.</h1>
                         <h3>Application ID: {this.props.location.state !== undefined && this.props.location.state._id}</h3>
                         <button className="btn btn-success d-print-none" onClick={() => window.print()}>Print Confirmation</button><br /><br />
-                        <p>Thank you for submitting an application for the Access to Technology (A2T) Program. The application will be reviewed, and eligible clients will receive an A2T laptop.    </p>
+                        <p>Thank you for submitting an application for the Access to Technology (A2T) Program. Your client will receive an automated email that you completed this application form on their behalf. The email has a link for the client to sign a consent form and laptop agreement. Please encourage them to do this right away so they can get their laptop on time. They have three weeks once they get the email to do this, or they won’t get a laptop.</p>
                         <p>IMPORTANT NOTICE: If information on this application is incorrect, please contact <a href="mailto:AccessToTechnology@gov.bc.ca" title="A2T Email Address">Access To Technology</a> and include the Application ID referenced above in the subject of the email.</p>
                         <p>
                             The following information was received:
@@ -32,7 +32,6 @@ class thankyouProviderIntake extends Component {
                                     <h3>Service Provider Information</h3>
                                         <p><b>Referring Ministry:</b>  {this.props.location.state !== undefined && this.props.location.state.fundingSource}</p>
                                         <p><b>Service Provider Name:</b>  {this.props.location.state !== undefined && this.props.location.state.serviceProviderName}</p>
-                                        <p><b>Contract Reference ID:</b>  {this.props.location.state !== undefined && this.props.location.state.providerContractId}</p>
                                         <p><b>Staff Name:</b>  {this.props.location.state !== undefined && this.props.location.state.serviceProviderContact}</p>
                                         <p><b>Service Provider Postal Code:</b>  {this.props.location.state !== undefined && this.props.location.state.serviceProviderPostal}</p>
                                         <p><b>Contact Email Address:</b>  {this.props.location.state !== undefined && this.props.location.state.serviceProviderEmail}</p>
@@ -60,12 +59,7 @@ class thankyouProviderIntake extends Component {
 
                                         {altShippingAddress ? (
                                             <div>
-                                                <h3>Shipping Information (only if different from client home address)</h3>
-                                                <p><b>Street Address 1:</b>  {this.props.location.state !== undefined && this.props.location.state.addressAlt}</p>
-                                                <p><b>Street Address 2:</b>  {this.props.location.state !== undefined && this.props.location.state.addressAlt2}</p>
-                                                <p><b>City / Town:</b>  {this.props.location.state !== undefined && this.props.location.state.cityAlt}</p>
-                                                <p><b>Province:</b>  {this.props.location.state !== undefined && this.props.location.state.provinceAlt}</p>
-                                                <p><b>Postal Code:</b>  {this.props.location.state !== undefined && this.props.location.state.postalAlt}</p>
+                                                <p><b>Recipients Name:</b>  {this.props.location.state !== undefined && this.props.location.state.recipientName}</p>
                                             </div>
                                         ) : (<div></div>) 
                                         }

@@ -1,3 +1,4 @@
+var pathToRegexp = require('path-to-regexp');
 var express = require('express');
 var router = express.Router();
 const yup = require('yup');
@@ -9,13 +10,14 @@ var csrfProtection = csrf({ cookie: true });
 var spauth = require('node-sp-auth')
 var request = require('request-promise')
 
+
 var ParticipantFormValidationSchema = require('../schemas/ParticipantFormValidationSchema')
 var generateHTMLEmail = require('../utils/htmlEmail')
 var notification = require('../utils/applicationReceivedEmail');
 var clean = require('../utils/clean')
 var confirmData = require('../utils/confirmationData');
 const { getSubmitted } = require('../utils/confirmationData');
-var {saveParticipantValues} = require("../utils/mongoOperations");
+var {saveParticipantValues, getParticipantValues} = require("../utils/mongoOperations");
 
 // env var info here...
 var confirmationEmail1 = process.env.CONFIRMATIONONE || process.env.OPENSHIFT_NODEJS_CONFIRMATIONONE || "";
@@ -31,6 +33,15 @@ var listDomain = process.env.LISTDOMAIN || process.env.OPENSHIFT_NODEJS_LISTDOMA
 var listParty = process.env.LISTPARTY || process.env.OPENSHIFT_NODEJS_LISTPARTY || ""
 var listADFS = process.env.LISTADFS || process.env.OPENSHIFT_NODEJS_LISTADFS || ""
 // send email func
+app = express();
+var spr;
+spr = spauth.getAuth(listWebURL, {
+  username: listUser,
+  password: listPass,
+  domain: listDomain,
+  relyingParty: listParty,
+  adfsUrl: listADFS
+})
 
 // get
 router.get('/', csrfProtection, (req, res) => {
@@ -40,6 +51,77 @@ router.get('/', csrfProtection, (req, res) => {
       csrfToken: token
     });
   })
+
+  async function getItemID(values){
+    try{
+      var headers;
+    return await spr
+    .then(async data => {
+        headers = data.headers;
+        headers['Accept'] = 'application/json;odata=verbose';
+        return headers
+    }).then(async response => {
+          //return true
+          //console.log(response)
+          headers = response
+          return request.post({
+            url: listWebURL + '/A2TTest/_api/contextInfo',
+            headers: headers,
+            json: true,
+          })
+      }).then(async response => {
+        var digest = response.d.GetContextWebInformation.FormDigestValue
+        return digest
+      }).then(async response => {
+        //console.log(headers)
+        headers['X-RequestDigest'] = response
+        headers['Content-Type'] = "application/json;odata=verbose"
+        // change to local Access to Technology list
+        //filter by ID and Token to check Consistency
+        var l = listWebURL + `/A2TTest/_api/web/lists/getByTitle('IntakeForm')/items?$filter=(applicationID eq '`+values.id+`') and (applicationToken eq '`+values.token+`')`;
+        return request.get({
+          url: l,
+          headers: headers,
+          json: true,
+        })
+      }).then(async response => {
+        //return the ID of the item
+        return await response.d.results[0];
+      })    
+      .catch(err => {
+        console.log("error in chain")
+        //console.log(err);
+        console.log("err status code:"+ err.statusCode);
+        console.log(err);
+        if (err.statusCode !== 403){
+          console.log(err);
+        }   
+        return false
+      })
+    
+    //try catch catcher
+    } catch (error) {
+      console.log(error)
+      return false
+    }
+  }
+
+ router.get('/getData/:id/:token', csrfProtection, async(req, res) => {
+  console.log(req.params);
+  await getItemID(req.params).then(function(result) {
+    if(result !== undefined){
+      console.log(result)
+      res.send({
+        serviceProvider: result.serviceProviderName,
+        clientFirstName: result.clientName,
+      });
+    }else{
+      res.send({
+        err
+      });
+    }
+ });
+})
 
 //post
   router.post('/', csrfProtection, async (req, res) => {

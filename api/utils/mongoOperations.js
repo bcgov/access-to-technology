@@ -70,7 +70,19 @@ module.exports = {
                  
         });
     },
-    saveProviderIntakeValues: async function (values, savedToSP) {
+
+    getParticipantValues: async function (values) {
+        return await connection
+        .then(mClient => {
+            // get a handle on the db
+            return mClient.db();
+        }).then(async db => {
+            // get our values from db 
+            return db.collection("ProviderIntake").find({applicationId: values.id, _token: values.token});
+            console.log(err)  
+        });
+    },
+    saveProviderIntakeValues: async function (values) {
         return await connection
         .then(mClient => {
             // get a handle on the db
@@ -84,7 +96,6 @@ module.exports = {
                  //step 1
                  // create new field Array of comparator values
                 serviceProviderName: myTrim(values.serviceProviderName),
-                providerContractID: myTrim(values.providerContractId),
                 serviceProviderContact: myTrim(values.serviceProviderContact),
                 serviceProviderPostal: myTrim(values.serviceProviderPostal),
                 serviceProviderPhone: myTrim(values.serviceProviderPhone),
@@ -110,10 +121,6 @@ module.exports = {
 
                 //step 1:pop-up fields
                 addressAlt: values.addressAlt,
-                addressAlt2: values.addressAlt2,
-                cityAlt: values.cityAlt,
-                provinceAlt: values.provinceAlt,
-                postalAlt: values.postalAlt,
                
                 //step 2
                 /*

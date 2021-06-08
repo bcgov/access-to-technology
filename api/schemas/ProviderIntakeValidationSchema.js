@@ -8,8 +8,6 @@ var ProviderIntakeValidationSchema = yup.object().shape({
     //see what requirements are fo APP id but it will be generated anyways
     serviceProviderName: yup.string()
         .required('Please enter the service provider name'),
-    providerContractId: yup.string()
-        .required('Please enter the service provider contract reference ID'),
     serviceProviderPostal:yup.string()
         .matches(/^[A-Za-z]\d[A-Za-z]\d[A-Za-z]\d$/,"Please enter a valid Postal Code")
         .required("Please enter a valid Postal Code"),   
@@ -77,28 +75,11 @@ var ProviderIntakeValidationSchema = yup.object().shape({
     trainingProgram: yup.string()
         .required('Please select a an eligible training program'),
         //.oneOf(["Skills Training","Essential Skills Training","Pre-Apprenticeship Training" ,"Skills Training for Employment", "ITA Funded Pre-Apprenticeship Training","Indigenous Employment and Skills Training","Blade Runners","Short Duration Training","Occupational Skills Training","BC Adult Graduation Diploma"],"Please select an eligible training program"),
-    addressAlt:yup.string()
+    recipientName:yup.string()
         .when("altShippingAddress",{
             is:true,
-            then: yup.string().max(255,"Address too long, please use address line 2.").required("please enter your other work address")
+            then: yup.string().required("please enter the recipients name")
         }),   
-    addressAlt2: yup.string()
-        .max(255,"Address too long"), 
-    cityAlt: yup.string()
-        .when("altShippingAddress", {
-            is: true,
-            then: yup.string().max(100,"City name too long").required("Please enter a city")
-        }),    
-    provinceAlt:yup.string()
-        .when("altShippingAddress", {
-            is: true,
-            then: yup.string().required("Please enter a province")
-        }),   
-    postalAlt:yup.string()
-        .when("altShippingAddress", {
-            is: true,
-            then: yup.string().matches(/^[A-Za-z]\d[A-Za-z]\d[A-Za-z]\d$/,"Please enter a valid Postal Code").required("Please enter a postal code.")
-        }),  
     clientEligibility: yup.boolean()
         .oneOf([true],"Please attest to the clients Eligibility"),
     serviceProviderResponsibility: yup.boolean()
