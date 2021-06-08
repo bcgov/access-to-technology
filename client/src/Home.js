@@ -24,6 +24,7 @@ function Home() {
                                     <li>Training Program start and end dates</li>
                                     <li>Client Information (Name, Phone, Email, Shipping Address)</li>
                                 </ol>
+                                <p><b>Note</b>: The Service Provider from the Ministry who is funding the majority share of the eligible skills training program must complete the A2T application form on their client’s behalf. </p>
                         </div>
                         <div className="form-row col-md-6">
                             <div className="jumbotron">

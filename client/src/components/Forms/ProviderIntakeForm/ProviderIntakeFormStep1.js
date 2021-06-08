@@ -282,6 +282,7 @@ class FormStep1 extends Component {
                                 <option value="ISET">ISET</option>
                                 <option value="SDPR">SDPR</option>
                             </Field>
+                            <small className="text-muted" id="trainingProgram">The Ministry who is funding the majority share of the eligible skills training program</small>
                             {feedBackInvalid(this.props.errors,this.props.touched,"fundingSource")}
                     </div>
                 </div>
@@ -442,15 +443,6 @@ class FormStep1 extends Component {
                                 value="Social Assistance provided by Indigenous Services Canada (ISC) for persons living on a First Nation Reserve;"
                             />
                             <label className="form-check-label" htmlFor="BCEAorFederalOnReserve">Social Assistance provided by Indigenous Services Canada (ISC) for persons living on a First Nation Reserve;</label>
-                            </div>
-                        <div className="form-check">
-                            <Field
-                                className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "BCEAorFederalOnReserve")}`}
-                                type="checkbox"
-                                name="BCEAorFederalOnReserve"
-                                value="An Affordable Childcare Benefit under the Childcare Subsidy Act (British Columbia);"
-                            />
-                            <label className="form-check-label" htmlFor="BCEAorFederalOnReserve">An Affordable Childcare Benefit under the Childcare Subsidy Act (British Columbia);</label>
                             </div>
                         <div className="form-check">
                             <Field

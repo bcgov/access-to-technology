@@ -29,7 +29,7 @@ export const ProviderIntakeValidationSchema = yup.object().shape({
         .oneOf(["AEST",
                 "ISET",
                 "SDPR"],"Please select a valid field.")
-        .required('Please select your Referring Ministry'),
+        .required('Please select Referring Ministry'),
     periodStart1: yup.date()
         .required("Please enter your clients program start date"),
     periodEnd1: yup.date()
