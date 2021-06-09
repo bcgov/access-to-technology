@@ -104,7 +104,6 @@ module.exports = {
         })
         .then(async db => {
         // get our values from db 
-        console.log(comparatorField);
         return await db.collection("ProviderIntake").aggregate([
             {$unwind: "$compareField"},
             {$match: {compareField:{ $in:comparatorField}}},
