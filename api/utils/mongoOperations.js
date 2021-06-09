@@ -132,7 +132,7 @@ module.exports = {
                 clientEligibility: values.clientEligibility,
                 serviceProviderResponsibility: values.serviceProviderResponsibility,
                 clientConsent:false,
-                compareField:[values.clientName.toLowerCase(), values.clientLastName.toLowerCase(), values.clientAddress.toLowerCase(), values. clientPostal, values.clientEmail.toLowerCase(), value.clientPhone, value.workBCCaseNumber],         
+                compareField:[values.clientName.toLowerCase(), values.clientLastName.toLowerCase(), values.clientAddress.toLowerCase(), values. clientPostal, values.clientEmail.toLowerCase(), values.clientPhone, values.workBCCaseNumber],         
                 
             });
         });
