@@ -28,9 +28,6 @@ var ProviderIntakeValidationSchema = yup.object().shape({
         .required("Please Enter your clients program start date"),
     periodEnd1: yup.date()
         .required("Please Enter your clients program end date"),
-    unemployed:yup.string()
-        .oneOf(["yes"],"The client should be unemployed or precariously employed to be eligible for this program.")
-        .required("The client should be unemployed or precariously employed to be eligible for this program."),
     BCEAorFederalOnReserve:yup.array()
         .required("The client must be receiving one of the above forms of government assistance to be eligible for this program."),
     

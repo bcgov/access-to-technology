@@ -104,7 +104,6 @@ module.exports = {
                 trainingProgram: values.trainingProgram,
                 periodStart1: values.periodStart1,
                 periodEnd1: values.periodEnd1,
-                unemployed: values.unemployed,
                 BCEAorFederalOnReserve: values.BCEAorFederalOnReserve,
                 workBCCaseNumber: values.workBCCaseNumber,
                 clientName: myTrim(values.clientName),
@@ -125,7 +124,6 @@ module.exports = {
                 //step 2
                 /*
                 clientResidesInBC: values.clientResidesInBC,
-                clientUnemployed: values.clientUnemployed,
                 registeredInApprovedProgram:values.registeredInApprovedProgram,
                 accessToComputerCurrently: values.accessToComputerCurrently,
                 receivingAlternateFunding: values.receivingAlternateFunding,

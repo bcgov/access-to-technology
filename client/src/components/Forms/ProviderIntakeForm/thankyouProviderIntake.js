@@ -77,7 +77,6 @@ class thankyouProviderIntake extends Component {
                                 <p><b>Training Program End Date:</b>  {this.props.location.state !== undefined && moment(this.props.location.state.periodEnd1).format('MMMM Do YYYY').toString()}</p>
                                 
                                 <h3>Client Eligibility</h3>
-                                <p><b>Client is unemployed or precariously employed:</b>  {this.props.location.state !== undefined && this.props.location.state.unemployed}</p>
                                 <p><b>Select which of the following form(s) of government assistance the client is receiving (choose all that apply):</b> <br/> {this.props.location.state !== undefined && this.props.location.state.BCEAorFederalOnReserve.join(" ")}</p>
                                 
                               

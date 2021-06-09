@@ -145,7 +145,6 @@ class ProviderIntakeForm extends Component {
                                     trainingProgram:"",
                                     periodStart1:"",
                                     periodEnd1:"",
-                                    unemployed:"",
                                     BCEAorFederalOnReserve:[],
                                     //step2
                                     workBCCaseNumber:"",
