@@ -73,7 +73,7 @@ module.exports = {
         if(alternativeAddress){
             html= html + `
             <h5>Laptop will be delivered to the recipient below as per clients request:</h5>
-            <p><b>Recipients Name 1:</b>  ${strings.orEmpty(values.recipientName)}</p>
+            <p><b>Recipients Name:</b>  ${strings.orEmpty(values.recipientName)}</p>
             <hr />
             `
         }
