@@ -95,6 +95,27 @@ module.exports = {
         })     
     },
     
+    duplicateCheck: async function (comparatorField) {
+        return await connection
+        .then(mClient => {
+            // get a handle on the db
+            return mClient.db();
+            //return db
+        })
+        .then(async db => {
+        // get our values from db 
+        console.log(comparatorField);
+        return await db.collection("ProviderIntake").aggregate([
+            {$unwind: "$compareField"},
+            {$match: {compareField:{ $in:comparatorField}}},
+            {$group: {_id: "$applicationId", number: {$sum: 1}}},
+            {$project: {_id: 1, number: 1, percentage: {$divide: ["$number", comparatorField.length]}}},
+            {$sort: {percentage: -1}}]).toArray(); 
+        }).then(async doc =>{
+            return doc
+        })    
+    }, 
+    
     updateConsentToFalse: async function(collection,_id){
         return await connection
         .then(mClient => {

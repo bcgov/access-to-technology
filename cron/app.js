@@ -3,7 +3,7 @@ const express = require('express')
 const spauth = require('node-sp-auth')
 const request = require('request-promise')
 
-var {getProviderIntakeNotSP, getProviderIntakeConsentNotSP, updateConsentToFalse, getNeedEmployeeNotSP, getClaimNotSP, getProviderIntakeNotReporting, getNeedEmployeeNotReporting, getClaimNotReporting, updateReporting, updateSavedToSP} = require('./mongo')
+var {getProviderIntakeNotSP, duplicateCheck, getProviderIntakeConsentNotSP, updateConsentToFalse, getNeedEmployeeNotSP, getClaimNotSP, getProviderIntakeNotReporting, getNeedEmployeeNotReporting, getClaimNotReporting, updateReporting, updateSavedToSP} = require('./mongo')
 var clean = require('./clean')
 var listWebURL = process.env.LISTWEBURL || process.env.OPENSHIFT_NODEJS_LISTWEBURL || ""
 var listUser = process.env.LISTUSER || process.env.OPENSHIFT_NODEJS_LISTUSER || ""
@@ -69,8 +69,10 @@ async function sendEmail(values, Sub) {
 
 //add proper fields for A2T
 async function saveListProviderIntake(values) {
+  // call function in here before saving
   try{
     var headers;
+    var duplicateChecks;
   return await spr
   .then(async data => {
       headers = data.headers;
@@ -86,6 +88,7 @@ async function saveListProviderIntake(values) {
           json: true,
         })
     }).then(async response => {
+      duplicateChecks =  await duplicateCheck(values.compareField);
       var digest = response.d.GetContextWebInformation.FormDigestValue
       return digest
     }).then(async response => {
@@ -96,6 +99,7 @@ async function saveListProviderIntake(values) {
       var l = listWebURL + `/A2TTest/_api/web/lists/getByTitle('IntakeForm')/items`
       console.log("webURL:")
       console.log(l)
+      
       return request.post({
         url: l,
         headers: headers,
@@ -133,7 +137,8 @@ async function saveListProviderIntake(values) {
           'altShippingAddress': values.altShippingAddress,
           // insert duplicate info response here 
           //step 1:pop-up fields
-          'addressAlt':values.addressAlt,
+          'recipientName':values.recipientName,
+          'DuplicateInfo': JSON.stringify(duplicateChecks),
           //step 2
           /*'clientResidesInBC': values.clientResidesInBC,
           'clientUnemployed': values.clientUnemployed,
