@@ -322,7 +322,7 @@ class FormStep1 extends Component {
                         name="trainingProgram"
                     >
                         <option value="">Please select</option>
-                        <option value="Cohort-Based: Long Term Training Coures">Cohort-Based: Long Term Training Coures</option>
+                        <option value="Cohort-Based: Long Term Training Courses">Cohort-Based: Long Term Training Courses</option>
                         <option value="Cohort-Based: Short Term Training Courses">Cohort-Based: Short Term Training Courses</option>
                         <option value="Individualized Training">Individualized Training</option>
 
