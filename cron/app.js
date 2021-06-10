@@ -242,7 +242,7 @@ async function updateListProviderIntake(values) {
       var itemID = values.SPID;
       if(itemID === ""){
         sendEmail(values, "Update Attempt Error - ApplicationID and Token Not Found")
-        console.log("CONSENT REQUEST FAILED:  applicationID:"+values.applicationId +" token:"+values._token + " Not Found In SharePoint")
+        console.log("CONSENT REQUEST FAILED:  applicationID:"+values.applicationId +" token:"+values._token + " Not Found In Database")
         console.log("-Consent set back to false to prevent further errors-")
         try {
           updateSavedToSP("ProviderIntake",values._id);
