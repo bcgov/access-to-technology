@@ -40,7 +40,7 @@ module.exports = {
         })
         .then(async db => {
         // add our values to db (they are always new)
-            return db.collection("ProviderIntake").find({savedToSP: false, clientConsent:false})
+            return db.collection("ProviderIntake").find({savedToSP: false})
                 //console.log(err)
                 //console.log(doc)
         }).then(async doc =>{
@@ -57,7 +57,7 @@ module.exports = {
         })
         .then(async db => {
         // get our values from db 
-            return db.collection("ProviderIntake").find({savedToSP: false, clientConsent:true})
+            return db.collection("ProviderIntake").find({savedToSP: true, clientConsent:true, savedConsent:false})
                 //console.log(err)
                 //console.log(doc)
         }).then(async doc =>{
@@ -147,7 +147,7 @@ module.exports = {
         })    
     }, 
     
-    updateConsentToFalse: async function(collection,_id){
+    updateConsentSP: async function(collection,_id){
         return await connection
         .then(mClient => {
             // get a handle on the db
@@ -162,7 +162,7 @@ module.exports = {
                 },
                 { 
                     $set : {
-                    clientConsent: false
+                    savedConsent: true,
                     }
                 },
                 {
@@ -176,51 +176,7 @@ module.exports = {
             return result
         })     
     },
-    getProviderIntakeNotReporting: async function () {
-        return await connection
-        .then(mClient => {
-            // get a handle on the db
-            return mClient.db();
-            //return db
-        })
-        .then(async db => {
-        // add our values to db (they are always new)
-            return db.collection("ProviderIntake").find({savedReporting: false})
-                //console.log(err)
-                //console.log(doc)
-        }).then(doc =>{
-            return doc
-        })   
-    },
-    updateReporting: async function(collection,_id){
-        return await connection
-        .then(mClient => {
-            // get a handle on the db
-            return mClient.db();
-            //return db
-        })
-        .then(async db => {
-        // add our values to db (they are always new)
-            return db.collection(collection).updateOne(
-                {
-                    _id: _id
-                },
-                { 
-                    $set : {
-                    savedReporting: true
-                    }
-                },
-                {
-                    upsert: false
-                }
 
-            )
-                //console.log(err)
-                //console.log(doc)
-        }).then(result =>{
-            return result
-        })   
-    }
     /*
     printValues: function(collection) {
         const client = new MongoClient(uri, { useUnifiedTopology: true });

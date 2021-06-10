@@ -211,7 +211,7 @@ class FormStep1 extends Component {
                         <option value="">Please select</option>
                         <option value="Cohort-Based: (CERT) Career Employment and Readiness Training">Cohort-Based:  (CERT) Career Employment and Readiness Training</option>
                         <option value="Cohort-Based: (OLES) Essential Skills Training">Cohort-Based:  (OLES) Essential Skills Training</option>
-                        <option value="Cohort-Based: Industry-Specific and/or Trades Training ">Cohort-Based:  Industry-Specific and/or Trades Training </option>
+                        <option value="Cohort-Based: Industry-Specific and/or Trades Training">Cohort-Based:  Industry-Specific and/or Trades Training</option>
                         <option value="Individualized Training">Individualized Training</option>
 
 
@@ -300,8 +300,8 @@ class FormStep1 extends Component {
                         <option value="">Please select</option>
                         <option value="Cohort-Based: Aboriginal Employment Gateway">Cohort-Based: Aboriginal Employment Gateway</option>
                         <option value="Cohort-Based: Aboriginal Gateway Training Centre Trades">Cohort-Based: Aboriginal Gateway Training Centre Trades</option>
-                        <option value="Cohort-Based: Urban Aboriginal Working Group ">Cohort-Based: Urban Aboriginal Working Group </option>
-                        <option value="Cohort-Based: 18 First Nations Labour Market Training Programs ">Cohort-Based: 18 First Nations Labour Market Training Programs </option>
+                        <option value="Cohort-Based: Urban Aboriginal Working Group">Cohort-Based: Urban Aboriginal Working Group</option>
+                        <option value="Cohort-Based: 18 First Nations Labour Market Training Programs">Cohort-Based: 18 First Nations Labour Market Training Programs</option>
                         <option value="Individualized Training">Individualized Training</option>
 
                     </Field>

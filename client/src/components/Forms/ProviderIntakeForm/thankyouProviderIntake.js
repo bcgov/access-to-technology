@@ -27,7 +27,7 @@ class thankyouProviderIntake extends Component {
                             The following information was received:
                         </p>
                         <br />
-                            <div className="row">
+                        <div className="row">
                             <div className="col-md-6">
                                     <h3>Application Tracking Information</h3>
                                         <p><b>Application ID:</b>  {this.props.location.state !== undefined && this.props.location.state._id}</p>
@@ -66,10 +66,8 @@ class thankyouProviderIntake extends Component {
                                             </div>
                                         ) : (<div></div>) 
                                         }
-                                </div>
-                               
-                               
-                            </div>
+                            </div>   
+                        </div>
                                 <br></br>
                                 <hr />
                                 <h3>Program Eligibility</h3>

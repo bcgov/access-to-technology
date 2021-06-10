@@ -3,7 +3,7 @@ const express = require('express')
 const spauth = require('node-sp-auth')
 const request = require('request-promise')
 
-var {getProviderIntakeNotSP, updateSaveIdToSP, duplicateCheck, getProviderIntakeConsentNotSP, updateConsentToFalse, getNeedEmployeeNotSP, getClaimNotSP, getProviderIntakeNotReporting, getNeedEmployeeNotReporting, getClaimNotReporting, updateReporting, updateSavedToSP} = require('./mongo')
+var {getProviderIntakeNotSP, updateSaveIdToSP, duplicateCheck, getProviderIntakeConsentNotSP, updateConsentSP, updateSavedToSP} = require('./mongo')
 var clean = require('./clean')
 var listWebURL = process.env.LISTWEBURL || process.env.OPENSHIFT_NODEJS_LISTWEBURL || ""
 var listUser = process.env.LISTUSER || process.env.OPENSHIFT_NODEJS_LISTUSER || ""
@@ -179,62 +179,7 @@ async function saveListProviderIntake(values) {
     return false
   }
 }
-async function getItemID(values){
-  try{
-    var headers;
-  return await spr
-  .then(async data => {
-      headers = data.headers;
-      headers['Accept'] = 'application/json;odata=verbose';
-      return headers
-  }).then(async response => {
-        //return true
-        //console.log(response)
-        headers = response
-        return request.post({
-          url: listWebURL + '/A2TTest/_api/contextInfo',
-          headers: headers,
-          json: true,
-        })
-    }).then(async response => {
-      var digest = response.d.GetContextWebInformation.FormDigestValue
-      return digest
-    }).then(async response => {
-      //console.log(headers)
-      headers['X-RequestDigest'] = response
-      headers['Content-Type'] = "application/json;odata=verbose"
-      // change to local Access to Technology list
-      //filter by ID and Token to check Consistency
-      var l = listWebURL + `/A2TTest/_api/web/lists/getByTitle('IntakeForm')/items?$filter=(applicationID eq '`+values.applicationId+`') and (applicationToken eq '`+values._token+`')`;
-      return request.get({
-        url: l,
-        headers: headers,
-        json: true,
-      })
-    }).then(async response => {
-      //return the ID of the item
-      return String(response.d.results[0].Id)
-    })    
-    .catch(err => {
-      //there was an error in the chan
-      //item was not created
-      console.log("error in chain")
-      //console.log(err);
-      console.log("err status code:"+ err.statusCode);
-      console.log(err);
-      if (err.statusCode !== 403){
-        console.log(err);
-      }
-      
-      return false
-    })
-  
-  //try catch catcher
-  } catch (error) {
-    console.log(error)
-    return false
-  }
-}
+
 async function updateListProviderIntake(values) {
   try{
       var headers;
@@ -276,6 +221,7 @@ async function updateListProviderIntake(values) {
         headers['X-HTTP-Method'] = "MERGE"
         headers['If-Match'] = "*"
         // change to local Access to Technology list
+        console.log(itemID);
         var l = listWebURL + `/A2TTest/_api/web/lists/getByTitle('IntakeForm')/items('`+itemID+`')`
         return request.post({
           url: l,
@@ -369,7 +315,7 @@ cron.schedule('*/3 * * * *', async function() {
                 // save values to mongo db
                 if (saved) {
                   try {
-                    updateSavedToSP("ProviderIntake",data._id);
+                    updateConsentSP("ProviderIntake",data._id);
                   }
                   catch (error) {
                     console.log(error);
@@ -379,8 +325,7 @@ cron.schedule('*/3 * * * *', async function() {
               .catch(function(e){
                 console.log("error")
                 console.log(e)
-              })
-              
+              })  
         }
     })
     /*
