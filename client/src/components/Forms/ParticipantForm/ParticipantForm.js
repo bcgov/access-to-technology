@@ -25,6 +25,8 @@ class ParticipantForm extends Component {
             _csrf: '',
             _id: id,
             clientFirstName:'',
+            clientLastName:'',
+            fundingSource:'',
             serviceProviderName:'',
             hasError: false,
              _token: token1,      
@@ -70,6 +72,8 @@ class ParticipantForm extends Component {
                     this.setState({
                         serviceProviderName: result.serviceProvider,
                         clientFirstName: result.clientFirstName,
+                        clientLastName: result.clientLastName,
+                        fundingSource: result.fundingSource,
                     })
                 }
             },
@@ -110,43 +114,47 @@ class ParticipantForm extends Component {
               
               <Form>
                                   
-                                <div className="form=row">
-                                <p>The Ministry of Social Development and Poverty Reduction has received a request from a service provider.
-                                  To process your application for an A2T laptop, you must complete and submit this Client Consent and Agreement.<br/><br/>
-                                  Please be aware that delays in submitting your completed Client Consent and Agreement will result in delays in processing your
-                                  application and may negatively impact your eligibility to receive an A2T laptop. You are encouraged to complete and submit this form as soon as possible.<br/><br />
-                                  If you have questions or require assistance to complete this form, please contact your service provider via the email provided in your previous confirmation email.<br/></p>
-                                  </div>
                                   {/* handleApplicationID handles all the pre populated values in future. */}
-                                 
                                   <p>Please make sure the Application ID below matches the one provided to you in your confirmation email. If it does not please contact your service provider.</p>
                                       <div className="form-group">
                                       <h3 id="forms">Application ID: {this.state._id}</h3>
                                   </div>
-                                 <p> <b>CONFIRMATION, CONSENT AND AGREEMENT</b><br/>
-                                    I, {this.state.clientFirstName},</p>
-                                    
+                                  <p><b>COLLECTION ,USE OR DISCLOSURE OF PERSONAL INFORMATION</b><br/><br/>
+                                  Access to Technology (“A2T”) is a Ministry of Social Development and Poverty Reduction (“SDPR“) program that is delivered in part by BC 
+                                  Technology for Learning Society (“BC Tech for Learning”) under a contract with MSDPR.
+                                  <br/><br/>
+                                    MSDPR and the Ministry of Advanced Education, Skills and Training (“AEST”) each provide employment related training programs that are 
+                                    delivered by private sector organizations under contracts with MSDPR (the “SDPR Service Providers”) and AEST (the “AEST Service Providers”), 
+                                    respectively.  Employment and Social Development Canada (“ESDC”) provides the Indigenous Skills and Employment Training Program (“ISET”), 
+                                    which is delivered by private sector organizations under contracts with ESDC (the “ISET Service Providers”).
+                                    <br/><br/>
+                                    The applicant is participating in an employment-related training program delivered by {this.state.serviceProviderName}, an {this.state.fundingSource} 
+                                    Service Provider. The applicant is applying to SDPR and A2T for a laptop computer that the applicant requires to complete the employment-related training program. 
+                                    {this.state.serviceProviderName} is referring the applicant to SDPR and A2T.
+                                    <br/><br/>
+                                    Certain personal information of the applicant is directly related to and necessary for assessing the applicant’s eligibility for A2T, administering A2T with 
+                                    respect to the applicant and evaluating the effectiveness of A2T (the “A2T-Related Personal Information”.  It will be necessary for the following organizations to 
+                                    collect, use and disclose A2T-Related Personal Information:
+                                    <br/>
+                                    <ol style={{listStyleType:"lower-alpha"}}>
+                                        <li>{this.state.serviceProviderName}</li>
+                                        <li>SDPR; and</li>
+                                        <li>BC Tech for Learning.</li>
+                                    </ol>
+                                  </p>
+                                 <p><b>APPLICANT CONSENT</b><br/><br/>
+                                    I, {this.state.clientFirstName} {this.state.clientLastName}, am applying to SDPR and A2T for a laptop computer that I require to complete an {this.state.fundingSource} employment-related training program.</p>
+                                    <p>I CONSENT to:</p>
                                         <ol>
-                                        <li>CONFIRM that I need a laptop computer to participate in and complete the training program described in my application.</li>
-                                        <li>CONSENT to MSDPR or its contracted A2T service provider collecting my personal information from and disclosing my personal information to the service provider for the purposes of administering or evaluating the effectiveness of the A2T program.</li>
-                                        <li>ACKNOWLEDGE and AGREE that:
-                                            <ol type="a">
-                                            <li>My receipt and use of a laptop computer provided to me through the A2T program is dependent on my participation in the training described in my application;</li>
-                                            <li>If I complete the training described in my application to the satisfaction of the service provider I may keep the laptop computer provided to me through the A2T program;</li>
-                                            <li>If I do not complete the training specified in my application to the satisfaction of the service provider I must return the laptop computer, in good working order, to the A2T contractor;</li>
-                                            <li>I may not and will not use any laptop computer provided to me through the A2T program for the purposes of:
-                                                <ol type="i">
-                                                <li>sexual exploitation;</li>
-                                                <li>promoting hate or discrimination;</li>
-                                                <li>any other illegal activity; or</li>
-                                                <li>promoting any illegal activity.</li>
-                                                </ol>
-                                            </li>
-                                            </ol>
-                                        </li>
+                                            <li>SDPR collecting my A2T-Related Personal Information indirectly from {this.state.serviceProviderName} or BC Tech for Learning, for the purposes of administering, delivering or evaluating the A2T program;</li>
+                                            <li>SDPR disclosing my A2T-Related Personal Information to BC Tech for Learning or {this.state.serviceProviderName}, for the purposes of administering, delivering or evaluating the A2T program;</li>
+                                            <li>{this.state.serviceProviderName} collecting my A2T-Related Personal Information indirectly from SDPR or BC Tech for Learning, for the purposes of administering, delivering or evaluating the A2T program;</li>
+                                            <li>{this.state.serviceProviderName} disclosing my A2T-Related Personal Information to SDPR or BC Tech for Learning, for the purposes of administering, delivering or evaluating the A2T program;</li>
+                                            <li>BC Tech for Learning collecting my A2T-Related Personal Information indirectly from SDPR or {this.state.serviceProviderName}, for the purposes of administering, delivering or evaluating the A2T program;</li>
+                                            <li>BC Tech for Learning disclosing my A2T-Related Personal Information to SDPR or {this.state.serviceProviderName}, for the purposes of administering, delivering or evaluating the A2T program;</li>
                                         </ol>
-                                    
-                        
+                                    <p>The consents described above are effective on the date I sign this document and expire of the date MSDPR completes an evaluation of the A2T program.</p>
+                                    <p>Any disclosure of my A2T-Related Personal Information as described above may take place only in Canada.</p>
                                   <CollectionNotice />
 
                                   <div className="form-row">

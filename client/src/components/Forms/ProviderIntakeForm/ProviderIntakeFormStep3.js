@@ -69,9 +69,14 @@ class FormStep3 extends Component {
                                     </div>
                                 </div>
                                 <li key={8}>Has Reviewed this application form and is aware they must sign an electronic Applicant Consent form agreeing to all below-noted terms and conditions:
-                                                    <ol style={{listStyleType:"none"}}>
-                                                        <li><b>TERMS AND CONDITIONS</b></li>
-                                                    </ol>
+                                <div className="col-md-12 pad">
+                                    <div className="card card-secondary">
+                                        <div className="card-header">
+                                            <h4 className="my-0">TERMS AND CONDITIONS</h4>
+                                        </div>
+                                                   
+                                        <div className="card-body">
+                                            <p className="card-text">
                                                     <ol style={{listStyleType:"lower-alpha"}}>
                                                     <li >Their receipt and use of a laptop computer provided to them through the A2T program is dependent on their participation in the training described above;</li>
                                                     <li >If they complete the training described above to the satisfaction of {`${this.props.values.serviceProviderName}`} they may keep the laptop computer provided to them through the A2T program;</li>
@@ -83,7 +88,11 @@ class FormStep3 extends Component {
                                                          <li>any other illegal activity; or</li>
                                                          <li>promoting any illegal activity.</li>
                                                         </ol>
-                                                    </ol>          
+                                                    </ol>   
+                                                </p>
+                                            </div>  
+                                        </div>
+                                    </div>     
                                 </li>     
                             </ol>
                         </label>
