@@ -157,9 +157,6 @@ async function saveListProviderIntake(values) {
       })
     }).then(async response => {
       //item was created
-      console.log("********");
-      console.log(response.d);
-
       return [true, response.d.ID];
     })    
     .catch(err => {
