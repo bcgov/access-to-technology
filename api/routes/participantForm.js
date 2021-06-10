@@ -109,14 +109,14 @@ router.get('/', csrfProtection, (req, res) => {
  router.get('/getData/:id/:token', csrfProtection, async(req, res) => {
   console.log(req.params);
   await getParticipantValues(req.params).then(function(result) {
-    if(result !== undefined){
+    if(result[0] !== undefined){
       res.send({
         serviceProvider: result[0].serviceProviderName,
         clientFirstName: result[0].clientName,
       });
     }else{
       res.send({
-        err
+        err: "Not Found"
       });
     }
  });

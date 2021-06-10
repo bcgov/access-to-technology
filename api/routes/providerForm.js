@@ -67,9 +67,9 @@ async function sendEmails(values) {
             "Access to Technology Application",
             [
               `Hello ${values.clientName},`,
-              `<p>You are receiving this email as confirmation that ${values.serviceProviderName} has electronically submitted an Access to Technology (A2T) Application and Agreement on your behalf to the Ministry of Social Development and Poverty Reduction (“MSDPR”), which administers the A2T program to support eligible clients participating in eligible skills training programs.</p>`,
+              `<p>You are receiving this email as confirmation that ${values.serviceProviderName} has electronically submitted an Access to Technology (A2T) Application on your behalf to the Ministry of Social Development and Poverty Reduction (“MSDPR”), which administers the A2T program to support eligible clients participating in eligible skills training programs.</p>`,
               `<p><b style="color:#FF0000">IMPORTANT</b>: to complete your application, you must visit the link below to provide your consent and complete the agreement.  Without your consent and agreement, the application cannot be processed.</p>`,
-              `<a href="https://access-to-technology-dev.apps.silver.devops.gov.bc.ca/clientConsent/${values._id}/${values._token}" style="padding: 8px 12px; bgcolor: #ffffff; background-color: #ffffff; border: 2px solid #294266; border-radius: 2px; font-family: Helvetica, Arial, sans-serif; font-size: 14px; color: #294266 ! important; text-decoration: none; font-weight: bold; display: inline-block;" >Consent Form</a>`,
+              `<a href="https://access-to-technology-dev.apps.silver.devops.gov.bc.ca/clientConsent/${values._id}/${values._token}" style="padding: 8px 12px; bgcolor: #ffffff; background-color: #ffffff; border: 2px solid #294266; border-radius: 2px; font-family: Helvetica, Arial, sans-serif; font-size: 14px; color: #294266 ! important; text-decoration: none; font-weight: bold; display: inline-block;" >Consent and AgreementForm</a>`,
               
               `<p>A copy of your application information is included below for your records. Please review this information and contact your Service Provider if you have questions and/or if any of the information is not correct:</p>`,
               `<b>Service Provider:</b> ${values.serviceProviderName}`,
@@ -110,7 +110,12 @@ async function sendEmails(values) {
             ],
             [
               `<b>COLLECTION NOTICE</b>`,
-              `Personal information collected in this application is collected under the authority of sections 26 (c) and (e) of the Freedom of Information and Protection of Privacy Act or Parts 3 and 4 of the Personal Information Protection Act and is subject to all the provisions of the applicable Act. The personal information collected will be used by the Ministry of Social Development and Poverty Reduction (“MSDPR”), and its contracted A2T service provider to administer the A2T program, and may also be used to evaluate the effectiveness of the A2T program. If you have any questions about the collection of your personal information, please contact the Records Clerk of the Employment and Labour Market Services Division, MSDPR at WorkBCOESprivacy@gov.bc.ca.`,
+              `Personal information collected in this application is collected under the authority of sections 26 (c) and (e)
+               of the <i>Freedom of Information and Protection of Privacy Act</i> or Parts 3 and 4 of the <i>Personal Information Protection Act</i> and is subject
+               to all the provisions of the applicable Act. The personal information collected will be used by the Ministry of Social Development and 
+               Poverty Reduction (“MSDPR”), and its contracted A2T service provider to administer the A2T program, and may also be used to evaluate the 
+               effectiveness of the A2T program. If you have any questions about the collection of your personal information, please contact the Records 
+               Clerk of the Employment and Labour Market Services Division, MSDPR at WorkBCOESprivacy@gov.bc.ca.`,
               ``,
             ]
           ) // html body

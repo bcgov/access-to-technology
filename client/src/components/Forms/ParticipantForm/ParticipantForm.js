@@ -62,16 +62,21 @@ class ParticipantForm extends Component {
         .then(
             (result) => {
                 console.log(result)
-                this.setState({
-                    serviceProviderName: result.serviceProvider,
-                    clientFirstName: result.clientFirstName
-                })
-
+                if(result.err === "Not Found"){
+                    this.setState({
+                        hasError: true
+                    })
+                }else{
+                    this.setState({
+                        serviceProviderName: result.serviceProvider,
+                        clientFirstName: result.clientFirstName,
+                    })
+                }
             },
             (error) => {
                 console.log(error)
                 this.setState({
-                    hasError: true
+                        hasError: true
                 })
             }
         )
@@ -83,14 +88,23 @@ class ParticipantForm extends Component {
     }
 
     handleApplicationId( values, errors, touched, isSubmitting) {
+        console.log(this.state.hasError)
         if (this.state._id === "" || this.state._id.length !== 10 ||this.state._token === "" || this.state._token.length !== 25 ) {
             //show non id/token handler
             return (
                 <div>
-                    <p>Please follow the link provided to you in your confirmation email. </p>
+                    <p>Please follow the link provided to you in your confirmation email.</p>
                 </div>
             )
-        } else {
+        } else if( this.state.hasError === true){
+            return (
+                <div>
+                    <p>Your link may not be active yet, please check back in 5 - 10 minutes </p>
+                </div>
+            )
+
+        } 
+        else {
            
             return (<div>
               

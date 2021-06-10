@@ -18,7 +18,10 @@ class thankyouProviderIntake extends Component {
                         <h1>Your Application has been received.</h1>
                         <h3>Application ID: {this.props.location.state !== undefined && this.props.location.state._id}</h3>
                         <button className="btn btn-success d-print-none" onClick={() => window.print()}>Print Confirmation</button><br /><br />
-                        <p>Thank you for submitting an application for the Access to Technology (A2T) Program. Your client will receive an automated email that you completed this application form on their behalf. The email has a link for the client to sign a consent form and laptop agreement. Please encourage them to do this right away so they can get their laptop on time. They have three weeks once they get the email to do this, or they won’t get a laptop.</p>
+                        <p>Thank you for submitting an application for the Access to Technology (A2T) Program. Your client will receive an automated
+                            email confirming that you completed this application on their behalf. The email has a link for the client to sign a 
+                            consent form and laptop agreement. Please encourage them to do this right away so they can get their laptop on time. 
+                            They have three weeks once they get the email to do this, or they will not get a laptop.</p>
                         <p>IMPORTANT NOTICE: If information on this application is incorrect, please contact <a href="mailto:AccessToTechnology@gov.bc.ca" title="A2T Email Address">Access To Technology</a> and include the Application ID referenced above in the subject of the email.</p>
                         <p>
                             The following information was received:
