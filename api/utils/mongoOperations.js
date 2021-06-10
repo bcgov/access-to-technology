@@ -78,7 +78,8 @@ module.exports = {
             return mClient.db();
         }).then(async db => {
             // get our values from db 
-            return db.collection("ProviderIntake").find({applicationId: values.id, _token: values.token});
+            console.log("getting SPID");
+            return db.collection("ProviderIntake").find({applicationId: values.id, _token: values.token}).toArray();
             console.log(err)  
         });
     },

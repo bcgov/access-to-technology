@@ -108,12 +108,11 @@ router.get('/', csrfProtection, (req, res) => {
 
  router.get('/getData/:id/:token', csrfProtection, async(req, res) => {
   console.log(req.params);
-  await getItemID(req.params).then(function(result) {
+  await getParticipantValues(req.params).then(function(result) {
     if(result !== undefined){
-      console.log(result)
       res.send({
-        serviceProvider: result.serviceProviderName,
-        clientFirstName: result.clientName,
+        serviceProvider: result[0].serviceProviderName,
+        clientFirstName: result[0].clientName,
       });
     }else{
       res.send({

@@ -12,8 +12,8 @@ function Home() {
                                     training programs administered by Social Development and Poverty Reduction (SDPR), 
                                     Advanced Education and Skills Training (AEST) and Indigenous Skills and Employment Training (ISET), which:</p>
                                 <ul>
-                                    <li>Starts on or after August 15, 2021;</li>
-                                    <li>Has an online learning component;</li>
+                                    <li>Start on or after August 15, 2021;</li>
+                                    <li>Have an online learning component;</li>
                                     <li>Leads to employment;</li>
                                     <li>Is a minimum of four consecutive weeks;</li>
                                     <li>Is on the list of approved skills training programs.</li>
@@ -21,8 +21,6 @@ function Home() {
                                 <p>For additional Service Provider Information see the <a href="https://www.workbc.ca/getmedia/3532dbe8-f084-4022-bd3c-8f9ebe422fa4/WS-Guide.aspx" target="_blank" rel="noopener noreferrer" >Access to Technology (A2T) Service Provider Guide</a>.</p>
                                 <p>In order to submit an application for a client to access the A2T Program, you will need the following: </p>
                                 <ol style={{listStyleType:"decimal"}}>
-                                    <li>Confirmation of Client Eligibility </li>
-                                    <li>Confirmation of Training Program Eligibility</li>
                                     <li>Training Program start and end dates</li>
                                     <li>Client Information (Name, Phone, Email, Shipping Address)</li>
                                 </ol>
@@ -48,7 +46,7 @@ function Home() {
                                 <ul>
                                     <li>Skills training programs, as identified by each participating ISET Service Provider, and confirmed by the Ministry of Social Development and Poverty Reduction.</li>
                                 </ul>
-                                <p><b>Note</b>: The staff member from the Ministry who is funding the majority share of the approved skills training program must complete the A2T application form on their client’s behalf. </p>
+                                <p><b>Note</b>: The organization that is responsible for administering the majority share of funding for the approved skills training program must complete the A2T application form on their client’s behalf. </p>
                             </div>
                         </div>
                     </div>

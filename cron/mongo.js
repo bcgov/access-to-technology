@@ -64,7 +64,38 @@ module.exports = {
             return doc
         })    
     },
-   
+    updateSaveIdToSP: async function(collection,_id, appID){
+        return await connection
+        .then(mClient => {
+            // get a handle on the db
+            return mClient.db();
+            //return db
+        })
+        .then(async db => {
+        // add our values to db (they are always new)
+            return db.collection(collection).updateOne(
+                {
+                    _id: _id
+                },
+                { 
+                    $set : {
+                    savedToSP: true,
+                    SPID: appID
+
+                    }
+                },
+                {
+                    upsert: false
+                }
+
+            )
+                //console.log(err)
+                //console.log(doc)
+        }).then(result =>{
+            return result
+        })     
+    },
+
     updateSavedToSP: async function(collection,_id){
         return await connection
         .then(mClient => {
@@ -81,6 +112,7 @@ module.exports = {
                 { 
                     $set : {
                     savedToSP: true
+
                     }
                 },
                 {
