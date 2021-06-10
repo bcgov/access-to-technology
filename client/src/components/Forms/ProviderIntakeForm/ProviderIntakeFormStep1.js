@@ -567,32 +567,6 @@ class FormStep1 extends Component {
                 </div>
                 <div className="form-row">
                     <div className="form-group">
-                        <label className="col-form-label control-label" htmlFor="unemployed">Client is unemployed or precariously employed
-                        <span
-                            style={{ color: "red" }}>*</span> </label>
-                        <div className="form-check">
-                            <Field
-                                className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "unemployed")}`}
-                                type="radio"
-                                name="unemployed"
-                                value="yes"
-                            />
-                            <label className="form-check-label" htmlFor="unemployed">Yes</label>
-                        </div>
-                        <div className="form-check">
-                            <Field
-                                className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "unemployed")}`}
-                                type="radio"
-                                name="unemployed"
-                                value="no"
-                            />
-                            <label className="form-check-label" htmlFor="unemployed">No</label>
-                        </div>
-                        {feedBackInvalid(this.props.errors, this.props.touched, "unemployed")}
-                    </div> 
-                </div>
-                <div className="form-row">
-                    <div className="form-group">
                         <label className="col-form-label control-label" htmlFor="BCEAorFederalOnReserve">Select which of the following form(s) of government assistance the client is receiving (choose all that apply):    
                         <span
                             style={{ color: "red" }}>*</span> </label>

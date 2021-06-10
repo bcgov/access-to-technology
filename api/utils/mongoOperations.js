@@ -78,7 +78,8 @@ module.exports = {
             return mClient.db();
         }).then(async db => {
             // get our values from db 
-            return db.collection("ProviderIntake").find({applicationId: values.id, _token: values.token});
+            console.log("getting SPID");
+            return db.collection("ProviderIntake").find({applicationId: values.id, _token: values.token}).toArray();
             console.log(err)  
         });
     },
@@ -104,7 +105,6 @@ module.exports = {
                 trainingProgram: values.trainingProgram,
                 periodStart1: values.periodStart1,
                 periodEnd1: values.periodEnd1,
-                unemployed: values.unemployed,
                 BCEAorFederalOnReserve: values.BCEAorFederalOnReserve,
                 workBCCaseNumber: values.workBCCaseNumber,
                 clientName: myTrim(values.clientName),
@@ -120,12 +120,11 @@ module.exports = {
                 altShippingAddress: values.altShippingAddress,
 
                 //step 1:pop-up fields
-                addressAlt: values.addressAlt,
+                recipientName: values.recipientName,
                
                 //step 2
                 /*
                 clientResidesInBC: values.clientResidesInBC,
-                clientUnemployed: values.clientUnemployed,
                 registeredInApprovedProgram:values.registeredInApprovedProgram,
                 accessToComputerCurrently: values.accessToComputerCurrently,
                 receivingAlternateFunding: values.receivingAlternateFunding,
@@ -134,7 +133,7 @@ module.exports = {
                 clientEligibility: values.clientEligibility,
                 serviceProviderResponsibility: values.serviceProviderResponsibility,
                 clientConsent:false,
-                
+                compareField:[values.clientName.toLowerCase(), values.clientLastName.toLowerCase(), values.clientAddress.toLowerCase(), values. clientPostal, values.clientEmail.toLowerCase(), values.clientPhone, values.workBCCaseNumber],         
                 
             });
         });

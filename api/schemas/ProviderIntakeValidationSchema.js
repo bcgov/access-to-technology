@@ -28,9 +28,6 @@ var ProviderIntakeValidationSchema = yup.object().shape({
         .required("Please Enter your clients program start date"),
     periodEnd1: yup.date()
         .required("Please Enter your clients program end date"),
-    unemployed:yup.string()
-        .oneOf(["yes"],"The client should be unemployed or precariously employed to be eligible for this program.")
-        .required("The client should be unemployed or precariously employed to be eligible for this program."),
     BCEAorFederalOnReserve:yup.array()
         .required("The client must be receiving one of the above forms of government assistance to be eligible for this program."),
     
@@ -39,8 +36,9 @@ var ProviderIntakeValidationSchema = yup.object().shape({
     workBCCaseNumber: yup.string().when('fundingSource', {
         is: 'SDPR',
         then: yup.string()
-        .required(
-        "Please use the WorkBC ES case number.  All eligible WorkBC clients must be in an approved WorkBC Service, with an ICM Case number."),
+        .test('Is-valid-case-Number','Invalid case number, please enter in the format: 1-XXXX-XXXX',
+        value => (value +"").match(/^\d{1}-\d{4}-\d{4}$/gi))
+        .required("Please use the WorkBC ES case number.  All eligible WorkBC clients must be in an approved WorkBC Service, with an ICM Case number"),
         otherwise: yup.string()}),
     clientName: yup.string()
         .required('Please enter the clients First name'),

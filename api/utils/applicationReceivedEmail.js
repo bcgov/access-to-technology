@@ -50,7 +50,6 @@ module.exports = {
          <p><b>Training Program Start Date:</b>  ${strings.orEmpty(moment(values.periodStart1).format('MMMM Do YYYY'))}</p>
          <p><b>Training Program End Date:</b>  ${strings.orEmpty(moment(values.periodEnd1).format('MMMM Do YYYY'))}</p>
         <h3>Client Eligibility</h3>
-         <p><b>Client is unemployed or precariously employed:</b>  ${strings.orEmpty(values.unemployed)}</p>
          <p><b>Select which of the following form(s) of government assistance the client is receiving (choose all that apply):</b> <br/>  ${strings.orEmpty(values.BCEAorFederalOnReserve.join('<br/>'))}</p>
          <hr />
 
@@ -74,7 +73,7 @@ module.exports = {
         if(alternativeAddress){
             html= html + `
             <h5>Laptop will be delivered to the recipient below as per clients request:</h5>
-            <p><b>Recipients Name 1:</b>  ${strings.orEmpty(values.recipientName)}</p>
+            <p><b>Recipients Name:</b>  ${strings.orEmpty(values.recipientName)}</p>
             <hr />
             `
         }

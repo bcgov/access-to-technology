@@ -34,9 +34,6 @@ export const ProviderIntakeValidationSchema = yup.object().shape({
         .required("Please enter your clients program start date"),
     periodEnd1: yup.date()
         .required("Please enter your clients program end date"),
-    unemployed:yup.string()
-        .oneOf(["yes"],"The client must be unemployed or precariously employed to be eligible for this program")
-        .required("The client must be unemployed or precariously employed to be eligible for this program"),
     BCEAorFederalOnReserve:yup.array()
         //.oneOf(["yes"],"The client must be receiving one of the above forms of government assistance to be eligible for this program.")
         .required("The client must be receiving one of the above forms of government assistance to be eligible for this program"),
@@ -46,8 +43,9 @@ export const ProviderIntakeValidationSchema = yup.object().shape({
     workBCCaseNumber: yup.string().when('fundingSource', {
         is: 'SDPR',
         then: yup.string()
-        .required(
-        "Please use the WorkBC ES case number.  All eligible WorkBC clients must be in an approved WorkBC Service, with an ICM Case number"),
+        .test('Is-valid-case-Number','Invalid case number, please enter in the format: 1-XXXX-XXXX',
+        value => (value +"").match(/^\d{1}-\d{4}-\d{4}$/gi))
+        .required("Please use the WorkBC ES case number.  All eligible WorkBC clients must be in an approved WorkBC Service, with an ICM Case number"),
         otherwise: yup.string()}),
     clientName: yup.string()
         .required("Please enter client's first name"),
@@ -57,7 +55,7 @@ export const ProviderIntakeValidationSchema = yup.object().shape({
     clientPhone:yup.string()
         .test('Is-valid-phone','Invalid Phone Number',
         value => (value +"").match(/^\d{3}-\d{3}-\d{4}$/gi))
-        .required("Please enter a valid phone number."),
+        .required("Please enter a valid phone number"),
     clientEmail:yup.string()
         .email("Please enter a valid email")
         .required("Please enter client email address ")

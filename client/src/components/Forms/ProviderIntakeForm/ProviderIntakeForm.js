@@ -94,7 +94,7 @@ class ProviderIntakeForm extends Component {
         console.log(errors);
         console.log(errors['workBCCaseNumber']);
         if(currentStep === 1){
-            if(errors['workBCCaseNumber'] === 'Please use the WorkBC ES case number.  All eligible WorkBC clients must be in an approved WorkBC Service, with an ICM Case number'){
+            if('workBCCaseNumber' in errors){
                 nextFlag = ((parseInt(Object.keys(errors).length) > 11 || (parseInt(Object.keys(errors).length) === 0 && parseInt(Object.keys(touched).length) === 0)));
              }else{
                 nextFlag = ((parseInt(Object.keys(errors).length) > 10 || (parseInt(Object.keys(errors).length) === 0 && parseInt(Object.keys(touched).length) === 0)));
@@ -145,7 +145,6 @@ class ProviderIntakeForm extends Component {
                                     trainingProgram:"",
                                     periodStart1:"",
                                     periodEnd1:"",
-                                    unemployed:"",
                                     BCEAorFederalOnReserve:[],
                                     //step2
                                     workBCCaseNumber:"",

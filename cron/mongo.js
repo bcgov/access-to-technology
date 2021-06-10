@@ -64,7 +64,38 @@ module.exports = {
             return doc
         })    
     },
-   
+    updateSaveIdToSP: async function(collection,_id, appID){
+        return await connection
+        .then(mClient => {
+            // get a handle on the db
+            return mClient.db();
+            //return db
+        })
+        .then(async db => {
+        // add our values to db (they are always new)
+            return db.collection(collection).updateOne(
+                {
+                    _id: _id
+                },
+                { 
+                    $set : {
+                    savedToSP: true,
+                    SPID: appID
+
+                    }
+                },
+                {
+                    upsert: false
+                }
+
+            )
+                //console.log(err)
+                //console.log(doc)
+        }).then(result =>{
+            return result
+        })     
+    },
+
     updateSavedToSP: async function(collection,_id){
         return await connection
         .then(mClient => {
@@ -81,6 +112,7 @@ module.exports = {
                 { 
                     $set : {
                     savedToSP: true
+
                     }
                 },
                 {
@@ -94,6 +126,26 @@ module.exports = {
             return result
         })     
     },
+    
+    duplicateCheck: async function (comparatorField) {
+        return await connection
+        .then(mClient => {
+            // get a handle on the db
+            return mClient.db();
+            //return db
+        })
+        .then(async db => {
+        // get our values from db 
+        return await db.collection("ProviderIntake").aggregate([
+            {$unwind: "$compareField"},
+            {$match: {compareField:{ $in:comparatorField}}},
+            {$group: {_id: "$applicationId", number: {$sum: 1}}},
+            {$project: {_id: 1, number: 1, percentage: {$divide: ["$number", comparatorField.length]}}},
+            {$sort: {percentage: -1}}]).toArray(); 
+        }).then(async doc =>{
+            return doc
+        })    
+    }, 
     
     updateConsentToFalse: async function(collection,_id){
         return await connection

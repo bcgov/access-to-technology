@@ -3,7 +3,7 @@ const express = require('express')
 const spauth = require('node-sp-auth')
 const request = require('request-promise')
 
-var {getProviderIntakeNotSP, getProviderIntakeConsentNotSP, updateConsentToFalse, getNeedEmployeeNotSP, getClaimNotSP, getProviderIntakeNotReporting, getNeedEmployeeNotReporting, getClaimNotReporting, updateReporting, updateSavedToSP} = require('./mongo')
+var {getProviderIntakeNotSP, updateSaveIdToSP, duplicateCheck, getProviderIntakeConsentNotSP, updateConsentToFalse, getNeedEmployeeNotSP, getClaimNotSP, getProviderIntakeNotReporting, getNeedEmployeeNotReporting, getClaimNotReporting, updateReporting, updateSavedToSP} = require('./mongo')
 var clean = require('./clean')
 var listWebURL = process.env.LISTWEBURL || process.env.OPENSHIFT_NODEJS_LISTWEBURL || ""
 var listUser = process.env.LISTUSER || process.env.OPENSHIFT_NODEJS_LISTUSER || ""
@@ -69,8 +69,10 @@ async function sendEmail(values, Sub) {
 
 //add proper fields for A2T
 async function saveListProviderIntake(values) {
+  // call function in here before saving
   try{
     var headers;
+    var duplicateChecks;
   return await spr
   .then(async data => {
       headers = data.headers;
@@ -86,6 +88,7 @@ async function saveListProviderIntake(values) {
           json: true,
         })
     }).then(async response => {
+      duplicateChecks =  await duplicateCheck(values.compareField);
       var digest = response.d.GetContextWebInformation.FormDigestValue
       return digest
     }).then(async response => {
@@ -96,6 +99,7 @@ async function saveListProviderIntake(values) {
       var l = listWebURL + `/A2TTest/_api/web/lists/getByTitle('IntakeForm')/items`
       console.log("webURL:")
       console.log(l)
+      
       return request.post({
         url: l,
         headers: headers,
@@ -117,7 +121,6 @@ async function saveListProviderIntake(values) {
           'eligibleProgram': values.trainingProgram,
           'periodStart1': typeof values.periodStart1 !== "undefined" ? new Date(values.periodStart1) : null,
           'periodEnd1': typeof values.periodEnd1 !== "undefined" ? new Date(values.periodEnd1) : null,
-          'unemployed':values.unemployed === "yes",
           'BCEAorFederalOnReserve':{'results': values.BCEAorFederalOnReserve},
           'workBCCaseNumber': values.workBCCaseNumber,
           'clientName': values.clientName,
@@ -133,7 +136,8 @@ async function saveListProviderIntake(values) {
           'altShippingAddress': values.altShippingAddress,
           // insert duplicate info response here 
           //step 1:pop-up fields
-          'addressAlt':values.addressAlt,
+          'recipientName':values.recipientName,
+          'DuplicateInfo': JSON.stringify(duplicateChecks),
           //step 2
           /*'clientResidesInBC': values.clientResidesInBC,
           'clientUnemployed': values.clientUnemployed,
@@ -153,7 +157,7 @@ async function saveListProviderIntake(values) {
       })
     }).then(async response => {
       //item was created
-      return true
+      return [true, response.d.ID];
     })    
     .catch(err => {
       //there was an error in the chan
@@ -235,8 +239,8 @@ async function getItemID(values){
 async function updateListProviderIntake(values) {
   try{
       var headers;
-      var itemID = await getItemID(values)
-      if(itemID === false){
+      var itemID = values.SPID;
+      if(itemID === ""){
         sendEmail(values, "Update Attempt Error - ApplicationID and Token Not Found")
         console.log("CONSENT REQUEST FAILED:  applicationID:"+values.applicationId +" token:"+values._token + " Not Found In SharePoint")
         console.log("-Consent set back to false to prevent further errors-")
@@ -333,11 +337,13 @@ cron.schedule('*/3 * * * *', async function() {
           await saveListProviderIntake(data)
               .then(function(saved){
                 console.log("saved")
-                console.log(saved)
+                console.log(saved[0])
+                console.log(saved[1])
                 // save values to mongo db
                 if (saved) {
                   try {
                     updateSavedToSP("ProviderIntake",data._id);
+                    updateSaveIdToSP("ProviderIntake",data._id,saved[1])
                   }
                   catch (error) {
                     console.log(error);

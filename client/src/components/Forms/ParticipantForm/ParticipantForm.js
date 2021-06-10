@@ -56,7 +56,7 @@ class ParticipantForm extends Component {
 
     getContext(values){
         console.log("running...")
-        fetch(FORM_URL.clientForm+"/getData/"+this.state._id+"/"+this.state._token,  {
+        fetch(FORM_URL.clientForm+"/getData/"+values._id+"/"+values._token,  {
             credentials: "include",
         }).then(res => res.json())
         .then(
