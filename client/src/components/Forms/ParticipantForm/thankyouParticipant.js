@@ -16,11 +16,11 @@ class thankyouParticipant extends Component {
                     </div>
                 </div>
                 <div className="row">
-                <div class="col-lg-8">
+                <div className="col-lg-8">
                     <div>
-                        <div class="alert alert-dismissible alert-success">
-                            <button type="button" class="close" data-dismiss="alert">×</button>
-                            <strong>Complete!</strong> <br/>Your consent and agreement have been received.
+                        <div className="alert alert-dismissible alert-success">
+                            <button type="button" className="close" data-dismiss="alert">×</button>
+                            <strong>Complete!</strong> <br/>Your consent and agreement have been received. You will receive an email copy shortly.
                         </div>
                     </div>
                 </div>

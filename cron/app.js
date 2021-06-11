@@ -136,6 +136,7 @@ async function saveListProviderIntake(values) {
           // insert duplicate info response here 
           //step 1:pop-up fields
           'recipientName':values.recipientName,
+          'clientFullName':values.clientName +" "+values.clientLastName,
           'DuplicateInfo': JSON.stringify(duplicateChecks),
           //step 2
           /*'clientResidesInBC': values.clientResidesInBC,
