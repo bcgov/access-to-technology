@@ -51,7 +51,7 @@ class FormStep3 extends Component {
                                         <li >Social assistance provided by Indigenous Services Canada (ISC) for persons living on a First Nation Reserve;</li>
                                         <li >Assistance from the British Columbia Ministry of Children and Family Development under an Agreement with a Young Adult.</li>
                                     </ol>
-                                <li >Has reviewed the COLLECTION NOTICE and agreed to the collection of their personal information; and</li>
+                                <li >Has reviewed the COLLECTION NOTICE and is aware they must sign an electronic Applicant Consent form; and</li>
 
                                 <div className="col-md-12 pad">
                                     <div className="card card-secondary">
@@ -60,7 +60,7 @@ class FormStep3 extends Component {
                                         </div>
                                         <div className="card-body">
                                             <p className="card-text">Personal information collected in this application is collected under the authority of sections 26 (c) and (e)
-                                             of the Freedom of Information and Protection of Privacy Act or Parts 3 and 4 of the Personal Information Protection Act and is subject
+                                             of the <i>Freedom of Information and Protection of Privacy Act</i> or Parts 3 and 4 of the <i>Personal Information Protection Act</i> and is subject
                                               to all the provisions of the applicable Act. The personal information collected will be used by the Ministry of Social Development and 
                                               Poverty Reduction (“MSDPR”), and its contracted A2T service provider to administer the A2T program, and may also be used to evaluate the 
                                               effectiveness of the A2T program. If you have any questions about the collection of your personal information, please contact the Records 
@@ -68,7 +68,15 @@ class FormStep3 extends Component {
                                         </div>
                                     </div>
                                 </div>
-                                <li key={9}>Has acknowledged and Agree that:
+                                <li key={8}>Has Reviewed this application form and is aware they must sign an electronic Applicant Consent form agreeing to all below-noted terms and conditions:
+                                <div className="col-md-12 pad">
+                                    <div className="card card-secondary">
+                                        <div className="card-header">
+                                            <h4 className="my-0">TERMS AND CONDITIONS</h4>
+                                        </div>
+                                                   
+                                        <div className="card-body">
+                                            <p className="card-text">
                                                     <ol style={{listStyleType:"lower-alpha"}}>
                                                     <li >Their receipt and use of a laptop computer provided to them through the A2T program is dependent on their participation in the training described above;</li>
                                                     <li >If they complete the training described above to the satisfaction of {`${this.props.values.serviceProviderName}`} they may keep the laptop computer provided to them through the A2T program;</li>
@@ -80,9 +88,12 @@ class FormStep3 extends Component {
                                                          <li>any other illegal activity; or</li>
                                                          <li>promoting any illegal activity.</li>
                                                         </ol>
-                                                    </ol>          
+                                                    </ol>   
+                                                </p>
+                                            </div>  
+                                        </div>
+                                    </div>     
                                 </li>     
-                                <li key={10}>Has reviewed this application and agreed to all terms and conditions set out in this part.</li>
                             </ol>
                         </label>
                     </div>
@@ -97,7 +108,7 @@ class FormStep3 extends Component {
                                 <li >If {`${this.props.values.clientName}`}  does not complete the approved eligible training described in this application to the satisfaction of {`${this.props.values.serviceProviderName}`} to:</li>
                                     <ol style={{listStyleType:"lower-alpha"}}>
                                         <li >Advise the MSDPR that the individual did not complete the training; and</li>
-                                        <li >Exercise reasonable due diligence in notifying the individual of their obligation to return the laptop computer to the A2T contractor. </li>
+                                        <li >Notify the individual of their obligation to return the laptop computer to the A2T contractor. </li>
                                     </ol>
                                 <li>If requested to do so by {`${this.props.values.fundingSource}`}, to provide documentation to demonstrate {`${this.props.values.serviceProviderName}`} has applied the criteria described in the confirmation above to assess the eligibility of {`${this.props.values.clientName}`} for the A2T program; and</li>
                                 <li>That by clicking the "submit" icon below, {`${this.props.values.serviceProviderContact}`}, an authorized signatory for {`${this.props.values.serviceProviderName}`}  is attaching their electronic signature to this form, which has the same effect as if {`${this.props.values.serviceProviderContact}`} were to manually sign a physical copy of this form.</li>

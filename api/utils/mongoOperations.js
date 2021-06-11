@@ -59,7 +59,6 @@ module.exports = {
                         clientSignature: values.clientSignature,
                         clientConsent: true,
                         clientConsentDate: values.clientConsentDate,
-                        savedToSP:false,
                     }
                 },
                 {
@@ -80,7 +79,6 @@ module.exports = {
             // get our values from db 
             console.log("getting SPID");
             return db.collection("ProviderIntake").find({applicationId: values.id, _token: values.token}).toArray();
-            console.log(err)  
         });
     },
     saveProviderIntakeValues: async function (values) {
@@ -92,6 +90,7 @@ module.exports = {
             // add our values to db (they are always new)
             return db.collection("ProviderIntake").insertOne({
                 savedToSP: false,
+                savedConsent: false,
                 applicationId: values._id,  // id is provided
                 _token: values._token,
                  //step 1

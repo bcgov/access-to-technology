@@ -30,17 +30,19 @@ class FormStep1 extends Component {
                         }}
                     >
                         <option value="">Please select</option>
-                        <option value="KNC - Ktunaxa Nation Council">KNC - Ktunaxa Nation Council</option>
-                        <option value="MNBC - Métis Nation of British Columbia">MNBC - Métis Nation of British Columbia</option>
-                        <option value="NENAS - North-East Native Advancing Society">NENAS - North-East Native Advancing Society</option>
-                        <option value="NETP - Nuu-chah-nulth Employment and Training Program">NETP - Nuu-chah-nulth Employment and Training Program</option>
-                        <option value="NVIATS - North Vancouver Island Aboriginal Training Society">NVIATS - North Vancouver Island Aboriginal Training Society</option>
-                        <option value="PGNAETA - Prince George Nechako Aboriginal Employment and Training Association">PGNAETA - Prince George Nechako Aboriginal Employment and Training Association</option>
-                        <option value="SNTC - Shuswap Nation Tribal Council (formerly Central Interior Partners in Human Resource Development)">SNTC - Shuswap Nation Tribal Council (formerly Central Interior Partners in Human Resource Development)</option>
-                        <option value="TRICORP - Tribal Resources Investment Corporation">TRICORP - Tribal Resources Investment Corporation</option>
-                        <option value="LTC - Lillooet Tribal Council">LTC - Lillooet Tribal Council</option>
+                        <option value="LTC - Lillooet Tribal Council">LTC - Lillooet Tribal Council</option>
+                        <option value="MNBC - Métis Nation of British Columbia">MNBC - Métis Nation of British Columbia</option>
+                        <option value="NENAS - North-East Native Advancing Society">NENAS - North-East Native Advancing Society</option>
+                        <option value="NETP - Nuu-chah-nulth Employment and Training Program">NETP - Nuu-chah-nulth Employment and Training Program</option>
+                        <option value="NVIATS - North Vancouver Island Aboriginal Training Society">NVIATS - North Vancouver Island Aboriginal Training Society</option>
+                        <option value="PGNAETA - Prince George Nechako Aboriginal Employment and Training Association">PGNAETA - Prince George Nechako Aboriginal Employment and Training Association</option>
+                        <option value="SNTC - Shuswap Nation Tribal Council (formerly Central Interior Partners in Human Resource Development)">SNTC - Shuswap Nation Tribal Council (formerly Central Interior Partners in Human Resource Development)</option>
+                        <option value="TRICORP - Tribal Resources Investment Corporation">TRICORP - Tribal Resources Investment Corporation</option>
+                        <option value="KNC - Ktunaxa Nation Council">KNC - Ktunaxa Nation Council</option>
+
                         
-                        {/*<option value="ACCESS - Aboriginal Community Career Employment Services Society">ACCESS - Aboriginal Community Career Employment Services Society</option>
+                        {/* WHEN EDITING THESE OPTIONS ENSURE YOU UPDATE THEIR ELIGIBLE PROGRAM REFERENCES BELOW (COPY-PASTE)
+                        <option value="ACCESS - Aboriginal Community Career Employment Services Society">ACCESS - Aboriginal Community Career Employment Services Society</option>
                         <option value="CCATEC - Cariboo Chilcotin Aboriginal Training Employment Centre">CCATEC - Cariboo Chilcotin Aboriginal Training Employment Centre</option>
                         <option value="CSETS - Coast Salish Employment and Training Society">CSETS - Coast Salish Employment and Training Society</option>
                         <option value="Lil'wat Nation - Lil'wat Nation">Lil'wat Nation - Lil'wat Nation</option>
@@ -75,43 +77,44 @@ class FormStep1 extends Component {
                         }}
                     >
                         <option value="">Please select</option>
-                        <option value="Thompson Rivers University">Thompson Rivers University</option>
-                        <option value="BC Federation of Labour">BC Federation of Labour</option>
-                        <option value="Camosun College/Vancouver Island University">Camosun College/Vancouver Island University</option>
-                        <option value="Okanagan College">Okanagan College</option>
-                        <option value="Kitselas First Nation">Kitselas First Nation</option>
-                        <option value="ACCESS Trades">ACCESS Trades</option>
-                        <option value="Construction Foundation of BC">Construction Foundation of BC</option>
-                        <option value="Thompson Rivers University (Kamloops)">Thompson Rivers University (Kamloops)</option>
-                        <option value="Camosun College/Vancouver Island University">Camosun College/Vancouver Island University</option>
-                        <option value="Thompson Rivers University (Williams Lake)">Thompson Rivers University (Williams Lake)</option>
-                        <option value="Ktunaxa">Ktunaxa</option>
-                        <option value="JHSP">JHSP</option>
-                        <option value="ACCESS">ACCESS</option>
-                        <option value="DCCSSS">DCCSSS</option>
-                        <option value="Kopar Administration Ltd.">Kopar Administration Ltd.</option>
-                        <option value="Cariboo Chilcotin Aboriginal Training Employment Centre (CCATEC)">Cariboo Chilcotin Aboriginal Training Employment Centre (CCATEC)</option>
-                        <option value="Vancouver Coastal Health Authority DBA- Gastown Vocational Services">Vancouver Coastal Health Authority DBA- Gastown Vocational Services</option>
-                        <option value="Hecate Straight Employment Development Society">Hecate Straight Employment Development Society</option>
-                        <option value="YWCA Metro Vancouver">YWCA Metro Vancouver</option>
-                        <option value="British Columbia Regional Council of Carpenters">British Columbia Regional Council of Carpenters</option>
-                        <option value="Camosun College">Camosun College</option>
-                        <option value="Coast Mountain College">Coast Mountain College</option>
-                        <option value="Dan's Legacy Foundation">Dan's Legacy Foundation</option>
-                        <option value="EMBERS (Eastside Movement for Business and Economic Renewal Society)">EMBERS (Eastside Movement for Business and Economic Renewal Society)</option>
-                        <option value="Greater Trail Community Skills Centre (Skills Centre)">Greater Trail Community Skills Centre (Skills Centre)</option>
-                        <option value="Kitselas Five Tier System LP">Kitselas Five Tier System LP</option>
-                        <option value="North Island College (Heavy Mechanical program)">North Island College (Heavy Mechanical program)</option>
-                        <option value="NIC (Auto Collision program)">NIC (Auto Collision program)</option>
-                        <option value="Okanagan College (Culinary-Lillooet)">Okanagan College (Culinary-Lillooet)</option>
-                        <option value="Prince George Nechako Aboriginal Employment and Training Association (PGNAETA)">Prince George Nechako Aboriginal Employment and Training Association (PGNAETA)</option>
-                        <option value="Skill Source Group Training Organization Society">Skill Source Group Training Organization Society</option>
-                        <option value="Thompson Rivers University (Construction Craft Worker Program)">Thompson Rivers University (Construction Craft Worker Program)</option>
-                        <option value="Vancouver Island Construction Association">Vancouver Island Construction Association</option>
-                        <option value="Workforce Development Consulting Services of Northern BC">Workforce Development Consulting Services of Northern BC</option>
-                        <option value="YWCA Metro Vancouver (Young Women's Christian Association)">YWCA Metro Vancouver (Young Women's Christian Association)</option>
-                        <option value="College of New Caledonia">College of New Caledonia</option>
-                        <option value="Kopar Administration Ltd">Kopar Administration Ltd</option>
+                                                <option value="ACCESS Trades">ACCESS Trades</option>
+                        <option value="ACCESS">ACCESS</option>
+                        <option value="BC Federation of Labour">BC Federation of Labour</option>
+                        <option value="British Columbia Regional Council of Carpenters">British Columbia Regional Council of Carpenters</option>
+                        <option value="Camosun College">Camosun College</option>
+                        <option value="Camosun College/Vancouver Island University">Camosun College/Vancouver Island University</option>
+                        <option value="Camosun College/Vancouver Island University">Camosun College/Vancouver Island University</option>
+                        <option value="Cariboo Chilcotin Aboriginal Training Employment Centre (CCATEC)">Cariboo Chilcotin Aboriginal Training Employment Centre (CCATEC)</option>
+                        <option value="Coast Mountain College">Coast Mountain College</option>
+                        <option value="College of New Caledonia">College of New Caledonia</option>
+                        <option value="Construction Foundation of BC">Construction Foundation of BC</option>
+                        <option value="Dan's Legacy Foundation">Dan's Legacy Foundation</option>
+                        <option value="DCCSSS">DCCSSS</option>
+                        <option value="EMBERS (Eastside Movement for Business and Economic Renewal Society)">EMBERS (Eastside Movement for Business and Economic Renewal Society)</option>
+                        <option value="Greater Trail Community Skills Centre (Skills Centre)">Greater Trail Community Skills Centre (Skills Centre)</option>
+                        <option value="Hecate Straight Employment Development Society">Hecate Straight Employment Development Society</option>
+                        <option value="JHSP">JHSP</option>
+                        <option value="Kitselas First Nation">Kitselas First Nation</option>
+                        <option value="Kitselas Five Tier System LP">Kitselas Five Tier System LP</option>
+                        <option value="Kopar Administration Ltd">Kopar Administration Ltd</option>
+                        <option value="Kopar Administration Ltd.">Kopar Administration Ltd.</option>
+                        <option value="Ktunaxa">Ktunaxa</option>
+                        <option value="NIC (Auto Collision program)">NIC (Auto Collision program)</option>
+                        <option value="North Island College (Heavy Mechanical program)">North Island College (Heavy Mechanical program)</option>
+                        <option value="Okanagan College (Culinary-Lillooet)">Okanagan College (Culinary-Lillooet)</option>
+                        <option value="Okanagan College">Okanagan College</option>
+                        <option value="Prince George Nechako Aboriginal Employment and Training Association (PGNAETA)">Prince George Nechako Aboriginal Employment and Training Association (PGNAETA)</option>
+                        <option value="Skill Source Group Training Organization Society">Skill Source Group Training Organization Society</option>
+                        <option value="Thompson Rivers University (Construction Craft Worker Program)">Thompson Rivers University (Construction Craft Worker Program)</option>
+                        <option value="Thompson Rivers University (Kamloops)">Thompson Rivers University (Kamloops)</option>
+                        <option value="Thompson Rivers University (Williams Lake)">Thompson Rivers University (Williams Lake)</option>
+                        <option value="Vancouver Coastal Health Authority DBA- Gastown Vocational Services">Vancouver Coastal Health Authority DBA- Gastown Vocational Services</option>
+                        <option value="Vancouver Island Construction Association">Vancouver Island Construction Association</option>
+                        <option value="Workforce Development Consulting Services of Northern BC">Workforce Development Consulting Services of Northern BC</option>
+                        <option value="YWCA Metro Vancouver (Young Women's Christian Association)">YWCA Metro Vancouver (Young Women's Christian Association)</option>
+                        <option value="YWCA Metro Vancouver">YWCA Metro Vancouver</option>
+                        <option value="Thompson Rivers University">Thompson Rivers University</option>
+
 
                     </Field>
                     {feedBackInvalid(this.props.errors,this.props.touched,"serviceProviderName")}
@@ -194,7 +197,7 @@ class FormStep1 extends Component {
     get ApplicableProgramForm(){
         if (this.props.values.fundingSource === "ISET") {
             console.log(this.props.values.serviceProviderName)
-            if(this.props.values.serviceProviderName === "KNC - Ktunaxa Nation Council"){
+            if(this.props.values.serviceProviderName === "NENAS - North-East Native Advancing Society"){
                 return (<div className="form-row">
                 <div className="form-group col-md-6">
                     <label className="col-form-label control-label" htmlFor="trainingProgram">Eligible Skills Training Program<span
@@ -206,32 +209,10 @@ class FormStep1 extends Component {
                         name="trainingProgram"
                     >
                         <option value="">Please select</option>
-                        <option value="Individualualized Training">Individualualized Training</option>
-                        <option value="Cohort-Based: BladeRunners">Cohort-Based:  BladeRunners</option>
-
-                    </Field>
-                    <small className="text-muted" id="trainingProgram">  This dropdown list is determined by the Referring Ministry and Service Provider Name selected above.</small>
-                    {feedBackInvalid(this.props.errors, this.props.touched, "trainingProgram")}
-                </div>
-            </div>)
-            }
-            else if(this.props.values.serviceProviderName === "NENAS - North-East Native Advancing Society"){
-                return (<div className="form-row">
-                <div className="form-group col-md-6">
-                    <label className="col-form-label control-label" htmlFor="trainingProgram">Eligible Skills Training Program<span
-                        style={{ color: "red" }}>*</span></label>
-                    <Field
-                        as="select"
-                        className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "trainingProgram")}`}
-                        id="trainingProgram"
-                        name="trainingProgram"
-                    >
-                        <option value="">Please select</option>
-                        <option value="Individualized Training">Individualized Training</option>
                         <option value="Cohort-Based: (CERT) Career Employment and Readiness Training">Cohort-Based:  (CERT) Career Employment and Readiness Training</option>
                         <option value="Cohort-Based: (OLES) Essential Skills Training">Cohort-Based:  (OLES) Essential Skills Training</option>
-                        <option value="Cohort-Based: BladeRunners">Cohort-Based: BladeRunners</option>
-                        <option value="Cohort-Based: Industry-Specific and/or Trades Training ">Cohort-Based:  Industry-Specific and/or Trades Training </option>
+                        <option value="Cohort-Based: Industry-Specific and/or Trades Training">Cohort-Based:  Industry-Specific and/or Trades Training</option>
+                        <option value="Individualized Training">Individualized Training</option>
 
 
                     </Field>
@@ -240,7 +221,7 @@ class FormStep1 extends Component {
                 </div>
             </div>)
             }
-            else if(this.props.values.serviceProviderName === "MNBC - Métis Nation of British Columbia"){
+            else if(this.props.values.serviceProviderName === "MNBC - Métis Nation of British Columbia"){
                 return (<div className="form-row">
                 <div className="form-group col-md-6">
                     <label className="col-form-label control-label" htmlFor="trainingProgram">Eligible Skills Training Program<span
@@ -252,15 +233,15 @@ class FormStep1 extends Component {
                         name="trainingProgram"
                     >
                         <option value="">Please select</option>
-                        <option value="Individualized Training">Individualized Training</option>
                         <option value="Cohort-Based: Microsoft Office and Accounting/Bookkeeping Training">Cohort-Based: Microsoft Office and Accounting/Bookkeeping Training</option>
+                        <option value="Individualized Training">Individualized Training</option>
                     </Field>
                     <small className="text-muted" id="trainingProgram">  This dropdown list is determined by the Referring Ministry and Service Provider Name selected above.</small>
                     {feedBackInvalid(this.props.errors, this.props.touched, "trainingProgram")}
                 </div>
             </div>)
             }
-            else if(this.props.values.serviceProviderName === "NETP - Nuu-chah-nulth Employment and Training Program"){
+            else if(this.props.values.serviceProviderName === "NETP - Nuu-chah-nulth Employment and Training Program"){
                 return (<div className="form-row">
                 <div className="form-group col-md-6">
                     <label className="col-form-label control-label" htmlFor="trainingProgram">Eligible Skills Training Program<span
@@ -272,9 +253,9 @@ class FormStep1 extends Component {
                         name="trainingProgram"
                     >
                         <option value="">Please select</option>
-                        <option value="Individualized Training">Individualized Training</option>
-                        <option value="Cohort-Based: Trades Training">Cohort-Based: Trades Training</option>
                         <option value="Cohort-Based: In-House Training">Cohort-Based: In-House Training</option>
+                        <option value="Cohort-Based: Trades Training">Cohort-Based: Trades Training</option>
+                        <option value="Individualized Training">Individualized Training</option>
 
                     </Field>
                     <small className="text-muted" id="trainingProgram">  This dropdown list is determined by the Referring Ministry and Service Provider Name selected above.</small>
@@ -282,7 +263,7 @@ class FormStep1 extends Component {
                 </div>
             </div>)
             }
-            else if(this.props.values.serviceProviderName === "NVIATS - North Vancouver Island Aboriginal Training Society"){
+            else if(this.props.values.serviceProviderName === "NVIATS - North Vancouver Island Aboriginal Training Society"){
                 return (<div className="form-row">
                 <div className="form-group col-md-6">
                     <label className="col-form-label control-label" htmlFor="trainingProgram">Eligible Skills Training Program<span
@@ -294,9 +275,9 @@ class FormStep1 extends Component {
                         name="trainingProgram"
                     >
                         <option value="">Please select</option>
-                        <option value="Individualized Training">Individualized Training</option>
                         <option value="Cohort-Based: Fishing Master IV Program">Cohort-Based: Fishing Master IV Program</option>
                         <option value="Cohort-Based: Health Care Assistant Program">Cohort-Based: Health Care Assistant Program</option>
+                        <option value="Individualized Training">Individualized Training</option>
 
 
                     </Field>
@@ -305,7 +286,7 @@ class FormStep1 extends Component {
                 </div>
             </div>)
             }
-            else if(this.props.values.serviceProviderName === "PGNAETA - Prince George Nechako Aboriginal Employment and Training Association"){
+            else if(this.props.values.serviceProviderName === "PGNAETA - Prince George Nechako Aboriginal Employment and Training Association"){
                 return (<div className="form-row">
                 <div className="form-group col-md-6">
                     <label className="col-form-label control-label" htmlFor="trainingProgram">Eligible Skills Training Program<span
@@ -317,12 +298,11 @@ class FormStep1 extends Component {
                         name="trainingProgram"
                     >
                         <option value="">Please select</option>
-                        <option value="Individualized Training">Individualized Training</option>
                         <option value="Cohort-Based: Aboriginal Employment Gateway">Cohort-Based: Aboriginal Employment Gateway</option>
                         <option value="Cohort-Based: Aboriginal Gateway Training Centre Trades">Cohort-Based: Aboriginal Gateway Training Centre Trades</option>
-                        <option value="Cohort-Based: 18 First Nations Labour Market Training Programs ">Cohort-Based: 18 First Nations Labour Market Training Programs </option>
-                        <option value="Cohort-Based: Urban Aboriginal Working Group ">Cohort-Based: Urban Aboriginal Working Group </option>
-
+                        <option value="Cohort-Based: Urban Aboriginal Working Group">Cohort-Based: Urban Aboriginal Working Group</option>
+                        <option value="Cohort-Based: 18 First Nations Labour Market Training Programs">Cohort-Based: 18 First Nations Labour Market Training Programs</option>
+                        <option value="Individualized Training">Individualized Training</option>
 
                     </Field>
                     <small className="text-muted" id="trainingProgram">  This dropdown list is determined by the Referring Ministry and Service Provider Name selected above.</small>
@@ -330,7 +310,7 @@ class FormStep1 extends Component {
                 </div>
             </div>)
             }
-            else if(this.props.values.serviceProviderName === "TRICORP - Tribal Resources Investment Corporation"){
+            else if(this.props.values.serviceProviderName === "TRICORP - Tribal Resources Investment Corporation"){
                 return (<div className="form-row">
                 <div className="form-group col-md-6">
                     <label className="col-form-label control-label" htmlFor="trainingProgram">Eligible Skills Training Program<span
@@ -342,9 +322,9 @@ class FormStep1 extends Component {
                         name="trainingProgram"
                     >
                         <option value="">Please select</option>
-                        <option value="Individualized Training">Individualized Training</option>
-                        <option value="Cohort-Based: Long Term Training Coures">Cohort-Based: Long Term Training Coures</option>
+                        <option value="Cohort-Based: Long Term Training Courses">Cohort-Based: Long Term Training Courses</option>
                         <option value="Cohort-Based: Short Term Training Courses">Cohort-Based: Short Term Training Courses</option>
+                        <option value="Individualized Training">Individualized Training</option>
 
 
 
@@ -354,7 +334,7 @@ class FormStep1 extends Component {
                 </div>
             </div>)
             }
-            else if(this.props.values.serviceProviderName === "SNTC - Shuswap Nation Tribal Council (formerly Central Interior Partners in Human Resource Development)" || this.props.values.serviceProviderName === "LTC - Lillooet Tribal Council"){
+            else if(this.props.values.serviceProviderName === "SNTC - Shuswap Nation Tribal Council (formerly Central Interior Partners in Human Resource Development)" || this.props.values.serviceProviderName === "LTC - Lillooet Tribal Council" || this.props.values.serviceProviderName === "KNC - Ktunaxa Nation Council"){
                 return (<div className="form-row">
                 <div className="form-group col-md-6">
                     <label className="col-form-label control-label" htmlFor="trainingProgram">Eligible Skills Training Program<span
@@ -367,7 +347,6 @@ class FormStep1 extends Component {
                     >
                         <option value="">Please select</option>
                         <option value="Individualized Training">Individualized Training</option>
-
 
                     </Field>
                     <small className="text-muted" id="trainingProgram">  This dropdown list is determined by the Referring Ministry and Service Provider Name selected above.</small>
@@ -462,7 +441,7 @@ class FormStep1 extends Component {
                                 <option value="ISET">ISET</option>
                                 <option value="SDPR">SDPR</option>
                             </Field>
-                            <small className="text-muted" id="trainingProgram">The Ministry who is funding the majority share of the eligible skills training program</small>
+                            <small className="text-muted" id="trainingProgram">The primary funding source for the majority share of the eligible skills training program</small>
                             {feedBackInvalid(this.props.errors,this.props.touched,"fundingSource")}
                     </div>
                 </div>
