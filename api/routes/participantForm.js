@@ -3,16 +3,13 @@ var router = express.Router();
 var csrf = require('csurf');
 var csrfProtection = csrf({ cookie: true });
 var ParticipantFormValidationSchema = require('../schemas/ParticipantFormValidationSchema')
+var generateHTMLEmail = require('../utils/htmlEmail')
 var clean = require('../utils/clean')
 var {saveParticipantValues, getParticipantValues} = require("../utils/mongoOperations");
+var nodemailer = require("nodemailer");
 
 // env var info here...
-var listWebURL = process.env.LISTWEBURL || process.env.OPENSHIFT_NODEJS_LISTWEBURL || ""
-var listUser = process.env.LISTUSER || process.env.OPENSHIFT_NODEJS_LISTUSER || ""
-var listPass = process.env.LISTPASS || process.env.OPENSHIFT_NODEJS_LISTPASS || ""
-var listDomain = process.env.LISTDOMAIN || process.env.OPENSHIFT_NODEJS_LISTDOMAIN || ""
-var listParty = process.env.LISTPARTY || process.env.OPENSHIFT_NODEJS_LISTPARTY || ""
-var listADFS = process.env.LISTADFS || process.env.OPENSHIFT_NODEJS_LISTADFS || ""
+var confirmationBCC = process.env.CONFIRMATIONBCC || process.env.OPENSHIFT_NODEJS_CONFIRMATIONBCC || "";
 // send email func
 app = express();
 
@@ -25,6 +22,122 @@ router.get('/', csrfProtection, (req, res) => {
     });
   })
 
+  async function sendEmails(values) {
+    try {
+      let transporter = nodemailer.createTransport({
+        host: "apps.smtp.gov.bc.ca",
+        port: 25,
+        secure: false,
+        tls: {
+          rejectUnauthorized: false
+        } // true for 465, false for other ports
+      });
+      return await transporter.verify()
+        .then(function (r) {
+          //console.log(r)
+          console.log("Transporter connected.")
+          //Service provider Know Consent was received confirmation
+          let message1 = {
+            from: 'Access to Technology <donotreply@gov.bc.ca>', // sender address
+            to: values.serviceProviderEmail,// list of receivers
+            bcc: confirmationBCC,
+            subject: "Consent Received: Access to Technology Application ID #" + values._id, // Subject line
+            html:`<h2>Access to Technology Client Consent and Agreement</h2>
+                  <p>You are receiving this email as confirmation that ${values.clientFirstName} ${values.clientLastName} has electronically submitted an Access to Technology (A2T) Consent and Agreement. Once Their application is processed they should receive their laptop within 4 weeks of their eligible training program start date.</p>`
+              
+              
+               // html body
+          };
+          //Client email
+         
+          let message2 = {
+            from: 'Access to Technology <donotreply@gov.bc.ca>', // sender address
+            to: values.clientEmail,
+            bcc: confirmationBCC,// list of receivers
+            subject: `Consent Received: Access to Technology Application ID #${values._id}`, // Subject line
+            html: generateHTMLEmail(
+              "Access to Technology Consent and Agreement",
+              [
+                `Hello ${values.clientFirstName},<br/>
+                <p>Your consent and agreement form has been received! A copy of this form is included below for your records.<br/>`,
+  
+                `<b>COLLECTION ,USE OR DISCLOSURE OF PERSONAL INFORMATION</b>`,
+                `Access to Technology (“A2T”) is a Ministry of Social Development and Poverty Reduction (“SDPR“) program that is delivered in part by BC 
+                 Technology for Learning Society (“BC Tech for Learning”) under a contract with MSDPR.
+                 <br/><br/>
+                  MSDPR and the Ministry of Advanced Education, Skills and Training (“AEST”) each provide employment related training programs that are 
+                  delivered by private sector organizations under contracts with MSDPR (the “SDPR Service Providers”) and AEST (the “AEST Service Providers”), 
+                  respectively.  Employment and Social Development Canada (“ESDC”) provides the Indigenous Skills and Employment Training Program (“ISET”), 
+                  which is delivered by private sector organizations under contracts with ESDC (the “ISET Service Providers”).
+                  <br/><br/>
+                  The applicant is participating in an employment-related training program delivered by ${values.serviceProviderName}, an ${values.fundingSource} 
+                  Service Provider. The applicant is applying to SDPR and A2T for a laptop computer that the applicant requires to complete the employment-related training program. 
+                  ${values.serviceProviderName} is referring the applicant to SDPR and A2T.
+                  <br/><br/>
+                  Certain personal information of the applicant is directly related to and necessary for assessing the applicant’s eligibility for A2T, administering A2T with 
+                  respect to the applicant and evaluating the effectiveness of A2T (the “A2T-Related Personal Information”.  It will be necessary for the following organizations to 
+                  collect, use and disclose A2T-Related Personal Information:
+                  <br/>
+                  <ol style={{listStyleType:"lower-alpha"}}>
+                      <li>${values.serviceProviderName}</li>
+                      <li>SDPR; and</li>
+                      <li>BC Tech for Learning.</li>
+                  </ol>
+                `,
+  
+                `<b>APPLICANT CONSENT</b><br/>`,
+                `I, ${values.clientFirstName} ${values.clientLastName}, am applying to SDPR and A2T for a laptop computer that I require to complete an ${values.fundingSource} employment-related training program.<br/><br/>
+                I CONSENT to:<br/><br/>
+                    <ol>
+                        <li>SDPR collecting my A2T-Related Personal Information indirectly from ${values.serviceProviderName} or BC Tech for Learning, for the purposes of administering, delivering or evaluating the A2T program;</li>
+                        <li>SDPR disclosing my A2T-Related Personal Information to BC Tech for Learning or ${values.serviceProviderName}, for the purposes of administering, delivering or evaluating the A2T program;</li>
+                        <li>${values.serviceProviderName} collecting my A2T-Related Personal Information indirectly from SDPR or BC Tech for Learning, for the purposes of administering, delivering or evaluating the A2T program;</li>
+                        <li>${values.serviceProviderName} disclosing my A2T-Related Personal Information to SDPR or BC Tech for Learning, for the purposes of administering, delivering or evaluating the A2T program;</li>
+                        <li>BC Tech for Learning collecting my A2T-Related Personal Information indirectly from SDPR or ${values.serviceProviderName}, for the purposes of administering, delivering or evaluating the A2T program;</li>
+                        <li>BC Tech for Learning disclosing my A2T-Related Personal Information to SDPR or ${values.serviceProviderName}, for the purposes of administering, delivering or evaluating the A2T program;</li>
+                    </ol><br/>
+                The consents described above are effective on the date I sign this document and expire of the date MSDPR completes an evaluation of the A2T program.<br/><br/>
+                Any disclosure of my A2T-Related Personal Information as described above may take place only in Canada.<br/><br/>`,
+              ],
+              [
+                `<b>COLLECTION NOTICE</b>`,
+                ` Personal information collected in this application is collected under the authority of sections 26 (c) and (e)
+                of the <i>Freedom of Information and Protection of Privacy Act</i> or Parts 3 and 4 of the <i>Personal Information Protection Act</i> and is subject
+                to all the provisions of the applicable Act. The personal information collected will be used by the Ministry of Social Development and 
+                Poverty Reduction (“MSDPR”), and its contracted A2T service provider to administer the A2T program, and may also be used to evaluate the 
+                effectiveness of the A2T program. If you have any questions about the collection of your personal information, please contact the Records 
+                Clerk of the Employment and Labour Market Services Division, MSDPR at <a href="mailto:WorkBCOESprivacy@gov.bc.ca">WorkBCOESprivacy@gov.bc.ca</a>.`,
+              ],
+              []
+            ) // html body
+          };      
+          let info = transporter.sendMail(message1, (error, info) => {
+            if (error) {
+              console.log("error:", error);
+              console.log("Error sending confirmation for " + values._id)
+            } else {
+              console.log("Message sent: %s", info.messageId);
+            }
+          });
+          info = transporter.sendMail(message2, (error, info) => {
+            if (error) {
+              console.log("error:", error);
+              console.log("Error sending list notification for " + values._id)
+            } else {
+              console.log("Message sent: %s", info.messageId);
+            }
+          });
+          return true
+        }).catch(function (e) {
+          console.log(e)
+          console.log("Error connecting to transporter")
+          return false
+        })
+    } catch (error) {
+      console.log(error)
+      return false
+    }
+  }
 
  router.get('/getData/:id/:token', csrfProtection, async(req, res) => {
   console.log(req.params);
@@ -35,6 +148,9 @@ router.get('/', csrfProtection, (req, res) => {
         clientFirstName: result[0].clientName,
         clientLastName: result[0].clientLastName,
         fundingSource: result[0].fundingSource,
+        serviceProviderEmail: result[0].serviceProviderEmail,
+        clientEmail:result[0].clientEmail,
+
       });
     }else{
       res.send({
@@ -54,7 +170,13 @@ router.get('/', csrfProtection, (req, res) => {
         .then(async r => {
           // {n: 1, ok: 1}
           if (r.result.ok === 1 && r.result.n === 1){
-            console.log("success");
+            await sendEmails(value)
+            .then(async function (sent) {
+              console.log("emails Sent: "+ sent);
+            })
+            res.send({
+              ok: "ok"
+            })
           }
           else{
             res.send({
@@ -69,10 +191,8 @@ router.get('/', csrfProtection, (req, res) => {
         console.log(error);
         //send error back, stop submission
       }
-      res.send({
-        ok: "ok"
-      })
     }).catch(function(errors){
+      console.log(errors)
       var err = {}
       errors.inner.forEach(e => {
         err[e.path] = e.message

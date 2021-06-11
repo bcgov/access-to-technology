@@ -52,7 +52,13 @@ module.exports = {
             return db.collection("ProviderIntake").updateOne(
                 {
                     applicationId: values._id,
-                    _token: values._token
+                    _token: values._token,
+                    clientName: values.clientFirstName,
+                    clientLastName: values.clientLastName,
+                    serviceProviderName: values.serviceProviderName,
+                    fundingSource: values.fundingSource,
+                    serviceProviderEmail: values.serviceProviderEmail,
+                    clientEmail: values.clientEmail,
                 },
                 { 
                     $set : {

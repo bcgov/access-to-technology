@@ -26,8 +26,10 @@ class ParticipantForm extends Component {
             _id: id,
             clientFirstName:'',
             clientLastName:'',
+            clientEmail:'',
             fundingSource:'',
             serviceProviderName:'',
+            serviceProviderEmail:'',
             hasError: false,
              _token: token1,      
         }
@@ -57,7 +59,6 @@ class ParticipantForm extends Component {
     }
 
     getContext(values){
-        console.log("running...")
         fetch(FORM_URL.clientForm+"/getData/"+values._id+"/"+values._token,  {
             credentials: "include",
         }).then(res => res.json())
@@ -74,6 +75,8 @@ class ParticipantForm extends Component {
                         clientFirstName: result.clientFirstName,
                         clientLastName: result.clientLastName,
                         fundingSource: result.fundingSource,
+                        serviceProviderEmail: result.serviceProviderEmail,
+                        clientEmail: result.clientEmail,
                     })
                 }
             },
@@ -225,7 +228,12 @@ class ParticipantForm extends Component {
                                 clientConsentDate:new Date(),
                                 clientSignature:'',
                                 clientConsent:false,
-                                serviceProviderName:'',
+                                serviceProviderName: this.state.serviceProviderName,
+                                clientFirstName: this.state.clientFirstName,
+                                clientLastName: this.state.clientLastName,
+                                fundingSource: this.state.fundingSource,
+                                serviceProviderEmail: this.state.serviceProviderEmail,
+                                clientEmail: this.state.clientEmail,
                             }}
                             enableReinitialize={true}
                             validationSchema={ParticipantValidationSchema}
