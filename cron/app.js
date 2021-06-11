@@ -72,6 +72,7 @@ async function saveListProviderIntake(values) {
   // call function in here before saving
   try{
     var headers;
+    var duplicates = 4;
     var duplicateChecks;
   return await spr
   .then(async data => {
@@ -83,12 +84,15 @@ async function saveListProviderIntake(values) {
         //console.log(response)
         headers = response
         return request.post({
-          url: listWebURL + '/A2TTest/_api/contextInfo',
+          url: listWebURL + '/AccessToTechnology/_api/contextInfo',
           headers: headers,
           json: true,
         })
     }).then(async response => {
       duplicateChecks =  await duplicateCheck(values.compareField);
+      if(duplicateChecks.length < 4){
+        duplicates = duplicateChecks.length;
+      }
       var digest = response.d.GetContextWebInformation.FormDigestValue
       return digest
     }).then(async response => {
@@ -96,7 +100,7 @@ async function saveListProviderIntake(values) {
       headers['X-RequestDigest'] = response
       headers['Content-Type'] = "application/json;odata=verbose"
       // change to local AccesLs to Technology list
-      var l = listWebURL + `/A2TTest/_api/web/lists/getByTitle('IntakeForm')/items`
+      var l = listWebURL + `/AccessToTechnology/_api/web/lists/getByTitle('A2TApplications')/items`
       console.log("webURL:")
       console.log(l)
       
@@ -106,11 +110,11 @@ async function saveListProviderIntake(values) {
         json: true,
         body: {
           "__metadata": {
-            "type": `SP.Data.IntakeFormListItem`
+            "type": `SP.Data.A2TApplicationsListItem`
           },
           "Title": `${values.serviceProviderName} - ${values.applicationId}`,
-          'applicationID': values.applicationId,
-          'applicationToken': values._token,
+          'ApplicationID': values.applicationId,
+          'ApplicationToken': values._token,
           //step 1
           'serviceProviderName': values.serviceProviderName,
           'serviceProviderPostal': values.serviceProviderPostal,
@@ -137,7 +141,7 @@ async function saveListProviderIntake(values) {
           //step 1:pop-up fields
           'recipientName':values.recipientName,
           'clientFullName':values.clientName +" "+values.clientLastName,
-          'DuplicateInfo': JSON.stringify(duplicateChecks),
+          'DuplicateInfo': JSON.stringify(duplicateChecks.slice(1,duplicates)),
           //step 2
           /*'clientResidesInBC': values.clientResidesInBC,
           'clientUnemployed': values.clientUnemployed,
@@ -208,7 +212,7 @@ async function updateListProviderIntake(values) {
           //console.log(response)
           headers = response
           return request.post({
-            url: listWebURL + '/A2TTest/_api/contextInfo',
+            url: listWebURL + '/AccessToTechnology/_api/contextInfo',
             headers: headers,
             json: true,
           })
@@ -223,14 +227,14 @@ async function updateListProviderIntake(values) {
         headers['If-Match'] = "*"
         // change to local Access to Technology list
         console.log(itemID);
-        var l = listWebURL + `/A2TTest/_api/web/lists/getByTitle('IntakeForm')/items('`+itemID+`')`
+        var l = listWebURL + `/AccessToTechnology/_api/web/lists/getByTitle('A2TApplications')/items('`+itemID+`')`
         return request.post({
           url: l,
           headers: headers,
           json: true,
           body: {
             "__metadata": {
-              "type": `SP.Data.IntakeFormListItem`,
+              "type": `SP.Data.A2TApplicationsListItem`,
             },
             'clientConsent': values.clientConsent,
             'clientSignature': values.clientSignature,
@@ -283,8 +287,6 @@ cron.schedule('*/3 * * * *', async function() {
           await saveListProviderIntake(data)
               .then(function(saved){
                 console.log("saved")
-                console.log(saved[0])
-                console.log(saved[1])
                 // save values to mongo db
                 if (saved) {
                   try {
