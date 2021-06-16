@@ -24,6 +24,7 @@ class ParticipantForm extends Component {
         this.state = {
             _csrf: '',
             _id: id,
+            pdfFile: null,
             clientFirstName:'',
             clientLastName:'',
             clientEmail:'',
@@ -93,7 +94,14 @@ class ParticipantForm extends Component {
         event.preventDefault()
         this.props.history.push('/thankyouParticipant')
     }
-
+    handleFileInput = (e) => {
+        this.setState({
+            pdfFile: e.target.files[0],
+            loaded: 0,
+          })
+          console.log(this.state.pdfFile);
+          console.log(this.state.loaded);
+    }
     handleApplicationId( values, errors, touched, isSubmitting) {
         console.log(this.state.hasError)
         if (this.state._id === "" || this.state._id.length !== 10 ||this.state._token === "" || this.state._token.length !== 25 ) {
@@ -159,14 +167,30 @@ class ParticipantForm extends Component {
                                     <p>The consents described above are effective on the date I sign this document and expire of the date MSDPR completes an evaluation of the A2T program.</p>
                                     <p>Any disclosure of my A2T-Related Personal Information as described above may take place only in Canada.</p>
                                   <CollectionNotice />
-
+                                
+                                
+                                <div className="form-row"> 
+                                  <div className="form-group col-md-12">
+                                  <label className="col-form-label control-label" htmlFor="pdfFile">If your client has complete a physical copy attach the PDF below<span
+                                          style={{ color: "red" }}>*</span></label>
+                                    <Field
+                                            className={`form-check-input`}
+                                            type="file"
+                                            name="pdfFile"
+                                            onChange={this.handleFileInput}
+                                     />
+                                      {/*feedBackInvalid(errors,touched,"pdfFile")*/}
+                                  </div>
+                              </div>
                                   <div className="form-row">
+
                                   <div className="form-group col-md-8">
                                   <label className="col-form-label control-label" htmlFor="clientSignature">Please enter your full name <span
                                           style={{ color: "red" }}>*</span></label>
                                       <Field className={`form-control ${feedBackClassName(errors, touched, "clientSignature")}`} id="clientSignature" name="clientSignature" />
                                       {feedBackInvalid(errors,touched,"clientSignature")}
                                   </div>
+                                  
                                   <div className="form-group col-md-4">
                                       <label className="col-form-label control-label" htmlFor="clientConsentDate">Date of Signature</label>
                                       <p>{String(moment(this.state.clientConsentDate).format('MMMM Do YYYY'))}</p>
