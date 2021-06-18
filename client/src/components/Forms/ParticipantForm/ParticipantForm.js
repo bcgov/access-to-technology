@@ -24,7 +24,6 @@ class ParticipantForm extends Component {
         this.state = {
             _csrf: '',
             _id: id,
-            pdfFile: null,
             clientFirstName:'',
             clientLastName:'',
             clientEmail:'',
@@ -73,8 +72,6 @@ class ParticipantForm extends Component {
                 }else{
                     this.setState({
                         serviceProviderName: result.serviceProvider,
-                        clientFirstName: result.clientFirstName,
-                        clientLastName: result.clientLastName,
                         fundingSource: result.fundingSource,
                         serviceProviderEmail: result.serviceProviderEmail,
                         clientEmail: result.clientEmail,
@@ -94,14 +91,7 @@ class ParticipantForm extends Component {
         event.preventDefault()
         this.props.history.push('/thankyouParticipant')
     }
-    handleFileInput = (e) => {
-        this.setState({
-            pdfFile: e.target.files[0],
-            loaded: 0,
-          })
-          console.log(this.state.pdfFile);
-          console.log(this.state.loaded);
-    }
+  
     handleApplicationId( values, errors, touched, isSubmitting) {
         console.log(this.state.hasError)
         if (this.state._id === "" || this.state._id.length !== 10 ||this.state._token === "" || this.state._token.length !== 25 ) {
@@ -129,6 +119,23 @@ class ParticipantForm extends Component {
                                   <p>Please make sure the Application ID below matches the one provided to you in your confirmation email. If it does not please contact your service provider.</p>
                                       <div className="form-group">
                                       <h3 id="forms">Application ID: {this.state._id}</h3>
+                                      <div className="form-row">
+                                          <p>Please enter your first and last name to complete the language in the consent form below.</p>
+                                        </div>
+                                      <div className="form-row">
+                                        <div className="form-group col-md-4">
+                                            <label className="col-form-label control-label" htmlFor="clientName">Client First Name <span
+                                                style={{ color: "red" }}>*</span></label>
+                                            <Field className={`form-control ${feedBackClassName(errors, touched, "clientName")}`} id="clientName" name="clientName" />
+                                            {feedBackInvalid(errors,touched,"clientName")}
+                                        </div>
+                                        <div className="form-group col-md-4">
+                                            <label className="col-form-label control-label" htmlFor="clientLastName">Client Last Name <span
+                                                style={{ color: "red" }}>*</span></label>
+                                            <Field className={`form-control ${feedBackClassName(errors, touched, "clientLastName")}`} id="clientLastName" name="clientLastName" />
+                                            {feedBackInvalid(errors,touched,"clientLastName")}
+                                        </div>
+                                      </div>
                                   </div>
                                   <p><b>COLLECTION ,USE OR DISCLOSURE OF PERSONAL INFORMATION</b><br/><br/>
                                   Access to Technology (“A2T”) is a Ministry of Social Development and Poverty Reduction (“SDPR“) program that is delivered in part by BC 
@@ -154,7 +161,7 @@ class ParticipantForm extends Component {
                                     </ol>
                                   </p>
                                  <p><b>APPLICANT CONSENT</b><br/><br/>
-                                    I, {this.state.clientFirstName} {this.state.clientLastName}, am applying to SDPR and A2T for a laptop computer that I require to complete an {this.state.fundingSource} employment-related training program.</p>
+                                    I, {values.clientFirstName} {values.clientLastName}, am applying to SDPR and A2T for a laptop computer that I require to complete an {this.state.fundingSource} employment-related training program.</p>
                                     <p>I CONSENT to:</p>
                                         <ol>
                                             <li>SDPR collecting my A2T-Related Personal Information indirectly from {this.state.serviceProviderName} or BC Tech for Learning, for the purposes of administering, delivering or evaluating the A2T program;</li>
@@ -168,20 +175,7 @@ class ParticipantForm extends Component {
                                     <p>Any disclosure of my A2T-Related Personal Information as described above may take place only in Canada.</p>
                                   <CollectionNotice />
                                 
-                                
-                                <div className="form-row"> 
-                                  <div className="form-group col-md-12">
-                                  <label className="col-form-label control-label" htmlFor="pdfFile">If your client has complete a physical copy attach the PDF below<span
-                                          style={{ color: "red" }}>*</span></label>
-                                    <Field
-                                            className={`form-check-input`}
-                                            type="file"
-                                            name="pdfFile"
-                                            onChange={this.handleFileInput}
-                                     />
-                                      {/*feedBackInvalid(errors,touched,"pdfFile")*/}
-                                  </div>
-                              </div>
+                              
                                   <div className="form-row">
 
                                   <div className="form-group col-md-8">
@@ -253,8 +247,8 @@ class ParticipantForm extends Component {
                                 clientSignature:'',
                                 clientConsent:false,
                                 serviceProviderName: this.state.serviceProviderName,
-                                clientFirstName: this.state.clientFirstName,
-                                clientLastName: this.state.clientLastName,
+                                clientFirstName: '',
+                                clientLastName: '',
                                 fundingSource: this.state.fundingSource,
                                 serviceProviderEmail: this.state.serviceProviderEmail,
                                 clientEmail: this.state.clientEmail,

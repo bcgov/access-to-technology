@@ -41,6 +41,25 @@ function myTrim(x) {
 }
 
 module.exports = {
+
+    saveConsentValues: async function (values) {
+        return await connection
+        .then(mClient => {
+            // get a handle on the db
+            return mClient.db();
+        }).then(async db => {
+            // add our values to db (they are always new)
+            return db.collection("ProviderIntake").insertOne(
+                {
+                    applicationId: values._id,
+                    _token: values._token,
+                    serviceProviderName: values.serviceProviderName,
+                    fundingSource: values.fundingSource,
+                    serviceProviderEmail: values.serviceProviderEmail,
+                    clientEmail: values.clientEmail,
+                })
+        });
+    },
     //Deprecated participant values get saved at provider form
     saveParticipantValues: async function (values) {
         return await connection

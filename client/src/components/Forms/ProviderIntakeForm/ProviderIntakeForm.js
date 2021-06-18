@@ -10,12 +10,13 @@ import ProgressTracker from '../shared/ProgressTracker'
 import {ProviderIntakeValidationSchema} from './ProviderIntakeValidationSchema'
 import { FORM_URL } from '../../../constants/form'
 import { generateAlert } from '../shared/Alert'
+import {pathToRegexp} from 'path-to-regexp'
 
 
 class ProviderIntakeForm extends Component {
     constructor(){
         super()
-        const nanoid = customAlphabet('0123456789abcdefghijklmnopqrstuvwxyz',10)
+        const nanoid = customAlphabet('0123456789abcdefghijklmnopqrstuvwxyz',10);
         const nanoid1 = customAlphabet('0123456789abcdefghijklmnopqrstuvwxyz',25);
         this.state={
             _csrf: '',

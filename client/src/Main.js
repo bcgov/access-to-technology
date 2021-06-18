@@ -5,6 +5,8 @@ import ProviderIntakeForm from './components/Forms/ProviderIntakeForm/ProviderIn
 import ThankYouProviderIntake from './components/Forms/ProviderIntakeForm/thankyouProviderIntake'
 import ParticipantIntakeForm from './components/Forms/ParticipantForm/ParticipantForm'
 import ThankYouParticipant from './components/Forms/ParticipantForm/thankyouParticipant'
+import SendConsentForm from './components/Forms/SendConsentForm/SendConsentForm'
+import thankyouSendConsent from './components/Forms/SendConsentForm/thankyouSendConsent'
 
 
 function Main() {
@@ -13,9 +15,12 @@ function Main() {
             <Router>
                 <Switch>
                     <Route path="/ProviderIntake" component={ProviderIntakeForm} />
+                    <Route path="/ProviderIntake/:id/:token/" component={ProviderIntakeForm} />
                     <Route path="/thankyouProviderIntake" component={ThankYouProviderIntake}  />
                     <Route path="/thankyouParticipant" component={ThankYouParticipant} />
+                    <Route path="/thankyouSendConsent" component={thankyouSendConsent} />
                     <Route path="/clientConsent/:id/:token/" component={ParticipantIntakeForm} />
+                    <Route path="/SendConsentForm" component={SendConsentForm} />
                     <Route path="/">
                         <Home />
                     </Route>

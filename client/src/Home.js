@@ -40,7 +40,7 @@ function Home() {
                                     <ul>
                                         <li>Skills Training for Employment</li>
                                         <li>ITA Funded Pre-Apprenticeship Training</li>
-                                        <li>BladeRunners</li>
+                                        <li>BladeRunners</li>.
                                     </ul>
                                 <b className="text-primary">Indigenous Skills and Employment Training: </b>
                                 <ul>
@@ -54,7 +54,11 @@ function Home() {
             </div>
             <div className="form-row">
                 <div className="form-group col-md-6">
-                    <h3>Apply on behalf of client</h3>
+                    <h3>Send Client Consent Form</h3>
+                    <p><a href="/SendConsentForm" className="btn btn-lg btn-primary">Start</a><br/></p>
+                </div>
+                <div className="form-group col-md-6">
+                    <h3>Apply and Attach Client Consent</h3>
                     <p><a href="/ProviderIntake" className="btn btn-lg btn-primary">Start</a><br/></p>
                 </div>
             </div>
