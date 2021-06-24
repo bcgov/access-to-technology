@@ -43,7 +43,9 @@ router.get('/', csrfProtection, (req, res) => {
             bcc: confirmationBCC,
             subject: "Consent Received: Access to Technology Application ID #" + values._id, // Subject line
             html:`<h2>Access to Technology Client Consent and Agreement</h2>
-                  <p>You are receiving this email as confirmation that ${values.clientFirstName} ${values.clientLastName} has electronically submitted an Access to Technology (A2T) Consent and Agreement. Once Their application is processed they should receive their laptop within 4 weeks of their eligible training program start date.</p>`
+                  <p>You are receiving this email as confirmation that ${values.clientName} ${values.clientLastName} has electronically submitted an Access to Technology (A2T) Consent and Agreement. Visit the link below to complete their application.</p>
+                  <a href="https://access-to-technology-dev.apps.silver.devops.gov.bc.ca/providerIntake/${values._id}/${values._token}" style="padding: 8px 12px; bgcolor: #ffffff; background-color: #ffffff; border: 2px solid #294266; border-radius: 2px; font-family: Helvetica, Arial, sans-serif; font-size: 14px; color: #294266 ! important; text-decoration: none; font-weight: bold; display: inline-block;" >A2T Application</a>
+                  `
               
               
                // html body
@@ -58,7 +60,7 @@ router.get('/', csrfProtection, (req, res) => {
             html: generateHTMLEmail(
               "Access to Technology Consent and Agreement",
               [
-                `Hello ${values.clientFirstName},<br/>
+                `Hello ${values.clientName},<br/>
                 <p>Your consent and agreement form has been received! A copy of this form is included below for your records.<br/>`,
   
                 `<b>COLLECTION ,USE OR DISCLOSURE OF PERSONAL INFORMATION</b>`,
@@ -86,7 +88,7 @@ router.get('/', csrfProtection, (req, res) => {
                 `,
   
                 `<b>APPLICANT CONSENT</b><br/>`,
-                `I, ${values.clientFirstName} ${values.clientLastName}, am applying to SDPR and A2T for a laptop computer that I require to complete an ${values.fundingSource} employment-related training program.<br/><br/>
+                `I, ${values.clientName} ${values.clientLastName}, am applying to SDPR and A2T for a laptop computer that I require to complete an ${values.fundingSource} employment-related training program.<br/><br/>
                 I CONSENT to:<br/><br/>
                     <ol>
                         <li>SDPR collecting my A2T-Related Personal Information indirectly from ${values.serviceProviderName} or BC Tech for Learning, for the purposes of administering, delivering or evaluating the A2T program;</li>
@@ -145,11 +147,12 @@ router.get('/', csrfProtection, (req, res) => {
     if(result[0] !== undefined){
       res.send({
         serviceProvider: result[0].serviceProviderName,
-        clientFirstName: result[0].clientName,
+        clientName: result[0].clientName,
         clientLastName: result[0].clientLastName,
         fundingSource: result[0].fundingSource,
         serviceProviderEmail: result[0].serviceProviderEmail,
         clientEmail:result[0].clientEmail,
+        results: result[0],
 
       });
     }else{

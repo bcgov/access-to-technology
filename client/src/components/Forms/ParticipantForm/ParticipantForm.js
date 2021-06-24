@@ -20,16 +20,19 @@ class ParticipantForm extends Component {
         var content = re.exec(sample) //[/id/token/, id, token]]
         var id = content[1];
         var token1 = content[2];
-        
         this.state = {
             _csrf: '',
             _id: id,
-            clientFirstName:'',
+            clientName:'',
             clientLastName:'',
             clientEmail:'',
             fundingSource:'',
             serviceProviderName:'',
             serviceProviderEmail:'',
+            clientSignature:'',
+            clientConsent:false,
+            clientConsentDate: new Date(),
+            results:[],
             hasError: false,
              _token: token1,      
         }
@@ -64,7 +67,6 @@ class ParticipantForm extends Component {
         }).then(res => res.json())
         .then(
             (result) => {
-                console.log(result)
                 if(result.err === "Not Found"){
                     this.setState({
                         hasError: true
@@ -72,11 +74,10 @@ class ParticipantForm extends Component {
                 }else{
                     this.setState({
                         serviceProviderName: result.serviceProvider,
-                        clientFirstName: result.clientFirstName,
-                        clientLastName: result.clientLastName,
                         fundingSource: result.fundingSource,
                         serviceProviderEmail: result.serviceProviderEmail,
                         clientEmail: result.clientEmail,
+                        results:result.results,
                     })
                 }
             },
@@ -86,16 +87,28 @@ class ParticipantForm extends Component {
                         hasError: true
                 })
             }
-        )
+        ).then(
+            (result) => {
+            if (Object.getOwnPropertyNames(this.state.results).length > 8){
+                console.log(result)
+                var clientData = this.state.results;
+                this.setState({
+                    clientName:clientData.clientName,
+                    clientLastName:clientData.clientLastName,
+                    clientSignature:clientData.clientSignature,
+                    clientConsent:clientData.clientConsent,
+                    clientConsentDate: clientData.clientConsentDate,
+                })
+            }
+            })
     }
   
     handleSubmit = (event) => {
         event.preventDefault()
         this.props.history.push('/thankyouParticipant')
     }
-
+  
     handleApplicationId( values, errors, touched, isSubmitting) {
-        console.log(this.state.hasError)
         if (this.state._id === "" || this.state._id.length !== 10 ||this.state._token === "" || this.state._token.length !== 25 ) {
             //show non id/token handler
             return (
@@ -111,16 +124,119 @@ class ParticipantForm extends Component {
             )
 
         } 
+        else if (this.state.clientConsent === true){
+            return(<div>
+              
+               
+                <h2> Access to Technology (A2T) Client Consent Form </h2> 
+                                    {/* handleApplicationID handles all the pre populated values in future. <button className="btn btn-success d-print-none" onClick={() => window.print()}>Print Confirmation</button><br /><br />*/}
+                                   
+                                        <div className="form-group">
+                                        <h3 id="forms" className="d-print-none">Application ID: {this.state._id}</h3>
+                                        <div className="form-row">
+                                            <p className="d-print-none">To export this consent form you may click the "print" button below.</p>
+                                        </div>
+                                        <div className="form-row">
+                                            <button className="btn btn-success d-print-none" onClick={() => window.print()}>Print Confirmation</button>
+                                        </div>
+                                    </div>
+                                    <p><b>COLLECTION ,USE OR DISCLOSURE OF PERSONAL INFORMATION</b><br/><br/>
+                                    Access to Technology (“A2T”) is a Ministry of Social Development and Poverty Reduction (“SDPR“) program that is delivered in part by BC 
+                                    Technology for Learning Society (“BC Tech for Learning”) under a contract with MSDPR.
+                                    <br/><br/>
+                                      MSDPR and the Ministry of Advanced Education, Skills and Training (“AEST”) each provide employment related training programs that are 
+                                      delivered by private sector organizations under contracts with MSDPR (the “SDPR Service Providers”) and AEST (the “AEST Service Providers”), 
+                                      respectively.  Employment and Social Development Canada (“ESDC”) provides the Indigenous Skills and Employment Training Program (“ISET”), 
+                                      which is delivered by private sector organizations under contracts with ESDC (the “ISET Service Providers”).
+                                      <br/><br/>
+                                      The applicant is participating in an employment-related training program delivered by {this.state.serviceProviderName}, an {this.state.fundingSource} 
+                                      Service Provider. The applicant is applying to SDPR and A2T for a laptop computer that the applicant requires to complete the employment-related training program. 
+                                      {this.state.serviceProviderName} is referring the applicant to SDPR and A2T.
+                                      <br/><br/>
+                                      Certain personal information of the applicant is directly related to and necessary for assessing the applicant’s eligibility for A2T, administering A2T with 
+                                      respect to the applicant and evaluating the effectiveness of A2T (the “A2T-Related Personal Information”.  It will be necessary for the following organizations to 
+                                      collect, use and disclose A2T-Related Personal Information:
+                                      <br/>
+                                      <ol style={{listStyleType:"lower-alpha"}}>
+                                          <li>{this.state.serviceProviderName}</li>
+                                          <li>SDPR; and</li>
+                                          <li>BC Tech for Learning.</li>
+                                      </ol>
+                                    </p>
+                                   <p><b>APPLICANT CONSENT</b><br/><br/>
+                                      I, {this.state.clientName} {this.state.clientLastName}, am applying to SDPR and A2T for a laptop computer that I require to complete an {this.state.fundingSource} employment-related training program.</p>
+                                      <p>I CONSENT to:</p>
+                                          <ol>
+                                              <li>SDPR collecting my A2T-Related Personal Information indirectly from {this.state.serviceProviderName} or BC Tech for Learning, for the purposes of administering, delivering or evaluating the A2T program;</li>
+                                              <li>SDPR disclosing my A2T-Related Personal Information to BC Tech for Learning or {this.state.serviceProviderName}, for the purposes of administering, delivering or evaluating the A2T program;</li>
+                                              <li>{this.state.serviceProviderName} collecting my A2T-Related Personal Information indirectly from SDPR or BC Tech for Learning, for the purposes of administering, delivering or evaluating the A2T program;</li>
+                                              <li>{this.state.serviceProviderName} disclosing my A2T-Related Personal Information to SDPR or BC Tech for Learning, for the purposes of administering, delivering or evaluating the A2T program;</li>
+                                              <li>BC Tech for Learning collecting my A2T-Related Personal Information indirectly from SDPR or {this.state.serviceProviderName}, for the purposes of administering, delivering or evaluating the A2T program;</li>
+                                              <li>BC Tech for Learning disclosing my A2T-Related Personal Information to SDPR or {this.state.serviceProviderName}, for the purposes of administering, delivering or evaluating the A2T program;</li>
+                                          </ol>
+                                      <p>The consents described above are effective on the date I sign this document and expire of the date MSDPR completes an evaluation of the A2T program.</p>
+                                      <p>Any disclosure of my A2T-Related Personal Information as described above may take place only in Canada.</p>
+                                    <CollectionNotice />
+                                  
+                                
+                                    <div className="form-row">
+  
+                                    <div className="form-group col-md-8">
+                                    <label className="col-form-label control-label" htmlFor="clientSignature">Please enter your full name <span
+                                            style={{ color: "red" }}>*</span></label>
+                                        <Field className={`form-control ${feedBackClassName(errors, touched, "clientSignature")}`} value={this.state.clientSignature} id="clientSignature" name="clientSignature" />
+                                        {feedBackInvalid(errors,touched,"clientSignature")}
+                                    </div>
+                                    
+                                    <div className="form-group col-md-4">
+                                        <label className="col-form-label control-label" htmlFor="clientConsentDate">Date of Signature</label>
+                                        <p>{String(moment(this.state.clientConsentDate).format('MMMM Do YYYY'))}</p>
+                                        
+                                     </div>
+                                </div>
+                                    <div className="form-group">
+                                        <div className="form-check">
+                                            <Field type="checkbox" className={`form-check-input ${feedBackClassName(errors, touched, "clientConsent")}`} id="clientConsent"
+                                                name="clientConsent" checked={this.state.clientConsent}/>
+                                            <label className="form-check-label control-label" htmlFor="clientConsent"><span style={{ color: "red" }}>*</span> I acknowledge and
+                                            understand that by clicking the "submit" icon, I am attaching my electronic signature to this form, and that
+                                            by doing so, I am providing the same consent as I would by manually signing a physical copy of this
+                                            form.
+                                            </label>
+                                            {feedBackInvalid(errors, touched, "clientConsent")}
+                                        </div>
+                                    </div>
+                  
+              </div>)
+        }
         else {
            
             return (<div>
               
               <Form>
-                                  
-                                  {/* handleApplicationID handles all the pre populated values in future. */}
+              <h2> Access to Technology (A2T) Client Consent Form </h2> 
+                                  {/* handleApplicationID handles all the pre populated values in future. <button className="btn btn-success d-print-none" onClick={() => window.print()}>Print Confirmation</button><br /><br />*/}
                                   <p>Please make sure the Application ID below matches the one provided to you in your confirmation email. If it does not please contact your service provider.</p>
                                       <div className="form-group">
+                                      
                                       <h3 id="forms">Application ID: {this.state._id}</h3>
+                                      <div className="form-row">
+                                          <p> Please enter your first and last name to complete the language in the consent form below.</p>
+                                        </div>
+                                      <div className="form-row">
+                                        <div className="form-group col-md-4">
+                                            <label className="col-form-label control-label" htmlFor="clientName">Client First Name <span
+                                                style={{ color: "red" }}>*</span></label>
+                                            <Field className={`form-control ${feedBackClassName(errors, touched, "clientName")}`} id="clientName" name="clientName" />
+                                            {feedBackInvalid(errors,touched,"clientName")}
+                                        </div>
+                                        <div className="form-group col-md-4">
+                                            <label className="col-form-label control-label" htmlFor="clientLastName">Client Last Name <span
+                                                style={{ color: "red" }}>*</span></label>
+                                            <Field className={`form-control ${feedBackClassName(errors, touched, "clientLastName")}`} id="clientLastName" name="clientLastName" />
+                                            {feedBackInvalid(errors,touched,"clientLastName")}
+                                        </div>
+                                      </div>
                                   </div>
                                   <p><b>COLLECTION ,USE OR DISCLOSURE OF PERSONAL INFORMATION</b><br/><br/>
                                   Access to Technology (“A2T”) is a Ministry of Social Development and Poverty Reduction (“SDPR“) program that is delivered in part by BC 
@@ -146,7 +262,7 @@ class ParticipantForm extends Component {
                                     </ol>
                                   </p>
                                  <p><b>APPLICANT CONSENT</b><br/><br/>
-                                    I, {this.state.clientFirstName} {this.state.clientLastName}, am applying to SDPR and A2T for a laptop computer that I require to complete an {this.state.fundingSource} employment-related training program.</p>
+                                    I, {values.clientName} {values.clientLastName}, am applying to SDPR and A2T for a laptop computer that I require to complete an {this.state.fundingSource} employment-related training program.</p>
                                     <p>I CONSENT to:</p>
                                         <ol>
                                             <li>SDPR collecting my A2T-Related Personal Information indirectly from {this.state.serviceProviderName} or BC Tech for Learning, for the purposes of administering, delivering or evaluating the A2T program;</li>
@@ -159,14 +275,17 @@ class ParticipantForm extends Component {
                                     <p>The consents described above are effective on the date I sign this document and expire of the date MSDPR completes an evaluation of the A2T program.</p>
                                     <p>Any disclosure of my A2T-Related Personal Information as described above may take place only in Canada.</p>
                                   <CollectionNotice />
-
+                                
+                              
                                   <div className="form-row">
+
                                   <div className="form-group col-md-8">
                                   <label className="col-form-label control-label" htmlFor="clientSignature">Please enter your full name <span
                                           style={{ color: "red" }}>*</span></label>
                                       <Field className={`form-control ${feedBackClassName(errors, touched, "clientSignature")}`} id="clientSignature" name="clientSignature" />
                                       {feedBackInvalid(errors,touched,"clientSignature")}
                                   </div>
+                                  
                                   <div className="form-group col-md-4">
                                       <label className="col-form-label control-label" htmlFor="clientConsentDate">Date of Signature</label>
                                       <p>{String(moment(this.state.clientConsentDate).format('MMMM Do YYYY'))}</p>
@@ -225,11 +344,11 @@ class ParticipantForm extends Component {
                                 _csrf: this.state._csrf,
                                 _id: (typeof this.props.match.params.id !== 'undefined') ? this.props.match.params.id : '',
                                 _token: this.state._token,
-                                clientConsentDate:new Date(),
-                                clientSignature:'',
-                                clientConsent:false,
+                                clientConsentDate:this.state.clientConsentDate,
+                                clientSignature:this.state.clientSignature,
+                                clientConsent:this.state.clientConsent,
                                 serviceProviderName: this.state.serviceProviderName,
-                                clientFirstName: this.state.clientFirstName,
+                                clientName: this.state.clientName,
                                 clientLastName: this.state.clientLastName,
                                 fundingSource: this.state.fundingSource,
                                 serviceProviderEmail: this.state.serviceProviderEmail,

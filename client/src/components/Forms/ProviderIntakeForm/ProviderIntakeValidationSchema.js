@@ -6,6 +6,8 @@ import 'core-js/stable';
 export const ProviderIntakeValidationSchema = yup.object().shape({
     //step 1
     //see what requirements are fo APP id but it will be generated anyways
+    consent: yup.boolean()
+    .oneOf([true],"You must collect your clients consent form before submitting their application."),
     serviceProviderName: yup.string()
         .required('Please select the service provider name'),
     serviceProviderPostal:yup.string()
@@ -39,7 +41,6 @@ export const ProviderIntakeValidationSchema = yup.object().shape({
         .required("The client must be receiving one of the above forms of government assistance to be eligible for this program"),
     
     // STEP 2
-    
     workBCCaseNumber: yup.string().when('fundingSource', {
         is: 'SDPR',
         then: yup.string()
@@ -82,28 +83,6 @@ export const ProviderIntakeValidationSchema = yup.object().shape({
         .matches(/^[A-Za-z]\d[A-Za-z]\d[A-Za-z]\d$/,"Please enter a valid postal code")
         .required("Please enter a valid postal code"),
     altShippingAddress: yup.boolean(),
-    /*clientUnemployed:yup.string()
-    .oneOf(["yes",
-            "no"],"Please select a valid field.")
-    .required("Please select an answer on whether the client is precariously employed or unemployed"),
-   registeredInApprovedProgram:yup.string()
-    .oneOf(["yes",
-            "no"],"Please select a valid field.")
-    .required("Please select an answer on whether the client is registered in an approved program"),
-   accessToComputerCurrently:yup.string()
-    .oneOf(["yes",
-            "no"],"Please select a valid field.")
-    .required("Please select an answer on whether the client already has access to a suitable computer or not"),
-    receivingAlternateFunding:yup.string()
-    .oneOf(["yes",
-            "no"],"Please select a valid field.")
-    .required("Please select an answer on whether client is receiving funding from another source for the purchase of the required technology"),
-    financialNeed: yup.string()
-    .oneOf(["yes",
-            "no"],"Please select a valid field.")
-    .required("Please select an answer on whether client demonstrates a financial need to take part in this program"),
-    */
-
     //step 1:pop-up fields
     trainingProgram: yup.string()
         .required('Please select an eligible skills training program'),
@@ -113,19 +92,8 @@ export const ProviderIntakeValidationSchema = yup.object().shape({
             is:true,
             then: yup.string().required("Please enter the recipients name")
         }),   
-    /*signatoryTitle: yup.string()
-        .required("Please enter the title of the organization signatory.")
-        .test('match','Signatories must be different',function (signatoryTitle){
-            return signatoryTitle !== this.options.parent.signatory1
-        }),   
-    signatory1: yup.string()
-        .required("Please enter the full name of the organization signatory."),
-        */
     clientEligibility: yup.boolean()
         .oneOf([true],"Please attest to the Client's Eligibility"),
     serviceProviderResponsibility: yup.boolean()
         .oneOf([true],"Please attest to the Service Provider Responsibility"),
-    /*organizationConsent: yup.boolean()
-        .oneOf([true],"Required"),
-        */
 })

@@ -3,7 +3,7 @@ const express = require('express')
 const spauth = require('node-sp-auth')
 const request = require('request-promise')
 
-var {getProviderIntakeNotSP, updateSaveIdToSP, duplicateCheck, getProviderIntakeConsentNotSP, updateConsentSP, updateSavedToSP} = require('./mongo')
+var {getProviderIntakeNotSP, updateSaveIdToSP, WorkBCCheck, duplicateCheck, updateSavedToSP} = require('./mongo')
 var clean = require('./clean')
 var listWebURL = process.env.LISTWEBURL || process.env.OPENSHIFT_NODEJS_LISTWEBURL || ""
 var listUser = process.env.LISTUSER || process.env.OPENSHIFT_NODEJS_LISTUSER || ""
@@ -11,7 +11,9 @@ var listPass = process.env.LISTPASS || process.env.OPENSHIFT_NODEJS_LISTPASS || 
 var listDomain = process.env.LISTDOMAIN || process.env.OPENSHIFT_NODEJS_LISTDOMAIN || ""
 var listParty = process.env.LISTPARTY || process.env.OPENSHIFT_NODEJS_LISTPARTY || ""
 var listADFS = process.env.LISTADFS || process.env.OPENSHIFT_NODEJS_LISTADFS || ""
+var linkUrl = process.env.CLIENTURL || process.env.OPENSHIFT_NODEJS_CLIENTURL || ""
 var nodemailer = require("nodemailer")
+const { urlencoded } = require('express')
 
 app = express();
 
@@ -74,6 +76,13 @@ async function saveListProviderIntake(values) {
     var headers;
     var duplicates = 4;
     var duplicateChecks;
+    var WorkBCDuplicate = false;
+    var DuplicateString = "";
+    var data = {
+                  '__metadata': { 'type': 'SP.FieldUrlValue' },
+                  'Description': '',
+                  'Url': ''
+  };
   return await spr
   .then(async data => {
       headers = data.headers;
@@ -89,9 +98,15 @@ async function saveListProviderIntake(values) {
           json: true,
         })
     }).then(async response => {
-      duplicateChecks =  await duplicateCheck(values.compareField);
+      WorkBCDuplicate = await WorkBCCheck(values.workBCCaseNumber)
+      duplicateChecks = await duplicateCheck(values.compareField);
+      
       if(duplicateChecks.length < 4){
         duplicates = duplicateChecks.length;
+      }
+      duplicateChecks = duplicateChecks.slice(1,duplicates)
+      for (let i = 0; i <duplicates-1; i++){
+       DuplicateString += duplicateChecks[i]._id + "\n";
       }
       var digest = response.d.GetContextWebInformation.FormDigestValue
       return digest
@@ -103,7 +118,15 @@ async function saveListProviderIntake(values) {
       var l = listWebURL + `/AccessToTechnology/_api/web/lists/getByTitle('A2TApplications')/items`
       console.log("webURL:")
       console.log(l)
-      
+      if(values.savedConsent === true){
+        data = {
+                      '__metadata': { 'type': 'SP.FieldUrlValue' },
+                      'Description': 'Client Consent',
+                      'Url': 'https://access-to-technology-dev.apps.silver.devops.gov.bc.ca/clientConsent/'+values.applicationId +'/'+values._token
+                  
+      };
+      }
+     
       return request.post({
         url: l,
         headers: headers,
@@ -129,8 +152,8 @@ async function saveListProviderIntake(values) {
           'workBCCaseNumber': values.workBCCaseNumber,
           'clientName': values.clientName,
           'clientLastName': values.clientLastName,
-          'clientMiddleName': values.clientMiddleName,
-          'clientAddress': values.clientAddress +" "+ values.clientAddress2,
+          'clientMiddleName': values.clientMiddleName !== "undefined"? values.clientMiddleName : "",
+          'clientAddress': values.clientAddress + values.clientAddress2 !== "undefined"? " " + values.clientAddress2 : "",
           'clientCity': values.clientCity,
           'clientProvince': values.clientProvince,
           'clientPostal': values.clientPostal,
@@ -139,31 +162,23 @@ async function saveListProviderIntake(values) {
           'altShippingAddress': values.altShippingAddress,
           // insert duplicate info response here 
           //step 1:pop-up fields
-          'recipientName':values.recipientName,
+          'receiverName':values.recipientName,
           'clientFullName':values.clientName +" "+values.clientLastName,
-          'DuplicateInfo': JSON.stringify(duplicateChecks.slice(1,duplicates)),
-          //step 2
-          /*'clientResidesInBC': values.clientResidesInBC,
-          'clientUnemployed': values.clientUnemployed,
-          'registeredInApprovedProgram': values.registeredInApprovedProgram,
-          'accessToComputerCurrently': values.accessToComputerCurrently,
-          'receivingAlternateFunding': values.receivingAlternateFunding,
-          'financialNeed': values.financialNeed,
-          //step 3
-          'signatoryTitle': values.signatoryTitle,
-          'signatory1': values.signatory1,*/
+          'DuplicateInfo': DuplicateString !== "undefined"? DuplicateString : "",
+          //step 
           'clientEligibility': values.clientEligibility,
           'serviceProviderResponsibility': values.serviceProviderResponsibility,
-          'clientConsent': values.clientConsent,
-         //' organizationConsent': values.organizationConsent,
-          //"": values.,
+          'clientConsent': values.savedConsent,
+          'clientConsentDate': typeof values.clientConsentDate !== "undefined" ? new Date(values.clientConsentDate) : null,
+          'CaseNumberDuplicate': WorkBCDuplicate,
+          'virtualConsent':data,
         }
       })
-    }).then(async response => {
-      //item was created
+    }).then(async response =>{
+      //file attached
       return [true, response.d.ID];
-    })    
-    .catch(err => {
+    })
+     .catch(err => {
       //there was an error in the chan
       //item was not created
       console.log("error in chain")
@@ -176,8 +191,7 @@ async function saveListProviderIntake(values) {
       }
       
       return false
-    })
-  
+    }) 
   //try catch catcher
   } catch (error) {
     console.log(error)
@@ -185,89 +199,9 @@ async function saveListProviderIntake(values) {
   }
 }
 
-async function updateListProviderIntake(values) {
-  try{
-      var headers;
-      var itemID = values.SPID;
-      if(itemID === ""){
-        sendEmail(values, "Update Attempt Error - ApplicationID and Token Not Found")
-        console.log("CONSENT REQUEST FAILED:  applicationID:"+values.applicationId +" token:"+values._token + " Not Found In Database")
-        console.log("-Consent set back to false to prevent further errors-")
-        try {
-          updateSavedToSP("ProviderIntake",values._id);
-          updateConsentToFalse("ProviderIntake",values._id);
-        }
-        catch (error) {
-          console.log(error);
-        }
-        return false;
-      }
-    return await spr
-    .then(async data => {
-        headers = data.headers;
-        headers['Accept'] = 'application/json;odata=verbose';
-        return headers
-    }).then(async response => {
-          //return true
-          //console.log(response)
-          headers = response
-          return request.post({
-            url: listWebURL + '/AccessToTechnology/_api/contextInfo',
-            headers: headers,
-            json: true,
-          })
-      }).then(async response => {
-        var digest = response.d.GetContextWebInformation.FormDigestValue
-        return digest
-      }).then(async response => {
-        //console.log(headers)
-        headers['X-RequestDigest'] = response
-        headers['Content-Type'] = "application/json;odata=verbose"
-        headers['X-HTTP-Method'] = "MERGE"
-        headers['If-Match'] = "*"
-        // change to local Access to Technology list
-        console.log(itemID);
-        var l = listWebURL + `/AccessToTechnology/_api/web/lists/getByTitle('A2TApplications')/items('`+itemID+`')`
-        return request.post({
-          url: l,
-          headers: headers,
-          json: true,
-          body: {
-            "__metadata": {
-              "type": `SP.Data.A2TApplicationsListItem`,
-            },
-            'clientConsent': values.clientConsent,
-            'clientSignature': values.clientSignature,
-            'clientConsentDate': values.clientConsentDate,
-        
-          }
-        })
-      }).then(async response => {
-        //item was updated
-        return true
-      })    
-      .catch(err => {
-        //there was an error in the chan
-        //item was not created
-        console.log("error in chain")
-        //console.log(err);
-        console.log("err status code:"+ err.statusCode);
-        console.log(err);
-        if (err.statusCode !== 403){
-          console.log(err);
-        }
-        
-        return false
-      })
-    
-    //try catch catcher
-    } catch (error) {
-      console.log(error)
-      return false
-    }
-  }
 
-cron.schedule('*/3 * * * *', async function() {
+
+cron.schedule('*/1 * * * *', async function() {
     console.log('running a task every 3 minutes');
     //console.log('running a task every 10 seconds');
     spr = spauth.getAuth(listWebURL, {
@@ -302,35 +236,9 @@ cron.schedule('*/3 * * * *', async function() {
                 console.log("error")
                 console.log(e)
               })
-              
         }
     })
-    await  getProviderIntakeConsentNotSP()
-    .then(async cursor => {
-        var results = await cursor.toArray()
-        console.log(results.length)
-        for (const data of results){
-          clean(data)
-          await updateListProviderIntake(data)
-              .then(function(saved){
-                console.log("saved")
-                console.log(saved)
-                // save values to mongo db
-                if (saved) {
-                  try {
-                    updateConsentSP("ProviderIntake",data._id);
-                  }
-                  catch (error) {
-                    console.log(error);
-                  }
-                }
-              })
-              .catch(function(e){
-                console.log("error")
-                console.log(e)
-              })  
-        }
-    })
+   
     /*
     await getProviderIntakeNotReporting()
     .then(async cursor => {

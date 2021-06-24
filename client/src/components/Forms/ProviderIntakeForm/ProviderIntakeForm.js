@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {withRouter} from 'react-router-dom'
-import {Formik, Form} from 'formik'
+import {Formik, Form } from 'formik'
+
 import '../../../utils/polyfills'
 import {customAlphabet} from 'nanoid'
 import FormStep1 from './ProviderIntakeFormStep1'
@@ -10,19 +11,33 @@ import ProgressTracker from '../shared/ProgressTracker'
 import {ProviderIntakeValidationSchema} from './ProviderIntakeValidationSchema'
 import { FORM_URL } from '../../../constants/form'
 import { generateAlert } from '../shared/Alert'
-
+import {pathToRegexp} from 'path-to-regexp'
 
 class ProviderIntakeForm extends Component {
     constructor(){
         super()
-        const nanoid = customAlphabet('0123456789abcdefghijklmnopqrstuvwxyz',10)
+        var key = []
+        var re = pathToRegexp('/:id/:token', key)
+        var sample = window.location.href.split("/providerIntake")[1]
+        var content = re.exec(sample) //[/id/token/, id, token]]
+        console.log("content"+ content);
+        const nanoid = customAlphabet('0123456789abcdefghijklmnopqrstuvwxyz',10);
         const nanoid1 = customAlphabet('0123456789abcdefghijklmnopqrstuvwxyz',25);
+        
         this.state={
             _csrf: '',
             currentStep: 1,
-            _id: nanoid(),
-            _token: nanoid1(),
-            hasError: false
+            _id: (content != null) ? content[1] : nanoid(),
+            _token: (content != null) ? content[2] :nanoid1(),
+            serviceProviderName: '',
+            fundingSource: '',
+            serviceProviderEmail: '',
+            clientName: '',
+            clientLastName:'',
+            inDB: (content != null) ? true : false,
+            hasError: false,
+            pdfFile:null,
+            loaded:0,
         }
         this._next = this._next.bind(this)
         this._prev = this._prev.bind(this)
@@ -47,7 +62,43 @@ class ProviderIntakeForm extends Component {
                     })
                 }
             )
+           this.getContext(this.state)
     }
+
+    getContext(values){
+        if(values.inDB){
+            fetch(FORM_URL.ProviderIntakeForm+"/getData/"+values._id+"/"+values._token,  {
+                credentials: "include",
+            }).then(res => res.json())
+            .then(
+                (result) => {
+                    console.log(result)
+                    if(result.err === "Not Found"){
+                        this.setState({
+                            hasError: true
+                        })
+                    }else{
+                        this.setState({
+                            serviceProviderName: result.serviceProviderName,
+                            fundingSource: result.fundingSource,
+                            serviceProviderEmail: result.serviceProviderEmail,
+                            clientName: result.clientName,
+                            clientLastName: result.clientLastName,
+                            pdfFile:result.pdfFile,
+                        })
+                    }
+                },
+                (error) => {
+                    console.log(error)
+                    this.setState({
+                            hasError: true
+                    })
+                }
+            )
+        }
+    }
+
+   
 
     handleSubmit = (event) => {
         event.preventDefault()
@@ -116,8 +167,10 @@ class ProviderIntakeForm extends Component {
             </button>        
           )
         }
+
         return null;
     }
+  
 
     render() {
         return (
@@ -134,22 +187,30 @@ class ProviderIntakeForm extends Component {
                                     _csrf: this.state._csrf,
                                     _id: this.state._id,
                                     _token: this.state._token,
+                                    inDB: this.state.inDB,
+                                    
+                                    consent: this.state.inDB,
+                                    fileName:"",
+                                    fileSize:0,
+                                    fileType:"",
+                                    fileData: null,
+                                          
                                     //step 1
-                                    serviceProviderName:"",
+                                    serviceProviderName: this.state.serviceProviderName,
                                     serviceProviderPostal:"",
                                     serviceProviderContact:"",
                                     serviceProviderPhone:"",
-                                    serviceProviderEmail:"",
-                                    serviceProviderConfirmationEmail:"",
-                                    fundingSource:"",
+                                    serviceProviderEmail: this.state.serviceProviderEmail,
+                                    serviceProviderConfirmationEmail: this.state.serviceProviderEmail,
+                                    fundingSource: this.state.fundingSource,
                                     trainingProgram:"",
                                     periodStart1:"",
                                     periodEnd1:"",
                                     BCEAorFederalOnReserve:[],
                                     //step2
                                     workBCCaseNumber:"",
-                                    clientName:"",
-                                    clientLastName:"",
+                                    clientName: this.state.clientName,
+                                    clientLastName: this.state.clientLastName,
                                     clientMiddleName:"",
                                     clientAddress:"",
                                     clientAddress2:"",
@@ -233,6 +294,7 @@ class ProviderIntakeForm extends Component {
                                             </div>
                                             )
                                     }
+      
                                     <FormStep1 
                                         currentStep={this.state.currentStep}
                                         {...props}

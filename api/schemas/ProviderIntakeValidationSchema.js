@@ -6,6 +6,8 @@ require('yup-phone')
 var ProviderIntakeValidationSchema = yup.object().shape({
      //step 1
     //see what requirements are fo APP id but it will be generated anyways
+    consent: yup.boolean()
+    .oneOf([true],"You must collect your clients consent form before submitting their application."),
     serviceProviderName: yup.string()
         .required('Please enter the service provider name'),
     serviceProviderPostal:yup.string()

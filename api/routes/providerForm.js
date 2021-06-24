@@ -11,7 +11,7 @@ var generateHTMLEmail = require('../utils/htmlEmail')
 var notification = require('../utils/applicationReceivedEmail');
 var clean = require('../utils/clean')
 var strings = require("../utils/strings")
-var {saveProviderIntakeValues} = require("../utils/mongoOperations");
+var {saveProviderIntakeValues, getParticipantValues} = require("../utils/mongoOperations");
 
 var confirmationBCC = process.env.CONFIRMATIONBCC || process.env.OPENSHIFT_NODEJS_CONFIRMATIONBCC || "";
 //for backup, TODO
@@ -48,10 +48,7 @@ async function sendEmails(values) {
             "Access to Technology Application",
             [
               `Hello ${values.clientName},`,
-              `<p>You are receiving this email as confirmation that ${values.serviceProviderName} has electronically submitted an Access to Technology (A2T) Application on your behalf to the Ministry of Social Development and Poverty Reduction (“MSDPR”), which administers the A2T program to support eligible clients participating in eligible skills training programs.<br/><br/>
-              <b style="color:#FF0000">IMPORTANT</b>: to complete your application, you must visit the link below to provide your consent and complete the agreement.  Without your consent and agreement, the application cannot be processed.</p>`,
-              `<a href="https://access-to-technology-dev.apps.silver.devops.gov.bc.ca/clientConsent/${values._id}/${values._token}" style="padding: 8px 12px; bgcolor: #ffffff; background-color: #ffffff; border: 2px solid #294266; border-radius: 2px; font-family: Helvetica, Arial, sans-serif; font-size: 14px; color: #294266 ! important; text-decoration: none; font-weight: bold; display: inline-block;" >Consent and Agreement Form</a>`,
-              
+              `<p>You are receiving this email as confirmation that ${values.serviceProviderName} has electronically submitted an Access to Technology (A2T) Application on your behalf to the Ministry of Social Development and Poverty Reduction (“MSDPR”), which administers the A2T program to support eligible clients participating in eligible skills training programs.<br/></p>`,
               `<p>A copy of your application information is included below for your records. Please review this information and contact your Service Provider if you have questions and/or if any of the information is not correct:</p>`,
               `<b>Service Provider:</b> ${values.serviceProviderName}`,
               `<b>Staff Name:</b> ${values.serviceProviderContact}`,
@@ -109,7 +106,30 @@ router.get('/', csrfProtection, (req, res) => {
   });
 
 })
+router.get('/getData/:id/:token', csrfProtection, async(req, res) => {
+  console.log(req.params);
+  await getParticipantValues(req.params).then(function(result) {
+    if(result[0] !== undefined){
+      res.send({
+        serviceProviderName: result[0].serviceProviderName,
+        clientName: result[0].clientName,
+        clientLastName: result[0].clientLastName,
+        fundingSource: result[0].fundingSource,
+        serviceProviderEmail: result[0].serviceProviderEmail,
+        pdfFile:result[0].pdfFile,
+      
 
+      });
+    }else{
+      res.send({
+        err: "Not Found"
+      });
+    }
+ });
+})
+
+
+    
 router.post('/', csrfProtection, async (req, res) => {
   //clean the body
   //console.log(req.body)

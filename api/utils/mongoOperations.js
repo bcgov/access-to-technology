@@ -1,5 +1,7 @@
 
 const MongoClient = require('mongodb').MongoClient;
+const Binary = require('mongodb').Binary;
+var fs = require('fs');
 const strings = require("./strings");
 
 let uri;
@@ -40,7 +42,32 @@ function myTrim(x) {
     }
 }
 
+function validateFile(x){
+    // validate the pdf and do whatever scans before pushing to mongo
+    return true;
+}
+
 module.exports = {
+
+    saveConsentValues: async function (values) {
+        return await connection
+        .then(mClient => {
+            // get a handle on the db
+            return mClient.db();
+        }).then(async db => {
+            // add our values to db (they are always new)
+            return db.collection("ProviderIntake").insertOne(
+                {
+                    applicationId: values._id,
+                    _token: values._token,
+                    serviceProviderName: values.serviceProviderName,
+                    fundingSource: values.fundingSource,
+                    serviceProviderEmail: values.serviceProviderEmail,
+                    clientEmail: values.clientEmail,
+                    pdfFile:values.pdfFile,
+                })
+        });
+    },
     //Deprecated participant values get saved at provider form
     saveParticipantValues: async function (values) {
         return await connection
@@ -53,8 +80,6 @@ module.exports = {
                 {
                     applicationId: values._id,
                     _token: values._token,
-                    clientName: values.clientFirstName,
-                    clientLastName: values.clientLastName,
                     serviceProviderName: values.serviceProviderName,
                     fundingSource: values.fundingSource,
                     serviceProviderEmail: values.serviceProviderEmail,
@@ -62,6 +87,8 @@ module.exports = {
                 },
                 { 
                     $set : {
+                        clientName: values.clientName,
+                        clientLastName: values.clientLastName,
                         clientSignature: values.clientSignature,
                         clientConsent: true,
                         clientConsentDate: values.clientConsentDate,
@@ -83,10 +110,10 @@ module.exports = {
             return mClient.db();
         }).then(async db => {
             // get our values from db 
-            console.log("getting SPID");
             return db.collection("ProviderIntake").find({applicationId: values.id, _token: values.token}).toArray();
         });
     },
+
     saveProviderIntakeValues: async function (values) {
         return await connection
         .then(mClient => {
@@ -94,53 +121,100 @@ module.exports = {
             return mClient.db();
         }).then(async db => {
             // add our values to db (they are always new)
-            return db.collection("ProviderIntake").insertOne({
-                savedToSP: false,
-                savedConsent: false,
-                applicationId: values._id,  // id is provided
-                _token: values._token,
-                 //step 1
-                 // create new field Array of comparator values
-                serviceProviderName: myTrim(values.serviceProviderName),
-                serviceProviderContact: myTrim(values.serviceProviderContact),
-                serviceProviderPostal: myTrim(values.serviceProviderPostal),
-                serviceProviderPhone: myTrim(values.serviceProviderPhone),
-                serviceProviderEmail: myTrim(values.serviceProviderEmail),
-                fundingSource: values.fundingSource,
-                trainingProgram: values.trainingProgram,
-                periodStart1: values.periodStart1,
-                periodEnd1: values.periodEnd1,
-                BCEAorFederalOnReserve: values.BCEAorFederalOnReserve,
-                workBCCaseNumber: values.workBCCaseNumber,
-                clientName: myTrim(values.clientName),
-                clientLastName: myTrim(values.clientLastName),
-                clientMiddleName: myTrim(values.clientMiddleName),
-                clientAddress: myTrim(values.clientAddress),
-                clientAddress2:myTrim(values.clientAddress2),
-                clientCity: myTrim(values.clientCity),
-                clientProvince:values.clientProvince,
-                clientPostal: values.clientPostal,
-                clientPhone: values.clientPhone,
-                clientEmail: myTrim(values.clientEmail),
-                altShippingAddress: values.altShippingAddress,
+            if(values.inDB){
+                return db.collection("ProviderIntake").updateOne(
+                    {
+                        applicationId: values._id,  // id is provided
+                        _token: values._token,
+                    },
+                    { 
+                        $set : {
+                            savedToSP: false,
+                            savedConsent: true,
+                            applicationId: values._id,  // id is provided
+                            _token: values._token,
+                            //step 1
+                            // create new field Array of comparator values
+                            serviceProviderName: myTrim(values.serviceProviderName),
+                            serviceProviderContact: myTrim(values.serviceProviderContact),
+                            serviceProviderPostal: myTrim(values.serviceProviderPostal),
+                            serviceProviderPhone: myTrim(values.serviceProviderPhone),
+                            serviceProviderEmail: myTrim(values.serviceProviderEmail),
+                            fundingSource: values.fundingSource,
+                            trainingProgram: values.trainingProgram,
+                            periodStart1: values.periodStart1,
+                            periodEnd1: values.periodEnd1,
+                            BCEAorFederalOnReserve: values.BCEAorFederalOnReserve,
+                            //step 2
+                            workBCCaseNumber: values.workBCCaseNumber,
+                            clientName: myTrim(values.clientName),
+                            clientLastName: myTrim(values.clientLastName),
+                            clientMiddleName: myTrim(values.clientMiddleName),
+                            clientAddress: myTrim(values.clientAddress),
+                            clientAddress2:myTrim(values.clientAddress2),
+                            clientCity: myTrim(values.clientCity),
+                            clientProvince:values.clientProvince,
+                            clientPostal: values.clientPostal,
+                            clientPhone: values.clientPhone,
+                            clientEmail: myTrim(values.clientEmail),
+                            altShippingAddress: values.altShippingAddress,
 
-                //step 1:pop-up fields
-                recipientName: values.recipientName,
-               
-                //step 2
-                /*
-                clientResidesInBC: values.clientResidesInBC,
-                registeredInApprovedProgram:values.registeredInApprovedProgram,
-                accessToComputerCurrently: values.accessToComputerCurrently,
-                receivingAlternateFunding: values.receivingAlternateFunding,
-                financialNeed: values.financialNeed,*/
-                //step 3
-                clientEligibility: values.clientEligibility,
-                serviceProviderResponsibility: values.serviceProviderResponsibility,
-                clientConsent:false,
-                compareField:[values.clientName.toLowerCase(), values.clientLastName.toLowerCase(), values.clientAddress.toLowerCase(), values. clientPostal, values.clientEmail.toLowerCase(), values.clientPhone, values.workBCCaseNumber],         
-                
-            });
+                            //step 2:pop-up fields
+                            recipientName: values.recipientName,
+                            //step 3
+                            clientEligibility: values.clientEligibility,
+                            serviceProviderResponsibility: values.serviceProviderResponsibility,
+                            compareField:[values.clientName.toLowerCase() +" "+values.clientLastName.toLowerCase(), values.clientAddress.toLowerCase(), values.clientEmail.toLowerCase(), values.clientPhone],         
+                    
+                    }
+                },
+                {
+                    upsert: false
+                });
+            }
+            else{
+                return db.collection("ProviderIntake").insertOne({
+                    savedToSP: false,
+                    savedConsent: false,
+                    applicationId: values._id,  // id is provided
+                    _token: values._token,
+                    //step 1
+                    // create new field Array of comparator values
+                    serviceProviderName: myTrim(values.serviceProviderName),
+                    serviceProviderContact: myTrim(values.serviceProviderContact),
+                    serviceProviderPostal: myTrim(values.serviceProviderPostal),
+                    serviceProviderPhone: myTrim(values.serviceProviderPhone),
+                    serviceProviderEmail: myTrim(values.serviceProviderEmail),
+                    fundingSource: values.fundingSource,
+                    trainingProgram: values.trainingProgram,
+                    periodStart1: values.periodStart1,
+                    periodEnd1: values.periodEnd1,
+                    BCEAorFederalOnReserve: values.BCEAorFederalOnReserve,
+                    workBCCaseNumber: values.workBCCaseNumber,
+                    clientName: myTrim(values.clientName),
+                    clientLastName: myTrim(values.clientLastName),
+                    clientMiddleName: myTrim(values.clientMiddleName),
+                    clientAddress: myTrim(values.clientAddress),
+                    clientAddress2:myTrim(values.clientAddress2),
+                    clientCity: myTrim(values.clientCity),
+                    clientProvince:values.clientProvince,
+                    clientPostal: values.clientPostal,
+                    clientPhone: values.clientPhone,
+                    clientEmail: myTrim(values.clientEmail),
+                    altShippingAddress: values.altShippingAddress,
+
+                    //step 1:pop-up fields
+                    recipientName: values.recipientName,
+    
+                    //step 3
+                    clientEligibility: values.clientEligibility,
+                    serviceProviderResponsibility: values.serviceProviderResponsibility,
+                    clientConsent: false,
+                    clientConsentDate: new Date(),
+                    compareField:[values.clientName.toLowerCase() +" "+values.clientLastName.toLowerCase(), values.clientAddress.toLowerCase(), values.clientEmail.toLowerCase(), values.clientPhone],         
+                    
+                });
+            }
         });
     },
     printValues: function(collection) {
