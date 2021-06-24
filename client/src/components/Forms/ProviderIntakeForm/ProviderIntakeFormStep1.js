@@ -5,14 +5,44 @@ import { DatePickerField } from '../shared/DatePickerField'
 import moment from 'moment'
 
 
+
 class FormStep1 extends Component {
 
     constructor(){
         super()
         this.state = {
-           
+            FileData: null,
+        }
+       
+
+    }
+ 
+    
+
+    get getClientConsent(){
+        if(this.props.values.inDB){
+            return(<div></div>)
+        }
+        else{
+            return(<div> 
+            <div className="form-group">
+                <h2 id="forms">Client Consent</h2>
+            </div> 
+            <div className="form-row"> 
+                <div className="form-group col-md-12">
+                    <div className="form-check">
+                    <Field type="checkbox" className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "consent")}`} id="consent" name="consent" />
+                    <label className="form-check-label" htmlFor="consent">By clicking this box you attest that your client has completed a physical copy of their consent, and you will send this consent to<a href="mailto:AccessToTechnology@gov.bc.ca" title="A2T Email Address">Access To Technology</a> via email and including the applicationID that will be provided to you in your confirmation email.<span
+                                    style={{ color: "red" }}>*</span></label>
+                        {feedBackInvalid(this.props.errors, this.props.touched, "consent")}
+                            
+                    </div>      
+                </div>
+            </div>
+        </div>);
         }
     }
+
     get ApplicableServiceProvider(){
         if (this.props.values.fundingSource === "ISET") {
             return (<div className="form-row">
@@ -196,7 +226,6 @@ class FormStep1 extends Component {
     }
     get ApplicableProgramForm(){
         if (this.props.values.fundingSource === "ISET") {
-            console.log(this.props.values.serviceProviderName)
             if(this.props.values.serviceProviderName === "NENAS - North-East Native Advancing Society"){
                 return (<div className="form-row">
                 <div className="form-group col-md-6">
@@ -405,8 +434,7 @@ class FormStep1 extends Component {
             return(<div>Please select a referring Ministry above</div>);
         }
     }
-  
-   
+
     render() {
         if (this.props.currentStep !== 1) {
             return null
@@ -418,9 +446,10 @@ class FormStep1 extends Component {
                 <p>
                 If assistance is required in completing this application please refer to the <a href="https://www.workbc.ca/Employment-Services/WorkBC-Centres/Find-Your-WorkBC-Centre.aspx" target="_blank" rel="noopener noreferrer">A2T Service Provider Guide</a>. 
                 </p>
+               {this.getClientConsent}
                 <div className="form-group">
                     <h2 id="forms">Service Provider Information</h2>
-                </div>
+                </div>                 
                 <div className="form-row">
                  <div className="form-group col-md-6">
                             <label className="col-form-label control-label" htmlFor="fundingSource">Referring Ministry <span

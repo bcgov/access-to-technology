@@ -126,6 +126,32 @@ module.exports = {
             return result
         })     
     },
+
+    WorkBCCheck:async function (comparatorField) {
+        if(comparatorField != null){
+            return await connection
+            .then(mClient => {
+                // get a handle on the db
+                return mClient.db();
+                //return db
+            })
+            .then(async db => {
+                // get our values from db 
+                return await db.collection("ProviderIntake").aggregate([
+                    {$match: {workBCCaseNumber:comparatorField}},
+                    {$group: {_id: "$applicationId" }}]).toArray()
+                }).then(async doc =>{
+                    if(doc.length > 1){
+                        return true
+                    }else{
+                        return false
+                    }
+                   
+                })    
+        }else{
+            return false;
+        }
+    },
     
     duplicateCheck: async function (comparatorField) {
         return await connection
@@ -147,35 +173,9 @@ module.exports = {
         })    
     }, 
     
-    updateConsentSP: async function(collection,_id){
-        return await connection
-        .then(mClient => {
-            // get a handle on the db
-            return mClient.db();
-            //return db
-        })
-        .then(async db => {
-        // add our values to db (they are always new)
-            return db.collection(collection).updateOne(
-                {
-                    _id: _id
-                },
-                { 
-                    $set : {
-                    savedConsent: true,
-                    }
-                },
-                {
-                    upsert: false
-                }
-
-            )
-                //console.log(err)
-                //console.log(doc)
-        }).then(result =>{
-            return result
-        })     
-    },
+   
+    
+    
 
     /*
     printValues: function(collection) {
