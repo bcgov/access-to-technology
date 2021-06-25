@@ -35,6 +35,8 @@ class SendConsentForm extends Component {
             .then(res => res.json())
             .then(
                 (result) => {
+                    console.log("Getting Token");
+                    console.log(result);
                    // console.log(result.csrfToken)
                     this.setState({
                         _csrf: result.csrfToken,
