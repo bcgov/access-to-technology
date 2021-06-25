@@ -29,10 +29,9 @@ class SendConsentForm extends Component {
        
     }
     componentDidMount() {
-        fetch(FORM_URL.sendConsentForm, {
+        fetch(FORM_URL.sendForm, {
             credentials: "include"
-        })
-            .then(res => res.json())
+        }).then(res => res.json())
             .then(
                 (result) => {
                     console.log("Getting Token");
@@ -83,7 +82,7 @@ class SendConsentForm extends Component {
                             enableReinitialize={true}
                             validationSchema={SendConsentValidationSchema}
                             onSubmit={(values,  {resetForm, setErrors, setStatus, setSubmitting }) => {
-                                fetch(FORM_URL.sendConsentForm, {
+                                fetch(FORM_URL.sendForm, {
                                     method: "POST",
                                     credentials: "include",
                                     headers: {

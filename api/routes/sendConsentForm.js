@@ -5,12 +5,13 @@ var csrfProtection = csrf({ cookie: true });
 var SendConsentValidationSchema = require('../schemas/SendConsentValidationSchema')
 var generateHTMLEmail = require('../utils/htmlEmail')
 var clean = require('../utils/clean')
-var strings = require("../utils/strings")
 var {saveConsentValues} = require("../utils/mongoOperations");
 var nodemailer = require("nodemailer");
 
 // env var info here...
 var confirmationBCC = process.env.CONFIRMATIONBCC || process.env.OPENSHIFT_NODEJS_CONFIRMATIONBCC || "";
+// send email func
+app = express();
 
   async function sendEmails(values) {
     try {
@@ -65,14 +66,12 @@ var confirmationBCC = process.env.CONFIRMATIONBCC || process.env.OPENSHIFT_NODEJ
   
 // get
 router.get('/', csrfProtection, (req, res) => {
-  //saveList()
-  var token = req.csrfToken()
-  res.cookie('XSRF-TOKEN', token)
-  res.setHeader('content-type', 'application/json');
-  res.send(
-    JSON.stringify({csrfToken: token})
-  );
-
+    //saveList()
+    var token = req.csrfToken()
+    res.cookie('XSRF-TOKEN', token)
+    res.send({
+      csrfToken: token
+    });
 })
 
 //post
