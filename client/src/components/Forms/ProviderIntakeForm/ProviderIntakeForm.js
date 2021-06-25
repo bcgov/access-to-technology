@@ -36,8 +36,6 @@ class ProviderIntakeForm extends Component {
             clientLastName:'',
             inDB: (content != null) ? true : false,
             hasError: false,
-            pdfFile:null,
-            loaded:0,
         }
         this._next = this._next.bind(this)
         this._prev = this._prev.bind(this)
