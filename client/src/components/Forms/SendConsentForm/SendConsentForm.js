@@ -26,15 +26,14 @@ class SendConsentForm extends Component {
         }
        
     }
-
     componentDidMount() {
         fetch(FORM_URL.sendConsentForm, {
-            credentials: "include",
+            credentials: "include"
         })
             .then(res => res.json())
             .then(
                 (result) => {
-                   console.log(result)
+                   // console.log(result.csrfToken)
                     this.setState({
                         _csrf: result.csrfToken,
                     })

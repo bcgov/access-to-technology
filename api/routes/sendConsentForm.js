@@ -15,13 +15,14 @@ app = express();
 
 // get
 router.get('/', csrfProtection, (req, res) => {
-    var token = req.csrfToken()
-    res.cookie('XSRF-TOKEN', token)
-    res.send({
-      csrfToken: token
-    });
-  })
+  //saveList()
+  var token = req.csrfToken()
+  res.cookie('XSRF-TOKEN', token)
+  res.send({
+    csrfToken: token
+  });
 
+})
   async function sendEmails(values) {
     try {
       let transporter = nodemailer.createTransport({
@@ -47,7 +48,7 @@ router.get('/', csrfProtection, (req, res) => {
               "Access to Technology Consent and Agreement Required",
               [
                 `Hello,<br/>
-                <p><b style="color:#FF0000">IMPORTANT</b> A Link to your consent and agreement form is below. Please complete and submit the form for you A2T application to proceed. With out your consent your application will not be completed. <br/>`,
+                <p><b style="color:#FF0000">IMPORTANT</b> A Link to your consent and agreement form is below. Please complete and submit the form for you A2T application to proceed. With out your consent your application will not be completed. <br/></p>`,
                 `<a href="https://access-to-technology-dev.apps.silver.devops.gov.bc.ca/clientConsent/${values._id}/${values._token}" style="padding: 8px 12px; bgcolor: #ffffff; background-color: #ffffff; border: 2px solid #294266; border-radius: 2px; font-family: Helvetica, Arial, sans-serif; font-size: 14px; color: #294266 ! important; text-decoration: none; font-weight: bold; display: inline-block;" >Consent and Agreement Form</a>`,
                
               ]
