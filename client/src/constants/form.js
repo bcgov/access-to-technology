@@ -7,10 +7,8 @@ if (process.env.NODE_ENV === 'development'){
     FORM_URL.ProviderIntakeForm = 'http://localhost:8000/api/providerForm'
     FORM_URL.clientForm = 'http://localhost:8000/api/participantForm'
     FORM_URL.sendConsentForm = 'http://localhost:8000/api/sendConsentForm'
-    FORM_URL.clientConsentForm = 'http://localhost:8000/clientConsent'
 } else if (process.env.NODE_ENV === 'production') {
     FORM_URL.ProviderIntakeForm = '/api/providerForm'
     FORM_URL.clientForm = '/api/participantForm'  
-    FORM_URL.sendConsentForm = 'api/sendConsentForm'
-    FORM_URL.clientConsentForm = '/clientConsent'  
+    FORM_URL.sendConsentForm = '/api/sendConsentForm'
 }
