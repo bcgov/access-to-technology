@@ -42,10 +42,7 @@ function myTrim(x) {
     }
 }
 
-function validateFile(x){
-    // validate the pdf and do whatever scans before pushing to mongo
-    return true;
-}
+
 
 module.exports = {
 
