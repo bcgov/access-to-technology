@@ -6,6 +6,8 @@ import { SendConsentValidationSchema } from './SendConsentValidationSchema'
 import { FORM_URL } from '../../../constants/form'
 import {customAlphabet} from 'nanoid'
 import { generateAlert } from '../shared/Alert'
+import '../../../utils/polyfills'
+
 
 
 

@@ -64,7 +64,6 @@ module.exports = {
                     fundingSource: values.fundingSource,
                     serviceProviderEmail: values.serviceProviderEmail,
                     clientEmail: values.clientEmail,
-                    pdfFile:values.pdfFile,
                 })
         });
     },
