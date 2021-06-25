@@ -68,11 +68,13 @@ router.get('/', csrfProtection, (req, res) => {
   //saveList()
   var token = req.csrfToken()
   res.cookie('XSRF-TOKEN', token)
-  res.send({
-    csrfToken: token
-  });
+  res.setHeader('content-type', 'application/json');
+  res.send(
+    JSON.stringify({csrfToken: token})
+  );
 
 })
+
 //post
   router.post('/', csrfProtection, async (req, res) => {
     clean(req.body);
