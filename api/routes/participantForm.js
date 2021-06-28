@@ -41,12 +41,18 @@ router.get('/', csrfProtection, (req, res) => {
             from: 'Access to Technology <donotreply@gov.bc.ca>', // sender address
             to: values.serviceProviderEmail,// list of receivers
             bcc: confirmationBCC,
-            subject: "Consent Received: Access to Technology Application ID #" + values._id, // Subject line
-            html:`<h2>Access to Technology Client Consent and Agreement</h2>
-                  <p>You are receiving this email as confirmation that ${values.clientName} ${values.clientLastName} has electronically submitted an Access to Technology (A2T) Consent and Agreement. Visit the link below to complete their application.</p>
-                  <a href="https://access-to-technology-dev.apps.silver.devops.gov.bc.ca/providerIntake/${values._id}/${values._token}" style="padding: 8px 12px; bgcolor: #ffffff; background-color: #ffffff; border: 2px solid #294266; border-radius: 2px; font-family: Helvetica, Arial, sans-serif; font-size: 14px; color: #294266 ! important; text-decoration: none; font-weight: bold; display: inline-block;" >A2T Application</a>
-                  `
-              
+            subject: "Access to Technology Consent Received - Application ID #" + values._id, // Subject line
+            html:generateHTMLEmail(
+              "Access to Technology Client Consent and Agreement",
+              [
+                `Hello,<br/>
+                <p>You are receiving this email as confirmation that the below client has electronically submitted a Client Consent and Agreement form:<br/>`,
+                `Application ID: ${values._id}`,
+                `Client Full Name:  ${values.clientName} ${values.clientLastName}`,
+                `<p>Click below to complete an A2T application for the individual identified above:</p>`,
+                `<a href="https://access-to-technology-dev.apps.silver.devops.gov.bc.ca/providerIntake/${values._id}/${values._token}" style="padding: 8px 12px; bgcolor: #ffffff; background-color: #ffffff; border: 2px solid #294266; border-radius: 2px; font-family: Helvetica, Arial, sans-serif; font-size: 14px; color: #294266 ! important; text-decoration: none; font-weight: bold; display: inline-block;" >Application Form</a>`,
+  
+              ],)
               
                // html body
           };
