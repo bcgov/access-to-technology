@@ -56,12 +56,12 @@ router.get('/', csrfProtection, (req, res) => {
             from: 'Access to Technology <donotreply@gov.bc.ca>', // sender address
             to: values.clientEmail,
             bcc: confirmationBCC,// list of receivers
-            subject: `Consent Received: Access to Technology Application ID #${values._id}`, // Subject line
+            subject: `Access to Technology Consent Received - Application ID #${values._id}`, // Subject line
             html: generateHTMLEmail(
-              "Access to Technology Consent and Agreement",
+              "Access to Technology Client Consent and Agreement",
               [
                 `Hello ${values.clientName},<br/>
-                <p>Your consent and agreement form has been received! A copy of this form is included below for your records.<br/>`,
+                <p>You are receiving this email as confirmation that your Client Consent and Agreement form has been received. A copy of this form is included below for your records.<br/>`,
   
                 `<b>COLLECTION ,USE OR DISCLOSURE OF PERSONAL INFORMATION</b>`,
                 `Access to Technology (“A2T”) is a Ministry of Social Development and Poverty Reduction (“SDPR“) program that is delivered in part by BC 
@@ -110,6 +110,23 @@ router.get('/', csrfProtection, (req, res) => {
                 effectiveness of the A2T program. If you have any questions about the collection of your personal information, please contact the Records 
                 Clerk of the Employment and Labour Market Services Division, MSDPR at <a href="mailto:WorkBCOESprivacy@gov.bc.ca">WorkBCOESprivacy@gov.bc.ca</a>.`,
               ],
+              [],
+              [
+                  `<b>Terms and Conditions</b>
+                  I have reviewed and agree to all below-noted terms and conditions:
+                          <ol style={{listStyleType:"lower-alpha"}}>
+                          <li >My receipt and use of a laptop computer provided to me through the A2T program is dependent on my participation in the training described in my A2T application;</li>
+                          <li >If I complete the training described in my application to the satisfaction of {this.state.serviceProviderName} I may keep the laptop computer provided to me through the A2T program;</li>
+                          <li >If I do not complete the training described in my A2T application to the satisfaction of {this.state.serviceProviderName} I must return the laptop computer, in good working order, to the A2T contractor;</li>
+                          <li>I may not and will not use any laptop computer provided to me through the A2T program for the purposes of:</li>
+                          <ol style={{listStyleType:"lower-roman"}}>
+                              <li> sexual exploitation;</li>
+                                  <li>promoting hate or discrimination; </li>
+                                  <li>any other illegal activity; or</li>
+                                  <li>promoting any illegal activity.</li>
+                              </ol>
+                          </ol>`
+                ],
               []
             ) // html body
           };      
