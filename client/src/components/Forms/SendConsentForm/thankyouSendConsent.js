@@ -10,9 +10,9 @@ class thankyouSendConsent extends Component {
             <div className="container">
                 <div className="row">
                     <div className="col-md-12">
-                        <h1>Thank you! The consent and agreement link has been sent to your client!</h1>
+                        <h1>The Client Consent and Agreement form has been sent to your client.</h1>
                         <h3>Application ID: {this.props.location.state !== undefined && this.props.location.state._id}</h3>
-                        <p>Your client should receive their consent form in the next 5 - 10 minutes.</p>
+                        <p>Please ask your client to complete and submit the form as soon as possible.</p>
                     </div>
                 </div>
                 <div className="row">
