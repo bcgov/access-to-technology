@@ -2,7 +2,7 @@ import React from 'react'
 
 function CollectionNotice() {
     return (
-        <div className="row" style={{ marginTop: '2em' }}>
+        <div className="row" style={{ marginTop: '1em' }}>
             <div className="col-md-12">
                 <h4>Collection Notice</h4>
                 <p className="small">
@@ -14,7 +14,7 @@ function CollectionNotice() {
                 Clerk of the Employment and Labour Market Services Division, MSDPR at <a href="mailto:WorkBCOESprivacy@gov.bc.ca">WorkBCOESprivacy@gov.bc.ca</a>.
                 </p>
             </div>
-        </div>
+        </div>  
     )
 }
 
