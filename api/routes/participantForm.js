@@ -43,7 +43,7 @@ router.get('/', csrfProtection, (req, res) => {
             bcc: confirmationBCC,
             subject: "Access to Technology Consent Received - Application ID #" + values._id, // Subject line
             html:generateHTMLEmail(
-              "Access to Technology Client Consent and Agreement",
+              "<b style='color:#FF0000'>Action Required:</b> Access to Technology Client Consent and Agreement Form",
               [
                 `Hello,<br/>
                 <p>You are receiving this email as confirmation that the below client has electronically submitted a Client Consent and Agreement form:<br/>`,
@@ -115,10 +115,7 @@ router.get('/', csrfProtection, (req, res) => {
                 Poverty Reduction (“MSDPR”), and its contracted A2T service provider to administer the A2T program, and may also be used to evaluate the 
                 effectiveness of the A2T program. If you have any questions about the collection of your personal information, please contact the Records 
                 Clerk of the Employment and Labour Market Services Division, MSDPR at <a href="mailto:WorkBCOESprivacy@gov.bc.ca">WorkBCOESprivacy@gov.bc.ca</a>.`,
-              ],
-              [],
-              [
-                  `<b>Terms and Conditions</b>
+                `<b>Terms and Conditions</b>
                   I have reviewed and agree to all below-noted terms and conditions:
                           <ol style={{listStyleType:"lower-alpha"}}>
                           <li >My receipt and use of a laptop computer provided to me through the A2T program is dependent on my participation in the training described in my A2T application;</li>
@@ -131,8 +128,8 @@ router.get('/', csrfProtection, (req, res) => {
                                   <li>any other illegal activity; or</li>
                                   <li>promoting any illegal activity.</li>
                               </ol>
-                          </ol>`
-                ],
+                          </ol>`,
+              ],
               []
             ) // html body
           };      
