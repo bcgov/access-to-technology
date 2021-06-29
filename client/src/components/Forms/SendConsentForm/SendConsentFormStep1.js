@@ -203,9 +203,6 @@ class FormStep1 extends Component {
         return (
 
             <div>
-                <p>
-                If assistance is required in completing this application please refer to the <a href="https://www.workbc.ca/Employment-Services/WorkBC-Centres/Find-Your-WorkBC-Centre.aspx" target="_blank" rel="noopener noreferrer">A2T Service Provider Guide</a>. 
-                </p>
                 <div className="form-group">
                     <h2 id="forms">Service Provider Information</h2>
                 </div>

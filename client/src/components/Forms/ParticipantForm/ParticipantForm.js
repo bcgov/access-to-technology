@@ -128,7 +128,7 @@ class ParticipantForm extends Component {
             return(<div>
               
                
-                <h2> Access to Technology (A2T) Client Consent Form </h2> 
+                <h2> Access to Technology (A2T) Client Consent and Agreement Form </h2> 
                                     {/* handleApplicationID handles all the pre populated values in future. <button className="btn btn-success d-print-none" onClick={() => window.print()}>Print Confirmation</button><br /><br />*/}
                                    
                                         <div className="form-group">
@@ -176,16 +176,36 @@ class ParticipantForm extends Component {
                                           </ol>
                                       <p>The consents described above are effective on the date I sign this document and expire of the date MSDPR completes an evaluation of the A2T program.</p>
                                       <p>Any disclosure of my A2T-Related Personal Information as described above may take place only in Canada.</p>
+                                   
+                                    <div className="row" style={{ marginTop: '2em' }}>
+                                    <div className="col-md-12">
+                                        <h4>Terms and Conditions</h4>
+                                        <p className="small">
+                                        I have reviewed and agree to all below-noted terms and conditions:
+                                                <ol style={{listStyleType:"lower-alpha"}}>
+                                                <li >My receipt and use of a laptop computer provided to me through the A2T program is dependent on my participation in the training described in my A2T application;</li>
+                                                <li >If I complete the training described in my application to the satisfaction of {this.state.serviceProviderName} I may keep the laptop computer provided to me through the A2T program;</li>
+                                                <li >If I do not complete the training described in my A2T application to the satisfaction of {this.state.serviceProviderName} I must return the laptop computer, in good working order, to the A2T contractor;</li>
+                                                <li>I may not and will not use any laptop computer provided to me through the A2T program for the purposes of:</li>
+                                                <ol style={{listStyleType:"lower-roman"}}>
+                                                    <li> sexual exploitation;</li>
+                                                        <li>promoting hate or discrimination; </li>
+                                                        <li>any other illegal activity; or</li>
+                                                        <li>promoting any illegal activity.</li>
+                                                    </ol>
+                                                </ol>   
+                                            </p>
+                                        </div>
+                                    </div>      
+                              
                                     <CollectionNotice />
-                                  
-                                
+
                                     <div className="form-row">
   
                                     <div className="form-group col-md-8">
                                     <label className="col-form-label control-label" htmlFor="clientSignature">Please enter your full name <span
                                             style={{ color: "red" }}>*</span></label>
-                                        <Field className={`form-control ${feedBackClassName(errors, touched, "clientSignature")}`} value={this.state.clientSignature} id="clientSignature" name="clientSignature" />
-                                        {feedBackInvalid(errors,touched,"clientSignature")}
+                                        <input className={`form-control ${feedBackClassName(errors, touched, "clientSignature")}`}  readOnly value={this.state.clientSignature} id="clientSignature" name="clientSignature" />
                                     </div>
                                     
                                     <div className="form-group col-md-4">
@@ -196,7 +216,7 @@ class ParticipantForm extends Component {
                                 </div>
                                     <div className="form-group">
                                         <div className="form-check">
-                                            <Field type="checkbox" className={`form-check-input ${feedBackClassName(errors, touched, "clientConsent")}`} id="clientConsent"
+                                            <input type="checkbox" className={`form-check-input ${feedBackClassName(errors, touched, "clientConsent")}`} readOnly id="clientConsent"
                                                 name="clientConsent" checked={this.state.clientConsent}/>
                                             <label className="form-check-label control-label" htmlFor="clientConsent"><span style={{ color: "red" }}>*</span> I acknowledge and
                                             understand that by clicking the "submit" icon, I am attaching my electronic signature to this form, and that
@@ -216,12 +236,12 @@ class ParticipantForm extends Component {
               <Form>
               <h2> Access to Technology (A2T) Client Consent Form </h2> 
                                   {/* handleApplicationID handles all the pre populated values in future. <button className="btn btn-success d-print-none" onClick={() => window.print()}>Print Confirmation</button><br /><br />*/}
-                                  <p>Please make sure the Application ID below matches the one provided to you in your confirmation email. If it does not please contact your service provider.</p>
+                                  <p>Please make sure the Application ID below matches the one provided to you in the email you received. If it does not, please contact your Service Provider. </p>
                                       <div className="form-group">
                                       
                                       <h3 id="forms">Application ID: {this.state._id}</h3>
                                       <div className="form-row">
-                                          <p> Please enter your first and last name to complete the language in the consent form below.</p>
+                                          <p> Please enter your first and last name and then review the information in the consent form below.</p>
                                         </div>
                                       <div className="form-row">
                                         <div className="form-group col-md-4">
@@ -274,11 +294,31 @@ class ParticipantForm extends Component {
                                         </ol>
                                     <p>The consents described above are effective on the date I sign this document and expire of the date MSDPR completes an evaluation of the A2T program.</p>
                                     <p>Any disclosure of my A2T-Related Personal Information as described above may take place only in Canada.</p>
-                                  <CollectionNotice />
-                                
-                              
-                                  <div className="form-row">
+                                 
 
+                                  <div className="row" style={{ marginTop: '2em' }}>
+                                    <div className="col-md-12">
+                                        <h4>Terms and Conditions</h4>
+                                        <p className="small">
+                                        I have reviewed and agree to all below-noted terms and conditions:
+                                                <ol style={{listStyleType:"lower-alpha"}}>
+                                                <li >My receipt and use of a laptop computer provided to me through the A2T program is dependent on my participation in the training described in my A2T application;</li>
+                                                <li >If I complete the training described in my application to the satisfaction of {this.state.serviceProviderName} I may keep the laptop computer provided to me through the A2T program;</li>
+                                                <li >If I do not complete the training described in my A2T application to the satisfaction of {this.state.serviceProviderName} I must return the laptop computer, in good working order, to the A2T contractor;</li>
+                                                <li>I may not and will not use any laptop computer provided to me through the A2T program for the purposes of:</li>
+                                                <ol style={{listStyleType:"lower-roman"}}>
+                                                    <li> sexual exploitation;</li>
+                                                        <li>promoting hate or discrimination; </li>
+                                                        <li>any other illegal activity; or</li>
+                                                        <li>promoting any illegal activity.</li>
+                                                    </ol>
+                                                </ol>   
+                                            </p>
+                                        </div>
+                                    </div>     
+                                    <CollectionNotice />
+
+                                  <div className="form-row">
                                   <div className="form-group col-md-8">
                                   <label className="col-form-label control-label" htmlFor="clientSignature">Please enter your full name <span
                                           style={{ color: "red" }}>*</span></label>
