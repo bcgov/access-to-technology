@@ -42,8 +42,6 @@ function myTrim(x) {
     }
 }
 
-
-
 module.exports = {
 
     saveConsentValues: async function (values) {
@@ -131,12 +129,10 @@ module.exports = {
                             _token: values._token,
                             //step 1
                             // create new field Array of comparator values
-                            serviceProviderName: myTrim(values.serviceProviderName),
                             serviceProviderContact: myTrim(values.serviceProviderContact),
                             serviceProviderPostal: myTrim(values.serviceProviderPostal),
                             serviceProviderPhone: myTrim(values.serviceProviderPhone),
                             serviceProviderEmail: myTrim(values.serviceProviderEmail),
-                            fundingSource: values.fundingSource,
                             trainingProgram: values.trainingProgram,
                             periodStart1: values.periodStart1,
                             periodEnd1: values.periodEnd1,

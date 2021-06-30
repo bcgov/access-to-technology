@@ -20,7 +20,7 @@ class thankyouSendConsent extends Component {
                     <div>
                         <div className="alert alert-dismissible alert-success">
                             <button type="button" className="close" data-dismiss="alert">×</button>
-                            <strong>Complete!</strong> <br/>Your submission Has been received.
+                            <strong>Complete!</strong> <br/>Your submission has been received.
                         </div>
                     </div>
                 </div>
