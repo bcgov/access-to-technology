@@ -28,7 +28,7 @@ function Home() {
                         </div>
                         <div className="form-row col-md-6">
                             <div className="jumbotron">
-                                <p><b>Eligible Skills Training Programs Include:</b></p>
+                                <p><b>Approved Skills Training Programs Include:</b></p>
                                 
                                 <b className="text-primary">WorkBC Employment Services: </b>
                                     <ul>
