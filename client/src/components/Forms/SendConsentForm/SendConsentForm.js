@@ -62,7 +62,7 @@ class SendConsentForm extends Component {
         return (
             <div className="container">
                 <div className="row">
-                    <h2> Access to Technology (A2T) Send Consent </h2>
+                    <h2> Access to Technology (A2T) Send Electronic Client Consent and Agreement Form </h2>
                     <div className="col-md-12">
                     {this.state.hasError && (
                             generateAlert("alert-danger", "An error has occurred, please refresh the page. If the error persists, please try again later.")

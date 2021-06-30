@@ -43,7 +43,7 @@ router.get('/', csrfProtection, (req, res) => {
             bcc: confirmationBCC,
             subject: "Access to Technology Consent Received - Application ID #" + values._id, // Subject line
             html:generateHTMLEmail(
-              "<b style='color:#FF0000'>Action Required:</b> Access to Technology Client Consent and Agreement Form",
+              "<b style='color:#FF0000'>Action Required:</b> Access to Technology - Client Consent and Agreement Form",
               [
                 `Hello,<br/>
                 <p>You are receiving this email as confirmation that the below client has electronically submitted a Client Consent and Agreement form:<br/>`,
@@ -64,7 +64,7 @@ router.get('/', csrfProtection, (req, res) => {
             bcc: confirmationBCC,// list of receivers
             subject: `Access to Technology Consent Received - Application ID #${values._id}`, // Subject line
             html: generateHTMLEmail(
-              "Access to Technology Client Consent and Agreement",
+              "Access to Technology - Client Consent and Agreement",
               [
                 `Hello ${values.clientName},<br/>
                 <p>You are receiving this email as confirmation that your Client Consent and Agreement form has been received. A copy of this form is included below for your records.<br/>`,

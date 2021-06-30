@@ -45,7 +45,7 @@ async function sendEmails(values) {
           bcc: confirmationBCC,// list of receivers
           subject: `Confirmation: Access to Technology Application ID #${values._id}`, // Subject line
           html: generateHTMLEmail(
-            "Access to Technology Application",
+            "Access to Technology - Application",
             [
               `Hello ${values.clientName},`,
               `<p>You are receiving this email as confirmation that ${values.serviceProviderName} has electronically submitted an Access to Technology (A2T) Application on your behalf to the Ministry of Social Development and Poverty Reduction (“MSDPR”), which administers the A2T program to support eligible clients participating in eligible skills training programs.<br/></p>`,

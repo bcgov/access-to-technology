@@ -35,13 +35,13 @@ app = express();
             bcc: confirmationBCC,// list of receivers
             subject: `Access to Technology Consent Required - Application ID #${values._id}`, // Subject line
             html: generateHTMLEmail(
-              "Access to Technology Consent and Agreement Required",
+              "Access to Technology - Consent and Agreement Required",
               [
                 `Hello,<br/>`,
                 `You are Receiving this email to provide your Consent and Agreement for ${values.serviceProviderName} to apply to the Access to Technology Program on your behalf.`,
                 `Click below to complete this step:`,
                 `<a href="https://access-to-technology-dev.apps.silver.devops.gov.bc.ca/clientConsent/${values._id}/${values._token}" style="padding: 8px 12px; bgcolor: #ffffff; background-color: #ffffff; border: 2px solid #294266; border-radius: 2px; font-family: Helvetica, Arial, sans-serif; font-size: 14px; color: #294266 ! important; text-decoration: none; font-weight: bold; display: inline-block;" >Consent and Agreement Form</a>`,
-                `<p><b style="color:#FF0000">IMPORTANT</b><br/></p>`,
+                `<p><b style="color:#FF0000">IMPORTANT</b></p>`,
                 `<ul><li>Your application cannot be processed without your completed Consent and Agreement.</li><li>${values.serviceProviderName} will be notified by email once you have completed this step.</li></ul>`,
                
               ]

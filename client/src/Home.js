@@ -15,7 +15,7 @@ function Home() {
                                     <li>Start on or after August 15, 2021;</li>
                                     <li>Have an online learning component;</li>
                                     <li>Leads to employment;</li>
-                                    <li>Is a minimum of four consecutive weeks;</li>
+                                    <li>Is a minimum of four consecutive weeks; and</li>
                                     <li>Is on the list of approved skills training programs.</li>
                                 </ul>
                                 <p>For additional Service Provider Information see the <a href="https://www.workbc.ca/getmedia/3532dbe8-f084-4022-bd3c-8f9ebe422fa4/WS-Guide.aspx" target="_blank" rel="noopener noreferrer" >Access to Technology (A2T) Service Provider Guide</a>.</p>
@@ -28,7 +28,7 @@ function Home() {
                         </div>
                         <div className="form-row col-md-6">
                             <div className="jumbotron">
-                                <p><b>Approved skills training programs include:</b></p>
+                                <p><b>Eligible Skills Training Programs Include:</b></p>
                                 
                                 <b className="text-primary">WorkBC Employment Services: </b>
                                     <ul>
@@ -40,7 +40,7 @@ function Home() {
                                     <ul>
                                         <li>Skills Training for Employment</li>
                                         <li>ITA Funded Pre-Apprenticeship Training</li>
-                                        <li>BladeRunners</li>.
+                                        <li>BladeRunners</li>
                                     </ul>
                                 <b className="text-primary">Indigenous Skills and Employment Training: </b>
                                 <ul>
@@ -50,18 +50,19 @@ function Home() {
                             </div>
                         </div>
                     </div>
+                    <div className="form-row">
+                        <div className="form-row col-md-6">
+                            <h3>Step 1 - Send Client Consent and Agreement form</h3>
+                            <p><a href="/SendConsentForm" className="btn btn-lg btn-primary">Start</a><br/></p>
+                        </div>
+                        <div className="form-row col-md-6">
+                            <h3>Step 2 – Complete Application</h3>
+                            <p>Once your client has completed the Client Consent and Agreement form, you will receive an email with a link to the online application form. Please use the link to complete the application on your client’s behalf.<br/></p>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div className="form-row">
-                <div className="form-group col-md-6">
-                    <h3>Send Client Consent Form</h3>
-                    <p><a href="/SendConsentForm" className="btn btn-lg btn-primary">Start</a><br/></p>
-                </div>
-                <div className="form-group col-md-6">
-                    <h3>Apply and Attach Client Consent</h3>
-                    <p><a href="/ProviderIntake" className="btn btn-lg btn-primary">Start</a><br/></p>
-                </div>
-            </div>
+            
         </div>
     )
 }
