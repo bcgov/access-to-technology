@@ -142,10 +142,10 @@ class ParticipantForm extends Component {
                                     </div>
                                     <p><b>COLLECTION ,USE OR DISCLOSURE OF PERSONAL INFORMATION</b><br/><br/>
                                     Access to Technology (“A2T”) is a Ministry of Social Development and Poverty Reduction (“SDPR“) program that is delivered in part by BC 
-                                    Technology for Learning Society (“BC Tech for Learning”) under a contract with MSDPR.
+                                    Technology for Learning Society (“BC Tech for Learning”) under a contract with SDPR.
                                     <br/><br/>
-                                      MSDPR and the Ministry of Advanced Education, Skills and Training (“AEST”) each provide employment related training programs that are 
-                                      delivered by private sector organizations under contracts with MSDPR (the “SDPR Service Providers”) and AEST (the “AEST Service Providers”), 
+                                      SDPR and the Ministry of Advanced Education, Skills and Training (“AEST”) each provide employment related training programs that are 
+                                      delivered by private sector organizations under contracts with SDPR (the “SDPR Service Providers”) and AEST (the “AEST Service Providers”), 
                                       respectively.  Employment and Social Development Canada (“ESDC”) provides the Indigenous Skills and Employment Training Program (“ISET”), 
                                       which is delivered by private sector organizations under contracts with ESDC (the “ISET Service Providers”).
                                       <br/><br/>
@@ -174,7 +174,7 @@ class ParticipantForm extends Component {
                                               <li>BC Tech for Learning collecting my A2T-Related Personal Information indirectly from SDPR or {this.state.serviceProviderName}, for the purposes of administering, delivering or evaluating the A2T program;</li>
                                               <li>BC Tech for Learning disclosing my A2T-Related Personal Information to SDPR or {this.state.serviceProviderName}, for the purposes of administering, delivering or evaluating the A2T program;</li>
                                           </ol>
-                                      <p>The consents described above are effective on the date I sign this document and expire of the date MSDPR completes an evaluation of the A2T program.</p>
+                                      <p>The consents described above are effective on the date I sign this document and expire of the date SDPR completes an evaluation of the A2T program.</p>
                                       <p>Any disclosure of my A2T-Related Personal Information as described above may take place only in Canada.</p>
                                    
                                     <div className="row" style={{ marginTop: '2em' }}>
@@ -259,10 +259,10 @@ class ParticipantForm extends Component {
                                   </div>
                                   <p><b>COLLECTION ,USE OR DISCLOSURE OF PERSONAL INFORMATION</b><br/><br/>
                                   Access to Technology (“A2T”) is a Ministry of Social Development and Poverty Reduction (“SDPR“) program that is delivered in part by BC 
-                                  Technology for Learning Society (“BC Tech for Learning”) under a contract with MSDPR.
+                                  Technology for Learning Society (“BC Tech for Learning”) under a contract with SDPR.
                                   <br/><br/>
-                                    MSDPR and the Ministry of Advanced Education, Skills and Training (“AEST”) each provide employment related training programs that are 
-                                    delivered by private sector organizations under contracts with MSDPR (the “SDPR Service Providers”) and AEST (the “AEST Service Providers”), 
+                                    SDPR and the Ministry of Advanced Education, Skills and Training (“AEST”) each provide employment related training programs that are 
+                                    delivered by private sector organizations under contracts with SDPR (the “SDPR Service Providers”) and AEST (the “AEST Service Providers”), 
                                     respectively.  Employment and Social Development Canada (“ESDC”) provides the Indigenous Skills and Employment Training Program (“ISET”), 
                                     which is delivered by private sector organizations under contracts with ESDC (the “ISET Service Providers”).
                                     <br/><br/>
@@ -291,7 +291,7 @@ class ParticipantForm extends Component {
                                             <li>BC Tech for Learning collecting my A2T-Related Personal Information indirectly from SDPR or {this.state.serviceProviderName}, for the purposes of administering, delivering or evaluating the A2T program;</li>
                                             <li>BC Tech for Learning disclosing my A2T-Related Personal Information to SDPR or {this.state.serviceProviderName}, for the purposes of administering, delivering or evaluating the A2T program;</li>
                                         </ol>
-                                    <p>The consents described above are effective on the date I sign this document and expire of the date MSDPR completes an evaluation of the A2T program.</p>
+                                    <p>The consents described above are effective on the date I sign this document and expire of the date SDPR completes an evaluation of the A2T program.</p>
                                     <p>Any disclosure of my A2T-Related Personal Information as described above may take place only in Canada.</p>
                                  
 
