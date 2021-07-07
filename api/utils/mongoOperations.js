@@ -190,6 +190,7 @@ module.exports = {
                     clientAddress2:myTrim(values.clientAddress2),
                     clientCity: myTrim(values.clientCity),
                     clientProvince:values.clientProvince,
+                    clientSignature:"",
                     clientPostal: values.clientPostal,
                     clientPhone: values.clientPhone,
                     clientEmail: myTrim(values.clientEmail),
