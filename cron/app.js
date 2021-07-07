@@ -153,6 +153,7 @@ async function saveListProviderIntake(values) {
           'clientName': values.clientName,
           'clientLastName': values.clientLastName,
           'clientMiddleName': typeof values.clientMiddleName !== "undefined"? values.clientMiddleName : "",
+          'clientSignature': typeof values.clientSignature !== "undefined"? values.clientSignature : "",
           'clientAddress': typeof values.clientAddress2 !== "undefined"?  (values.clientAddress +", " + values.clientAddress2) : values.clientAddress,
           'clientCity': values.clientCity,
           'clientProvince': values.clientProvince,
