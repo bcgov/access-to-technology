@@ -328,7 +328,7 @@ async function saveProcessTimeToSP(values) {
   }
 }
 
-  cron.schedule('*/1 * * * *', async function() {
+  cron.schedule('*/1 7 * * *', async function() {
     //30 7 * * *
       console.log('running a task every 1 minutes');
       //console.log('running a task every 10 seconds');
