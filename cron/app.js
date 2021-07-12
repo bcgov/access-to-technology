@@ -305,7 +305,7 @@ async function saveProcessTimeToSP(values) {
       })
     }).then(async response =>{
       //file attached
-      return true;
+      return isInFourWeeks;
     })
      .catch(err => {
       //there was an error in the chan
@@ -328,9 +328,9 @@ async function saveProcessTimeToSP(values) {
   }
 }
 
-  cron.schedule('*/1 7 * * *', async function() {
+  cron.schedule('*/1 6 * * *', async function() {
     //30 7 * * *
-      console.log('running a task every 1 minutes');
+      console.log('running a task every 6 hours');
       //console.log('running a task every 10 seconds');
       spr = spauth.getAuth(listWebURL, {
         username: listUser,
@@ -348,7 +348,6 @@ async function saveProcessTimeToSP(values) {
             clean(data)
             await saveProcessTimeToSP(data)
                 .then(function(saved){
-                  console.log("saved")
                   // save values to mongo db
                   if (saved) {
                     try {
@@ -359,8 +358,7 @@ async function saveProcessTimeToSP(values) {
                     }
                   }
                   else{
-                    console.log(saved);
-                    console.log("not time yet");
+                    console.log("Not time yet");
                   }
                 })
                 .catch(function(e){
