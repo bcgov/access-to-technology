@@ -140,7 +140,7 @@ class ParticipantForm extends Component {
                                             <button className="btn btn-success d-print-none" onClick={() => window.print()}>Print Confirmation</button>
                                         </div>
                                     </div>
-                                    <p><b>COLLECTION ,USE OR DISCLOSURE OF PERSONAL INFORMATION</b><br/><br/>
+                                    <p><b>COLLECTION, USE OR DISCLOSURE OF PERSONAL INFORMATION</b><br/><br/>
                                     Access to Technology (“A2T”) is a Ministry of Social Development and Poverty Reduction (“SDPR“) program that is delivered in part by BC 
                                     Technology for Learning Society (“BC Tech for Learning”) under a contract with SDPR.
                                     <br/><br/>
@@ -257,7 +257,7 @@ class ParticipantForm extends Component {
                                         </div>
                                       </div>
                                   </div>
-                                  <p><b>COLLECTION ,USE OR DISCLOSURE OF PERSONAL INFORMATION</b><br/><br/>
+                                  <p><b>COLLECTION, USE OR DISCLOSURE OF PERSONAL INFORMATION</b><br/><br/>
                                   Access to Technology (“A2T”) is a Ministry of Social Development and Poverty Reduction (“SDPR“) program that is delivered in part by BC 
                                   Technology for Learning Society (“BC Tech for Learning”) under a contract with SDPR.
                                   <br/><br/>
