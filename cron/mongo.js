@@ -47,8 +47,7 @@ module.exports = {
             return doc
         })    
     },
-    
-    getProviderIntakeConsentNotSP: async function () {
+    getIncomingProcessTimeNotTrue: async function () {
         return await connection
         .then(mClient => {
             // get a handle on the db
@@ -56,14 +55,15 @@ module.exports = {
             //return db
         })
         .then(async db => {
-        // get our values from db 
-            return db.collection("ProviderIntake").find({savedToSP: true, clientConsent:true, savedConsent:false})
+        // add our values to db (they are always new)
+            return db.collection("ProviderIntake").find({ProcessTime: false})
                 //console.log(err)
                 //console.log(doc)
         }).then(async doc =>{
             return doc
         })    
     },
+  
     updateSaveIdToSP: async function(collection,_id, appID){
         return await connection
         .then(mClient => {
@@ -126,7 +126,36 @@ module.exports = {
             return result
         })     
     },
+    updateProcessTimeToTrue: async function(collection,_id){
+        return await connection
+        .then(mClient => {
+            // get a handle on the db
+            return mClient.db();
+            //return db
+        })
+        .then(async db => {
+        // add our values to db (they are always new)
+            return db.collection(collection).updateOne(
+                {
+                    _id: _id
+                },
+                { 
+                    $set : {
+                    ProcessTime: true
 
+                    }
+                },
+                {
+                    upsert: false
+                }
+
+            )
+                //console.log(err)
+                //console.log(doc)
+        }).then(result =>{
+            return result
+        })     
+    },
     WorkBCCheck:async function (comparatorField) {
         if(comparatorField != null){
             return await connection

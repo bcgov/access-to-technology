@@ -69,7 +69,7 @@ router.get('/', csrfProtection, (req, res) => {
                 `Hello ${values.clientName},<br/>
                 <p>You are receiving this email as confirmation that your Client Consent and Agreement form has been received. A copy of this form is included below for your records.<br/>`,
   
-                `<b>COLLECTION ,USE OR DISCLOSURE OF PERSONAL INFORMATION</b>`,
+                `<b>COLLECTION, USE OR DISCLOSURE OF PERSONAL INFORMATION</b>`,
                 `Access to Technology (“A2T”) is a Ministry of Social Development and Poverty Reduction (“SDPR“) program that is delivered in part by BC 
                  Technology for Learning Society (“BC Tech for Learning”) under a contract with SDPR.
                  <br/><br/>

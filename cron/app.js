@@ -3,7 +3,7 @@ const express = require('express')
 const spauth = require('node-sp-auth')
 const request = require('request-promise')
 
-var {getProviderIntakeNotSP, updateSaveIdToSP, WorkBCCheck, duplicateCheck, updateSavedToSP} = require('./mongo')
+var {getProviderIntakeNotSP, getIncomingProcessTimeNotTrue, updateSaveIdToSP, WorkBCCheck, duplicateCheck, updateSavedToSP, updateProcessTimeToTrue} = require('./mongo')
 var clean = require('./clean')
 var listWebURL = process.env.LISTWEBURL || process.env.OPENSHIFT_NODEJS_LISTWEBURL || ""
 var listUser = process.env.LISTUSER || process.env.OPENSHIFT_NODEJS_LISTUSER || ""
@@ -202,7 +202,7 @@ async function saveListProviderIntake(values) {
 
 
 
-cron.schedule('*/3 * * * *', async function() {
+cron.schedule('*/1 * * * *', async function() {
     console.log('running a task every 3 minutes');
     //console.log('running a task every 10 seconds');
     spr = spauth.getAuth(listWebURL, {
@@ -239,7 +239,134 @@ cron.schedule('*/3 * * * *', async function() {
               })
         }
     })
-   
+  });
+  function isDateInThisWeek(date) {
+    const todayObj = new Date();
+    const todayDate = todayObj.getDate();
+    const todayDay = todayObj.getDay();
+  
+    // get first date of week
+    const firstDayOfWeek = new Date(todayObj.setDate(todayDate - todayDay));
+  
+    // get last date of week
+    const lastDayOfWeek = new Date(firstDayOfWeek);
+    lastDayOfWeek.setDate(lastDayOfWeek.getDate() + 28);
+  
+    // if date is equal or within the first and last dates of the week
+    return date >= firstDayOfWeek && date <= lastDayOfWeek;
+  }
+
+  //add proper fields for A2T
+async function saveProcessTimeToSP(values) {
+  // call function in here before saving
+  try{
+  var headers;
+  const date = new Date(values.periodStart1);
+  const isInFourWeeks = isDateInThisWeek(date);
+  console.log(isInFourWeeks)
+  return await spr
+  .then(async data => {
+      headers = data.headers;
+      headers['Accept'] = 'application/json;odata=verbose';
+      return headers
+  }).then(async response => {
+        //return true
+        //console.log(response)
+        headers = response
+        return request.post({
+          url: listWebURL + '/AccessToTechnology/_api/contextInfo',
+          headers: headers,
+          json: true,
+        })
+    }).then(async response => {
+      
+      var digest = response.d.GetContextWebInformation.FormDigestValue
+      return digest
+    }).then(async response => {
+      headers['X-RequestDigest'] = response
+      headers['Content-Type'] = "application/json;odata=verbose"
+      headers['X-HTTP-Method'] = "MERGE"
+      headers['If-Match'] = "*"
+      // change to local AccesLs to Technology list
+      var l = listWebURL + `/AccessToTechnology/_api/web/lists/getByTitle('A2TApplications')/items('`+values.SPID+`')`
+      console.log("webURL:")
+      console.log(l)
+     
+      return request.post({
+        url: l,
+        headers: headers,
+        json: true,
+        body: {
+          "__metadata": {
+            "type": `SP.Data.A2TApplicationsListItem`
+          },
+          "ProcessTime": isInFourWeeks,
+        }
+      })
+    }).then(async response =>{
+      //file attached
+      return isInFourWeeks;
+    })
+     .catch(err => {
+      //there was an error in the chan
+      //item was not created
+      console.log("error in chain")
+      //console.log(err);
+      //sendEmail(values, "Add Attempt Error - Application Could Not Be Added to SharePoint")
+      console.log("err status code:"+ err.statusCode);
+      console.log(err);
+      if (err.statusCode !== 403){
+        console.log(err);
+      }
+      
+      return false
+    }) 
+  //try catch catcher
+  } catch (error) {
+    console.log(error)
+    return false
+  }
+}
+
+  cron.schedule('*/1 6 * * *', async function() {
+    //30 7 * * *
+      console.log('running a task every 6 hours');
+      //console.log('running a task every 10 seconds');
+      spr = spauth.getAuth(listWebURL, {
+        username: listUser,
+        password: listPass,
+        domain: listDomain,
+        relyingParty: listParty,
+        adfsUrl: listADFS
+    })
+      
+    await getIncomingProcessTimeNotTrue()
+      .then(async cursor => {
+          var results = await cursor.toArray()
+          console.log(results.length)
+          for (const data of results){
+            clean(data)
+            await saveProcessTimeToSP(data)
+                .then(function(saved){
+                  // save values to mongo db
+                  if (saved) {
+                    try {
+                      updateProcessTimeToTrue("ProviderIntake",data._id);
+                    }
+                    catch (error) {
+                      console.log(error);
+                    }
+                  }
+                  else{
+                    console.log("Not time yet");
+                  }
+                })
+                .catch(function(e){
+                  console.log("error")
+                  console.log(e)
+                })
+          }
+      })
     /*
     await getProviderIntakeNotReporting()
     .then(async cursor => {
