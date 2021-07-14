@@ -217,7 +217,7 @@ cron.schedule('*/1 * * * *', async function() {
     await getProviderIntakeNotSP()
     .then(async cursor => {
         var results = await cursor.toArray()
-        //console.log(results.length)
+        console.log(results.length)
         for (const data of results){
           clean(data)
           await saveListProviderIntake(data)
@@ -344,7 +344,7 @@ async function saveProcessTimeToSP(values) {
     await getIncomingProcessTimeNotTrue()
       .then(async cursor => {
           var results = await cursor.toArray()
-          //console.log(results.length)
+          console.log(results.length)
           for (const data of results){
             clean(data)
             await saveProcessTimeToSP(data)
