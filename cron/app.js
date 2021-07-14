@@ -100,13 +100,14 @@ async function saveListProviderIntake(values) {
     }).then(async response => {
       WorkBCDuplicate = await WorkBCCheck(values.workBCCaseNumber)
       duplicateChecks = await duplicateCheck(values.compareField);
-      
-      if(duplicateChecks.length < 4){
-        duplicates = duplicateChecks.length;
-      }
-      duplicateChecks = duplicateChecks.slice(1,duplicates)
-      for (let i = 0; i <duplicates-1; i++){
-       DuplicateString += duplicateChecks[i]._id + "\n";
+      if(duplicateChecks != undefined){
+        if(duplicateChecks.length < 4){
+          duplicates = duplicateChecks.length;
+        }
+        duplicateChecks = duplicateChecks.slice(1,duplicates)
+        for (let i = 0; i <duplicates-1; i++){
+        DuplicateString += duplicateChecks[i]._id + "\n";
+        }
       }
       var digest = response.d.GetContextWebInformation.FormDigestValue
       return digest
@@ -216,7 +217,7 @@ cron.schedule('*/1 * * * *', async function() {
     await getProviderIntakeNotSP()
     .then(async cursor => {
         var results = await cursor.toArray()
-        console.log(results.length)
+        //console.log(results.length)
         for (const data of results){
           clean(data)
           await saveListProviderIntake(data)
@@ -343,7 +344,7 @@ async function saveProcessTimeToSP(values) {
     await getIncomingProcessTimeNotTrue()
       .then(async cursor => {
           var results = await cursor.toArray()
-          console.log(results.length)
+          //console.log(results.length)
           for (const data of results){
             clean(data)
             await saveProcessTimeToSP(data)
