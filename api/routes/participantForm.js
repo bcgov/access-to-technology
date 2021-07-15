@@ -50,7 +50,7 @@ router.get('/', csrfProtection, (req, res) => {
                 `Application ID: ${values._id}`,
                 `Client Full Name:  ${values.clientName} ${values.clientLastName}`,
                 `<p>Click below to complete an A2T application for the individual identified above:</p>`,
-                `<a href="https://access-to-technology-dev.apps.silver.devops.gov.bc.ca/providerIntake/${values._id}/${values._token}" style="padding: 8px 12px; bgcolor: #ffffff; background-color: #ffffff; border: 2px solid #294266; border-radius: 2px; font-family: Helvetica, Arial, sans-serif; font-size: 14px; color: #294266 ! important; text-decoration: none; font-weight: bold; display: inline-block;" >Application Form</a>`,
+                `<a href="https://access-to-technology.es.workbc.ca/providerIntake/${values._id}/${values._token}" style="padding: 8px 12px; bgcolor: #ffffff; background-color: #ffffff; border: 2px solid #294266; border-radius: 2px; font-family: Helvetica, Arial, sans-serif; font-size: 14px; color: #294266 ! important; text-decoration: none; font-weight: bold; display: inline-block;" >Application Form</a>`,
   
               ],)
               
