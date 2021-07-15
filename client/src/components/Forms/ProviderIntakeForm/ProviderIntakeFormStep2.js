@@ -49,7 +49,7 @@ class ProviderIntakeStep2 extends Component {
         return (
 
             <div>
-                <p>If assistance is required in completing this application please refer to the <a href="https://www.workbc.ca/Employment-Services/WorkBC-Centres/Find-Your-WorkBC-Centre.aspx" target="_blank" rel="noopener noreferrer">A2T Service Provider Guide</a>.</p>
+                <p>If assistance is required in completing this application please refer to the <a href="https://sdpr.sp.gov.bc.ca/sites/Workbcextranet/Resources/Access%20to%20Technology%20A2T%20Resources/A2T%20Service%20Provider%20Guide%20.pdf" target="_blank" rel="noopener noreferrer">A2T Service Provider Guide</a>.</p>
                 <div className="form-group">
                     <h2 id="forms">Client Information</h2>
                 </div>
