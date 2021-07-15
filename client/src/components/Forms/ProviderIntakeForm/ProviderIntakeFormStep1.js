@@ -492,7 +492,7 @@ class FormStep1 extends Component {
 
             <div>
                 <p>
-                If assistance is required in completing this application please refer to the <a href="https://sdpr.sp.gov.bc.ca/sites/Workbcextranet/Resources/Access%20to%20Technology%20A2T%20Resources/A2T%20Service%20Provider%20Guide%20.pdf" target="_blank" rel="noopener noreferrer">A2T Service Provider Guide</a>. 
+                If assistance is required in completing this application please refer to the <a href="/PDF/A2TServiceProviderGuide.pdf" target="_blank" rel="noopener noreferrer">A2T Service Provider Guide</a>. 
                 </p>
                {this.getClientConsent}
                
