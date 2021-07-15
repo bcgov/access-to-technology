@@ -123,7 +123,7 @@ async function saveListProviderIntake(values) {
         data = {
                       '__metadata': { 'type': 'SP.FieldUrlValue' },
                       'Description': 'Client Consent',
-                      'Url': 'https://access-to-technology-dev.apps.silver.devops.gov.bc.ca/clientConsent/'+values.applicationId +'/'+values._token
+                      'Url': 'https://access-to-technology.es.workbc.ca/clientConsent/'+values.applicationId +'/'+values._token
                   
       };
       }
