@@ -154,7 +154,7 @@ class FormStep1 extends Component {
                             }}
                         >
                             <option value="">Please select</option>
-                                                    <option value="ACCESS Trades">ACCESS Trades</option>
+                            <option value="ACCESS Trades">ACCESS Trades</option>
                             <option value="ACCESS">ACCESS</option>
                             <option value="BC Federation of Labour">BC Federation of Labour</option>
                             <option value="British Columbia Regional Council of Carpenters">British Columbia Regional Council of Carpenters</option>
@@ -173,9 +173,9 @@ class FormStep1 extends Component {
                             <option value="JHSP">JHSP</option>
                             <option value="Kitselas First Nation">Kitselas First Nation</option>
                             <option value="Kitselas Five Tier System LP">Kitselas Five Tier System LP</option>
-                            <option value="Kopar Administration Ltd">Kopar Administration Ltd</option>
                             <option value="Kopar Administration Ltd.">Kopar Administration Ltd.</option>
                             <option value="Ktunaxa">Ktunaxa</option>
+                            <option value="MCC Mennonite Central Committee">MCC Mennonite Central Committee</option>
                             <option value="NIC (Auto Collision program)">NIC (Auto Collision program)</option>
                             <option value="North Island College (Heavy Mechanical program)">North Island College (Heavy Mechanical program)</option>
                             <option value="Okanagan College (Culinary-Lillooet)">Okanagan College (Culinary-Lillooet)</option>
