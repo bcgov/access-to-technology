@@ -15,6 +15,14 @@ objects:
     lookupPolicy:
       local: false
 - apiVersion: v1
+  kind: Secret
+  type: opaque
+  metadata:
+    name: ${NAME}-list
+  stringData:
+    username: ${OPENSHIFT_NODEJS_LISTUSER}
+    password: ${OPENSHIFT_NODEJS_LISTPASS}
+- apiVersion: v1
   kind: DeploymentConfig
   metadata:
     creationTimestamp: null
@@ -22,9 +30,9 @@ objects:
     labels:
       app.kubernetes.io/component: cron
       app.kubernetes.io/part-of: access-to-technology
-      app.openshift.io/runtime: nginx
+      app.openshift.io/runtime: nodejs
   spec:
-    replicas: 2
+    replicas: 1
     selector:
       deploymentconfig: ${NAME}${SUFFIX}
     strategy:
@@ -57,12 +65,12 @@ objects:
             valueFrom:
               secretKeyRef:
                 key: username
-                name: access-to-technology-api-list
+                name: access-to-technology-cron-list
           - name: OPENSHIFT_NODEJS_LISTPASS
             valueFrom:
               secretKeyRef:
                 key: password
-                name: access-to-technology-api-list
+                name: access-to-technology-cron-list
           - name: OPENSHIFT_NODEJS_LISTDOMAIN
             value: ${OPENSHIFT_NODEJS_LISTDOMAIN}
           - name: OPENSHIFT_NODEJS_LISTPARTY
@@ -124,6 +132,16 @@ parameters:
   name: TAG
   required: true
   value: latest
+- description: List User
+  displayName: List User
+  name: OPENSHIFT_NODEJS_LISTUSER
+  required: true
+  value: ''
+- description: List Pass
+  displayName: List Pass
+  name: OPENSHIFT_NODEJS_LISTPASS
+  required: true
+  value: ''
 - description: List Web URL
   displayName: List Web URL
   name: OPENSHIFT_NODEJS_LISTWEBURL
