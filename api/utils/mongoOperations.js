@@ -156,6 +156,7 @@ module.exports = {
                             //step 3
                             clientEligibility: values.clientEligibility,
                             serviceProviderResponsibility: values.serviceProviderResponsibility,
+                            ProcessTime:false,
                             compareField:[values.clientName.toLowerCase() +" "+values.clientLastName.toLowerCase(), values.clientAddress.toLowerCase(), values.clientEmail.toLowerCase(), values.clientPhone],         
                     
                     }
@@ -204,6 +205,7 @@ module.exports = {
                     serviceProviderResponsibility: values.serviceProviderResponsibility,
                     clientConsent: false,
                     clientConsentDate: new Date(),
+                    ProcessTime:false,
                     compareField:[values.clientName.toLowerCase() +" "+values.clientLastName.toLowerCase(), values.clientAddress.toLowerCase(), values.clientEmail.toLowerCase(), values.clientPhone],         
                     
                 });
