@@ -329,9 +329,9 @@ async function saveProcessTimeToSP(values) {
   }
 }
 
-  cron.schedule('*/1 6 * * *', async function() {
+  cron.schedule('*/30 * * * *', async function() {
     //30 7 * * *
-      console.log('running a task every 6 hours');
+      console.log('running a task every 30 mins');
       //console.log('running a task every 10 seconds');
       spr = spauth.getAuth(listWebURL, {
         username: listUser,
