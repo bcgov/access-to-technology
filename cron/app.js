@@ -251,7 +251,7 @@ cron.schedule('*/1 * * * *', async function() {
   
     // get last date of week
     const lastDayOfWeek = new Date(firstDayOfWeek);
-    lastDayOfWeek.setDate(lastDayOfWeek.getDate() + 28);
+    lastDayOfWeek.setDate(lastDayOfWeek.getDate() + 32);
   
     // if date is equal or within the first and last dates of the week
     return date >= firstDayOfWeek && date <= lastDayOfWeek;
