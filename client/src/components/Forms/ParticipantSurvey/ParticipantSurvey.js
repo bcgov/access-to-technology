@@ -3,11 +3,9 @@ import {withRouter} from 'react-router-dom'
 import {Formik, Form } from 'formik'
 
 import '../../../utils/polyfills'
-import {customAlphabet} from 'nanoid'
 import FormStep1 from './ParticipantSurveyFormStep1'
-import FormStep3 from './ParticipantSurveyFormStep3'
 import FormStep2 from './ParticipantSurveyFormStep2'
-import ProgressTracker from '../shared/ProgressTracker'
+
 import {ParticipantSurveyValidationSchema} from './ParticipantSurveyValidationSchema'
 import { FORM_URL } from '../../../constants/form'
 import { generateAlert } from '../shared/Alert'
@@ -18,23 +16,21 @@ class ParticipantSurvey extends Component {
         super()
         var key = []
         var re = pathToRegexp('/:id/:token', key)
-        var sample = window.location.href.split("/participantSurvey")[1]
+        var sample = window.location.href.split("/ParticipantSurvey")[1]
         var content = re.exec(sample) //[/id/token/, id, token]]
         console.log("content"+ content);
-        const nanoid = customAlphabet('0123456789abcdefghijklmnopqrstuvwxyz',10);
-        const nanoid1 = customAlphabet('0123456789abcdefghijklmnopqrstuvwxyz',25);
         
         this.state={
             _csrf: '',
             currentStep: 1,
-            _id: (content != null) ? content[1] : nanoid(),
-            _token: (content != null) ? content[2] :nanoid1(),
+            _id:  content[1] ,
+            _token: content[2],
             serviceProviderName: '',
             fundingSource: '',
             serviceProviderEmail: '',
             clientName: '',
-            clientLastName:'',
             inDB: (content != null) ? true : false,
+            clientLastName:'',
             hasError: false,
         }
         this._next = this._next.bind(this)
@@ -42,14 +38,14 @@ class ParticipantSurvey extends Component {
     }
 
     componentDidMount() {
-        fetch(FORM_URL.ParticipantSurvey, {
+        fetch(FORM_URL.participantSurvey, {
             credentials: "include"
         })
             .then(res => res.json())
             .then(
                 (result) => {
                     console.log("Getting Token");
-                    console.log(result);
+                    console.log(result.csrfToken);
                    // console.log(result.csrfToken)
                     this.setState({
                         _csrf: result.csrfToken,
@@ -67,13 +63,14 @@ class ParticipantSurvey extends Component {
 
     getContext(values){
         if(values.inDB){
-            fetch(FORM_URL.ParticipantSurvey+"/getData/"+values._id+"/"+values._token,  {
+            fetch(FORM_URL.participantSurvey+"/getData/"+values._id+"/"+values._token,  {
                 credentials: "include",
             }).then(res => res.json())
             .then(
                 (result) => {
                     console.log(result)
                     if(result.err === "Not Found"){
+                        console.log("NOT FOUND")
                         this.setState({
                             hasError: true
                         })
@@ -89,6 +86,7 @@ class ParticipantSurvey extends Component {
                     }
                 },
                 (error) => {
+                    console.log("not found?")
                     console.log(error)
                     this.setState({
                             hasError: true
@@ -108,7 +106,7 @@ class ParticipantSurvey extends Component {
     _next() {
         this.setState( prevState => {
             return {
-                currentStep: prevState.currentStep >= 2 ? 3 : prevState.currentStep + 1
+                currentStep: prevState.currentStep >=  2 ? 3 : prevState.currentStep + 1
             }
         })
     }
@@ -129,7 +127,7 @@ class ParticipantSurvey extends Component {
             <button 
               className="btn btn-secondary" 
               type="button" onClick={this._prev}>
-            Previous
+            Back to Landing Page
             </button>
           )
         }
@@ -138,8 +136,9 @@ class ParticipantSurvey extends Component {
 
     nextButton(touched, errors){
         let currentStep = this.state.currentStep;
-        var nextFlag = true;
-        if(currentStep !== 3){
+        var nextFlag = false;
+        console.log(this.state.currentStep);
+        if(currentStep !== 2){
           return (
             <button 
               className="btn btn-primary float-right" 
@@ -148,7 +147,7 @@ class ParticipantSurvey extends Component {
               disabled={nextFlag}
             
             >
-            Next
+            Proceed To Survey
             </button>        
           )
         }
@@ -161,9 +160,8 @@ class ParticipantSurvey extends Component {
         return (
             <div className="container">
                 <div className="row">
-                    <h2> Access to Technology (A2T) Application </h2>
+                    <h2> Access to Technology (A2T) Client Survey </h2>
                     <div className="col-md-12">
-                        <ProgressTracker currentStep={this.state.currentStep}/>
                         {this.state.hasError && (
                             generateAlert("alert-danger","An error has occurred, please refresh the page. If the error persists, please try again later.")
                         )}
@@ -172,55 +170,21 @@ class ParticipantSurvey extends Component {
                                     _csrf: this.state._csrf,
                                     _id: this.state._id,
                                     _token: this.state._token,
-                                    inDB: this.state.inDB,
-                                    
-                                    consent: this.state.inDB,
-                                    fileName:"",
-                                    fileSize:0,
-                                    fileType:"",
-                                    fileData: null,
-                                          
+                                   
                                     //step 1
+                                    LaptopWasNeeded:"",
+                                    technicalSupportSatisfaction:"",
+                                    FeedbackAndExperienceComments:"",
+                                    certificateProgram:"",
+                                    hoursPerWeek:"",
+                                    postTrainingPlans:"",
                                     serviceProviderName: this.state.serviceProviderName,
-                                    serviceProviderPostal:"",
-                                    serviceProviderContact:"",
-                                    serviceProviderPhone:"",
                                     serviceProviderEmail: this.state.serviceProviderEmail,
                                     serviceProviderConfirmationEmail: this.state.serviceProviderEmail,
                                     fundingSource: this.state.fundingSource,
-                                    trainingProgram:"",
-                                    periodStart1:"",
-                                    periodEnd1:"",
-                                    BCEAorFederalOnReserve:[],
-                                    //step2
-                                    workBCCaseNumber:"",
                                     clientName: this.state.clientName,
                                     clientLastName: this.state.clientLastName,
-                                    clientMiddleName:"",
-                                    clientAddress:"",
-                                    clientAddress2:"",
-                                    clientCity:"",
-                                    clientProvince:"British Columbia",
-                                    clientPostal:"",
-                                    clientPhone:"",
-                                    clientEmail:"",
-                                    clientConfirmationEmail:"",
-                                    altShippingAddress: false,
 
-                                    //step 2:pop-up fields
-                                    recipientName:"",
-                                    /*clientResidesInBC:"",
-                                    clientUnemployed:"",
-                                    registeredInApprovedProgram:"",
-                                    accessToComputerCurrently:"",
-                                    receivingAlternateFunding:"",
-                                    financialNeed:"",*/
-                                    //step 3
-                                    //signatoryTitle:"",
-                                    //signatory1:"",
-                                    clientEligibility:false,
-                                    serviceProviderResponsibility:false,
-                                    //organizationConsent: false,
     
 
 
@@ -228,7 +192,7 @@ class ParticipantSurvey extends Component {
                             enableReinitialize={true}
                             validationSchema={ParticipantSurveyValidationSchema}
                             onSubmit={(values, {resetForm, setErrors, setStatus, setSubmitting }) => {
-                                fetch(FORM_URL.ParticipantSurvey, {
+                                fetch(FORM_URL.participantSurvey, {
                                     method: "POST",
                                     credentials: 'include',
                                     headers: {
@@ -269,26 +233,11 @@ class ParticipantSurvey extends Component {
                         >
                             { props => ( 
                                 <Form>
-                                    {
-                                        this.state.currentStep === 1 && (
-                                            <div className="alert alert-primary alert-dismissible fade show" role="alert">
-                                                    You will need to submit client information in step 2.
-                                                <button type="button" className="close" data-dismiss="alert" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            )
-                                    }
-      
                                     <FormStep1 
                                         currentStep={this.state.currentStep}
                                         {...props}
                                     />
-                                    <FormStep2
-                                        currentStep={this.state.currentStep}
-                                        {...props}
-                                    />
-                                     <FormStep3
+                                     <FormStep2
                                         currentStep={this.state.currentStep}
                                         {...props}
                                     />

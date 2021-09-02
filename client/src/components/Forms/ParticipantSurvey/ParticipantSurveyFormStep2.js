@@ -1,221 +1,318 @@
 import React, { Component } from 'react'
 import { Field } from 'formik'
-import { feedBackClassName, feedBackInvalid} from '../shared/ValidationMessages'
-
+import { feedBackClassName, feedBackInvalid } from '../shared/ValidationMessages'
 
 class FormStep2 extends Component {
-    constructor(){
-        super()
-        this.state = {
-           
-        }
-    }
-    get WorkBCCaseNumber(){
-        if (this.props.values.fundingSource === "SDPR"){
-            return (<div className="form-row">
-             <div className="form-group col-md-4">
-                            <label className="col-form-label control-label" htmlFor="workBCCaseNumber">WorkBC Case Number <span
-                                style={{ color: "red" }}>*</span></label>
-                                <small className="text-muted" id="workBCCaseNumber">1-XXXXXX-XXXXXX or 1-XXXXXXXXXXX</small>
-                            <Field className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "workBCCaseNumber")}`} id="workBCCaseNumber" name="workBCCaseNumber" />
-                            {feedBackInvalid(this.props.errors,this.props.touched,"workBCCaseNumber")}
-            </div>
-        </div>)
-        }
-        else{
-            return(<div></div>)
-        }
-    }
-    get careOfField(){
-        if(this.props.values.altShippingAddress){
-            return(<div>
-                <div className="form-group">
-                    <label className="col-form-label control-label" htmlFor="recipientName">Recipient Name<span
-                        style={{ color: "red" }}>*  </span></label>
 
-                    <Field className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "recipientName")}`} id="recipientName" name="recipientName" />
-                    {feedBackInvalid(this.props.errors,this.props.touched,"recipientName")}
+    get showErrors() {
+        if (this.props.submitCount > 0) {
+            return (
+                <div>
+                    <p>Please correct the following errors:</p>
+                    <ul>
+                        {Object.values(this.props.errors).map((error, i) => (
+                            <li key={i}>{error}</li>
+                        ))}
+                    </ul>
                 </div>
-            </div>)
+            )
+        } else {
+            return null
         }
-        return null;
     }
-   
+
     render() {
         if (this.props.currentStep !== 2) {
             return null
         }
-        //Else return step 1
-        return (
 
+
+        //Else return step 3
+        return (
             <div>
-                <p>If assistance is required in completing this application please refer to the <a href="/PDF/A2TServiceProviderGuide.pdf" target="_blank" rel="noopener noreferrer">A2T Service Provider Guide</a>.</p>
+                <p>Please rate your level of agreement with the following statements:</p>
+                <p>The rating scale used is as follows: 1 = strongly disagree, 2 = disagree, 3 = neither agree nor disagree, 4 = agree, 5 = strongly agree.</p>
+                <hr />
                 <div className="form-group">
-                    <h2 id="forms">Client Information</h2>
-                </div>
-                {this.WorkBCCaseNumber}
-                <div className="form-row">
-                    <div className="form-group col-md-4">
-                        <label className="col-form-label control-label" htmlFor="clientName">Client First Name <span
-                            style={{ color: "red" }}>*</span></label>
-                        <Field className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "clientName")}`} id="clientName" name="clientName" />
-                        {feedBackInvalid(this.props.errors,this.props.touched,"clientName")}
+                <div className="row">
+                        <div className="col-6"></div>
+                        <div className="col d-none d-md-block">
+                            Strongly <br /> Disagree
+                            </div>
+                        <div className="col">
+
+                        </div>
+                        <div className="col">
+
+                        </div>
+                        <div className="col">
+
+                        </div>
+                        <div className="col d-none d-md-block">
+                            Strongly<br /> Agree
+                            </div>
                     </div>
-                    <div className="form-group col-md-4">
-                        <label className="col-form-label control-label" htmlFor="clientLastName">Client Last Name <span
-                            style={{ color: "red" }}>*</span></label>
-                        <Field className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "clientLastName")}`} id="clientLastName" name="clientLastName" />
-                        {feedBackInvalid(this.props.errors,this.props.touched,"clientLastName")}
-                    </div>
-                    <div className="form-group col-md-4">
-                        <label className="col-form-label control-label" htmlFor="clientMiddleName">Client Middle Name(s)</label>
-                        <Field className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "clientMiddleName")}`} id="clientMiddleName" name="clientMiddleName" />
-                        {feedBackInvalid(this.props.errors,this.props.touched,"clientMiddleName")}
-                    </div>
-                    <div className="form-group col-md-4">
-                            <label className="col-form-label control-label" htmlFor="clientPhone">Phone Number <span
-                                style={{ color: "red" }}>*</span></label>
-                            <small className="text-muted" id="clientPhone">  250-555-5555</small>
-                            <Field className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "clientPhone")}`} id="clientPhone" name="clientPhone" />
-                            {feedBackInvalid(this.props.errors,this.props.touched,"clientPhone")}
-                    </div>
-                </div>
-                <div className="form-row">
-                    <div className="form-group col-md-4">
-                        <label className="col-form-label control-label" htmlFor="clientEmail">E-mail Address <span
-                                style={{ color: "red" }}>*</span></label>
-                        <small className="text-muted" id="clientEmail">  someone@example.com</small>
-                        <Field 
-                            className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "clientEmail")}`} 
-                            id="clientEmail" 
-                            name="clientEmail" 
-                            onBlur={e => {
-                                this.props.handleBlur(e)
-                                if(!this.props.errors.clientEmail) {
-                                    this.props.setFieldValue("_bEmailDomain", this.props.values.clientEmail.substring(this.props.values.clientEmail.lastIndexOf("@") + 1))
-                                }
-                            }}
-                        />
-                        {feedBackInvalid(this.props.errors,this.props.touched,"clientEmail")}
-                       
-                    </div>
-                    <div className="form-group col-md-4">
-                        <label className="col-form-label control-label" htmlFor="clientConfirmationEmail">Confirm E-mail Address <span
-                                style={{ color: "red" }}>*</span></label>
-                        <small className="text-muted" id="clientConfirmationEmail">  someone@example.com</small>
-                        <Field 
-                            className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "clientConfirmationEmail")}`} 
-                            id="clientConfirmationEmail" 
-                            name="clientConfirmationEmail" 
-                            onBlur={e => {
-                                this.props.handleBlur(e)
-                                if(!this.props.errors.clientConfirmationEmail) {
-                                    this.props.setFieldValue("_bEmailDomain", this.props.values.clientConfirmationEmail.substring(this.props.values.clientEmail.lastIndexOf("@") + 1))
-                                }
-                            }}
-                        />
-                        {feedBackInvalid(this.props.errors,this.props.touched,"clientConfirmationEmail")}
-                       
-                    </div>
-                
-                </div>
-                <div className="form-group">
-                    <h2 id="forms">Shipping Information</h2>
-                </div>
-                <div className="form-row">
-                    <div className="form-group">
-                        <div className="form-check">
-                            <Field type="checkbox" className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "altShippingAddress")}`} id="altShippingAddress" name="altShippingAddress"/>
-                            {feedBackInvalid(this.props.errors,this.props.touched,"altShippingAddress")}
-                            <label 
-                                className="form-check-label" 
-                                htmlFor="altShippingAddress"
-                            >
-                               The address below is in "care of" another individual other than the client.
-                            </label>
+                    <div className="row">
+                        <div className="col-md-6 col-sm-12 col-xs-12">
+                            <label className="control-label" htmlFor="LaptopWasNeeded">I would have faced significant barriers in completing
+
+the training without the laptop provided through the
+
+Access to Technology (A2T) program.<span style={{ color: "red" }}>*</span></label>
+                        </div>
+                        <div className="form-check col">
+                            <Field
+                                className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "LaptopWasNeeded")}`}
+                                type="radio"
+                                name="LaptopWasNeeded"
+                                value="1"
+                            />
+                            <label className="form-check-label">1</label>
+                        </div>
+                        <div className="form-check col">
+                            <Field
+                                className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "LaptopWasNeeded")}`}
+                                type="radio"
+                                name="LaptopWasNeeded"
+                                value="2"
+                            />
+                            <label className="form-check-label">2</label>
+                        </div>
+                        <div className="form-check col">
+                            <Field
+                                className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "LaptopWasNeeded")}`}
+                                type="radio"
+                                name="LaptopWasNeeded"
+                                value="3"
+                            />
+                            <label className="form-check-label">3</label>
+                        </div>
+                        <div className="form-check col">
+                            <Field
+                                className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "LaptopWasNeeded")}`}
+                                type="radio"
+                                name="LaptopWasNeeded"
+                                value="4"
+                            />
+                            <label className="form-check-label">4</label>
+                        </div>
+                        <div className="form-check col">
+                            <Field
+                                className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "LaptopWasNeeded")}`}
+                                type="radio"
+                                name="LaptopWasNeeded"
+                                value="5"
+                            />
+                            <label className="form-check-label">5</label>
+                            {feedBackInvalid(this.props.errors, this.props.touched, "LaptopWasNeeded")}
                         </div>
                     </div>
                 </div>
-                {this.careOfField}
-                <div className="form-row">
-                    <div className="form-group col-md-12">
-                        <label className="col-form-label control-label" htmlFor="clientAddress">Street Address 1 <span
-                            style={{ color: "red" }}>*  </span></label>
-                        <small className="text-muted" id="clientAddress">  123 Main St.</small>
-                        <Field 
-                            className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "clientAddress")}`} 
-                            id="clientAddress" 
-                            name="clientAddress"
-                            onChange={e => {
-                                this.props.handleChange(e)
-                            }} 
-                        />
-                        {feedBackInvalid(this.props.errors,this.props.touched,"clientAddress")}
+                <div className="form-group">
+                    <div className="row">
+                        <div className="col-md-6 col-sm-12 col-xs-12">
+                            <label className="control-label" htmlFor="technicalSupportSatisfaction">I am satisfied with the level of technical support
+
+received on how to set up and use the laptop under the
+
+Access to Technology (A2T) program.<span style={{ color: "red" }}>*</span></label>
+                        </div>
+                        <div className="form-check col">
+                            <Field
+                                className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "technicalSupportSatisfaction")}`}
+                                type="radio"
+                                name="technicalSupportSatisfaction"
+                                value="1"
+                            />
+                            <label className="form-check-label">1</label>
+                        </div>
+                        <div className="form-check col">
+                            <Field
+                                className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "technicalSupportSatisfaction")}`}
+                                type="radio"
+                                name="technicalSupportSatisfaction"
+                                value="2"
+                            />
+                            <label className="form-check-label">2</label>
+                        </div>
+                        <div className="form-check col">
+                            <Field
+                                className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "technicalSupportSatisfaction")}`}
+                                type="radio"
+                                name="technicalSupportSatisfaction"
+                                value="3"
+                            />
+                            <label className="form-check-label">3</label>
+                        </div>
+                        <div className="form-check col">
+                            <Field
+                                className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "technicalSupportSatisfaction")}`}
+                                type="radio"
+                                name="technicalSupportSatisfaction"
+                                value="4"
+                            />
+                            <label className="form-check-label">4</label>
+                        </div>
+                        <div className="form-check col">
+                            <Field
+                                className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "technicalSupportSatisfaction")}`}
+                                type="radio"
+                                name="technicalSupportSatisfaction"
+                                value="5"
+                            />
+                            <label className="form-check-label">5</label>
+                            {feedBackInvalid(this.props.errors, this.props.touched, "technicalSupportSatisfaction")}
+                        </div>
                     </div>
                 </div>
                 <div className="form-row">
-                    <div className="form-group col-md-12">
-                        <label className="col-form-label control-label" htmlFor="clientAddress2">Street Address 2 </label>
-                        <small className="text-muted" id="clientAddress2">   Apartment 207</small>
-                        <Field 
-                            className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "clientAddress2")}`} 
-                            id="clientAddress2" 
-                            name="clientAddress2"
-                            onChange={e => {
-                                this.props.handleChange(e)
-                            }} 
-                        />
-                        {feedBackInvalid(this.props.errors,this.props.touched,"clientAddress2")}
-                    </div>
-                </div>
-                <div className="form-row">
-                    <div className="form-group col-md-4">
-                        <label className="col-form-label control-label" htmlFor="clientCity">City / Town <span
-                            style={{ color: "red" }}>*</span></label>
-                        <Field 
-                            className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "clientCity")}`} 
-                            id="clientCity" 
-                            name="clientCity"
-                            onChange={e => {
-                                this.props.handleChange(e)
-                            }} 
-                        />
-                        {feedBackInvalid(this.props.errors,this.props.touched,"clientCity")}
-                    </div>
-                    <div className="form-group col-md-4">
-                        <label className="col-form-label control-label" htmlFor="clientProvince">Province <span
-                            style={{ color: "red" }}>*</span></label>
-                        <Field
-                            as="select"
-                            className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "clientProvince")}`}
-                            id="clientProvince" 
-                            name="clientProvince"
-                            onChange={e => {
-                                this.props.handleChange(e)
-                            }} 
-                        >
-                            <option value="BC">British Columbia</option>
-                        </Field>
-                        {feedBackInvalid(this.props.errors,this.props.touched,"clientProvince")}
-                    </div>
-                    <div className="form-group col-md-4">
-                        <label className="col-form-label control-label" htmlFor="clientPostal">Postal Code <span
-                            style={{ color: "red" }}>*  </span></label>
-                        <small className="text-muted" id="clientPostal">  V0R2V5</small>
-                        <Field 
-                            className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "clientPostal")}`} 
-                            id="clientPostal" 
-                            name="clientPostal"
-                            onChange={e => {
-                                this.props.handleChange(e)
-                            }}  
-                        />
-                        {feedBackInvalid(this.props.errors,this.props.touched,"clientPostal")}
-                    </div>
-                </div>
+            <div className="form-group col-md-6">
+                <label className="col-form-label control-label" htmlFor="hoursPerWeek">Approximately how many hours per week did you
+
+use the laptop for your training? </label>
+                 <Field
+                        as="select"
+                        className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "hoursPerWeek")}`}
+                        id="hoursPerWeek" 
+                        name="hoursPerWeek" 
+                        onChange={e => {
+                            this.props.handleChange(e)
+                            
+                        }}
+                    >
+                        <option value="">Please select</option>
+                        <option value="0-5">0-5</option>
+                        <option value="6-10">6-10</option>
+                        <option value="11-15">11-15</option>
+                        <option value="16-20">16-20</option>
+                        <option value="21-25">21-25</option>
+                        <option value="26-30">26-30</option>
+                        <option value="31-35">31-35</option>
+                        <option value="36-40">36-40</option>
+                        <option value="40+">40+</option>
+                       
+
+                    </Field>
+                    {feedBackInvalid(this.props.errors,this.props.touched,"hoursPerWeek")}
             </div>
+        </div>
+                <div className="form-group">
+                    <label className="col-form-label control-label" htmlFor="certificateProgram">What certificate or qualification did you obtain
+
+through your skills training program?
+                </label>
+                    <small className="text-muted" id="certificateProgram"> (200 characters max.)</small>
+                    <Field
+                        as="textarea"
+                        className="form-control"
+                        id="certificateProgram"
+                        name="certificateProgram"
+                        rows="2"
+                        maxLength="200"
+                    />
+                    <small>{this.props.values.certificateProgram.length}/200</small>
+                </div>
+                <div className="form-group">
+                    {this.showErrors}
+                </div>
+                <div className="form-group">
+                        <label className="col-form-label control-label" htmlFor="postTrainingPlans">What do you plan to do after you have completed
+
+your training? 
+                        </label>
+                        <div className="form-check">
+                            <Field
+                                className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touch, "postTrainingPlans")}`}
+                                type="radio"
+                                name="postTrainingPlans"
+                                value="Look for a job"
+                            />
+                            <label className="form-check-label" htmlFor="postTrainingPlansLookForAJob">Look for a job</label>
+                        </div>
+                        <div className="form-check">
+                            <Field
+                                className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touch, "postTrainingPlans")}`}
+                                type="radio"
+                                name="postTrainingPlans"
+                                value="Start my own business"
+                            />
+                            <label className="form-check-label" htmlFor="postTrainingPlansStartMyOwnBusiness">Start my own business</label>
+                        </div>
+                        <div className="form-check">
+                            <Field
+                                className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touch, "postTrainingPlans")}`}
+                                type="radio"
+                                name="postTrainingPlans"
+                                value="Enroll in more training and education"
+                            />
+                            <label className="form-check-label" htmlFor="postTrainingPlansEnrollInMoreTrainingAndEducation">Enroll in more training and education</label>
+                        </div>
+                        <div className="form-check">
+                            <Field
+                                className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touch, "postTrainingPlans")}`}
+                                type="radio"
+                                name="postTrainingPlans"
+                                value="Volunteering"
+                            />
+                            <label className="form-check-label" htmlFor="postTrainingPlansVolunteering">Volunteering</label>
+                        </div>
+    
+                        <div className="form-check">
+                            <Field
+                                className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touch, "postTrainingPlans")}`}
+                                type="radio"
+                                name="postTrainingPlans"
+                                value="Other (not listed above)"
+                            />
+                            <label className="form-check-label" htmlFor="postTrainingPlansOther">Other (not listed above)</label>
+                            {feedBackInvalid(this.props.errors, this.props.touch, "postTrainingPlans")}
+                        </div>
+                    </div>
+                <div className="form-group">
+                    <label className="col-form-label control-label" htmlFor="FeedbackAndExperienceComments">How can we make the experience better for you?
+
+Please feel free to include any comments, suggestions,
+
+or feedback about the program. (optional)
+                </label>
+                    <small className="text-muted" id="FeedbackAndExperienceComments"> (1000 characters max.)</small>
+                    <Field
+                        as="textarea"
+                        className="form-control"
+                        id="FeedbackAndExperienceComments"
+                        name="FeedbackAndExperienceComments"
+                        rows="4"
+                        maxLength="1000"
+                    />
+                    <small>{this.props.values.FeedbackAndExperienceComments.length}/1000</small>
+                </div>
+                <div className="form-group">
+                    {this.showErrors}
+                </div>
+
+                <button
+                    className="btn btn-success btn-block"
+                    type="submit"
+                    style={{ marginBottom: "2rem" }}
+                    disabled={this.props.isSubmitting || this.props.hasError}
+                >
+                    {
+                    this.props.isSubmitting ?
+                        <div>
+                            <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                              Submitting...
+                        </div>
+                        :
+                        "Submit"
+
+                    }                      
+                
+                
+                </button>
+            </div>
+
         )
     }
-
 }
+
 export default FormStep2

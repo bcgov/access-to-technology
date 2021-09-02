@@ -110,7 +110,7 @@ class CourseCompletionSurvey extends Component {
     fetchNotice(values){
         if(values.minimallyCompleted === "no"){
             return(<div className="form-group">
-                        <label>Note: Please speak to {this.state.clientName} about
+                        <label><b>Note:</b> Please speak to {this.state.clientName} about
                             returning the laptop. A return shipping label is in the
                             information shipped with the laptop. If the shipping
                             label has been lost, refer to the A2T Service Provider
@@ -197,9 +197,6 @@ class CourseCompletionSurvey extends Component {
                         </div>
                         <div className="form-row">
                             <p className="card-text">Client Last Name:{this.state.clientLastName}</p>
-                        </div>
-                        <div className="form-row">
-                            <p className="card-text">Client Middle Name:{this.state.clientMiddleName}</p>
                         </div>
                     </div>
                     <div className="form-group">
