@@ -21,7 +21,12 @@ class FormStep1 extends Component {
 
     get getClientConsent(){
         if(this.props.values.inDB){
-            return(<div><div className="form-group">
+            return(<div>
+        <div className="form-group">
+            <h4 id="forms">This Application is for the client listed below</h4>
+            <p>Client Name: {this.props.values.clientName} {this.props.values.clientLastName}</p>
+        </div>               
+        <div className="form-group">
             <h2 id="forms">Service Provider Information</h2>
         </div>                 
         <div className="form-row">
