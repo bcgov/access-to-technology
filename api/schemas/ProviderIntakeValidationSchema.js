@@ -39,7 +39,7 @@ var ProviderIntakeValidationSchema = yup.object().shape({
         is: 'SDPR',
         then: yup.string()
         .test('Is-valid-case-Number','Invalid case number, please enter in the format: 1-XXXXXX-XXXXXX or 1-XXXXXXXXXXX',
-        value => (value +"").match(/^\d{1}-\d{6}-\d{6}$/gi) || (value +"").match(/^\d{1}-\d{11}$/gi) || (value +"").match(/^\d{1}-\d*$/gi))
+        value => (value +"").match(/^\d{1}-\d{6}-\d{6}$/gi) || (value +"").match(/^\d{1}-\d{11}$/gi) || (value +"").match(/^\d{1}-\d*$/gi) || (value +"").match(/^\d{1}-\d*-\d*$/gi))
         .required("Please use the WorkBC ES case number.  All eligible WorkBC clients must be in an approved WorkBC Service, with an ICM Case number"),
         otherwise: yup.string()}),
     clientName: yup.string()
