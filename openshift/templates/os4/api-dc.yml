@@ -31,6 +31,10 @@ objects:
     annotations:
       description: Defines how to deploy the database
     name: ${DATABASE_SERVICE_NAME}
+    labels:
+      app.kubernetes.io/component: db
+      app.kubernetes.io/part-of: access-to-technology
+      app.openshift.io/runtime: mongodb
   spec:
     replicas: 1
     strategy:
@@ -110,14 +114,6 @@ objects:
     selector:
         name: ${DATABASE_SERVICE_NAME}
 - apiVersion: v1
-  kind: Secret
-  type: opaque
-  metadata:
-    name: ${NAME}-list
-  stringData:
-    username: ${OPENSHIFT_NODEJS_LISTUSER}
-    password: ${OPENSHIFT_NODEJS_LISTPASS}
-- apiVersion: v1
   kind: ImageStream
   metadata:
     creationTimestamp: null
@@ -130,6 +126,10 @@ objects:
   metadata:
     creationTimestamp: null
     name: ${NAME}${SUFFIX}
+    labels:
+      app.kubernetes.io/component: api
+      app.kubernetes.io/part-of: access-to-technology
+      app.openshift.io/runtime: nodejs
   spec:
     replicas: 2
     selector:
@@ -160,46 +160,8 @@ objects:
           env:
           - name: OPENSHIFT_NODEJS_ORIGIN_URL
             value: ${OPENSHIFT_NODEJS_ORIGIN_URL}
-          - name: OPENSHIFT_NODEJS_CONFIRMATIONONE
-            value: ${OPENSHIFT_NODEJS_CONFIRMATIONONE}
-          - name: OPENSHIFT_NODEJS_CONFIRMATIONTWO
-            value: ${OPENSHIFT_NODEJS_CONFIRMATIONTWO}
-          - name: OPENSHIFT_NODEJS_CONFIRMATIONBCC
-            value: ${OPENSHIFT_NODEJS_CONFIRMATIONBCC}
-          - name: OPENSHIFT_NODEJS_PARTICIPANTEMAIL
-            value: ${OPENSHIFT_NODEJS_PARTICIPANTEMAIL}
-          - name: OPENSHIFT_NODEJS_LISTEMAIL
-            value: ${OPENSHIFT_NODEJS_LISTEMAIL}
-          - name: OPENSHIFT_NODEJS_NOTIFYEMAIL
-            value: ${OPENSHIFT_NODEJS_NOTIFYEMAIL}
           - name: OPENSHIFT_NODEJS_CLIENTURL
             value: ${OPENSHIFT_NODEJS_CLIENTURL}
-          - name: OPENSHIFT_NODEJS_CLAIM_CONFIRMATION_EMAIL
-            value: ${OPENSHIFT_NODEJS_CLAIM_CONFIRMATION_EMAIL}
-          - name: OPENSHIFT_NODEJS_CLAIM_CONFIRMATION_BCC
-            value: ${OPENSHIFT_NODEJS_CLAIM_CONFIRMATION_BCC}
-          - name: OPENSHIFT_NODEJS_CLAIM_NOTIFYEMAIL
-            value: ${OPENSHIFT_NODEJS_CLAIM_NOTIFYEMAIL}
-          - name: OPENSHIFT_NODEJS_CLAIM_LISTEMAIL
-            value: ${OPENSHIFT_NODEJS_CLAIM_LISTEMAIL}
-          - name: OPENSHIFT_NODEJS_LISTWEBURL
-            value: ${OPENSHIFT_NODEJS_LISTWEBURL}
-          - name: OPENSHIFT_NODEJS_LISTUSER
-            valueFrom:
-              secretKeyRef:
-                key: username
-                name: ${NAME}-list
-          - name: OPENSHIFT_NODEJS_LISTPASS
-            valueFrom:
-              secretKeyRef:
-                key: password
-                name: ${NAME}-list
-          - name: OPENSHIFT_NODEJS_LISTDOMAIN
-            value: ${OPENSHIFT_NODEJS_LISTDOMAIN}
-          - name: OPENSHIFT_NODEJS_LISTPARTY
-            value: ${OPENSHIFT_NODEJS_LISTPARTY}
-          - name: OPENSHIFT_NODEJS_LISTADFS
-            value: ${OPENSHIFT_NODEJS_LISTADFS}
           - name: MONGO_USERNAME
             value: ${DATABASE_USER}
           - name: MONGO_PASSWORD
@@ -211,8 +173,6 @@ objects:
             value: ${DATABASE_SERVICE_NAME}
           - name: MONGO_DB_NAME
             value: ${DATABASE_NAME}
-          - name: CAEMAILS
-            value: ${CAEMAILS}
     test: false
     triggers:
     - type: ConfigChange
@@ -282,26 +242,6 @@ parameters:
   name: TAG
   required: true
   value: latest
-- description: Email one to send confirmation emails (test)
-  displayName: Confirmation email one
-  name: OPENSHIFT_NODEJS_CONFIRMATIONONE
-  required: false
-  value: ''
-- description: BCC email to send confirmation emails
-  displayName: Confirmation BCC email
-  name: OPENSHIFT_NODEJS_CONFIRMATIONBCC
-  required: false
-  value: ''
-- description: List email to send notification emails
-  displayName: List email
-  name: OPENSHIFT_NODEJS_LISTEMAIL
-  required: false
-  value: ''
-- description: Notify email to send notification emails
-  displayName: Notify email
-  name: OPENSHIFT_NODEJS_NOTIFYEMAIL
-  required: false
-  value: ''
 - description: The origin URL
   displayName: access-to-technology api
   name: OPENSHIFT_NODEJS_ORIGIN_URL
@@ -311,61 +251,6 @@ parameters:
   displayName: Client URL
   name: OPENSHIFT_NODEJS_CLIENTURL
   required: false
-  value: ''
-- description: Claim confirmation email (test)
-  displayName: Claim confirmation email
-  name: OPENSHIFT_NODEJS_CLAIM_CONFIRMATION_EMAIL
-  required: false
-  value: ''
-- description: Claim confirmation BCC email (test)
-  displayName: Claim confirmation BCC email
-  name: OPENSHIFT_NODEJS_CLAIM_CONFIRMATION_BCC
-  required: false
-  value: ''
-- description: Claim Notify email (test)
-  displayName: Claim Notify email
-  name: OPENSHIFT_NODEJS_CLAIM_NOTIFYEMAIL
-  required: false
-  value: ''
-- description: Claim List email
-  displayName: Claim List email
-  name: OPENSHIFT_NODEJS_CLAIM_LISTEMAIL
-  required: false
-  value: ''
-- description: List Web URL
-  displayName: List Web URL
-  name: OPENSHIFT_NODEJS_LISTWEBURL
-  required: true
-  value: ''
-- description: List User
-  displayName: List User
-  name: OPENSHIFT_NODEJS_LISTUSER
-  required: true
-  value: ''
-- description: List Pass
-  displayName: List Pass
-  name: OPENSHIFT_NODEJS_LISTPASS
-  required: true
-  value: ''
-- description: List Domain
-  displayName: List Domain
-  name: OPENSHIFT_NODEJS_LISTDOMAIN
-  required: true
-  value: ''
-- description: List Party
-  displayName: List Party
-  name: OPENSHIFT_NODEJS_LISTPARTY
-  required: true
-  value: ''
-- description: List ADFS
-  displayName: List ADFS
-  name: OPENSHIFT_NODEJS_LISTADFS
-  required: true
-  value: ''
-- description: CA emails to use start with none, separated by space
-  displayName: CA email
-  name: CAEMAILS
-  required: true
   value: ''
 - description: The namespace of the OS project containing the imagestreams
   displayName: Image Namespace
