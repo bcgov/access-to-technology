@@ -40,6 +40,40 @@ class ProviderIntakeStep2 extends Component {
         }
         return null;
     }
+
+    get clientInformation(){
+        if(this.props.values.inDB){
+            return(
+                <div className="form-row"> <div className="form-group col-md-4">
+                <label className="col-form-label control-label"  htmlFor="clientName">Client First Name <span
+                    style={{ color: "red" }}>*</span></label>
+                <Field className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "clientName")}`} readOnly value={this.props.values.clientName} id="clientName" name="clientName" />
+                {feedBackInvalid(this.props.errors,this.props.touched,"clientName")}
+            </div>
+            <div className="form-group col-md-4">
+                <label className="col-form-label control-label" htmlFor="clientLastName">Client Last Name <span
+                    style={{ color: "red" }}>*</span></label>
+                <Field className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "clientLastName")}`} readOnly value={this.props.values.clientLastName} id="clientLastName" name="clientLastName" />
+                {feedBackInvalid(this.props.errors,this.props.touched,"clientLastName")}
+            </div></div>
+            )
+        }else{
+            return(
+                <div className="form-row"> <div className="form-group col-md-4">
+            <label className="col-form-label control-label" htmlFor="clientName">Client First Name <span
+                style={{ color: "red" }}>*</span></label>
+            <Field className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "clientName")}`} id="clientName" name="clientName" />
+            {feedBackInvalid(this.props.errors,this.props.touched,"clientName")}
+        </div>
+        <div className="form-group col-md-4">
+            <label className="col-form-label control-label" htmlFor="clientLastName">Client Last Name <span
+                style={{ color: "red" }}>*</span></label>
+            <Field className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "clientLastName")}`} id="clientLastName" name="clientLastName" />
+            {feedBackInvalid(this.props.errors,this.props.touched,"clientLastName")}
+        </div></div>
+        )
+        }
+    }
    
     render() {
         if (this.props.currentStep !== 2) {
@@ -54,19 +88,9 @@ class ProviderIntakeStep2 extends Component {
                     <h2 id="forms">Client Information</h2>
                 </div>
                 {this.WorkBCCaseNumber}
-                <div className="form-row">
-                    <div className="form-group col-md-4">
-                        <label className="col-form-label control-label" htmlFor="clientName">Client First Name <span
-                            style={{ color: "red" }}>*</span></label>
-                        <Field className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "clientName")}`} id="clientName" name="clientName" />
-                        {feedBackInvalid(this.props.errors,this.props.touched,"clientName")}
-                    </div>
-                    <div className="form-group col-md-4">
-                        <label className="col-form-label control-label" htmlFor="clientLastName">Client Last Name <span
-                            style={{ color: "red" }}>*</span></label>
-                        <Field className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "clientLastName")}`} id="clientLastName" name="clientLastName" />
-                        {feedBackInvalid(this.props.errors,this.props.touched,"clientLastName")}
-                    </div>
+                
+                {this.clientInformation}
+                <div className="form-row">    
                     <div className="form-group col-md-4">
                         <label className="col-form-label control-label" htmlFor="clientMiddleName">Client Middle Name(s)</label>
                         <Field className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "clientMiddleName")}`} id="clientMiddleName" name="clientMiddleName" />
