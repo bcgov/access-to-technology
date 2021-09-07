@@ -653,7 +653,7 @@ class FormStep1 extends Component {
                             minDate={new Date(new Date().getTime() + 24 * 60 * 60 * 1000)}
                             maxDate={new Date(2023,2,2)}
                         />
-                        <small className="text-muted" id="periodStart1"> Note: Training program starts dates before August 15, 2021 do not qualify.</small>
+                        <small className="text-muted" id="periodStart1"> Note: Application for a laptop must be for a future training program start date as Clients are not eligible to receive a laptop when their training program has already started.</small>
                         {feedBackInvalid(this.props.errors, this.props.touched, "periodStart1")}
                     </div>
                     <div className="form-group col-md-6">
