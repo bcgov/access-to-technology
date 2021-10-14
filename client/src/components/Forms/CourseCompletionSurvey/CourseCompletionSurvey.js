@@ -91,8 +91,8 @@ class CourseCompletionSurvey extends Component {
                 console.log(result)
                 var clientData = this.state.results;
                 this.setState({
-                    clientName:clientData.clientName,
-                    clientLastName:clientData.clientLastName,
+                    clientName: clientData.clientName,
+                    clientLastName: clientData.clientLastName,
                     resubmit: 'courseCompletionUpdateNeeded' in clientData,
                 })
             }
@@ -196,10 +196,10 @@ class CourseCompletionSurvey extends Component {
                     <div className="form-group">
                         <h3 id="forms" className="d-print-none">Application ID: {this.state._id}</h3>
                         <div className="form-row">
-                            <p className="card-text">Client First Name:{this.state.clientName}</p>
+                            <p className="card-text">Client First Name: {this.state.clientName}</p>
                         </div>
                         <div className="form-row">
-                            <p className="card-text">Client Last Name:{this.state.clientLastName}</p>
+                            <p className="card-text">Client Last Name: {this.state.clientLastName}</p>
                         </div>
                     </div>
                     <div className="form-group">

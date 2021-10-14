@@ -554,5 +554,6 @@ cron.schedule('*/1 * * * *', async function() {
         }
     })
 });
+// need cron to run to check dates of course completion 1 month 3 month -> send emails accordingly
 
 app.listen(5000);

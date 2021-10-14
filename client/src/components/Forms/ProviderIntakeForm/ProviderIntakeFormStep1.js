@@ -21,7 +21,12 @@ class FormStep1 extends Component {
 
     get getClientConsent(){
         if(this.props.values.inDB){
-            return(<div><div className="form-group">
+            return(<div>
+        <div className="form-group">
+            <h4 id="forms">This Application is for the client listed below</h4>
+            <p>Client Name: {this.props.values.clientName} {this.props.values.clientLastName}</p>
+        </div>               
+        <div className="form-group">
             <h2 id="forms">Service Provider Information</h2>
         </div>                 
         <div className="form-row">
@@ -645,10 +650,10 @@ class FormStep1 extends Component {
                         <DatePickerField
                             name="periodStart1"
                             className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "periodStart1")}`}
-                            minDate={new Date(2021,7,15)}
+                            minDate={new Date(new Date().getTime() + 24 * 60 * 60 * 1000)}
                             maxDate={new Date(2023,2,2)}
                         />
-                        <small className="text-muted" id="periodStart1"> Note: Training program starts dates before August 15, 2021 do not qualify.</small>
+                        <small className="text-muted" id="periodStart1"> Note: Application for a laptop must be for a future training program start date as Clients are not eligible to receive a laptop when their training program has already started.</small>
                         {feedBackInvalid(this.props.errors, this.props.touched, "periodStart1")}
                     </div>
                     <div className="form-group col-md-6">

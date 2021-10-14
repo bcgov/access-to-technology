@@ -2,7 +2,6 @@ export const FORM_URL = {
     ProviderIntakeForm: '',
     sendForm:'',
     needEmployeeForm: '',
-    serviceProviderSurvey: '',
 }
 
 if (process.env.NODE_ENV === 'development'){
@@ -20,9 +19,10 @@ if (process.env.NODE_ENV === 'development'){
     FORM_URL.ProviderIntakeForm = '/api/providerForm'
     FORM_URL.clientForm = '/api/participantForm'  
     FORM_URL.sendForm = '/api/sendConsentForm'
-    FORM_URL.surveyParticipant = '/api/surveyParticipant' 
+    FORM_URL.surveyParticipant = '/api/surveyParticipant'
     FORM_URL.courseCompletionSurvey = '/api/courseCompletionSurvey'
     FORM_URL.employmentSurvey = '/api/employmentSurvey'
     FORM_URL.participantSurvey = '/api/participantSurvey'
+
     
 }
