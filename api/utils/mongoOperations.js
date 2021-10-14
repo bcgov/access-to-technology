@@ -3,7 +3,9 @@ const MongoClient = require('mongodb').MongoClient;
 const Binary = require('mongodb').Binary;
 var fs = require('fs');
 const strings = require("./strings");
-
+process.env.MONGO_USERNAME="userWCK";
+process.env.MONGO_PASSWORD="p84b8jSlEY3KHbSs";
+process.env.MONGO_DB_NAME="access-to-technology"
 let uri;
 if (!process.env.MONGO_USERNAME  || !process.env.MONGO_PASSWORD){
     uri = `mongodb://${process.env.MONGO_CONNECTION_URI || 'localhost'}/${process.env.MONGO_DB_NAME || 'test'}`;
@@ -105,6 +107,34 @@ module.exports = {
         }).then(async db => {
             // get our values from db 
             return db.collection("ProviderIntake").find({applicationId: values.id, _token: values.token}).toArray();
+        });
+    },
+
+    saveCourseCompletionSurvey: async function (values) {
+        return await connection
+        .then(mClient => {
+            // get a handle on the db
+            return mClient.db();
+        }).then(async db => {
+            // add our values to db (they are always new)
+            return db.collection("ProviderIntake").updateOne(
+                {
+                    applicationId: values._id,
+                    _token: values._token,
+                },
+                { 
+                    $set : {
+                        completedTraining: values.completedTraining,
+                        minimallyCompleted: values.minimallyCompleted,
+                        courseCompletionUpdateNeeded:true,
+                    }
+                },
+                {
+                    upsert: false
+                }
+
+            )
+                 
         });
     },
 

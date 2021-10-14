@@ -25,9 +25,9 @@ class CourseCompletionSurvey extends Component {
             clientName:'',
             clientLastName:'',
             clientEmail:'',
-            fundingSource:'',
             serviceProviderName:'',
             serviceProviderEmail:'',
+            resubmit:'false',
             clientSignature:'',
             clientConsent:false,
             clientConsentDate: new Date(),
@@ -51,13 +51,13 @@ class CourseCompletionSurvey extends Component {
                     })
                 },
                 (error) => {
-                    console.log(error)
+                    console.log(error);
                     this.setState({
                         hasError: true
                     })
                 }
             )
-        this.getContext(this.state)
+        this.getContext(this.state);
     }
 
     getContext(values){
@@ -73,15 +73,13 @@ class CourseCompletionSurvey extends Component {
                 }else{
                     this.setState({
                         serviceProviderName: result.serviceProvider,
-                        fundingSource: result.fundingSource,
                         serviceProviderEmail: result.serviceProviderEmail,
-                        clientEmail: result.clientEmail,
                         results:result.results,
                     })
                 }
             },
             (error) => {
-                console.log(error)
+                console.log(error);
                 //set to true to enforces
                 this.setState({
                         hasError: false
@@ -95,9 +93,7 @@ class CourseCompletionSurvey extends Component {
                 this.setState({
                     clientName:clientData.clientName,
                     clientLastName:clientData.clientLastName,
-                    clientSignature:clientData.clientSignature,
-                    clientConsent:clientData.clientConsent,
-                    clientConsentDate: clientData.clientConsentDate,
+                    resubmit: 'courseCompletionUpdateNeeded' in clientData,
                 })
             }
             })
@@ -180,6 +176,13 @@ class CourseCompletionSurvey extends Component {
                     <p>Your link may not be active yet, please check back in 5 - 10 minutes </p>
                 </div>
             )
+        } 
+        else if( this.state.resubmit === true){
+            return (
+                <div>
+                    <p>Thank You. Your clients Training Completion survey has already been submitted. </p>
+                </div>
+            )
 
         } 
         else {
@@ -189,7 +192,7 @@ class CourseCompletionSurvey extends Component {
               <Form>
               <h2> Access to Technology (A2T) Client Course Completion Survey </h2>
                 {/* handleApplicationID handles all the pre populated values in future. <button className="btn btn-success d-print-none" onClick={() => window.print()}>Print Confirmation</button><br /><br />*/}
-                
+              
                     <div className="form-group">
                         <h3 id="forms" className="d-print-none">Application ID: {this.state._id}</h3>
                         <div className="form-row">
@@ -264,13 +267,10 @@ class CourseCompletionSurvey extends Component {
                                 _csrf: this.state._csrf,
                                 _id: (typeof this.props.match.params.id !== 'undefined') ? this.props.match.params.id : '',
                                 _token: this.state._token,
-                                clientConsentDate:this.state.clientConsentDate,
-                                clientSignature:this.state.clientSignature,
-                                clientConsent:this.state.clientConsent,
                                 serviceProviderName: this.state.serviceProviderName,
                                 clientName: this.state.clientName,
                                 clientLastName: this.state.clientLastName,
-                                fundingSource: this.state.fundingSource,
+                               
                                 completedTraining:"",
                                 minimallyCompleted:"",
                                 serviceProviderEmail: this.state.serviceProviderEmail,

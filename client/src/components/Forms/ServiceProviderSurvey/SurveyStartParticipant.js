@@ -12,6 +12,9 @@ class SurveyStartParticipant extends Component {
     }
 
     componentDidMount() {
+        console.log(qs.parse(this.props.location.search, { ignoreQueryPrefix: true }).uid || "")
+        console.log(this.props.location.search)
+        console.log(qs.parse(this.props.location.search, { ignoreQueryPrefix: true }).uid )
         let uid = qs.parse(this.props.location.search, { ignoreQueryPrefix: true }).uid || ""
         if (uid === "") {
             this.setState({ invalidLink: true })

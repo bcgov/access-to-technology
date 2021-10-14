@@ -12,7 +12,7 @@ class thankyouCourseCompletion extends Component {
                     <div className="col-md-12">
                         <h1>Thank you for submitting your clients course completion survey!</h1>
                         <h3>Application ID: {this.props.location.state !== undefined && this.props.location.state._id}</h3>
-                        <p>You'll receive another survey in 3 months regarding your clients employment status</p>
+                        <p>You'll receive another survey in 2 months regarding your clients employment status</p>
                     </div>
                 </div>
                 <div className="row">

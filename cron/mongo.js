@@ -63,6 +63,22 @@ module.exports = {
             return doc
         })    
     },
+    getCourseCompletionUpdateNeeded: async function () {
+        return await connection
+        .then(mClient => {
+            // get a handle on the db
+            return mClient.db();
+            //return db
+        })
+        .then(async db => {
+        // add our values to db (they are always new)
+            return db.collection("ProviderIntake").find({courseCompletionUpdateNeeded: true})
+            //console.log(err)
+            //console.log(doc)
+        }).then(async doc =>{
+            return doc
+        })    
+    },
   
     updateSaveIdToSP: async function(collection,_id, appID){
         return await connection
@@ -112,6 +128,36 @@ module.exports = {
                 { 
                     $set : {
                     savedToSP: true
+
+                    }
+                },
+                {
+                    upsert: false
+                }
+
+            )
+                //console.log(err)
+                //console.log(doc)
+        }).then(result =>{
+            return result
+        })     
+    },
+    updateCourseCompletionUpdateToFalse: async function(collection,_id){
+        return await connection
+        .then(mClient => {
+            // get a handle on the db
+            return mClient.db();
+            //return db
+        })
+        .then(async db => {
+        // add our values to db (they are always new)
+            return db.collection(collection).updateOne(
+                {
+                    _id: _id
+                },
+                { 
+                    $set : {
+                    courseCompletionUpdateNeeded: false
 
                     }
                 },
