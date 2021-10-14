@@ -31,6 +31,7 @@ class EmploymentSurvey extends Component {
             clientSignature:'',
             clientConsent:false,
             clientConsentDate: new Date(),
+            resubmit:false,
             results:[],
             hasError: false,
              _token: token1,      
@@ -90,14 +91,11 @@ class EmploymentSurvey extends Component {
         ).then(
             (result) => {
             if (Object.getOwnPropertyNames(this.state.results).length > 8){
-                console.log(result)
                 var clientData = this.state.results;
                 this.setState({
                     clientName:clientData.clientName,
                     clientLastName:clientData.clientLastName,
-                    clientSignature:clientData.clientSignature,
-                    clientConsent:clientData.clientConsent,
-                    clientConsentDate: clientData.clientConsentDate,
+                    resubmit: clientData.hasOwnProperty("employmentUpdateNeeded"),
                 })
             }
             })
@@ -197,6 +195,14 @@ class EmploymentSurvey extends Component {
             )
 
         } 
+        else if( this.state.resubmit === true){
+            return (
+                <div>
+                    <p>Thank You. Your clients Training Completion survey has already been submitted. </p>
+                </div>
+            )
+
+        } 
         else {
            
             return (<div >
@@ -208,13 +214,10 @@ class EmploymentSurvey extends Component {
                     <div className="form-group">
                         <h3 id="forms" className="d-print-none">Application ID: {this.state._id}</h3>
                         <div className="form-row">
-                            <p className="card-text">Client First Name:{this.state.clientName}</p>
+                            <p className="card-text">Client First Name: {this.state.clientName}</p>
                         </div>
                         <div className="form-row">
-                            <p className="card-text">Client Last Name:{this.state.clientLastName}</p>
-                        </div>
-                        <div className="form-row">
-                            <p className="card-text">Client Middle Name:{this.state.clientMiddleName}</p>
+                            <p className="card-text">Client Last Name: {this.state.clientLastName}</p>
                         </div>
                     </div>
                     <div className="form-group">
@@ -292,13 +295,9 @@ class EmploymentSurvey extends Component {
                                 _csrf: this.state._csrf,
                                 _id: (typeof this.props.match.params.id !== 'undefined') ? this.props.match.params.id : '',
                                 _token: this.state._token,
-                                clientConsentDate:this.state.clientConsentDate,
-                                clientSignature:this.state.clientSignature,
-                                clientConsent:this.state.clientConsent,
                                 serviceProviderName: this.state.serviceProviderName,
                                 clientName: this.state.clientName,
                                 clientLastName: this.state.clientLastName,
-                                fundingSource: this.state.fundingSource,
                                 employmentFound:"",
                                 employmentStatus:"",
                                 serviceProviderEmail: this.state.serviceProviderEmail,
@@ -335,7 +334,7 @@ class EmploymentSurvey extends Component {
                                             }
                                             else if (resp.ok) {
                                                 setSubmitting(false);
-                                                this.props.history.push('/thankyouEmployment',values)
+                                                this.props.history.push('/thankyouEmploymentSurvey',values)
                                             }
                                         }
                                     ));

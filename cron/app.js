@@ -3,7 +3,7 @@ const express = require('express')
 const spauth = require('node-sp-auth')
 const request = require('request-promise')
 
-var {getProviderIntakeNotSP, getIncomingProcessTimeNotTrue, updateSaveIdToSP,updateCourseCompletionUpdateToFalse, getCourseCompletionUpdateNeeded, WorkBCCheck, duplicateCheck, updateSavedToSP, updateProcessTimeToTrue} = require('./mongo')
+var {getProviderIntakeNotSP, getIncomingProcessTimeNotTrue, updateSaveIdToSP,updateCourseCompletionUpdateToFalse, updateEmploymentUpdateToFalse, getCourseCompletionUpdateNeeded, getEmploymentUpdateNeeded,  WorkBCCheck, duplicateCheck, updateSavedToSP, updateProcessTimeToTrue} = require('./mongo')
 var clean = require('./clean')
 var listWebURL = process.env.LISTWEBURL || process.env.OPENSHIFT_NODEJS_LISTWEBURL || "https://sdpr.sp.gov.bc.ca/sites/elmsd"
 var listUser = process.env.LISTUSER || process.env.OPENSHIFT_NODEJS_LISTUSER || "elmsdtst"
@@ -517,6 +517,76 @@ async function saveCourseCompletionSurveyToSP(values) {
     return false
   }
 }
+
+async function saveEmploymentSurveyToSP(values) {
+  // call function in here before saving
+  try{
+  var headers;
+  return await spr
+  .then(async data => {
+      headers = data.headers;
+      headers['Accept'] = 'application/json;odata=verbose';
+      return headers
+  }).then(async response => {
+        //return true
+        //console.log(response)
+        headers = response
+        return request.post({
+          url: listWebURL + '/A2TTest/_api/contextInfo',
+          headers: headers,
+          json: true,
+        })
+    }).then(async response => {
+      
+      var digest = response.d.GetContextWebInformation.FormDigestValue
+      return digest
+    }).then(async response => {
+      headers['X-RequestDigest'] = response
+      headers['Content-Type'] = "application/json;odata=verbose"
+      headers['X-HTTP-Method'] = "MERGE"
+      headers['If-Match'] = "*"
+      // change to local AccesLs to Technology list
+      var l = listWebURL + `/A2TTest/_api/web/lists/getByTitle('A2TApplicationsTest')/items('`+values.SPID+`')`
+      console.log("webURL:")
+      console.log(l)
+     
+      return request.post({
+        url: l,
+        headers: headers,
+        json: true,
+        body: {
+          "__metadata": {
+            "type": `SP.Data.A2TApplicationsTestListItem`
+          },
+          "employmentFound": values.employmentFound,
+          "employmentStatus": values.employmentStatus,
+        }
+      })
+    }).then(async response =>{
+      //file attached
+      return true;
+    })
+     .catch(err => {
+      //there was an error in the chan
+      //item was not created
+      console.log("error in chain")
+      //console.log(err);
+      //sendEmail(values, "Add Attempt Error - Application Could Not Be Added to SharePoint")
+      console.log("err status code:"+ err.statusCode);
+      console.log(err);
+      if (err.statusCode !== 403){
+        console.log(err);
+      }
+      
+      return false
+    }) 
+  //try catch catcher
+  } catch (error) {
+    console.log(error)
+    return false
+  }
+}
+
 cron.schedule('*/1 * * * *', async function() {
   //30 7 * * *
     console.log('running a task every 1 mins');
@@ -553,7 +623,36 @@ cron.schedule('*/1 * * * *', async function() {
               })
         }
     })
+  
+    await getEmploymentUpdateNeeded()
+    .then(async cursor => {
+        var results = await cursor.toArray()
+        console.log(results.length)
+        for (const data of results){
+          clean(data)
+          await saveEmploymentSurveyToSP(data)
+              .then(function(saved){
+                // save values to mongo db
+                if (saved) {
+                  try {
+                    updateEmploymentUpdateToFalse("ProviderIntake",data._id);
+                  }
+                  catch (error) {
+                    console.log(error);
+                  }
+                }
+              })
+              .catch(function(e){
+                console.log("error")
+                console.log(e)
+              })
+        }
+    })
+
+
 });
+
+
 // need cron to run to check dates of course completion 1 month 3 month -> send emails accordingly
 
 app.listen(5000);

@@ -31,7 +31,6 @@ router.get('/', csrfProtection, (req, res) => {
         serviceProviderName: result[0].serviceProviderName,
         serviceProviderEmail: result[0].serviceProviderEmail,
         results: result[0],
-
       });
     }else{
       res.send({

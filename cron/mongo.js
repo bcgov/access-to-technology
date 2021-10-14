@@ -47,6 +47,7 @@ module.exports = {
             return doc
         })    
     },
+
     getIncomingProcessTimeNotTrue: async function () {
         return await connection
         .then(mClient => {
@@ -63,6 +64,7 @@ module.exports = {
             return doc
         })    
     },
+
     getCourseCompletionUpdateNeeded: async function () {
         return await connection
         .then(mClient => {
@@ -142,6 +144,7 @@ module.exports = {
             return result
         })     
     },
+    
     updateCourseCompletionUpdateToFalse: async function(collection,_id){
         return await connection
         .then(mClient => {
@@ -172,6 +175,55 @@ module.exports = {
             return result
         })     
     },
+    
+    getEmploymentUpdateNeeded: async function () {
+        return await connection
+        .then(mClient => {
+            // get a handle on the db
+            return mClient.db();
+            //return db
+        })
+        .then(async db => {
+        // add our values to db (they are always new)
+            return db.collection("ProviderIntake").find({employmentUpdateNeeded: true})
+            //console.log(err)
+            //console.log(doc)
+        }).then(async doc =>{
+            return doc
+        })    
+    },
+
+    updateEmploymentUpdateToFalse: async function(collection,_id){
+        return await connection
+        .then(mClient => {
+            // get a handle on the db
+            return mClient.db();
+            //return db
+        })
+        .then(async db => {
+        // add our values to db (they are always new)
+            return db.collection(collection).updateOne(
+                {
+                    _id: _id
+                },
+                { 
+                    $set : {
+                    employmentUpdateNeeded: false
+
+                    }
+                },
+                {
+                    upsert: false
+                }
+
+            )
+                //console.log(err)
+                //console.log(doc)
+        }).then(result =>{
+            return result
+        })     
+    },
+
     updateProcessTimeToTrue: async function(collection,_id){
         return await connection
         .then(mClient => {
@@ -202,6 +254,7 @@ module.exports = {
             return result
         })     
     },
+
     WorkBCCheck:async function (comparatorField) {
         if(comparatorField != null){
             return await connection

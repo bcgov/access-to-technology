@@ -64,8 +64,7 @@ class CourseCompletionSurvey extends Component {
         fetch(FORM_URL.courseCompletionSurvey+"/getData/"+values._id+"/"+values._token,  {
             credentials: "include",
         }).then(res => res.json())
-        .then(
-            (result) => {
+        .then((result) => {
                 if(result.err === "Not Found"){
                     this.setState({
                         hasError: true
@@ -74,7 +73,7 @@ class CourseCompletionSurvey extends Component {
                     this.setState({
                         serviceProviderName: result.serviceProvider,
                         serviceProviderEmail: result.serviceProviderEmail,
-                        results:result.results,
+                        results: result.results,
                     })
                 }
             },
@@ -85,15 +84,13 @@ class CourseCompletionSurvey extends Component {
                         hasError: false
                 })
             }
-        ).then(
-            (result) => {
+        ).then((result) => {
             if (Object.getOwnPropertyNames(this.state.results).length > 8){
-                console.log(result)
                 var clientData = this.state.results;
                 this.setState({
                     clientName: clientData.clientName,
                     clientLastName: clientData.clientLastName,
-                    resubmit: 'courseCompletionUpdateNeeded' in clientData,
+                    resubmit: clientData.hasOwnProperty("courseCompletionUpdateNeeded"),
                 })
             }
             })
