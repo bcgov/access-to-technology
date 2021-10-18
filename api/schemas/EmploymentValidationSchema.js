@@ -1,7 +1,6 @@
-import * as yup from 'yup'
-import 'core-js/stable';
+var yup = require('yup')
 
-export const EmploymentValidationSchema = yup.object().shape({
+var EmploymentValidationSchema = yup.object().shape({
     _id: yup.string()
         .required("Please enter the application ID.")
         .min(10, "Must be 10 characters")
@@ -19,3 +18,4 @@ export const EmploymentValidationSchema = yup.object().shape({
         }),
     
 })
+module.exports =EmploymentValidationSchema;

@@ -1,11 +1,8 @@
-import * as yup from 'yup'
-import "yup-phone"
-import 'core-js/stable';
+var yup = require('yup')
 
-
-export const ParticipantSurveyValidationSchema = yup.object().shape({
+var ParticipantSurveyValidationSchema = yup.object().shape({
     //REQUIRED
-    LaptopWasNeeded: yup.string()
+    laptopWasNeeded: yup.string()
         .required("Please rate how essential your laptop was in completing your course.")
         .oneOf([
             '1',
@@ -52,3 +49,4 @@ export const ParticipantSurveyValidationSchema = yup.object().shape({
         .max(1000, "Max characters of best of part of program comments is 1000."),
    
 })
+module.exports = ParticipantSurveyValidationSchema;

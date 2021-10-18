@@ -54,7 +54,7 @@ class FormStep2 extends Component {
                     </div>
                     <div className="row">
                         <div className="col-md-6 col-sm-12 col-xs-12">
-                            <label className="control-label" htmlFor="LaptopWasNeeded">I would have faced significant barriers in completing
+                            <label className="control-label" htmlFor="laptopWasNeeded">I would have faced significant barriers in completing
 
 the training without the laptop provided through the
 
@@ -62,49 +62,49 @@ Access to Technology (A2T) program.<span style={{ color: "red" }}>*</span></labe
                         </div>
                         <div className="form-check col">
                             <Field
-                                className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "LaptopWasNeeded")}`}
+                                className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "laptopWasNeeded")}`}
                                 type="radio"
-                                name="LaptopWasNeeded"
+                                name="laptopWasNeeded"
                                 value="1"
                             />
                             <label className="form-check-label">1</label>
                         </div>
                         <div className="form-check col">
                             <Field
-                                className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "LaptopWasNeeded")}`}
+                                className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "laptopWasNeeded")}`}
                                 type="radio"
-                                name="LaptopWasNeeded"
+                                name="laptopWasNeeded"
                                 value="2"
                             />
                             <label className="form-check-label">2</label>
                         </div>
                         <div className="form-check col">
                             <Field
-                                className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "LaptopWasNeeded")}`}
+                                className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "laptopWasNeeded")}`}
                                 type="radio"
-                                name="LaptopWasNeeded"
+                                name="laptopWasNeeded"
                                 value="3"
                             />
                             <label className="form-check-label">3</label>
                         </div>
                         <div className="form-check col">
                             <Field
-                                className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "LaptopWasNeeded")}`}
+                                className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "laptopWasNeeded")}`}
                                 type="radio"
-                                name="LaptopWasNeeded"
+                                name="laptopWasNeeded"
                                 value="4"
                             />
                             <label className="form-check-label">4</label>
                         </div>
                         <div className="form-check col">
                             <Field
-                                className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "LaptopWasNeeded")}`}
+                                className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "laptopWasNeeded")}`}
                                 type="radio"
-                                name="LaptopWasNeeded"
+                                name="laptopWasNeeded"
                                 value="5"
                             />
                             <label className="form-check-label">5</label>
-                            {feedBackInvalid(this.props.errors, this.props.touched, "LaptopWasNeeded")}
+                            {feedBackInvalid(this.props.errors, this.props.touched, "laptopWasNeeded")}
                         </div>
                     </div>
                 </div>
@@ -252,7 +252,7 @@ your training?
                                 className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touch, "postTrainingPlans")}`}
                                 type="radio"
                                 name="postTrainingPlans"
-                                value="Volunteering"
+                                value="Volunteer"
                             />
                             <label className="form-check-label" htmlFor="postTrainingPlansVolunteering">Volunteering</label>
                         </div>
@@ -262,29 +262,29 @@ your training?
                                 className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touch, "postTrainingPlans")}`}
                                 type="radio"
                                 name="postTrainingPlans"
-                                value="Other (not listed above)"
+                                value="Other"
                             />
                             <label className="form-check-label" htmlFor="postTrainingPlansOther">Other (not listed above)</label>
                             {feedBackInvalid(this.props.errors, this.props.touch, "postTrainingPlans")}
                         </div>
                     </div>
                 <div className="form-group">
-                    <label className="col-form-label control-label" htmlFor="FeedbackAndExperienceComments">How can we make the experience better for you?
+                    <label className="col-form-label control-label" htmlFor="feedBackAndExperienceComments">How can we make the experience better for you?
 
 Please feel free to include any comments, suggestions,
 
 or feedback about the program. (optional)
                 </label>
-                    <small className="text-muted" id="FeedbackAndExperienceComments"> (1000 characters max.)</small>
+                    <small className="text-muted" id="feedBackAndExperienceComments"> (1000 characters max.)</small>
                     <Field
                         as="textarea"
                         className="form-control"
-                        id="FeedbackAndExperienceComments"
-                        name="FeedbackAndExperienceComments"
+                        id="feedBackAndExperienceComments"
+                        name="feedBackAndExperienceComments"
                         rows="4"
                         maxLength="1000"
                     />
-                    <small>{this.props.values.FeedbackAndExperienceComments.length}/1000</small>
+                    <small>{this.props.values.feedBackAndExperienceComments.length}/1000</small>
                 </div>
                 <div className="form-group">
                     {this.showErrors}

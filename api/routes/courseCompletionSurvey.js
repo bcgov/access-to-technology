@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var csrf = require('csurf');
 var csrfProtection = csrf({ cookie: true });
-var ParticipantFormValidationSchema = require('../schemas/ParticipantFormValidationSchema')
+var CourseCompletionValidationSchema = require('../schemas/CourseCompletionValidationSchema')
 var generateHTMLEmail = require('../utils/htmlEmail')
 var clean = require('../utils/clean')
 var {saveCourseCompletionSurvey, getParticipantValues} = require("../utils/mongoOperations");
@@ -43,7 +43,7 @@ router.get('/', csrfProtection, (req, res) => {
 //post
   router.post('/', csrfProtection, async (req, res) => {
     clean(req.body);
-    ParticipantFormValidationSchema.validate(req.body, { abortEarly: false })
+    CourseCompletionValidationSchema.validate(req.body, { abortEarly: false })
     .then(async function (value) {
       try {
         await saveCourseCompletionSurvey(value)

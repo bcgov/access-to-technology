@@ -5,7 +5,7 @@ import 'core-js/stable';
 
 export const ParticipantSurveyValidationSchema = yup.object().shape({
     //REQUIRED
-    LaptopWasNeeded: yup.string()
+    laptopWasNeeded: yup.string()
         .required("Please rate how essential your laptop was in completing your course.")
         .oneOf([
             '1',

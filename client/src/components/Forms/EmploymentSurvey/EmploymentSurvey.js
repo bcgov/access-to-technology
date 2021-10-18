@@ -198,7 +198,7 @@ class EmploymentSurvey extends Component {
         else if( this.state.resubmit === true){
             return (
                 <div>
-                    <p>Thank You. Your clients Training Completion survey has already been submitted. </p>
+                    <p>Thank You. Your clients Employment survey has already been submitted. </p>
                 </div>
             )
 
@@ -321,7 +321,7 @@ class EmploymentSurvey extends Component {
                                             console.log(resp)
                                             if (resp.err) {
                                                 console.log(resp.err)
-                                                alert("There has been an error submitting your consent, please contact your service Provider.")
+                                                alert("Please review your form, a field is incomplete.")
                                                 setSubmitting(false)
                                                 setErrors(resp.err)
 
@@ -330,7 +330,7 @@ class EmploymentSurvey extends Component {
                                                 this.setState({
                                                     hasError: true
                                                 })
-                                                alert("There has been an error submitting your consent please contact your service Provider")
+                                                alert("There has been an error submitting your survey, please contact A2T.")
                                             }
                                             else if (resp.ok) {
                                                 setSubmitting(false);

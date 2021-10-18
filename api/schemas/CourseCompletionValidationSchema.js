@@ -1,7 +1,7 @@
-import * as yup from 'yup'
-import 'core-js/stable';
+var yup = require('yup')
 
-export const CourseCompletionValidationSchema = yup.object().shape({
+
+var CourseCompletionValidationSchema = yup.object().shape({
     _id: yup.string()
         .required("Please enter the application ID.")
         .min(10, "Must be 10 characters")
@@ -19,3 +19,4 @@ export const CourseCompletionValidationSchema = yup.object().shape({
         }),
    
 })
+module.exports = CourseCompletionValidationSchema;

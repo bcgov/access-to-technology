@@ -16,14 +16,14 @@ class thankyouEmploymentSurvey extends Component {
                     </div>
                 </div>
                 <div className="row">
-                <div className="col-lg-8">
-                    <div>
-                        <div className="alert alert-dismissible alert-success">
-                            <button type="button" className="close" data-dismiss="alert">×</button>
-                            <strong>Complete!</strong> <br/>Your submission has been received.
+                    <div className="col-lg-8">
+                        <div>
+                            <div className="alert alert-dismissible alert-success">
+                                <button type="button" className="close" data-dismiss="alert">×</button>
+                                <strong>Complete!</strong> <br/>Your submission has been received.
+                            </div>
                         </div>
                     </div>
-                </div>
                 </div>
             </div>
         )

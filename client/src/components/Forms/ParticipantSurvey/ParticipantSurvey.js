@@ -9,12 +9,14 @@ import FormStep2 from './ParticipantSurveyFormStep2'
 import {ParticipantSurveyValidationSchema} from './ParticipantSurveyValidationSchema'
 import { FORM_URL } from '../../../constants/form'
 import { generateAlert } from '../shared/Alert'
+import {customAlphabet} from 'nanoid'
 import {pathToRegexp} from 'path-to-regexp'
 
 class ParticipantSurvey extends Component {
     constructor(){
         super()
         var key = []
+        const nanoid = customAlphabet('0123456789abcdefghijklmnopqrstuvwxyz',10)
         var re = pathToRegexp('/:id/:token', key)
         var sample = window.location.href.split("/ParticipantSurvey")[1]
         var content = re.exec(sample) //[/id/token/, id, token]]
@@ -23,20 +25,19 @@ class ParticipantSurvey extends Component {
         this.state={
             _csrf: '',
             currentStep: 1,
-            _id:  content[1] ,
+            _id:  content[1],
             _token: content[2],
-            serviceProviderName: '',
-            fundingSource: '',
-            serviceProviderEmail: '',
-            clientName: '',
+            new_id: nanoid(),
+            hasIdError:false,
+            resubmit:false,
+            results:[],
             inDB: (content != null) ? true : false,
-            clientLastName:'',
-            hasError: false,
+            hasError: ( content[1] === "" ||  content[1].length !== 10 ||content[2] === "" || content[2].length !== 25 ),
         }
         this._next = this._next.bind(this)
         this._prev = this._prev.bind(this)
     }
-
+   
     componentDidMount() {
         fetch(FORM_URL.participantSurvey, {
             credentials: "include"
@@ -62,40 +63,42 @@ class ParticipantSurvey extends Component {
     }
 
     getContext(values){
-        if(values.inDB){
-            fetch(FORM_URL.participantSurvey+"/getData/"+values._id+"/"+values._token,  {
-                credentials: "include",
-            }).then(res => res.json())
-            .then(
-                (result) => {
-                    console.log(result)
-                    if(result.err === "Not Found"){
-                        console.log("NOT FOUND")
-                        this.setState({
-                            hasError: true
-                        })
-                    }else{
-                        this.setState({
-                            serviceProviderName: result.serviceProviderName,
-                            fundingSource: result.fundingSource,
-                            serviceProviderEmail: result.serviceProviderEmail,
-                            clientName: result.clientName,
-                            clientLastName: result.clientLastName,
-                            pdfFile:result.pdfFile,
-                        })
-                    }
-                },
-                (error) => {
-                    console.log("not found?")
-                    console.log(error)
+        fetch(FORM_URL.participantSurvey+"/getData/"+values._id+"/"+values._token,  {
+            credentials: "include",
+        }).then(res => res.json())
+        .then(
+            (result) => {
+                if(result.err === "Not Found"){
                     this.setState({
-                            hasError: true
+                        hasError: true
+                    })
+                }else{
+                    console.log(result);
+                    this.setState({
+                        results:result.results,
                     })
                 }
-            )
-        }
+            },
+            (error) => {
+                console.log(error)
+                //set to true to enforces
+                this.setState({
+                        hasError: false
+                })
+            }
+        ).then(
+            (result) => {
+                console.log(result)
+            if (Object.getOwnPropertyNames(this.state.results).length > 8){
+                var clientData = this.state.results;
+                this.setState({
+                    clientName:clientData.clientName,
+                    clientLastName:clientData.clientLastName,
+                    resubmit: clientData.hasOwnProperty("clientSurveyCompleted"),
+                })
+            }
+            })
     }
-
    
 
     handleSubmit = (event) => {
@@ -165,25 +168,23 @@ class ParticipantSurvey extends Component {
                         {this.state.hasError && (
                             generateAlert("alert-danger","An error has occurred, please refresh the page. If the error persists, please try again later.")
                         )}
+
                         <Formik
                             initialValues= {{
                                     _csrf: this.state._csrf,
                                     _id: this.state._id,
                                     _token: this.state._token,
-                                   
+                                    new_id:this.state.new_id,
+                                    resubmit:this.state.resubmit,
+                                    hasIdError:this.state.hasIdError,
+                                    hasError:this.state.hasError,
                                     //step 1
-                                    LaptopWasNeeded:"",
+                                    laptopWasNeeded:"",
                                     technicalSupportSatisfaction:"",
-                                    FeedbackAndExperienceComments:"",
+                                    feedBackAndExperienceComments:"",
                                     certificateProgram:"",
                                     hoursPerWeek:"",
                                     postTrainingPlans:"",
-                                    serviceProviderName: this.state.serviceProviderName,
-                                    serviceProviderEmail: this.state.serviceProviderEmail,
-                                    serviceProviderConfirmationEmail: this.state.serviceProviderEmail,
-                                    fundingSource: this.state.fundingSource,
-                                    clientName: this.state.clientName,
-                                    clientLastName: this.state.clientLastName,
 
     
 
@@ -219,9 +220,11 @@ class ParticipantSurvey extends Component {
                                                 this.setState({
                                                     hasError: true
                                                 })
+                                                alert("There has been an error submitting your survey, please contact your Service Provider.")
+                                                
                                             } 
                                             else if (resp.ok){
-                                                setSubmitting(false)
+                                                setSubmitting(true)
                                                 this.props.history.push('/thankYouParticipantSurvey',values)
                                             }
                                         }
@@ -241,8 +244,8 @@ class ParticipantSurvey extends Component {
                                         currentStep={this.state.currentStep}
                                         {...props}
                                     />
-                                    {this.previousButton}
-                                    {this.nextButton(props.touched, props.errors)}
+                                    {this.state.hasError ===false && !this.state.resubmit && this.previousButton}
+                                    {this.state.hasError ===false && !this.state.resubmit && this.nextButton(props.touched, props.errors)}
 
                                 </Form>
                             )}
