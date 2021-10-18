@@ -108,6 +108,108 @@ module.exports = {
         });
     },
 
+    saveCourseCompletionSurvey: async function (values) {
+        return await connection
+        .then(mClient => {
+            // get a handle on the db
+            return mClient.db();
+        }).then(async db => {
+            // add our values to db (they are always new)
+            return db.collection("ProviderIntake").updateOne(
+                {
+                    applicationId: values._id,
+                    _token: values._token,
+                },
+                { 
+                    $set : {
+                        completedTraining: values.completedTraining,
+                        minimallyCompleted: values.minimallyCompleted,
+                        courseCompletionUpdateNeeded:true,
+                    }
+                },
+                {
+                    upsert: false
+                }
+
+            )
+                 
+        });
+    },
+
+    saveEmploymentSurvey: async function (values) {
+        return await connection
+        .then(mClient => {
+            // get a handle on the db
+            return mClient.db();
+        }).then(async db => {
+            // add our values to db (they are always new)
+            return db.collection("ProviderIntake").updateOne(
+                {
+                    applicationId: values._id,
+                    _token: values._token,
+                },
+                { 
+                    $set : {
+                        employmentFound: values.employmentFound,
+                        employmentStatus: values.employmentStatus,
+                        employmentUpdateNeeded:true,
+                    }
+                },
+                {
+                    upsert: false
+                }
+
+            )
+                 
+        });
+    },
+    
+    updateParticipantSurveyCompleted: async function(values){
+        return await connection
+        .then(mClient => {
+            // get a handle on the db
+            return mClient.db();
+        }).then(async db => {
+            // add our values to db (they are always new)
+            console.log(values);
+            return db.collection("ProviderIntake").updateOne(
+                {
+                    applicationId: values._id,
+                    _token: values._token,
+                },
+                { 
+                    $set : {
+                       clientSurveyCompleted:true,
+                    }
+                },
+                {
+                    upsert: false
+                });
+                 
+        });
+    },
+
+    saveParticipantSurveyValues: async function (values) {
+        return await connection
+        .then(mClient => {
+            // get a handle on the db
+            return mClient.db();
+        }).then(async db => {
+            // add our values to db (they are always new)
+            return db.collection("ClientSurvey").insertOne(
+                {
+                    applicationId: values._id,
+                    laptopWasNeeded: values.laptopWasNeeded,
+                    technicalSupportSatisfaction: values.technicalSupportSatisfaction,
+                    hoursPerWeek: values.hoursPerWeek,
+                    postTrainingPlans: values.postTrainingPlans,
+                    feedBackAndExperienceComments: values.feedBackAndExperienceComments,
+                    certificateProgram: values.certificateProgram,
+                    savedToSP:false,
+                })
+        })
+    },
+
     saveProviderIntakeValues: async function (values) {
         return await connection
         .then(mClient => {

@@ -18,6 +18,9 @@ const corsOptions = {
 var formRouter = require('./routes/providerForm');
 var participantFormRouter = require('./routes/participantForm');
 var sendConsentFormRouter = require('./routes/sendConsentForm');
+var courseCompletionSurveyRouter = require('./routes/courseCompletionSurvey');
+var employmentSurveyRouter = require('./routes/employmentSurvey')
+var participantSurveyRouter = require('./routes/participantSurvey')
 
 var app = express();
 
@@ -33,4 +36,7 @@ app.use(helmet());
 app.use('/api/providerForm', formRouter)
 app.use('/api/participantForm',participantFormRouter)
 app.use('/api/sendConsentForm',sendConsentFormRouter)
+app.use('/api/courseCompletionSurvey',courseCompletionSurveyRouter)
+app.use('/api/employmentSurvey',employmentSurveyRouter)
+app.use('/api/participantSurvey',participantSurveyRouter)
 module.exports = app;

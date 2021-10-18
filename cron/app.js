@@ -3,14 +3,14 @@ const express = require('express')
 const spauth = require('node-sp-auth')
 const request = require('request-promise')
 
-var {getProviderIntakeNotSP, getIncomingProcessTimeNotTrue, updateSaveIdToSP, WorkBCCheck, duplicateCheck, updateSavedToSP, updateProcessTimeToTrue} = require('./mongo')
+var {getProviderIntakeNotSP, getClientSurveyNotSP, getIncomingProcessTimeNotTrue, updateSaveIdToSP,updateCourseCompletionUpdateToFalse, updateEmploymentUpdateToFalse, getCourseCompletionUpdateNeeded, getEmploymentUpdateNeeded,  WorkBCCheck, duplicateCheck, updateSavedToSP, updateProcessTimeToTrue} = require('./mongo')
 var clean = require('./clean')
-var listWebURL = process.env.LISTWEBURL || process.env.OPENSHIFT_NODEJS_LISTWEBURL || ""
-var listUser = process.env.LISTUSER || process.env.OPENSHIFT_NODEJS_LISTUSER || ""
+var listWebURL = process.env.LISTWEBURL || process.env.OPENSHIFT_NODEJS_LISTWEBURL || "https://sdpr.sp.gov.bc.ca/sites/elmsd"
+var listUser = process.env.LISTUSER || process.env.OPENSHIFT_NODEJS_LISTUSER || "elmsdtst"
 var listPass = process.env.LISTPASS || process.env.OPENSHIFT_NODEJS_LISTPASS || ""
-var listDomain = process.env.LISTDOMAIN || process.env.OPENSHIFT_NODEJS_LISTDOMAIN || ""
-var listParty = process.env.LISTPARTY || process.env.OPENSHIFT_NODEJS_LISTPARTY || ""
-var listADFS = process.env.LISTADFS || process.env.OPENSHIFT_NODEJS_LISTADFS || ""
+var listDomain = process.env.LISTDOMAIN || process.env.OPENSHIFT_NODEJS_LISTDOMAIN || "IDIR"
+var listParty = process.env.LISTPARTY || process.env.OPENSHIFT_NODEJS_LISTPARTY || "urn:sp.gov.bc.ca"
+var listADFS = process.env.LISTADFS || process.env.OPENSHIFT_NODEJS_LISTADFS || "https://sts.gov.bc.ca/adfs/ls"
 var linkUrl = process.env.CLIENTURL || process.env.OPENSHIFT_NODEJS_CLIENTURL || ""
 var nodemailer = require("nodemailer")
 const { urlencoded } = require('express')
@@ -69,6 +69,54 @@ async function sendEmail(values, Sub) {
   }
 }
 
+async function sendEmailCourseCompletion(values, Sub) {
+  try {
+    let transporter = nodemailer.createTransport({
+      host: "apps.smtp.gov.bc.ca",
+      port: 25,
+      secure: false,
+      tls: {
+        rejectUnauthorized: false
+      } // true for 465, false for other ports
+    });
+    return await transporter.verify()
+      .then(function (r) {
+        //console.log(r)
+        console.log("Transporter connected.")
+        // send mail with defined transport object  
+        let message2 = {
+          from: 'Access to Technology <donotreply@gov.bc.ca>', // sender address
+          to: values.serviceProviderEmail,
+          bcc: 'ELMSD.Webmaster@gov.bc.ca',
+          subject: `Course Completion Survey - Application: ${values.applicationId}`, // Subject line
+          html: 
+          `<b>APPLICATION INFORMATION</b><br/>`+
+              `<b>Client Name:</b> ${values.clientFullName}<br/>`+
+              `<b>Application ID:</b> ${values.applicationId}<br/>`+
+              `<b>Application token:</b> ${values._token}<br/>`
+            
+          // html body
+        };      
+       transporter.sendMail(message2, (error, info) => {
+          if (error) {
+            console.log("error:", error);
+            console.log("Error sending list notification for " + values._id)
+          } else {
+            console.log("Message sent: %s", info.messageId);
+          }
+        });
+        return true
+      }).catch(function (e) {
+        console.log(e)
+        console.log("Error connecting to transporter")
+        return false
+      })
+  } catch (error) {
+    console.log(error)
+    return false
+  }
+}
+
 //add proper fields for A2T
 async function saveListProviderIntake(values) {
   // call function in here before saving
@@ -93,7 +141,7 @@ async function saveListProviderIntake(values) {
         //console.log(response)
         headers = response
         return request.post({
-          url: listWebURL + '/AccessToTechnology/_api/contextInfo',
+          url: listWebURL + '/A2TTest/_api/contextInfo',
           headers: headers,
           json: true,
         })
@@ -116,7 +164,7 @@ async function saveListProviderIntake(values) {
       headers['X-RequestDigest'] = response
       headers['Content-Type'] = "application/json;odata=verbose"
       // change to local AccesLs to Technology list
-      var l = listWebURL + `/AccessToTechnology/_api/web/lists/getByTitle('A2TApplications')/items`
+      var l = listWebURL + `/A2TTest/_api/web/lists/getByTitle('A2TApplicationsTest')/items`
       console.log("webURL:")
       console.log(l)
       if(values.savedConsent === true){
@@ -134,7 +182,7 @@ async function saveListProviderIntake(values) {
         json: true,
         body: {
           "__metadata": {
-            "type": `SP.Data.A2TApplicationsListItem`
+            "type": `SP.Data.A2TApplicationsTestListItem`
           },
           "Title": `${values.serviceProviderName} - ${values.applicationId}`,
           'ApplicationID': values.applicationId,
@@ -222,7 +270,6 @@ cron.schedule('*/1 * * * *', async function() {
           clean(data)
           await saveListProviderIntake(data)
               .then(function(saved){
-                console.log("saved")
                 // save values to mongo db
                 if (saved) {
                   try {
@@ -241,6 +288,7 @@ cron.schedule('*/1 * * * *', async function() {
         }
     })
   });
+
   function isDateInThisWeek(date) {
     const todayObj = new Date();
     const todayDate = todayObj.getDate();
@@ -275,7 +323,7 @@ async function saveProcessTimeToSP(values) {
         //console.log(response)
         headers = response
         return request.post({
-          url: listWebURL + '/AccessToTechnology/_api/contextInfo',
+          url: listWebURL + '/A2TTest/_api/contextInfo',
           headers: headers,
           json: true,
         })
@@ -289,7 +337,7 @@ async function saveProcessTimeToSP(values) {
       headers['X-HTTP-Method'] = "MERGE"
       headers['If-Match'] = "*"
       // change to local AccesLs to Technology list
-      var l = listWebURL + `/AccessToTechnology/_api/web/lists/getByTitle('A2TApplications')/items('`+values.SPID+`')`
+      var l = listWebURL + `/A2TTest/_api/web/lists/getByTitle('A2TApplicationsTest')/items('`+values.SPID+`')`
       console.log("webURL:")
       console.log(l)
      
@@ -299,7 +347,7 @@ async function saveProcessTimeToSP(values) {
         json: true,
         body: {
           "__metadata": {
-            "type": `SP.Data.A2TApplicationsListItem`
+            "type": `SP.Data.A2TApplicationsTestListItem`
           },
           "ProcessTime": isInFourWeeks,
         }
@@ -399,5 +447,307 @@ async function saveProcessTimeToSP(values) {
     })
     */
 });
+
+async function saveCourseCompletionSurveyToSP(values) {
+  // call function in here before saving
+  try{
+  var headers;
+  return await spr
+  .then(async data => {
+      headers = data.headers;
+      headers['Accept'] = 'application/json;odata=verbose';
+      return headers
+  }).then(async response => {
+        //return true
+        //console.log(response)
+        headers = response
+        return request.post({
+          url: listWebURL + '/A2TTest/_api/contextInfo',
+          headers: headers,
+          json: true,
+        })
+    }).then(async response => {
+      
+      var digest = response.d.GetContextWebInformation.FormDigestValue
+      return digest
+    }).then(async response => {
+      headers['X-RequestDigest'] = response
+      headers['Content-Type'] = "application/json;odata=verbose"
+      headers['X-HTTP-Method'] = "MERGE"
+      headers['If-Match'] = "*"
+      // change to local AccesLs to Technology list
+      var l = listWebURL + `/A2TTest/_api/web/lists/getByTitle('A2TApplicationsTest')/items('`+values.SPID+`')`
+      console.log("webURL:")
+      console.log(l)
+      return request.post({
+        url: l,
+        headers: headers,
+        json: true,
+        body: {
+          "__metadata": {
+            "type": `SP.Data.A2TApplicationsTestListItem`
+          },
+          "completedTraining": values.completedTraining,
+          "minimallyCompleted": values.minimallyCompleted,
+          "courseCompletionSurveyDate": (new Date()),
+        }
+      })
+    }).then(async response =>{
+      //file attached
+      return true;
+    })
+     .catch(err => {
+      //there was an error in the chan
+      //item was not created
+      console.log("error in chain")
+      //console.log(err);
+      //sendEmail(values, "Add Attempt Error - Application Could Not Be Added to SharePoint")
+      console.log("err status code:"+ err.statusCode);
+      console.log(err);
+      if (err.statusCode !== 403){
+        console.log(err);
+      }
+      
+      return false
+    }) 
+  //try catch catcher
+  } catch (error) {
+    console.log(error)
+    return false
+  }
+}
+
+async function saveEmploymentSurveyToSP(values) {
+  // call function in here before saving
+  try{
+  var headers;
+  return await spr
+  .then(async data => {
+      headers = data.headers;
+      headers['Accept'] = 'application/json;odata=verbose';
+      return headers
+  }).then(async response => {
+        //return true
+        //console.log(response)
+        headers = response
+        return request.post({
+          url: listWebURL + '/A2TTest/_api/contextInfo',
+          headers: headers,
+          json: true,
+        })
+    }).then(async response => {
+      var digest = response.d.GetContextWebInformation.FormDigestValue
+      return digest
+    }).then(async response => {
+      headers['X-RequestDigest'] = response
+      headers['Content-Type'] = "application/json;odata=verbose"
+      headers['X-HTTP-Method'] = "MERGE"
+      headers['If-Match'] = "*"
+      // change to local AccesLs to Technology list
+      var l = listWebURL + `/A2TTest/_api/web/lists/getByTitle('A2TApplicationsTest')/items('`+values.SPID+`')`
+      console.log("webURL:")
+      console.log(l)
+      return request.post({
+        url: l,
+        headers: headers,
+        json: true,
+        body: {
+          "__metadata": {
+            "type": `SP.Data.A2TApplicationsTestListItem`
+          },
+          "employmentFound": values.employmentFound,
+          "employmentStatus": values.employmentStatus,
+          "employmentSurveySubmissionDate": (new Date()),
+        }
+      })
+    }).then(async response =>{
+      //file attached
+      return true;
+    })
+     .catch(err => {
+      //there was an error in the chan
+      //item was not created
+      console.log("error in chain")
+      //console.log(err);
+      //sendEmail(values, "Add Attempt Error - Application Could Not Be Added to SharePoint")
+      console.log("err status code:"+ err.statusCode);
+      console.log(err);
+      if (err.statusCode !== 403){
+        console.log(err);
+      }
+      
+      return false
+    }) 
+  //try catch catcher
+  } catch (error) {
+    console.log(error)
+    return false
+  }
+}
+
+async function saveListClientSurvey(values) {
+  // call function in here before saving
+  try{
+    var headers;
+  return await spr
+  .then(async data => {
+      headers = data.headers;
+      headers['Accept'] = 'application/json;odata=verbose';
+      return headers
+  }).then(async response => {
+        //return true
+        //console.log(response)
+        headers = response
+        return request.post({
+          url: listWebURL + '/A2TTest/_api/contextInfo',
+          headers: headers,
+          json: true,
+        })
+    }).then(async response => {
+      var digest = response.d.GetContextWebInformation.FormDigestValue
+      return digest
+    }).then(async response => {
+      //console.log(headers)
+      headers['X-RequestDigest'] = response
+      headers['Content-Type'] = "application/json;odata=verbose"
+      // change to local AccesLs to Technology list
+      var l = listWebURL + `/A2TTest/_api/web/lists/getByTitle('A2TClientSurvey')/items`
+      console.log("webURL:")
+      console.log(l)
+      return request.post({
+        url: l,
+        headers: headers,
+        json: true,
+        body: {
+          "__metadata": {
+            "type": `SP.Data.A2TClientSurveyListItem`
+          },
+          "LaptopWasNeeded": `${values.laptopWasNeeded}`,
+          "TechnicalSupportSatisfaction": `${values.technicalSupportSatisfaction}`,
+          "HoursPerWeek": `${values.hoursPerWeek}`,
+          "PostTrainingPlans": `${values.postTrainingPlans}`,
+          "FeedbackAndExperienceComments": `${values.feedBackAndExperienceComments}`,
+          "ApplicationID": `${values.applicationId}`,
+          "CertificateProgram": `${values.certificateProgram}`,
+       
+        }
+      })
+    }).then(async response =>{
+      //file attached
+      return true;
+    })
+     .catch(err => {
+      //there was an error in the chan
+      //item was not created
+      console.log("error in chain")
+      //console.log(err);
+      //sendEmail(values, "Add Attempt Error - Application Could Not Be Added to SharePoint")
+      console.log("err status code:"+ err.statusCode);
+      console.log(err);
+      if (err.statusCode !== 403){
+        console.log(err);
+      }
+      
+      return false
+    }) 
+  //try catch catcher
+  } catch (error) {
+    console.log(error)
+    return false
+  }
+}
+
+cron.schedule('*/1 * * * *', async function() {
+  //30 7 * * *
+    console.log('running a task every 1 mins');
+    //console.log('running a task every 10 seconds');
+    spr = spauth.getAuth(listWebURL, {
+      username: listUser,
+      password: listPass,
+      domain: listDomain,
+      relyingParty: listParty,
+      adfsUrl: listADFS
+  })
+    
+  await getCourseCompletionUpdateNeeded()
+    .then(async cursor => {
+        var results = await cursor.toArray()
+        console.log(results.length)
+        for (const data of results){
+          clean(data)
+          await saveCourseCompletionSurveyToSP(data)
+              .then(function(saved){
+                // save values to mongo db
+                if (saved) {
+                  try {
+                    updateCourseCompletionUpdateToFalse("ProviderIntake",data._id);
+                  }
+                  catch (error) {
+                    console.log(error);
+                  }
+                }
+              })
+              .catch(function(e){
+                console.log("error")
+                console.log(e)
+              })
+        }
+    })
+  
+    await getEmploymentUpdateNeeded()
+    .then(async cursor => {
+        var results = await cursor.toArray()
+        console.log(results.length)
+        for (const data of results){
+          clean(data)
+          await saveEmploymentSurveyToSP(data)
+              .then(function(saved){
+                // save values to mongo db
+                if (saved) {
+                  try {
+                    updateEmploymentUpdateToFalse("ProviderIntake",data._id);
+                  }
+                  catch (error) {
+                    console.log(error);
+                  }
+                }
+              })
+              .catch(function(e){
+                console.log("error")
+                console.log(e)
+              })
+        }
+    })
+
+    await getClientSurveyNotSP()
+    .then(async cursor => {
+        var results = await cursor.toArray()
+        console.log(results.length)
+        for (const data of results){
+          clean(data)
+          await saveListClientSurvey(data)
+              .then(function(saved){
+                // save values to mongo db
+                if (saved) {
+                  try {
+                    updateSavedToSP("ClientSurvey", data._id);
+                  }
+                  catch (error) {
+                    console.log(error);
+                  }
+                }
+              })
+              .catch(function(e){
+                console.log("error")
+                console.log(e)
+              })
+        }
+    })
+
+
+});
+
+
+// need cron to run to check dates of course completion 1 month 3 month -> send emails accordingly
 
 app.listen(5000);
