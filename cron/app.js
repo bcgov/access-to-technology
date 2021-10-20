@@ -3,7 +3,7 @@ const express = require('express')
 const spauth = require('node-sp-auth')
 const request = require('request-promise')
 
-var {getProviderIntakeNotSP, getClientSurveyNotSP, getIncomingProcessTimeNotTrue, updateSaveIdToSP,updateCourseCompletionUpdateToFalse, updateEmploymentUpdateToFalse, getCourseCompletionUpdateNeeded, getEmploymentUpdateNeeded,  WorkBCCheck, duplicateCheck, updateSavedToSP, updateProcessTimeToTrue} = require('./mongo')
+var {getProviderIntakeNotSP, getProviderSurveyNotSP, getClientSurveyNotSP, getIncomingProcessTimeNotTrue, updateSaveIdToSP,updateCourseCompletionUpdateToFalse, updateEmploymentUpdateToFalse, getCourseCompletionUpdateNeeded, getEmploymentUpdateNeeded,  WorkBCCheck, duplicateCheck, updateSavedToSP, updateProcessTimeToTrue} = require('./mongo')
 var clean = require('./clean')
 var listWebURL = process.env.LISTWEBURL || process.env.OPENSHIFT_NODEJS_LISTWEBURL || "https://sdpr.sp.gov.bc.ca/sites/elmsd"
 var listUser = process.env.LISTUSER || process.env.OPENSHIFT_NODEJS_LISTUSER || "elmsdtst"
@@ -252,7 +252,7 @@ async function saveListProviderIntake(values) {
 
 
 cron.schedule('*/1 * * * *', async function() {
-    console.log('running a task every 3 minutes');
+    console.log('running a forms task every 3 minutes');
     //console.log('running a task every 10 seconds');
     spr = spauth.getAuth(listWebURL, {
       username: listUser,
@@ -379,7 +379,7 @@ async function saveProcessTimeToSP(values) {
 
   cron.schedule('*/30 * * * *', async function() {
     //30 7 * * *
-      console.log('running a task every 30 mins');
+      console.log('running a processTime task every 30 mins');
       //console.log('running a task every 10 seconds');
       spr = spauth.getAuth(listWebURL, {
         username: listUser,
@@ -657,9 +657,84 @@ async function saveListClientSurvey(values) {
   }
 }
 
+async function saveListProviderSurvey(values) {
+  // call function in here before saving
+  try{
+    var headers;
+  return await spr
+  .then(async data => {
+      headers = data.headers;
+      headers['Accept'] = 'application/json;odata=verbose';
+      return headers
+  }).then(async response => {
+        //return true
+        //console.log(response)
+        headers = response
+        return request.post({
+          url: listWebURL + '/A2TTest/_api/contextInfo',
+          headers: headers,
+          json: true,
+        })
+    }).then(async response => {
+      var digest = response.d.GetContextWebInformation.FormDigestValue
+      return digest
+    }).then(async response => {
+      //console.log(headers)
+      headers['X-RequestDigest'] = response
+      headers['Content-Type'] = "application/json;odata=verbose"
+      // change to local AccesLs to Technology list
+      var l = listWebURL + `/A2TTest/_api/web/lists/getByTitle('A2TServiceProviderSurvey')/items`
+      console.log("webURL:")
+      console.log(l)
+      return request.post({
+        url: l,
+        headers: headers,
+        json: true,
+        body: {
+          "__metadata": {
+            "type": `SP.Data.A2TServiceProviderSurveyListItem`
+          },
+          "easeOfApplicationCompletion": `${values.easeOfApplicationCompletion}`,
+          "applicationProcessingSpeed": `${values.applicationProcessingSpeed}`,
+          "otherTrainingProgramsSuggestions": `${values.otherTrainingProgramsSuggestions}`,
+          "overallExperienceWithOnlineAppli": `${values.overallExperienceWithOnlineApplicationProcess}`,
+          "programsSupportOfClient": `${values.programsSupportOfClient}`,
+          "levelOfSupportsReceived": `${values.levelOfSupportsReceived}`,
+          "overallExperienceWithOrganizatio": `${values.overallExperienceWithOrganization}`,
+          "ServiceProviderName": `${values.firstname}`,
+          "cohort": `${values.cohort}`,
+          "ReferralId": `${values.referral_wid}`,
+       
+        }
+      })
+    }).then(async response =>{
+      //file attached
+      return true;
+    })
+     .catch(err => {
+      //there was an error in the chan
+      //item was not created
+      console.log("error in chain")
+      //console.log(err);
+      //sendEmail(values, "Add Attempt Error - Application Could Not Be Added to SharePoint")
+      console.log("err status code:"+ err.statusCode);
+      console.log(err);
+      if (err.statusCode !== 403){
+        console.log(err);
+      }
+      
+      return false
+    }) 
+  //try catch catcher
+  } catch (error) {
+    console.log(error)
+    return false
+  }
+}
+
 cron.schedule('*/1 * * * *', async function() {
   //30 7 * * *
-    console.log('running a task every 1 mins');
+    console.log('running a survey tasks every 3 mins');
     //console.log('running a task every 10 seconds');
     spr = spauth.getAuth(listWebURL, {
       username: listUser,
@@ -731,6 +806,31 @@ cron.schedule('*/1 * * * *', async function() {
                 if (saved) {
                   try {
                     updateSavedToSP("ClientSurvey", data._id);
+                  }
+                  catch (error) {
+                    console.log(error);
+                  }
+                }
+              })
+              .catch(function(e){
+                console.log("error")
+                console.log(e)
+              })
+        }
+    })
+
+    await getProviderSurveyNotSP()
+    .then(async cursor => {
+        var results = await cursor.toArray()
+        console.log(results.length)
+        for (const data of results){
+          clean(data)
+          await saveListProviderSurvey(data)
+              .then(function(saved){
+                // save values to mongo db
+                if (saved) {
+                  try {
+                    updateSavedToSP("ServiceProvider", data._id);
                   }
                   catch (error) {
                     console.log(error);

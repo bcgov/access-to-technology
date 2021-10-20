@@ -314,6 +314,53 @@ module.exports = {
             }
         });
     },
+
+    getProviderValues: async function (values) {
+        return await connection
+        .then(mClient => {
+            // get a handle on the db
+            return mClient.db();
+        }).then(async db => {
+            // get our values from db 
+            return db.collection("ServiceProvider").find({referral_wid: values.id}).toArray();
+        });
+    },
+
+    saveProviderSurveyValues: async function (values) {
+        return await connection
+        .then(mClient => {
+            // get a handle on the db
+            return mClient.db();
+        }).then(async db => {
+            // add our values to db (they are always new)
+            return db.collection("ServiceProvider").updateOne(
+                {
+                    referral_wid: values.referral_wid,
+                },
+                { 
+                    $set : {
+                        easeOfApplicationCompletion: values.easeOfApplicationCompletion,
+                        applicationProcessingSpeed: values.applicationProcessingSpeed,
+                        otherTrainingProgramsSuggestions: values.otherTrainingProgramsSuggestions,
+                        overallExperienceWithOnlineApplicationProcess: values.overallExperienceWithOnlineApplicationProcess,
+                        //step 2
+                        programsSupportOfClient: values.programsSupportOfClient,
+                        levelOfSupportsReceived: values.levelOfSupportsReceived,
+                        overallExperienceWithOrganization: values.overallExperienceWithOrganization,
+                        completed:true,
+                        saveToSP:false,
+
+                    }
+                },
+                {
+                    upsert: false
+                }
+
+            )
+                 
+        });
+    },
+
     printValues: function(collection) {
         const client = getClient();
         client.connect().then(mc => {

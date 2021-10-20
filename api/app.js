@@ -21,6 +21,7 @@ var sendConsentFormRouter = require('./routes/sendConsentForm');
 var courseCompletionSurveyRouter = require('./routes/courseCompletionSurvey');
 var employmentSurveyRouter = require('./routes/employmentSurvey')
 var participantSurveyRouter = require('./routes/participantSurvey')
+var serviceProviderSurveyRouter = require('./routes/serviceProviderSurvey')
 
 var app = express();
 
@@ -39,4 +40,5 @@ app.use('/api/sendConsentForm',sendConsentFormRouter)
 app.use('/api/courseCompletionSurvey',courseCompletionSurveyRouter)
 app.use('/api/employmentSurvey',employmentSurveyRouter)
 app.use('/api/participantSurvey',participantSurveyRouter)
+app.use('/api/serviceProviderSurvey',serviceProviderSurveyRouter)
 module.exports = app;

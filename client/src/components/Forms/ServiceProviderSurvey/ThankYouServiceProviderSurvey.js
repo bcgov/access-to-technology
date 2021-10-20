@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 
-class ThankyouSurveyParticipant extends Component {
+class ThankyouServiceProviderSurvey extends Component {
     get handleThankYouPage(){
         if (this.props.location.state !== undefined){
             if (this.props.location.state.hasStartedWorkExperience === "yes"){
@@ -29,13 +29,19 @@ class ThankyouSurveyParticipant extends Component {
                 <div className="row">
                     <div className="col-md-12">
                         <h1>Thank you, your information has been received.</h1>
-                        {this.handleThankYouPage}
-                        <ul>
-                            <li>Discover job options and services designed to support British Columbians with disabilities by clicking <a href="https://www.workbc.ca/Resources-for/People-with-Disabilities.aspx" target="_blank" rel="noopener noreferrer" onClick={ () => window._paq.push(['trackEvent', 'ThankYouParticipant', 'Discover'])}> here.</a></li>
-                            <li>The Wage Subsidy program covers a part of employee wages so employers can hire job seekers. Find out more by clicking <a href="https://www.workbc.ca/Employment-Services/Wage-Subsidy.aspx" target="_blank" rel="noopener noreferrer" onClick={ () => window._paq.push(['trackEvent', 'ThankYouParticipant', 'WageSubsidy'])}>here</a>.</li>
-                            <li>Do you know what are the Top 10 Trades with the highest demand in BC? Find out more by clicking <a href="https://www.workbc.ca/Labour-Market-Industry/Top-Demand-Trades.aspx" target="_blank" rel="noopener noreferrer" onClick={() => window._paq.push(['trackEvent', 'ThankYouParticipant', 'Top10Trades'])}> here</a>.</li>
-                            <li>Learn more about WorkBC Centres and how they can help you by clicking <a href="https://www.workbc.ca/Employment-Services/WorkBC-Centres.aspx" target="_blank" rel="noopener noreferrer" onClick={() => window._paq.push(['trackEvent', 'ThankYouParticipant', 'LearnMore'])}> here</a>.</li>
-                        </ul>
+                        
+                        <p>Thank you for taking the time to help make the Access to Technology (A2T) program better. As a Service Provider participating in the program, your views are very valuable and your contribution is much appreciated.</p>
+                        
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-lg-8">
+                        <div>
+                            <div className="alert alert-dismissible alert-success">
+                                <button type="button" className="close" data-dismiss="alert">×</button>
+                                <strong>Complete!</strong> <br/>Your submission has been received.
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -43,4 +49,4 @@ class ThankyouSurveyParticipant extends Component {
     }
 }
 
-export default ThankyouSurveyParticipant
+export default ThankyouServiceProviderSurvey
