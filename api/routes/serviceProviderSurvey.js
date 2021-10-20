@@ -20,6 +20,7 @@ router.get('/', csrfProtection, (req, res) => {
 
  router.get('/getData/:id', csrfProtection, async(req, res) => {
   console.log(req.params);
+  console.log("getData was called")
   await getProviderValues(req.params).then(function(result) {
     if(result[0] !== undefined){
       res.send({
