@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var csrf = require('csurf');
 var csrfProtection = csrf({ cookie: true });
-var SurveyParticipantValidationSchema = require('../schemas/SurveyParticipantValidationSchema')
+var ServiceProviderSurveyValidationSchema = require('../schemas/ServiceProviderSurveyValidationSchema')
 var clean = require('../utils/clean')
 var {getProviderValues, saveProviderSurveyValues} = require("../utils/mongoOperations");
 
@@ -18,18 +18,16 @@ router.get('/', csrfProtection, (req, res) => {
     });
   })
 
- router.get('/getData/:id/', csrfProtection, async(req, res) => {
+ router.get('/getData/:id', csrfProtection, async(req, res) => {
   console.log(req.params);
   await getProviderValues(req.params).then(function(result) {
     if(result[0] !== undefined){
       res.send({
-        serviceProvider: result[0].serviceProviderName,
-        clientName: result[0].clientName,
-        clientLastName: result[0].clientLastName,
-        fundingSource: result[0].fundingSource,
-        serviceProviderEmail: result[0].serviceProviderEmail,
-        clientEmail:result[0].clientEmail,
-        results: result[0],
+        firstName: result[0].firstname,
+        userChannelId: result[0].userChannelId,
+        cohort: result[0].cohort,
+        referral_wid: result[0].referral_wid,
+        completed: result[0].completed,
 
       });
     }else{
@@ -43,7 +41,7 @@ router.get('/', csrfProtection, (req, res) => {
 //post
   router.post('/', csrfProtection, async (req, res) => {
     clean(req.body);
-    SurveyParticipantValidationSchema.validate(req.body, { abortEarly: false })
+    ServiceProviderSurveyValidationSchema.validate(req.body, { abortEarly: false })
     .then(async function (value) {
       try {
         await saveProviderSurveyValues(value)

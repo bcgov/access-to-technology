@@ -1,16 +1,18 @@
 import React from 'react'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import Home from './Home'
+
 import ProviderIntakeForm from './components/Forms/ProviderIntakeForm/ProviderIntakeForm'
 import ThankYouProviderIntake from './components/Forms/ProviderIntakeForm/thankyouProviderIntake'
+
 import ParticipantIntakeForm from './components/Forms/ParticipantForm/ParticipantForm'
 import ThankYouParticipant from './components/Forms/ParticipantForm/thankyouParticipant'
+
 import SendConsentForm from './components/Forms/SendConsentForm/SendConsentForm'
 import ThankYouSendConsent from './components/Forms/SendConsentForm/thankyouSendConsent'
 
-import SurveyParticipant from './components/Forms/ServiceProviderSurvey/SurveyParticipant'
-import ThankYouSurveyParticipant from './components/Forms/ServiceProviderSurvey/ThankYouSurveyParticipant'
-import SurveyStartParticipant from './components/Forms/ServiceProviderSurvey/SurveyStartParticipant'
+import ServiceProviderSurvey from './components/Forms/ServiceProviderSurvey/ServiceProviderSurvey'
+import ThankYouServiceProviderSurvey from './components/Forms/ServiceProviderSurvey/ThankYouServiceProviderSurvey'
 
 import CourseCompletionSurvey from './components/Forms/CourseCompletionSurvey/CourseCompletionSurvey'
 import ThankYouCourseCompletion from './components/Forms/CourseCompletionSurvey/thankyouCourseCompletion'
@@ -41,10 +43,8 @@ function Main() {
                     <Route path="/SendConsentForm" component={SendConsentForm} />
                     <Route path="/thankyouSendConsent" component={ThankYouSendConsent} />
                     
-                    <Route path="/surveyParticipant/2" component={SurveyParticipant} />
-                    <Route path="/thankyouSurveyParticipant" component={ThankYouSurveyParticipant} />
-                    <Route path="/surveyLandingParticipant/:intake?" component={SurveyStartParticipant} />
-                    <Route path="/surveyParticipant/3" component={SurveyParticipant} />
+                    <Route path="/ServiceProviderSurvey/:id/" component={ServiceProviderSurvey} />
+                    <Route path="/thankyouServiceProviderSurvey" component={ThankYouServiceProviderSurvey} />
 
                     <Route path="/courseCompletionSurvey/:id/:token/" component={CourseCompletionSurvey} />
                     <Route path="/thankyouCourseCompletion" component={ThankYouCourseCompletion} />

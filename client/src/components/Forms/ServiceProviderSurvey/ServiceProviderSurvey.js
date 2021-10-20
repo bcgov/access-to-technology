@@ -3,26 +3,32 @@ import {withRouter} from 'react-router-dom'
 import {Formik, Form} from 'formik'
 import {generateAlert} from '../shared/Alert'
 import {customAlphabet} from 'nanoid'
-import SurveyParticipantStep0 from './SurveyParticipantStep0'
-import SurveyParticipantStep1 from './SurveyParticipantStep1'
-import SurveyParticipantStep2 from './SurveyParticipantStep2'
-import SurveyParticipantStep3 from './SurveyParticipantStep3'
-import SurveyParticipantStep4 from './SurveyParticipantStep4'
+import ServiceProviderSurveyStep0 from './ServiceProviderSurveyStep0'
+import ServiceProviderSurveyStep1 from './ServiceProviderSurveyStep1'
+import ServiceProviderSurveyStep2 from './ServiceProviderSurveyStep2'
 import ProgressTracker from './ProgressTracker'
-import { SurveyParticipantValidationSchema } from './SurveyParticipantValidation'
+import { ServiceProviderSurveyValidationSchema } from './ServiceProviderSurveyValidation'
 import { FORM_URL } from '../../../constants/form'
-import qs from 'qs'
+import {pathToRegexp} from 'path-to-regexp'
 
-class SurveyParticipant extends Component {
+class ServiceProviderSurvey extends Component {
     constructor(){
         super()
+        var key = []
         const nanoid = customAlphabet('0123456789abcdefghijklmnopqrstuvwxyz',5)
+        var re = pathToRegexp('/:id', key)
+        var sample = window.location.href.split("/ServiceProviderSurvey")[1]
+        var content = re.exec(sample) //[/id/token/, id, token]]
         this.state={
             currentStep: 0,
             _csrf: '',
             _id: nanoid(),
             _uid: '',
-            _intake: '',
+            _intake:'',
+            completed: false,
+            firstName:'',
+            cohort:'',
+            referral_wid: content[1],
             hasError: false,
             invalidLink: false,
         }
@@ -31,40 +37,61 @@ class SurveyParticipant extends Component {
     }
 
     componentDidMount() {
-        fetch(FORM_URL.surveyParticipant, {
+        fetch(FORM_URL.serviceProviderSurvey, {
             credentials: "include"
         })
             .then(res => res.json())
             .then(
                 (result) => {
-                    //console.log(result)
+                    console.log(result)
                     this.setState({
                         _csrf: result.csrfToken,
                     })
                 },
                 (error) => {
-                    //console.log(error)
+                    console.log(error)
                     this.setState({
                         hasError: true
                     })
                 }
             )
-        let uid = qs.parse(this.props.location.search, { ignoreQueryPrefix: true }).uid || ""
-        if (uid === ""){
-            this.setState({invalidLink: false})
-        }
-        this.setState({"_uid": uid})
-        if (this.props.match.path === "/surveyParticipant/2"){
-            this.setState({_intake: '2'})
-        } else if (this.props.match.path === "/surveyParticipant/3"){
-            this.setState({_intake: '3'})
-        }
+        this.getContext(this.state);
+    }
+
+    getContext(values){
+        fetch(FORM_URL.serviceProviderSurvey+"/getData/"+values.referral_wid,  {
+            credentials: "include",
+        }).then(res => res.json())
+        .then(
+            (result) => {
+                if(result.err === "Not Found"){
+                    this.setState({
+                        hasError: true,
+                        invalidLink:true,
+                    })
+                }else{
+                    console.log(result);
+                    this.setState({
+                        firstName:result.firstName,
+                        cohort:result.cohort,
+                        completed:result.completed,
+                    })
+                }
+            },
+            (error) => {
+                console.log(error)
+                //set to true to enforces
+                this.setState({
+                        hasError: false
+                })
+            }
+        )
     }
 
     _next() {
         this.setState( prevState => {
             return {
-                currentStep: prevState.currentStep >= 3 ? 4 : prevState.currentStep + 1
+                currentStep: prevState.currentStep >= 1 ? 2 : prevState.currentStep + 1
             }
         })
     }
@@ -92,20 +119,23 @@ class SurveyParticipant extends Component {
         return null;
     }
 
-    nextButton(hasStartedWorkExperience){
+    get nextButton(){
         let currentStep = this.state.currentStep;
 
-        if(currentStep < 4 && hasStartedWorkExperience === "yes" && !this.state.invalidLink){
+        if( currentStep < 2 && !this.state.invalidLink && !this.state.completed){
           return (
             <button 
               className="btn btn-primary float-right" 
               type="button" onClick={this._next}
             >
-            Next
+            {(currentStep === 0)? "Start": "Next"}
             </button>        
           )
+        } else{
+            return (
+                <div>
+                </div>     )   
         }
-        return null;
     }
 
     render() {
@@ -113,12 +143,17 @@ class SurveyParticipant extends Component {
             <div className="container">
                 <div className="row">
                     <div className="col-md-12">
+                        { (this.state.currentStep > 0) &&
                         <ProgressTracker currentStep={this.state.currentStep}/>
+                        }
                         {this.state.hasError && (
                             generateAlert("alert-danger","An error has occurred, please refresh the page. If the error persists, please try again later.")
                         )}
                         {this.state.invalidLink && (
                             generateAlert("alert-danger","Invalid link, please use the link that was sent to you through email.")
+                        )}
+                          {this.state.completed && (
+                            generateAlert("alert-danger","Your Survey has already been submitted. Thank you.")
                         )}
                         <Formik
                             initialValues={{
@@ -126,28 +161,23 @@ class SurveyParticipant extends Component {
                                 _id: this.state._id,
                                 _uid: this.state._uid,
                                 _intake: this.state._intake,
-                                hasStartedWorkExperience: '',
-                                workExperienceStartDate: '',
+                                referral_wid: this.state.referral_wid,
+                                cohort: this.state.cohort,
                                 //step 1
                                 easeOfApplicationCompletion: '',
-                                experienceOnlineApplicationComments: '',
+                                applicationProcessingSpeed: '',
+                                otherTrainingProgramsSuggestions: '',
+                                overallExperienceWithOnlineApplicationProcess: '',
                                 //step 2
-                                overallExperienceWithOrganization: '',
+                                programsSupportOfClient: '',
                                 levelOfSupportsReceived: '',
-                                increasedAbilityGettingAndKeepingJob: '',
-                                organizationAndExperienceComments: '',
-                                //step 3
-                                receivedOtherWorkBCServicesOrPrograms: '',
-                                likelyToParticipateInSimilarProgram: '',
-                                likelyToRecommendGrant: '',
-                                //step 4
-                                bestPartOfTheProgramComments: '',
-                                experienceBetterComments: '',
+                                overallExperienceWithOrganization: '',
+
                             }}
                             enableReinitialize={true}
-                            validationSchema={SurveyParticipantValidationSchema}
+                            validationSchema={ServiceProviderSurveyValidationSchema}
                             onSubmit={(values, { resetForm, setErrors, setStatus, setSubmitting }) => {
-                                fetch(FORM_URL.surveyParticipant, {
+                                fetch(FORM_URL.serviceProviderSurvey, {
                                     method: "POST",
                                     credentials: 'include',
                                     headers: {
@@ -169,7 +199,7 @@ class SurveyParticipant extends Component {
                                                 })
                                             } else if (resp.ok) {
                                                 setSubmitting(false)
-                                                this.props.history.push('/thankYouSurveyParticipant', values)
+                                                this.props.history.push('/thankYouServiceProviderSurvey', values)
                                             }
                                         }
                                     )
@@ -178,29 +208,22 @@ class SurveyParticipant extends Component {
                         {props => (
                             
                             <Form>
-                                <SurveyParticipantStep0
+                                <ServiceProviderSurveyStep0
                                     currentStep={this.state.currentStep}
                                     {...props}
                                 />
-                                <SurveyParticipantStep1
+                                <ServiceProviderSurveyStep1
                                     currentStep={this.state.currentStep}
                                     {...props}
                                 />
-                                <SurveyParticipantStep2
+                                <ServiceProviderSurveyStep2
                                     currentStep={this.state.currentStep}
                                     {...props}
                                 />
-                                <SurveyParticipantStep3
-                                    currentStep={this.state.currentStep}
-                                    {...props}
-                                />
-                                <SurveyParticipantStep4
-                                    currentStep={this.state.currentStep}
-                                    {...props}
-                                />
+                               
 
                                 {this.previousButton}
-                                {this.nextButton(props.values.hasStartedWorkExperience)}
+                                {this.nextButton}
                             </Form>
                         )}
 
@@ -213,5 +236,5 @@ class SurveyParticipant extends Component {
 
 }
 
-export default withRouter(SurveyParticipant);
+export default withRouter(ServiceProviderSurvey);
 

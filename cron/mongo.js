@@ -318,6 +318,23 @@ module.exports = {
             return doc
         })    
     },
+
+    getProviderSurveyNotSP: async function () {
+        return await connection
+        .then(mClient => {
+            // get a handle on the db
+            return mClient.db();
+            //return db
+        })
+        .then(async db => {
+        // add our values to db (they are always new)
+            return db.collection("ServiceProvider").find({savedToSP: false})
+                //console.log(err)
+                //console.log(doc)
+        }).then(async doc =>{
+            return doc
+        })    
+    },
     
 
     /*
