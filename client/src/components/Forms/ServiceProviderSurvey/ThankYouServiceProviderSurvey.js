@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 
-class ThankyouServiceProviderSurvey extends Component {
+class ThankYouServiceProviderSurvey extends Component {
     get handleThankYouPage(){
         if (this.props.location.state !== undefined){
             if (this.props.location.state.hasStartedWorkExperience === "yes"){
@@ -49,4 +49,4 @@ class ThankyouServiceProviderSurvey extends Component {
     }
 }
 
-export default ThankyouServiceProviderSurvey
+export default ThankYouServiceProviderSurvey
