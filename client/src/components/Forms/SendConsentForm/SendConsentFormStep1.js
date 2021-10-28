@@ -39,18 +39,7 @@ class FormStep1 extends Component {
                         <option value="KNC - Ktunaxa Nation Council">KNC - Ktunaxa Nation Council</option>
 
                         
-                        {/* WHEN EDITING THESE OPTIONS ENSURE YOU UPDATE THEIR ELIGIBLE PROGRAM REFERENCES BELOW (COPY-PASTE)
-                        <option value="ACCESS - Aboriginal Community Career Employment Services Society">ACCESS - Aboriginal Community Career Employment Services Society</option>
-                        <option value="CCATEC - Cariboo Chilcotin Aboriginal Training Employment Centre">CCATEC - Cariboo Chilcotin Aboriginal Training Employment Centre</option>
-                        <option value="CSETS - Coast Salish Employment and Training Society">CSETS - Coast Salish Employment and Training Society</option>
-                        <option value="Lil'wat Nation - Lil'wat Nation">Lil'wat Nation - Lil'wat Nation</option>
-                        <option value="MCFNTS - Mid Coast First Nations Training Society">MCFNTS - Mid Coast First Nations Training Society</option>
-                        <option value="MSTETS - Musqueam, Squamish, Tsleil-Waututh Training Society">MSTETS - Musqueam, Squamish, Tsleil-Waututh Training Society</option>
-                        <option value="NLG - Nisga'a Lisims Government">NLG - Nisga'a Lisims Government</option>
-                        <option value="OTDC - Okanagan Training and Development Council">OTDC - Okanagan Training and Development Council</option>
-                        <option value="SASET - Sto:lo Aboriginal Skills and Employment Training">SASET - Sto:lo Aboriginal Skills and Employment Training</option>
-                        <option value="TFN - Tsawwassen First Nation">TFN - Tsawwassen First Nation</option>
-                        */}
+                        {/*  WHEN EDITING THESE OPTIONS ENSURE YOU UPDATE THEIR ELIGIBLE PROGRAMS IN SHAREPOINT and IN SEND CONSENT FORM STEP 1 */}
                        
 
                     </Field>

@@ -224,18 +224,9 @@ class ProviderIntakeForm extends Component {
 
                                     //step 2:pop-up fields
                                     recipientName:"",
-                                    /*clientResidesInBC:"",
-                                    clientUnemployed:"",
-                                    registeredInApprovedProgram:"",
-                                    accessToComputerCurrently:"",
-                                    receivingAlternateFunding:"",
-                                    financialNeed:"",*/
-                                    //step 3
-                                    //signatoryTitle:"",
-                                    //signatory1:"",
                                     clientEligibility:false,
                                     serviceProviderResponsibility:false,
-                                    //organizationConsent: false,
+                                    
     
 
 

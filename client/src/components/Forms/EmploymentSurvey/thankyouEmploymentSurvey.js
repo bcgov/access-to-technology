@@ -10,7 +10,7 @@ class thankyouEmploymentSurvey extends Component {
             <div className="container">
                 <div className="row">
                     <div className="col-md-12">
-                        <h1>Thank you for submitting your clients employment survey!</h1>
+                        <h1>Thank you for submitting your client's employment survey!</h1>
                         <h3>Application ID: {this.props.location.state !== undefined && this.props.location.state._id}</h3>
                         
                     </div>

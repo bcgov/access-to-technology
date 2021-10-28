@@ -44,6 +44,64 @@ function myTrim(x) {
 
 module.exports = {
 
+    /******************************/
+    /* GET FUNCTIONS BEING CALLED */
+    /******************************/
+    // GET VALUES FROM SERVICEPROVIDER TABLE TO VERIFY SURVEY LINK
+    getProviderValues: async function (values) {
+        return await connection
+        .then(mClient => {
+            // get a handle on the db
+            return mClient.db();
+        }).then(async db => {
+            // get our values from db 
+            return db.collection("ServiceProvider").find({referral_wid: values.id}).toArray();
+        });
+    },
+    // GET VALUES FROM PROVIDERINTAKE TABLE TO VERIFY LINK AND PROVIDE CONTEXT 
+    getParticipantValues: async function (values) {
+        return await connection
+        .then(mClient => {
+            // get a handle on the db
+            return mClient.db();
+        }).then(async db => {
+            // get our values from db 
+            return db.collection("ProviderIntake").find({applicationId: values.id, _token: values.token}).toArray();
+        });
+    },
+    /*********************************/
+    /* UPDATE FUNCTIONS BEING CALLED */
+    /*********************************/
+    // UPDATE VALUES IN PROVIDER INTAKE TABLE TO STATE APPLICANT HAS COMPLETED THE CLIENT SURVEY
+    updateParticipantSurveyCompleted: async function(values){
+        return await connection
+        .then(mClient => {
+            // get a handle on the db
+            return mClient.db();
+        }).then(async db => {
+            // add our values to db (they are always new)
+            console.log(values);
+            return db.collection("ProviderIntake").updateOne(
+                {
+                    applicationId: values._id,
+                    _token: values._token,
+                },
+                { 
+                    $set : {
+                       clientSurveyCompleted:true,
+                    }
+                },
+                {
+                    upsert: false
+                });
+                 
+        });
+    },
+
+    /*******************************/
+    /* SAVE FUNCTIONS BEING CALLED */
+    /*******************************/
+    // SAVE VALUES IN PROVIDER INTAKE TABLE TO CREATE APPLICATION INSTANCE (SAVING OF SERVICEPROVIDER SENT CONSENT)
     saveConsentValues: async function (values) {
         return await connection
         .then(mClient => {
@@ -62,7 +120,7 @@ module.exports = {
                 })
         });
     },
-    //Deprecated participant values get saved at provider form
+    // SAVE CONSENT SUBMISSION VALUES IN PROVIDER INTAKE TABLE 
     saveParticipantValues: async function (values) {
         return await connection
         .then(mClient => {
@@ -96,18 +154,7 @@ module.exports = {
                  
         });
     },
-
-    getParticipantValues: async function (values) {
-        return await connection
-        .then(mClient => {
-            // get a handle on the db
-            return mClient.db();
-        }).then(async db => {
-            // get our values from db 
-            return db.collection("ProviderIntake").find({applicationId: values.id, _token: values.token}).toArray();
-        });
-    },
-
+    // SAVE SERVICE PROVIDERS COURSE COMPLETION SURVEY SUBMISSION VALUES IN PROVIDER INTAKE TABLE 
     saveCourseCompletionSurvey: async function (values) {
         return await connection
         .then(mClient => {
@@ -135,7 +182,7 @@ module.exports = {
                  
         });
     },
-
+    // SAVE SERVICE PROVIDERS EMPLOYMENT STATUS SURVEY SUBMISSION VALUES IN PROVIDER INTAKE TABLE 
     saveEmploymentSurvey: async function (values) {
         return await connection
         .then(mClient => {
@@ -163,32 +210,7 @@ module.exports = {
                  
         });
     },
-    
-    updateParticipantSurveyCompleted: async function(values){
-        return await connection
-        .then(mClient => {
-            // get a handle on the db
-            return mClient.db();
-        }).then(async db => {
-            // add our values to db (they are always new)
-            console.log(values);
-            return db.collection("ProviderIntake").updateOne(
-                {
-                    applicationId: values._id,
-                    _token: values._token,
-                },
-                { 
-                    $set : {
-                       clientSurveyCompleted:true,
-                    }
-                },
-                {
-                    upsert: false
-                });
-                 
-        });
-    },
-
+    // SAVE CLIENT SURVEY SUBMISSION VALUES IN CLIENT SURVEY TABLE - COMPLETION IS NOTED IN PROVIDER INTAKE TABLE UNDER UPDATE CLIENT SURVEY COMPLETED
     saveParticipantSurveyValues: async function (values) {
         return await connection
         .then(mClient => {
@@ -210,6 +232,7 @@ module.exports = {
         })
     },
 
+    // SAVE SERVICE PROVIDERS FILLED OUT APPLICATION TO PROVIDER INTAKE
     saveProviderIntakeValues: async function (values) {
         return await connection
         .then(mClient => {
@@ -314,18 +337,7 @@ module.exports = {
             }
         });
     },
-
-    getProviderValues: async function (values) {
-        return await connection
-        .then(mClient => {
-            // get a handle on the db
-            return mClient.db();
-        }).then(async db => {
-            // get our values from db 
-            return db.collection("ServiceProvider").find({referral_wid: values.id}).toArray();
-        });
-    },
-
+    // SAVE SERVICE PROVIDERS SURVEY SUBMISSION VALUES IN SERVICE PROVIDER TBALE
     saveProviderSurveyValues: async function (values) {
         return await connection
         .then(mClient => {
@@ -345,8 +357,8 @@ module.exports = {
                         overallExperienceWithOnlineApplicationProcess: values.overallExperienceWithOnlineApplicationProcess,
                         //step 2
                         programsSupportOfClient: values.programsSupportOfClient,
-                        levelOfSupportsReceived: values.levelOfSupportsReceived,
-                        overallExperienceWithOrganization: values.overallExperienceWithOrganization,
+                        likelyToRecommendProgram: values.likelyToRecommendProgram,
+                        experienceBetterComments: values.experienceBetterComments,
                         completed:true,
                         savedToSP:false,
 

@@ -94,7 +94,7 @@ class ParticipantSurvey extends Component {
                 this.setState({
                     clientName:clientData.clientName,
                     clientLastName:clientData.clientLastName,
-                    resubmit: clientData.hasOwnProperty("clientSurveyCompleted"),
+                    resubmit: clientData.clientSurveyCompleted,
                 })
             }
             })

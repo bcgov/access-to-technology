@@ -80,25 +80,11 @@ class thankyouProviderIntake extends Component {
                                 <h3>Client Eligibility</h3>
                                 <p><b>Select which of the following form(s) of government assistance the client is receiving (choose all that apply):</b> <br/> {this.props.location.state !== undefined && this.props.location.state.BCEAorFederalOnReserve.join(" ")}</p>
                                 
-                              
-
-                             {/*}   <h5>Client Eligibility and Need Assessment </h5>
-                                <p>Is the Client a Resident of BC:  {this.props.location.state !== undefined && this.props.location.state.clientResidesInBC}</p>
-                                <p>is the client Unemployed or precariously employed:  {this.props.location.state !== undefined && this.props.location.state.clientUnemployed}</p>
-                                <p>Is the client participating in an approved eligible skills training and employment program:  {this.props.location.state !== undefined && this.props.location.state.registeredInApprovedProgram}</p>
-                                <p>Does the client not have access to a suitable computer and requires a computer to participate in online training:  {this.props.location.state !== undefined && this.props.location.state.accessToComputerCurrently}</p>
-                                <p>Is the client not receiving funding from another source for the purchase of the required technology :  {this.props.location.state !== undefined && this.props.location.state.ReceivingAlternateFunding}</p>
-                                <p>The service provider has confirmed the client has a demonstrated financial need to take part in this program : {this.props.location.state !== undefined && this.props.location.state.financialNeed}</p>
-                                */}
                                 <hr />                          
                                 <h3>Declaration and Signature</h3>
-                               {/* <p>Signing Authority Title:  {this.props.location.state !== undefined && this.props.location.state.signatory1}</p>
-                                <p>Signatory Authority Full Name:  {this.props.location.state !== undefined && this.props.location.state.signatoryTitle}</p>*/}
                                 <p><b>Client Eligibility Attestation:</b>  {this.props.location.state !== undefined && this.props.location.state.clientEligibility.toString()}</p>
                                 <p><b>Service Provider Responsibility Attestation:</b>  {this.props.location.state !== undefined && this.props.location.state.serviceProviderResponsibility.toString()}</p>
-                                {/*<p>I acknowledge and understand that by clicking the "submit" I am attaching my electronic signature to this form and that 
-                                    by doing so I acquire the same rights, incur the same obligations and confer the same consent as I would by manually 
-                            signing a physical copy of this form :  {this.props.location.state !== undefined && this.props.location.state.organizationConsent.toString()}</p>*/}
+                                
                         <hr />
                     </div>
                 </div>

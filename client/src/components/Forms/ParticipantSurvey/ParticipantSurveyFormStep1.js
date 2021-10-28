@@ -20,7 +20,7 @@ class FormStep1 extends Component {
         else if( this.props.values.resubmit === true){
             return (
                 <div>
-                    <p>Thank You. Your survey has already been submitted. </p>
+                    <p>Your survey has either expired or already been completed. Thank you for you time.</p>
                 </div>
             )
 
