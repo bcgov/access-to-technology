@@ -908,7 +908,7 @@ function getSurveyEndDateOver(date){
   const timeOut = new Date(endDate.setDate(endDate.getDate() + (57)));
   timeOut.setHours(0, 0, 0, 0)
   todaysDate.setHours(0, 0, 0, 0)
-  return TodaysDate.getTime() >= timeOut.getTime();
+  return todaysDate.getTime() >= timeOut.getTime();
 }
 
 /*************************/
