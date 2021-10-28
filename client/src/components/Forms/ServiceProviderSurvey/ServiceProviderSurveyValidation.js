@@ -37,7 +37,7 @@ export const ServiceProviderSurveyValidationSchema = yup.object().shape({
             '4',
             '5'
         ]),
-    levelOfSupportsReceived: yup.string()
+    likelyToRecommendProgram: yup.string()
         .required("Please rate how likely your organization is to recommend the A2T program to other organizations.")
         .oneOf([
             '1',
@@ -46,6 +46,6 @@ export const ServiceProviderSurveyValidationSchema = yup.object().shape({
             '4',
             '5'
         ]),
-    overallExperienceWithOrganization: yup.string()
+    experienceBetterComments: yup.string()
         .max(1000, "Max characters of your program experience comments is 1000.")
 })

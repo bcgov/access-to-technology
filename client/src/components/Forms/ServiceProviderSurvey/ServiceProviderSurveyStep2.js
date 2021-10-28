@@ -35,11 +35,15 @@ class ServiceProviderSurveyStep2 extends Component {
                     </div>
                     <div className="row">
                         <div className="col-md-6 col-sm-12 col-xs-12">
-                            <label className="control-label" htmlFor="programsSupportOfClient">The Access to Technology (A2T) program is
+                            {(this.props.values.cohort) === 1 &&
+                                <label className="control-label" htmlFor="programsSupportOfClient">The Access to Technology (A2T) program is
 
-significantly supporting my clients to complete their
+                                    significantly supporting my clients to complete their
 
-training<span style={{ color: "red" }}>*</span></label>
+                                    training<span style={{ color: "red" }}>*</span></label>}
+                            {(this.props.values.cohort) === 2 &&
+                                <label className="control-label" htmlFor="programsSupportOfClient">The Access to Technology (A2T) program has the potential to significantly support my clients to complete their training.<span style={{ color: "red" }}>*</span></label>}
+
                         </div>
                         <div className="form-check col">
                             <Field
@@ -92,75 +96,75 @@ training<span style={{ color: "red" }}>*</span></label>
                 <div className="form-group">
                     <div className="row">
                         <div className="col-md-6 col-sm-12 col-xs-12">
-                            <label className="control-label" htmlFor="levelOfSupportsReceived">My organization would recommend the Access to
+                            <label className="control-label" htmlFor="likelyToRecommendProgram">My organization would recommend the Access to
 
 Technology (A2T) program to other organizations.<span style={{ color: "red" }}>*</span></label>
                         </div>
                         <div className="form-check col">
                             <Field
-                                className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "levelOfSupportsReceived")}`}
+                                className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "likelyToRecommendProgram")}`}
                                 type="radio"
-                                name="levelOfSupportsReceived"
+                                name="likelyToRecommendProgram"
                                 value="1"
                             />
                             <label className="form-check-label">1</label>
                         </div>
                         <div className="form-check col">
                             <Field
-                                className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "levelOfSupportsReceived")}`}
+                                className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "likelyToRecommendProgram")}`}
                                 type="radio"
-                                name="levelOfSupportsReceived"
+                                name="likelyToRecommendProgram"
                                 value="2"
                             />
                             <label className="form-check-label">2</label>
                         </div>
                         <div className="form-check col">
                             <Field
-                                className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "levelOfSupportsReceived")}`}
+                                className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "likelyToRecommendProgram")}`}
                                 type="radio"
-                                name="levelOfSupportsReceived"
+                                name="likelyToRecommendProgram"
                                 value="3"
                             />
                             <label className="form-check-label">3</label>
                         </div>
                         <div className="form-check col">
                             <Field
-                                className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "levelOfSupportsReceived")}`}
+                                className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "likelyToRecommendProgram")}`}
                                 type="radio"
-                                name="levelOfSupportsReceived"
+                                name="likelyToRecommendProgram"
                                 value="4"
                             />
                             <label className="form-check-label">4</label>
                         </div>
                         <div className="form-check col">
                             <Field
-                                className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "levelOfSupportsReceived")}`}
+                                className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "likelyToRecommendProgram")}`}
                                 type="radio"
-                                name="levelOfSupportsReceived"
+                                name="likelyToRecommendProgram"
                                 value="5"
                             />
                             <label className="form-check-label">5</label>
-                            {feedBackInvalid(this.props.errors, this.props.touched, "levelOfSupportsReceived")}
+                            {feedBackInvalid(this.props.errors, this.props.touched, "likelyToRecommendProgram")}
                         </div>
                     </div>
                 </div>
                 <div className="form-group">
-                    <label className="col-form-label control-label" htmlFor="overallExperienceWithOrganization">How can we make the experience better for your
+                    <label className="col-form-label control-label" htmlFor="experienceBetterComments">How can we make the experience better for your
 
 organization? Please feel free to include any comments,
 
 suggestions, or feedback about the program.
                 </label>
-                    <small className="text-muted" id="overallExperienceWithOrganization"> (1000 characters max.)</small>
+                    <small className="text-muted" id="experienceBetterComments"> (1000 characters max.)</small>
                     <Field
                         as="textarea"
                         className="form-control"
-                        id="overallExperienceWithOrganization"
-                        name="overallExperienceWithOrganization"
+                        id="experienceBetterComments"
+                        name="experienceBetterComments"
                         rows="4"
                         maxLength="1000"
                     />
-                    <small>{this.props.values.overallExperienceWithOrganization.length}/1000</small>
+                    <small>{this.props.values.experienceBetterComments.length}/1000</small>
                 </div>
                 <div className="form-group">
                     {this.showErrors}

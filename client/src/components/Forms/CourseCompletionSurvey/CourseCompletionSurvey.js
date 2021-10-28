@@ -177,7 +177,7 @@ class CourseCompletionSurvey extends Component {
         else if( this.state.resubmit === true){
             return (
                 <div>
-                    <p>Thank You. Your clients Training Completion survey has already been submitted. </p>
+                    <p>Thank You. Your client's Training Completion survey has already been submitted. </p>
                 </div>
             )
 
@@ -188,7 +188,6 @@ class CourseCompletionSurvey extends Component {
               
               <Form>
               <h2> Access to Technology (A2T) Client Course Completion Survey </h2>
-                {/* handleApplicationID handles all the pre populated values in future. <button className="btn btn-success d-print-none" onClick={() => window.print()}>Print Confirmation</button><br /><br />*/}
               
                     <div className="form-group">
                         <h3 id="forms" className="d-print-none">Application ID: {this.state._id}</h3>

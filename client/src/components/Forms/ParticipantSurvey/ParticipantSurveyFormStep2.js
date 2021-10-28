@@ -273,7 +273,7 @@ your training?
 
 Please feel free to include any comments, suggestions,
 
-or feedback about the program. (optional)
+or feedback about the program.
                 </label>
                     <small className="text-muted" id="feedBackAndExperienceComments"> (1000 characters max.)</small>
                     <Field

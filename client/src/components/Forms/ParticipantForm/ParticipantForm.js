@@ -126,8 +126,6 @@ class ParticipantForm extends Component {
         } 
         else if (this.state.clientConsent === true){
             return(<div>
-              
-               
                 <h2> Access to Technology (A2T) Client Consent and Agreement Form </h2> 
                                     {/* handleApplicationID handles all the pre populated values in future. <button className="btn btn-success d-print-none" onClick={() => window.print()}>Print Confirmation</button><br /><br />*/}
                                    

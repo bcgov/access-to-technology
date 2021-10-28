@@ -25,12 +25,10 @@ function getClient() {
 
 
 module.exports = {
-    /*
-    getClient: async function (values) {
-        const client = getClient();
-        return await client.connect()
-    },
-    */
+    /******************************/
+    /* GET FUNCTIONS BEING CALLED */
+    /******************************/
+    // GET ALL ITEMS IN PROVIDER INTAKE WHERE SAVEDTOSP = FALSE
     getProviderIntakeNotSP: async function () {
         return await connection
         .then(mClient => {
@@ -47,7 +45,7 @@ module.exports = {
             return doc
         })    
     },
-
+    // GET ALL ITEMS IN PROVIDER INTAKE TABLE WHERE PROCESSTIME = FALSE
     getIncomingProcessTimeNotTrue: async function () {
         return await connection
         .then(mClient => {
@@ -64,7 +62,7 @@ module.exports = {
             return doc
         })    
     },
-
+    // GET ALL ITEMS IN PROVIDER INTAKE WHERE COURSE COMPLETION UPDATE NEEDED AKA UPDATE SHAREPOINT WITH ANSWERS
     getCourseCompletionUpdateNeeded: async function () {
         return await connection
         .then(mClient => {
@@ -81,7 +79,273 @@ module.exports = {
             return doc
         })    
     },
-  
+    // GET ALL ITEMS IN PROVIDER INTAKE ONE MONTH SURVEY SENT DOES NOT EXISTS
+   getClientTrainingOneMonth: async function () {
+        return await connection
+        .then(mClient => {
+            // get a handle on the db
+            return mClient.db();
+            //return db
+        })
+        .then(async db => {
+        // add our values to db (they are always new)
+            return db.collection("ProviderIntake").find({oneMonthSurveysSent:{$exists:false}})
+            //console.log(err)
+            //console.log(doc)
+        }).then(async doc =>{
+            return doc
+        })    
+    },
+    // GET ALL ITEMS IN PROVIDER INTAKE WHERE ONEMONTHSURVEYSENT = TRUE AND CLIENT SURVEY COMPLETED = FALSE
+    getClientSurveyReminders: async function () {
+        return await connection
+        .then(mClient => {
+            // get a handle on the db
+            return mClient.db();
+            //return db
+        })
+        .then(async db => {
+        // add our values to db (they are always new)
+            return db.collection("ProviderIntake").find({oneMonthSurveysSent:true, clientSurveyCompleted:false})
+            //console.log(err)
+            //console.log(doc)
+        }).then(async doc =>{
+            return doc
+        })    
+    },
+    // GET ALL ITEMS IN PROVIDER INTAKE THREE MONTH SURVEY SENT DOES NOT EXISTS
+    getClientTrainingThreeMonth: async function () {
+        return await connection
+        .then(mClient => {
+            // get a handle on the db
+            return mClient.db();
+            //return db
+        })
+        .then(async db => {
+        // add our values to db (they are always new)
+            return db.collection("ProviderIntake").find({threeMonthSurveySent:{$exists:false}})
+            //console.log(err)
+            //console.log(doc)
+        }).then(async doc =>{
+            return doc
+        })    
+    },
+    // GET ALL ITEMS IN PROVIDER INTAKE WHERE EMPLOYMENT UPDATE NEEDED AKA UPDATE SHAREPOINT WITH ANSWERS
+    getEmploymentUpdateNeeded: async function () {
+        return await connection
+        .then(mClient => {
+            // get a handle on the db
+            return mClient.db();
+            //return db
+        })
+        .then(async db => {
+        // add our values to db (they are always new)
+            return db.collection("ProviderIntake").find({employmentUpdateNeeded: true})
+            //console.log(err)
+            //console.log(doc)
+        }).then(async doc =>{
+            return doc
+        })    
+    },
+    // GET ALL ITEMS IN CLIENT SURVEY TABLE WHERE SAVEDTOSP = FALSE
+    getClientSurveyNotSP: async function () {
+        return await connection
+        .then(mClient => {
+            // get a handle on the db
+            return mClient.db();
+            //return db
+        })
+        .then(async db => {
+        // add our values to db (they are always new)
+            return db.collection("ClientSurvey").find({savedToSP: false})
+                //console.log(err)
+                //console.log(doc)
+        }).then(async doc =>{
+            return doc
+        })    
+    },
+    // GET ALL ITEMS IN SERVICE PROVIDER TABLE WHERE SAVEDTOSP = FALSE
+    getProviderSurveyNotSP: async function () {
+        return await connection
+        .then(mClient => {
+            // get a handle on the db
+            return mClient.db();
+            //return db
+        })
+        .then(async db => {
+        // add our values to db (they are always new)
+            return db.collection("ServiceProvider").find({savedToSP: false})
+                //console.log(err)
+                //console.log(doc)
+        }).then(async doc =>{
+            return doc
+        })    
+    },
+    // GET ALL ITEMS IN SERVICE PROVIDER TABLE WHERE COMPLETED = FALSE
+    getProviderSurvey: async function () {
+        return await connection
+        .then(mClient => {
+            // get a handle on the db
+            return mClient.db();
+            //return db
+        })
+        .then(async db => {
+        // add our values to db (they are always new)
+            return db.collection("ServiceProvider").find({completed: false})
+                //console.log(err)
+                //console.log(doc)
+        }).then(async doc =>{
+            return doc
+        })    
+    },
+
+    /*********************************/
+    /* UPDATE FUNCTIONS BEING CALLED */
+    /*********************************/
+    // UPDATE ONEMONTHSURVEYSENT TO TRUE AND INITIALIZE REMINDERS TO FALSE, AND SURVEY COMPLETION TO FALSE (PROVIDER INTAKE)
+    updateOneMonthSurveysSent: async function(collection,_id){
+        return await connection
+        .then(mClient => {
+            // get a handle on the db
+            return mClient.db();
+            //return db
+        })
+        .then(async db => {
+        // add our values to db (they are always new)
+            return db.collection(collection).updateOne(
+                {
+                    _id: _id
+                },
+                { 
+                    $set : {
+                        oneMonthSurveysSent: true,
+                        clientSurveyCompleted: false,
+                        twoWeekReminderSent:false,
+                        fourWeekReminderSent:false,
+                    }
+                },
+                {
+                    upsert: false
+                }
+
+            )
+        }).then(result =>{
+            return result
+        })     
+    },
+    // UPDATE TWOWEEKREMINDERSENT TO TRUE (PROVIDER INTAKE)
+    updateTwoWeekReminderSent:  async function(collection,_id){
+        return await connection
+        .then(mClient => {
+            // get a handle on the db
+            return mClient.db();
+            //return db
+        })
+        .then(async db => {
+        // add our values to db (they are always new)
+            return db.collection(collection).updateOne(
+                {
+                    _id: _id
+                },
+                { 
+                    $set : {
+                     twoWeekReminderSent: true,
+                    }
+                },
+                {
+                    upsert: false
+                }
+
+            )
+        }).then(result =>{
+            return result
+        })     
+    },
+    // UPDATE FOURWEEKREMINDERSENT TO TRUE (PROVIDER INTAKE)
+    updateFourWeekReminderSent: async function(collection,_id){
+        return await connection
+        .then(mClient => {
+            // get a handle on the db
+            return mClient.db();
+            //return db
+        })
+        .then(async db => {
+        // add our values to db (they are always new)
+            return db.collection(collection).updateOne(
+                {
+                    _id: _id
+                },
+                { 
+                    $set : {
+                     fourWeekReminderSent: true,
+                    }
+                },
+                {
+                    upsert: false
+                }
+
+            )
+        }).then(result =>{
+            return result
+        })     
+    },
+    // UPDATE THREEMONTHSURVEYSENT TO TRUE (PROVIDER INTAKE)
+    updateThreeMonthSurveySent: async function(collection,_id){
+        return await connection
+        .then(mClient => {
+            // get a handle on the db
+            return mClient.db();
+            //return db
+        })
+        .then(async db => {
+        // add our values to db (they are always new)
+            return db.collection(collection).updateOne(
+                {
+                    _id: _id
+                },
+                { 
+                    $set : {
+                     threeMonthSurveySent: true,
+                    }
+                },
+                {
+                    upsert: false
+                }
+
+            )
+        }).then(result =>{
+            return result
+        })     
+    },
+    // UPDATE CLIENT SURVEY COMPLETED. TO DISABLE CLIENTS ENTERING SURVEY AFTER END DATE
+    updateSurveyPeriodOver: async function(collection,_id){
+        return await connection
+        .then(mClient => {
+            // get a handle on the db
+            return mClient.db();
+            //return db
+        })
+        .then(async db => {
+        // add our values to db (they are always new)
+            return db.collection(collection).updateOne(
+                {
+                    _id: _id
+                },
+                { 
+                    $set : {
+                     clientSurveyCompleted: true,
+                    }
+                },
+                {
+                    upsert: false
+                }
+
+            )
+        }).then(result =>{
+            return result
+        })     
+    },
+    // UPDATE SAVED TO SP AND THE SPID RETURN TO COLLECTION AND ID PROVIDED (PROVIDERINTAKE)
     updateSaveIdToSP: async function(collection,_id, appID){
         return await connection
         .then(mClient => {
@@ -113,7 +377,7 @@ module.exports = {
             return result
         })     
     },
-
+    // UPDATE SAVED TO SP TO TRUE FOR COLLECTION AND ID PROVIDED (USED FOR ALL TABLES)
     updateSavedToSP: async function(collection,_id){
         return await connection
         .then(mClient => {
@@ -144,7 +408,7 @@ module.exports = {
             return result
         })     
     },
-    
+    // UPDATE COURSECOMPLETIONUPDATE NEEDED TO FALSE (PROVIDERINTAKE COLLECTION)
     updateCourseCompletionUpdateToFalse: async function(collection,_id){
         return await connection
         .then(mClient => {
@@ -175,24 +439,7 @@ module.exports = {
             return result
         })     
     },
-    
-    getEmploymentUpdateNeeded: async function () {
-        return await connection
-        .then(mClient => {
-            // get a handle on the db
-            return mClient.db();
-            //return db
-        })
-        .then(async db => {
-        // add our values to db (they are always new)
-            return db.collection("ProviderIntake").find({employmentUpdateNeeded: true})
-            //console.log(err)
-            //console.log(doc)
-        }).then(async doc =>{
-            return doc
-        })    
-    },
-
+    // UPDATE EMPLOYMENTUPDATENEEDED TO FALSE (PROVIDERINTAKE COLLECTION)
     updateEmploymentUpdateToFalse: async function(collection,_id){
         return await connection
         .then(mClient => {
@@ -223,7 +470,7 @@ module.exports = {
             return result
         })     
     },
-
+    // UPDATE THE PROCESS TIME IN DB FOR GIVEN ID TO TRUE (PROVIDERINTAKE COLLECTION)
     updateProcessTimeToTrue: async function(collection,_id){
         return await connection
         .then(mClient => {
@@ -255,6 +502,10 @@ module.exports = {
         })     
     },
 
+    /***********************************************/
+    /* DUPLICATION CHECKING FUNCTIONS BEING CALLED */
+    /***********************************************/
+    // CHECK IF WORKBC NUMBER ALREADY EXISTS IN ENTRIES
     WorkBCCheck:async function (comparatorField) {
         if(comparatorField != null){
             return await connection
@@ -280,7 +531,7 @@ module.exports = {
             return false;
         }
     },
-    
+    // GET THE PERCENTAGE OF MATCHES ON OUR DUPLICATION CHECKING FIELDS
     duplicateCheck: async function (comparatorField) {
         return await connection
         .then(mClient => {
@@ -302,41 +553,7 @@ module.exports = {
     }, 
     
    
-    getClientSurveyNotSP: async function () {
-        return await connection
-        .then(mClient => {
-            // get a handle on the db
-            return mClient.db();
-            //return db
-        })
-        .then(async db => {
-        // add our values to db (they are always new)
-            return db.collection("ClientSurvey").find({savedToSP: false})
-                //console.log(err)
-                //console.log(doc)
-        }).then(async doc =>{
-            return doc
-        })    
-    },
-
-    getProviderSurveyNotSP: async function () {
-        return await connection
-        .then(mClient => {
-            // get a handle on the db
-            return mClient.db();
-            //return db
-        })
-        .then(async db => {
-        // add our values to db (they are always new)
-            return db.collection("ServiceProvider").find({savedToSP: false})
-                //console.log(err)
-                //console.log(doc)
-        }).then(async doc =>{
-            return doc
-        })    
-    },
-    
-
+   
     /*
     printValues: function(collection) {
         const client = new MongoClient(uri, { useUnifiedTopology: true });

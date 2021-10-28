@@ -84,9 +84,7 @@ var ProviderIntakeValidationSchema = yup.object().shape({
         .oneOf([true],"Please attest to the clients Eligibility"),
     serviceProviderResponsibility: yup.boolean()
         .oneOf([true],"please confirm the Service Provider Responsibility"),
-    /*organizationConsent: yup.boolean()
-        .oneOf([true],"Required"),
-        */
+   
 })
 
 module.exports = ProviderIntakeValidationSchema

@@ -170,8 +170,8 @@ class ServiceProviderSurvey extends Component {
                                 overallExperienceWithOnlineApplicationProcess: '',
                                 //step 2
                                 programsSupportOfClient: '',
-                                levelOfSupportsReceived: '',
-                                overallExperienceWithOrganization: '',
+                                likelyToRecommendProgram: '',
+                                experienceBetterComments: '',
 
                             }}
                             enableReinitialize={true}
