@@ -222,7 +222,7 @@ cron.schedule('*/5 * * * *', async function () {
 
 });
 
-cron.schedule('* */6 * * *', async function () {
+cron.schedule('0 */6 * * *', async function () {
   //30 7 * * *
   console.log('running a check to send surveys out every 6 hours');
   //console.log('running a task every 10 seconds');
@@ -818,7 +818,7 @@ async function saveListProviderSurvey(values) {
             "overallExperienceWithOnlineAppli": `${values.overallExperienceWithOnlineApplicationProcess}`,
             "programsSupportOfClient": `${values.programsSupportOfClient}`,
             "likelyToRecommendProgram": `${values.likelyToRecommendProgram}`,
-            "overallExperienceWithOrganizatio": `${values.experienceBetterComments}`,
+            "experienceBetterComments": `${values.experienceBetterComments}`,
             "ServiceProviderName": `${values.firstname}`,
             "cohort": `${values.cohort}`,
             "ReferralId": `${values.referral_wid}`,

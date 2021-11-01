@@ -227,7 +227,7 @@ your training?
                                 name="postTrainingPlans"
                                 value="Look for a job"
                             />
-                            <label className="form-check-label" htmlFor="postTrainingPlansLookForAJob">Look for a job</label>
+                            <label className="form-check-label" htmlFor="postTrainingPlans">Look for a job</label>
                         </div>
                         <div className="form-check">
                             <Field
@@ -236,7 +236,7 @@ your training?
                                 name="postTrainingPlans"
                                 value="Start my own business"
                             />
-                            <label className="form-check-label" htmlFor="postTrainingPlansStartMyOwnBusiness">Start my own business</label>
+                            <label className="form-check-label" htmlFor="postTrainingPlans">Start my own business</label>
                         </div>
                         <div className="form-check">
                             <Field
@@ -245,7 +245,7 @@ your training?
                                 name="postTrainingPlans"
                                 value="Enroll in more training and education"
                             />
-                            <label className="form-check-label" htmlFor="postTrainingPlansEnrollInMoreTrainingAndEducation">Enroll in more training and education</label>
+                            <label className="form-check-label" htmlFor="postTrainingPlans">Enroll in more training and education</label>
                         </div>
                         <div className="form-check">
                             <Field
@@ -254,7 +254,7 @@ your training?
                                 name="postTrainingPlans"
                                 value="Volunteer"
                             />
-                            <label className="form-check-label" htmlFor="postTrainingPlansVolunteering">Volunteering</label>
+                            <label className="form-check-label" htmlFor="postTrainingPlans">Volunteering</label>
                         </div>
     
                         <div className="form-check">
@@ -264,7 +264,7 @@ your training?
                                 name="postTrainingPlans"
                                 value="Other"
                             />
-                            <label className="form-check-label" htmlFor="postTrainingPlansOther">Other (not listed above)</label>
+                            <label className="form-check-label" htmlFor="postTrainingPlans">Other (not listed above)</label>
                             {feedBackInvalid(this.props.errors, this.props.touch, "postTrainingPlans")}
                         </div>
                     </div>
