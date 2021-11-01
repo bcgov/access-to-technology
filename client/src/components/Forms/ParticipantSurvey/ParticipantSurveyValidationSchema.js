@@ -35,12 +35,21 @@ export const ParticipantSurveyValidationSchema = yup.object().shape({
             '26-30',
             '31-35',
             '36-40',
-            '40+'
+            '40+',
+            '',
         ]),
     certificateProgram: yup.string()
         .max(200, "Max characters of what qualifications did you obtain through your skills training program is 200."),
-    postTrainingPlans: yup.string(),
-    bestPartOfTheProgramComments: yup.string()
+    postTrainingPlans: yup.string()
+        .oneOf([
+            'Look for a job',
+            'Start my own business',
+            'Enroll in more training and education',
+            'Volunteer',
+            'Other',
+            '',
+        ]),
+    feedBackAndExperienceComments: yup.string()
         .max(1000, "Max characters of best of part of program comments is 1000."),
    
 })

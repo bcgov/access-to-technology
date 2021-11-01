@@ -818,7 +818,7 @@ async function saveListProviderSurvey(values) {
             "overallExperienceWithOnlineAppli": `${values.overallExperienceWithOnlineApplicationProcess}`,
             "programsSupportOfClient": `${values.programsSupportOfClient}`,
             "likelyToRecommendProgram": `${values.likelyToRecommendProgram}`,
-            "overallExperienceWithOrganizatio": `${values.experienceBetterComments}`,
+            "experienceBetterComments": `${values.experienceBetterComments}`,
             "ServiceProviderName": `${values.firstname}`,
             "cohort": `${values.cohort}`,
             "ReferralId": `${values.referral_wid}`,
