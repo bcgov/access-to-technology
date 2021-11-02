@@ -47,7 +47,7 @@ likelyToRecommendProgram: yup.string()
         '5'
     ]),
 experienceBetterComments: yup.string()
-    .max(1000, "Max characters of your program experience comments is 1000.")
+    .max(1000, "Max characters of your program experience comment is 1000.")
 })
 
 module.exports = ServiceProviderSurveyValidationSchema;
