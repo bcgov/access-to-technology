@@ -47,7 +47,7 @@ module.exports = {
     /******************************/
     /* GET FUNCTIONS BEING CALLED */
     /******************************/
-    // GET VALUES FROM SERVICEPROVIDER TABLE TO VERIFY SURVEY LINK
+    // GET VALUES FROM ServiceProvider TABLE TO VERIFY SURVEY LINK
     getProviderValues: async function (values) {
         return await connection
         .then(mClient => {
