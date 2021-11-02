@@ -382,7 +382,7 @@ async function saveListProviderIntake(values) {
         //console.log(response)
         headers = response
         return request.post({
-          url: listWebURL + '/A2TTest/_api/contextInfo',
+          url: listWebURL + '/AccessToTechnology/_api/contextInfo',
           headers: headers,
           json: true,
         })
@@ -408,7 +408,7 @@ async function saveListProviderIntake(values) {
         headers['X-RequestDigest'] = response
         headers['Content-Type'] = "application/json;odata=verbose"
         // change to local AccesLs to Technology list
-        var l = listWebURL + `/A2TTest/_api/web/lists/getByTitle('A2TApplicationsTest')/items`
+        var l = listWebURL + `/AccessToTechnology/_api/web/lists/getByTitle('A2TApplications')/items`
         console.log("webURL:")
         console.log(l)
         // if electronic consent was completed, create consent link to append to application
@@ -427,7 +427,7 @@ async function saveListProviderIntake(values) {
           json: true,
           body: {
             "__metadata": {
-              "type": `SP.Data.A2TApplicationsTestListItem`
+              "type": `SP.Data.A2TApplicationsListItem`
             },
             "Title": `${values.serviceProviderName} - ${values.applicationId}`,
             'ApplicationID': values.applicationId,
@@ -511,7 +511,7 @@ async function saveProcessTimeToSP(values) {
         //console.log(response)
         headers = response
         return request.post({
-          url: listWebURL + '/A2TTest/_api/contextInfo',
+          url: listWebURL + '/AccessToTechnology/_api/contextInfo',
           headers: headers,
           json: true,
         })
@@ -524,7 +524,7 @@ async function saveProcessTimeToSP(values) {
         headers['X-HTTP-Method'] = "MERGE"
         headers['If-Match'] = "*"
         // change to local AccesLs to Technology list
-        var l = listWebURL + `/A2TTest/_api/web/lists/getByTitle('A2TApplicationsTest')/items('` + values.SPID + `')`
+        var l = listWebURL + `/AccessToTechnology/_api/web/lists/getByTitle('A2TApplications')/items('` + values.SPID + `')`
         console.log("webURL:")
         console.log(l)
         return request.post({
@@ -533,7 +533,7 @@ async function saveProcessTimeToSP(values) {
           json: true,
           body: {
             "__metadata": {
-              "type": `SP.Data.A2TApplicationsTestListItem`
+              "type": `SP.Data.A2TApplicationsListItem`
             },
             "ProcessTime": isInFourWeeks,
           }
@@ -578,7 +578,7 @@ async function saveCourseCompletionSurveyToSP(values) {
         //console.log(response)
         headers = response
         return request.post({
-          url: listWebURL + '/A2TTest/_api/contextInfo',
+          url: listWebURL + '/AccessToTechnology/_api/contextInfo',
           headers: headers,
           json: true,
         })
@@ -591,7 +591,7 @@ async function saveCourseCompletionSurveyToSP(values) {
         headers['X-HTTP-Method'] = "MERGE"
         headers['If-Match'] = "*"
         // change to local AccesLs to Technology list
-        var l = listWebURL + `/A2TTest/_api/web/lists/getByTitle('A2TApplicationsTest')/items('` + values.SPID + `')`
+        var l = listWebURL + `/AccessToTechnology/_api/web/lists/getByTitle('A2TApplications')/items('` + values.SPID + `')`
         console.log("webURL:")
         console.log(l)
         return request.post({
@@ -600,7 +600,7 @@ async function saveCourseCompletionSurveyToSP(values) {
           json: true,
           body: {
             "__metadata": {
-              "type": `SP.Data.A2TApplicationsTestListItem`
+              "type": `SP.Data.A2TApplicationsListItem`
             },
             "completedTraining": values.completedTraining,
             "minimallyCompleted": values.minimallyCompleted,
@@ -647,7 +647,7 @@ async function saveEmploymentSurveyToSP(values) {
         //console.log(response)
         headers = response
         return request.post({
-          url: listWebURL + '/A2TTest/_api/contextInfo',
+          url: listWebURL + '/AccessToTechnology/_api/contextInfo',
           headers: headers,
           json: true,
         })
@@ -660,7 +660,7 @@ async function saveEmploymentSurveyToSP(values) {
         headers['X-HTTP-Method'] = "MERGE"
         headers['If-Match'] = "*"
         // change to local AccesLs to Technology list
-        var l = listWebURL + `/A2TTest/_api/web/lists/getByTitle('A2TApplicationsTest')/items('` + values.SPID + `')`
+        var l = listWebURL + `/AccessToTechnology/_api/web/lists/getByTitle('A2TApplications')/items('` + values.SPID + `')`
         console.log("webURL:")
         console.log(l)
         return request.post({
@@ -669,7 +669,7 @@ async function saveEmploymentSurveyToSP(values) {
           json: true,
           body: {
             "__metadata": {
-              "type": `SP.Data.A2TApplicationsTestListItem`
+              "type": `SP.Data.A2TApplicationsListItem`
             },
             "employmentFound": values.employmentFound,
             "employmentStatus": values.employmentStatus,
@@ -716,7 +716,7 @@ async function saveListClientSurvey(values) {
         //console.log(response)
         headers = response
         return request.post({
-          url: listWebURL + '/A2TTest/_api/contextInfo',
+          url: listWebURL + '/AccessToTechnology/_api/contextInfo',
           headers: headers,
           json: true,
         })
@@ -728,7 +728,7 @@ async function saveListClientSurvey(values) {
         headers['X-RequestDigest'] = response
         headers['Content-Type'] = "application/json;odata=verbose"
         // change to local AccesLs to Technology list
-        var l = listWebURL + `/A2TTest/_api/web/lists/getByTitle('A2TClientSurvey')/items`
+        var l = listWebURL + `/AccessToTechnology/_api/web/lists/getByTitle('A2TClientSurvey')/items`
         console.log("webURL:")
         console.log(l)
         return request.post({
@@ -789,7 +789,7 @@ async function saveListProviderSurvey(values) {
         //console.log(response)
         headers = response
         return request.post({
-          url: listWebURL + '/A2TTest/_api/contextInfo',
+          url: listWebURL + '/AccessToTechnology/_api/contextInfo',
           headers: headers,
           json: true,
         })
@@ -801,7 +801,7 @@ async function saveListProviderSurvey(values) {
         headers['X-RequestDigest'] = response
         headers['Content-Type'] = "application/json;odata=verbose"
         // change to local AccesLs to Technology list
-        var l = listWebURL + `/A2TTest/_api/web/lists/getByTitle('A2TServiceProviderSurvey')/items`
+        var l = listWebURL + `/AccessToTechnology/_api/web/lists/getByTitle('A2TServiceProviderSurvey')/items`
         console.log("webURL:")
         console.log(l)
         return request.post({
@@ -819,7 +819,9 @@ async function saveListProviderSurvey(values) {
             "programsSupportOfClient": `${values.programsSupportOfClient}`,
             "likelyToRecommendProgram": `${values.likelyToRecommendProgram}`,
             "experienceBetterComments": `${values.experienceBetterComments}`,
-            "ServiceProviderName": `${values.firstname}`,
+            "ServiceProviderName": `${values.serviceProvider}`,
+            "ContactName":`${values.primaryContact}`,
+            "ContactEmail":`${values.userChannelId}`,
             "cohort": `${values.cohort}`,
             "ReferralId": `${values.referral_wid}`,
 
@@ -937,11 +939,11 @@ async function sendEmail(values, message) {
             from: 'Access to Technology <donotreply@gov.bc.ca>', // sender address
             to: `${values.userChannelId}`, // will be service provider Email
             bcc: '', // remove after
-            subject: `${values.firstname}, we need your insights on the Access to Technology (A2T) Program`, // Subject line
+            subject: `${values.firstName}, we need your insights on the Access to Technology (A2T) Program`, // Subject line
             html: generateHTMLEmail(
               "Access to Technology - Experience Survey",
               [
-                `Hello ${values.firstname},`,
+                `Hello ${values.firstName},`,
                 `You’re receiving this email because you’re participating in the Access to Technology (A2T) program.<br/>`,
 
                 `Thank you for being a part of the program. We’re always looking for ways to improve our services and hope you can help us.<br/>
@@ -950,8 +952,8 @@ async function sendEmail(values, message) {
                 <li>Please provide your thoughts, ideas, and any feedback as this will help improve the program - for you and for future participants.</li>
                 <li>All survey responses are confidential.</li>
               </ul>`,
-                `PLEASE <a href="https://access-to-technology-dev.apps.silver.devops.gov.bc.ca/ServiceProviderSurvey/${values.referral_wid}" style=" bgcolor: #ffffff; background-color: #ffffff;font-family: Helvetica, Arial, sans-serif; font-size: 14px; color: #294266 ! important; text-decoration: none; font-weight: bold; display: inline-block;" >CLICK HERE</a>, to complete the survey by <b>Wednesday, December 1, 2021</b>.<br/>`,
-                `Thank you in advance for your participation, ${values.firstname}. We look forward to hearing from you.<br/>`,
+                `PLEASE <a href="https://access-to-technology.es.workbc.ca/ServiceProviderSurvey/${values.referral_wid}" style=" bgcolor: #ffffff; background-color: #ffffff;font-family: Helvetica, Arial, sans-serif; font-size: 14px; color: #294266 ! important; text-decoration: none; font-weight: bold; display: inline-block;" >CLICK HERE</a>, to complete the survey by <b>Friday, December 3, 2021</b>.<br/>`,
+                `Thank you in advance for your participation, ${values.firstName}. We look forward to hearing from you.<br/>`,
                 `Sincerely,<br/>
               Your A2T Team`
               ])
@@ -978,7 +980,7 @@ async function sendEmail(values, message) {
                 <li>All survey responses are confidential.</li>
               </ul>`,
 
-                `PLEASE <a href="https://access-to-technology-dev.apps.silver.devops.gov.bc.ca/ParticipantSurvey/${values.applicationId}/${values._token}" style=" bgcolor: #ffffff; background-color: #ffffff;font-family: Helvetica, Arial, sans-serif; font-size: 14px; color: #294266 ! important; text-decoration: none; font-weight: bold; display: inline-block;" >CLICK HERE</a>, to complete the survey by <b>${getSurveyEndDate(values.periodEnd1)}</b>.<br/>`,
+                `PLEASE <a href="https://access-to-technology.es.workbc.ca/ParticipantSurvey/${values.applicationId}/${values._token}" style=" bgcolor: #ffffff; background-color: #ffffff;font-family: Helvetica, Arial, sans-serif; font-size: 14px; color: #294266 ! important; text-decoration: none; font-weight: bold; display: inline-block;" >CLICK HERE</a>, to complete the survey by <b>${getSurveyEndDate(values.periodEnd1)}</b>.<br/>`,
                 `Thank you in advance for your participation, ${values.clientName}. We look forward to hearing from you.<br/>`,
                 `Sincerely,<br/>
               Your A2T Team`
@@ -996,11 +998,11 @@ async function sendEmail(values, message) {
             html: generateHTMLEmail(
               "Access to Technology - Experience Survey",
               [
-                `Hello ${values.firstname},`,
+                `Hello ${values.firstName},`,
                 `You were recently invited to participate in a survey on the Access to Technology (A2T) program. Your feedback is critical as we strive to make the program better for you and for future participants.<br/>`,
                 `If you have not already completed the survey, we encourage you to do so. It only takes 2-3 minutes and your responses are confidential.<br/>`,
-                `PLEASE <a href="https://access-to-technology-dev.apps.silver.devops.gov.bc.ca/ServiceProviderSurvey/${values.referral_wid}" style=" bgcolor: #ffffff; background-color: #ffffff;font-family: Helvetica, Arial, sans-serif; font-size: 14px; color: #294266 ! important; text-decoration: none; font-weight: bold; display: inline-block;" >CLICK HERE</a>, to complete this survey by <b>Wednesday, December 1, 2021</b>.<br/>`,
-                `Thank you in advance for your help, ${values.firstname}.<br/>`,
+                `PLEASE <a href="https://access-to-technology.es.workbc.ca/ServiceProviderSurvey/${values.referral_wid}" style=" bgcolor: #ffffff; background-color: #ffffff;font-family: Helvetica, Arial, sans-serif; font-size: 14px; color: #294266 ! important; text-decoration: none; font-weight: bold; display: inline-block;" >CLICK HERE</a>, to complete this survey by <b>Friday, December 3, 2021</b>.<br/>`,
+                `Thank you in advance for your help, ${values.firstName}.<br/>`,
                 `Sincerely,<br/>
               Your A2T Team`
               ])
@@ -1020,7 +1022,7 @@ async function sendEmail(values, message) {
                 `Hello ${values.clientName},`,
                 `You were recently invited to participate in a survey on the Access to Technology (A2T) program. Your feedback is critical as we strive to make the program better for you and for future participants.<br/>`,
                 `If you have not already completed the survey, we encourage you to do so. It only takes 2-3 minutes and your responses are confidential.<br/>`,
-                `PLEASE <a href="https://access-to-technology-dev.apps.silver.devops.gov.bc.ca/ParticipantSurvey/${values.applicationId}/${values._token}" style=" bgcolor: #ffffff; background-color: #ffffff;font-family: Helvetica, Arial, sans-serif; font-size: 14px; color: #294266 ! important; text-decoration: none; font-weight: bold; display: inline-block;" >CLICK HERE</a>, to complete the survey by <b>${getSurveyEndDate(values.periodEnd1)}</b>.<br/>`,
+                `PLEASE <a href="https://access-to-technology.es.workbc.ca/ParticipantSurvey/${values.applicationId}/${values._token}" style=" bgcolor: #ffffff; background-color: #ffffff;font-family: Helvetica, Arial, sans-serif; font-size: 14px; color: #294266 ! important; text-decoration: none; font-weight: bold; display: inline-block;" >CLICK HERE</a>, to complete the survey by <b>${getSurveyEndDate(values.periodEnd1)}</b>.<br/>`,
                 `Thank you in advance for your help, ${values.clientName}.<br/>`,
                 `Sincerely,<br/>
               Your A2T Team`
@@ -1038,11 +1040,11 @@ async function sendEmail(values, message) {
             html: generateHTMLEmail(
               "Access to Technology - Experience Survey",
               [
-                `Hello ${values.firstname},`,
-                `Today, <b>December 1, 2021,</b> is the last day to participate in the Access to Technology (A2T) survey - don’t miss your opportunity to have your say.<br/>`,
+                `Hello ${values.firstName},`,
+                `Today, <b>December 3, 2021,</b> is the last day to participate in the Access to Technology (A2T) survey - don’t miss your opportunity to have your say.<br/>`,
                 `If you have not already completed the survey, we encourage you to do so. It only takes 2-3 minutes and your responses are confidential.<br/>`,
-                `PLEASE <a href="https://access-to-technology-dev.apps.silver.devops.gov.bc.ca/ServiceProviderSurvey/${values.referral_wid}" style=" bgcolor: #ffffff; background-color: #ffffff;font-family: Helvetica, Arial, sans-serif; font-size: 14px; color: #294266 ! important; text-decoration: none; font-weight: bold; display: inline-block;" >CLICK HERE</a>, to complete this survey.<br/>`,
-                `Thank you in advance for your help, ${values.firstname}.<br/>`,
+                `PLEASE <a href="https://access-to-technology.es.workbc.ca/ServiceProviderSurvey/${values.referral_wid}" style=" bgcolor: #ffffff; background-color: #ffffff;font-family: Helvetica, Arial, sans-serif; font-size: 14px; color: #294266 ! important; text-decoration: none; font-weight: bold; display: inline-block;" >CLICK HERE</a>, to complete this survey.<br/>`,
+                `Thank you in advance for your help, ${values.firstName}.<br/>`,
                 `Sincerely,<br/>
               Your A2T Team`
               ])
@@ -1062,7 +1064,7 @@ async function sendEmail(values, message) {
                 `Hello ${values.clientName},`,
                 `Today, is the last day to participate in the Access to Technology (A2T) survey - don’t miss your opportunity to have your say.<br/>`,
                 `If you have not already completed the survey, we encourage you to do so. It only takes 2-3 minutes and your responses are confidential.<br/>`,
-                `PLEASE <a href="https://access-to-technology-dev.apps.silver.devops.gov.bc.ca/ParticipantSurvey/${values.applicationId}/${values._token}" style=" bgcolor: #ffffff; background-color: #ffffff;font-family: Helvetica, Arial, sans-serif; font-size: 14px; color: #294266 ! important; text-decoration: none; font-weight: bold; display: inline-block;" >CLICK HERE</a>, to complete the survey by <b>${getSurveyEndDate(values.periodEnd1)}</b>.<br/>`,
+                `PLEASE <a href="https://access-to-technology.es.workbc.ca/ParticipantSurvey/${values.applicationId}/${values._token}" style=" bgcolor: #ffffff; background-color: #ffffff;font-family: Helvetica, Arial, sans-serif; font-size: 14px; color: #294266 ! important; text-decoration: none; font-weight: bold; display: inline-block;" >CLICK HERE</a>, to complete the survey by <b>${getSurveyEndDate(values.periodEnd1)}</b>.<br/>`,
                 `Thank you in advance for your help, ${values.clientName}.<br/>`,
                 `Sincerely,<br/>
               Your A2T Team`
@@ -1083,7 +1085,7 @@ async function sendEmail(values, message) {
                 `Hello ${values.serviceProviderContact},`,
                 `You’re receiving this email because you have an eligible client participating in the Access to Technology (A2T) program.<br/>
               We would like to request information on the client’s progress in their training program. Your response will help determine if the client gets to keep their laptop. Providing this information will take less than a minute.<br/>`,
-                `PLEASE <a href="https://access-to-technology-dev.apps.silver.devops.gov.bc.ca/courseCompletionSurvey/${values.applicationId}/${values._token}" style=" bgcolor: #ffffff; background-color: #ffffff;font-family: Helvetica, Arial, sans-serif; font-size: 14px; color: #294266 ! important; text-decoration: none; font-weight: bold; display: inline-block;" >CLICK HERE</a>, to submit this information.<br/>`,
+                `PLEASE <a href="https://access-to-technology.es.workbc.ca/courseCompletionSurvey/${values.applicationId}/${values._token}" style=" bgcolor: #ffffff; background-color: #ffffff;font-family: Helvetica, Arial, sans-serif; font-size: 14px; color: #294266 ! important; text-decoration: none; font-weight: bold; display: inline-block;" >CLICK HERE</a>, to submit this information.<br/>`,
 
                 `Application details are included below for your reference.<br/>
                 <b>Application ID:</b> ${values.applicationId}<br/>
@@ -1109,7 +1111,7 @@ async function sendEmail(values, message) {
                 `Hello ${values.serviceProviderContact},`,
                 `You’re receiving this email because you have an eligible client participating in the Access to Technology (A2T) program.<br/>
               We would like to request information on the client’s employment progress. Your response will help us understand the effectiveness of the A2T program in supporting clients to get employment. Providing this information will take less than a minute.<br/>`,
-                `PLEASE <a href="https://access-to-technology-dev.apps.silver.devops.gov.bc.ca/employmentSurvey/${values.applicationId}/${values._token}" style=" bgcolor: #ffffff; background-color: #ffffff;font-family: Helvetica, Arial, sans-serif; font-size: 14px; color: #294266 ! important; text-decoration: none; font-weight: bold; display: inline-block;" >CLICK HERE</a>, to submit this information.<br/>`,
+                `PLEASE <a href="https://access-to-technology.es.workbc.ca/employmentSurvey/${values.applicationId}/${values._token}" style=" bgcolor: #ffffff; background-color: #ffffff;font-family: Helvetica, Arial, sans-serif; font-size: 14px; color: #294266 ! important; text-decoration: none; font-weight: bold; display: inline-block;" >CLICK HERE</a>, to submit this information.<br/>`,
 
                 `Application details are included below for your reference.<br/>
                 <b>Application ID:</b> ${values.applicationId}<br/>
