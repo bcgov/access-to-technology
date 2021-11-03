@@ -308,11 +308,11 @@ cron.schedule('0 */6 * * *', async function () {
 });
 // Repeat pattern for 2 week and 4 week final reminder
 // Service Provider Survey Start Date
-const date1 = new Date(2021, 10, 3, 10, 17, 0);
+const date1 = new Date(2021, 10, 3, 10, 0, 0);
 // Service Provider Survey Reminder Date
-const date2 = new Date(2021, 10, 17, 10, 17, 0);
+const date2 = new Date(2021, 10, 17, 17, 0, 0);
 // Service Provider Survey Final Reminder Date
-const date3 = new Date(2021, 11, 3, 10, 17, 0);
+const date3 = new Date(2021, 11, 3, 17, 0, 0);
 // schedule provider Surveys to be sent
 schedule.scheduleJob(date1, async function () {
   // send to all in ServiceProvider table where completed = false
