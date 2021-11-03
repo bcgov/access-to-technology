@@ -6,6 +6,15 @@ function Home() {
             <div className="row">
                 <div className="col-md-12">
                     <div className="form-row">
+                            <div className="col-md-12">
+                                <div>
+                                    <div className="alert alert-dismissible alert-warning">
+                                        <button type="button" className="close" data-dismiss="alert">×</button>
+                                        <strong>IMPORTANT NOTICE:</strong> <br />Due to anticipated delays in postal shipping times this upcoming holiday season, it is recommended that Service Providers complete the A2T application process
+                                         by no later than  <strong>November 26, 2021</strong> to ensure clients receive their laptop for training starting in <strong>January 2022</strong>.   
+                                    </div>
+                                </div>
+                            </div>
                         <div className="form-row col-md-6">
                             <h1>Access to Technology</h1>
                             

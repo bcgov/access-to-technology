@@ -243,9 +243,9 @@ cron.schedule('0 */6 * * *', async function () {
         // if four weeks post training end date, send surveys
         if (isDateXWeeksOutorMore(data.periodEnd1, 4)) {
           //send out email course Completion Survey
-          sendEmail(data, 7)
+          await sendEmail(data, 7)
           //send out email client Survey
-          sendEmail(data, 2)
+          await sendEmail(data, 2)
           updateOneMonthSurveysSent("ProviderIntake", data._id)
           console.log("updateOneMonthSurveysSent");
 
@@ -262,7 +262,7 @@ cron.schedule('0 */6 * * *', async function () {
         // if 12 weeks post training end date, send survey
         if (isDateXWeeksOutorMore(data.periodEnd1, 12)) {
           //send out email client Employment Status 
-          sendEmail(data, 8)
+          await sendEmail(data, 8)
           updateThreeMonthSurveySent("ProviderIntake", data._id)
           console.log("updateThreeMonthSurveySent");
 
@@ -282,7 +282,7 @@ cron.schedule('0 */6 * * *', async function () {
           // if reminder has not already been sent
           if (!data.twoWeekReminderSent) {
             //send Reminder
-            sendEmail(data,4)
+            await sendEmail(data,4)
             //mark reminder as sent in mongo
             updateTwoWeekReminderSent("ProviderIntake", data._id)
             console.log("updateTwoWeekReminderSent");
@@ -293,7 +293,7 @@ cron.schedule('0 */6 * * *', async function () {
            // if reminder has not already been sent
           if (!data.fourWeekReminderSent) {
             //send Reminder
-             sendEmail(data,6)
+             await sendEmail(data,6)
             //mark reminder as sent in mongo
             updateFourWeekReminderSent("ProviderIntake", data._id)
             console.log("updateFourWeekReminderSent");
@@ -308,11 +308,11 @@ cron.schedule('0 */6 * * *', async function () {
 });
 // Repeat pattern for 2 week and 4 week final reminder
 // Service Provider Survey Start Date
-const date1 = new Date(2021, 10, 3, 10, 0, 0);
+const date1 = new Date(2021, 10, 3, 10, 17, 0);
 // Service Provider Survey Reminder Date
-const date2 = new Date(2021, 10, 17, 10, 0, 0);
+const date2 = new Date(2021, 10, 17, 10, 17, 0);
 // Service Provider Survey Final Reminder Date
-const date3 = new Date(2021, 11, 3, 10, 0, 0);
+const date3 = new Date(2021, 11, 3, 10, 17, 0);
 // schedule provider Surveys to be sent
 schedule.scheduleJob(date1, async function () {
   // send to all in ServiceProvider table where completed = false
@@ -322,7 +322,7 @@ schedule.scheduleJob(date1, async function () {
       console.log(results.length)
       for (const data of results) {
         clean(data)
-        sendEmail(data, 1);
+        await sendEmail(data, 1);
       }
     })
 });
@@ -336,7 +336,7 @@ schedule.scheduleJob(date2, async function () {
       console.log(results.length)
       for (const data of results) {
         clean(data)
-        sendEmail(data, 3);
+        await sendEmail(data, 3);
       }
     })
 });
@@ -350,7 +350,7 @@ schedule.scheduleJob(date3, async function () {
       console.log(results.length)
       for (const data of results) {
         clean(data)
-        sendEmail(data, 5);
+        await sendEmail(data, 5);
       }
     })
 });
