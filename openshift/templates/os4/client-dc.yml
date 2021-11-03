@@ -80,6 +80,18 @@ objects:
         location /api/sendConsentForm {
           proxy_pass ${API_URL};
         }
+        location /api/serviceProviderSurvey {
+          proxy_pass ${API_URL};
+        }
+        location /api/employmentSurvey {
+          proxy_pass ${API_URL};
+        }
+        location /api/courseCompletionSurvey {
+          proxy_pass ${API_URL};
+        }
+        location /api/participantSurvey {
+          proxy_pass ${API_URL};
+        }
         location / {
           try_files $uri /index.html;
           add_header Cache-Control 'no-cache';
