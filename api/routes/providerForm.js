@@ -98,6 +98,7 @@ async function sendEmails(values) {
 
 router.get('/', csrfProtection, (req, res) => {
   //saveList()
+
   var token = req.csrfToken()
   res.cookie('XSRF-TOKEN', token)
   res.send({
@@ -132,6 +133,9 @@ router.get('/getData/:id/:token', csrfProtection, async(req, res) => {
 router.post('/', csrfProtection, async (req, res) => {
   //clean the body
   //console.log(req.body)
+  console.log("POST request received to " + req.get("host") + req.originalUrl);
+  console.log("request body: ");
+  console.log(req.body);
   clean(req.body);
   ProviderIntakeValidationSchema.validate(req.body, { abortEarly: false })
     .then(async function (value) {

@@ -42,6 +42,9 @@ router.get('/', csrfProtection, (req, res) => {
 //post
 router.post('/', csrfProtection, async (req, res) => {
     clean(req.body);
+    console.log("POST request received to " + req.get("host") + req.originalUrl);
+    console.log("request body: ");
+    console.log(req.body);
     ParticipantSurveyValidationSchema.validate(req.body, { abortEarly: false })
         .then(async function (value) {
             try {
