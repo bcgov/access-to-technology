@@ -382,7 +382,7 @@ async function saveListProviderIntake(values) {
         //console.log(response)
         headers = response
         return request.post({
-          url: listWebURL + '/AccessToTechnology/_api/contextInfo',
+          url: listWebURL + '/A2TTest/_api/contextInfo',
           headers: headers,
           json: true,
         })
@@ -408,7 +408,7 @@ async function saveListProviderIntake(values) {
         headers['X-RequestDigest'] = response
         headers['Content-Type'] = "application/json;odata=verbose"
         // change to local AccesLs to Technology list
-        var l = listWebURL + `/AccessToTechnology/_api/web/lists/getByTitle('A2TApplications')/items`
+        var l = listWebURL + `/A2TTest/_api/web/lists/getByTitle('A2TApplicationsTest')/items`
         console.log("webURL:")
         console.log(l)
         // if electronic consent was completed, create consent link to append to application
@@ -427,7 +427,7 @@ async function saveListProviderIntake(values) {
           json: true,
           body: {
             "__metadata": {
-              "type": `SP.Data.A2TApplicationsListItem`
+              "type": `SP.Data.A2TApplicationsTestListItem`
             },
             "Title": `${values.serviceProviderName} - ${values.applicationId}`,
             'ApplicationID': values.applicationId,
@@ -511,7 +511,7 @@ async function saveProcessTimeToSP(values) {
         //console.log(response)
         headers = response
         return request.post({
-          url: listWebURL + '/AccessToTechnology/_api/contextInfo',
+          url: listWebURL + '/A2TTest/_api/contextInfo',
           headers: headers,
           json: true,
         })
@@ -524,7 +524,7 @@ async function saveProcessTimeToSP(values) {
         headers['X-HTTP-Method'] = "MERGE"
         headers['If-Match'] = "*"
         // change to local AccesLs to Technology list
-        var l = listWebURL + `/AccessToTechnology/_api/web/lists/getByTitle('A2TApplications')/items('` + values.SPID + `')`
+        var l = listWebURL + `/A2TTest/_api/web/lists/getByTitle('A2TApplicationsTest')/items('` + values.SPID + `')`
         console.log("webURL:")
         console.log(l)
         return request.post({
@@ -533,7 +533,7 @@ async function saveProcessTimeToSP(values) {
           json: true,
           body: {
             "__metadata": {
-              "type": `SP.Data.A2TApplicationsListItem`
+              "type": `SP.Data.A2TApplicationsTestListItem`
             },
             "ProcessTime": isInFourWeeks,
           }
@@ -578,7 +578,7 @@ async function saveCourseCompletionSurveyToSP(values) {
         //console.log(response)
         headers = response
         return request.post({
-          url: listWebURL + '/AccessToTechnology/_api/contextInfo',
+          url: listWebURL + '/A2TTest/_api/contextInfo',
           headers: headers,
           json: true,
         })
@@ -591,7 +591,7 @@ async function saveCourseCompletionSurveyToSP(values) {
         headers['X-HTTP-Method'] = "MERGE"
         headers['If-Match'] = "*"
         // change to local AccesLs to Technology list
-        var l = listWebURL + `/AccessToTechnology/_api/web/lists/getByTitle('A2TApplications')/items('` + values.SPID + `')`
+        var l = listWebURL + `/A2TTest/_api/web/lists/getByTitle('A2TApplicationsTest')/items('` + values.SPID + `')`
         console.log("webURL:")
         console.log(l)
         return request.post({
@@ -600,7 +600,7 @@ async function saveCourseCompletionSurveyToSP(values) {
           json: true,
           body: {
             "__metadata": {
-              "type": `SP.Data.A2TApplicationsListItem`
+              "type": `SP.Data.A2TApplicationsTestListItem`
             },
             "completedTraining": values.completedTraining,
             "minimallyCompleted": values.minimallyCompleted,
@@ -647,7 +647,7 @@ async function saveEmploymentSurveyToSP(values) {
         //console.log(response)
         headers = response
         return request.post({
-          url: listWebURL + '/AccessToTechnology/_api/contextInfo',
+          url: listWebURL + '/A2TTest/_api/contextInfo',
           headers: headers,
           json: true,
         })
@@ -660,7 +660,7 @@ async function saveEmploymentSurveyToSP(values) {
         headers['X-HTTP-Method'] = "MERGE"
         headers['If-Match'] = "*"
         // change to local AccesLs to Technology list
-        var l = listWebURL + `/AccessToTechnology/_api/web/lists/getByTitle('A2TApplications')/items('` + values.SPID + `')`
+        var l = listWebURL + `/A2TTest/_api/web/lists/getByTitle('A2TApplicationsTest')/items('` + values.SPID + `')`
         console.log("webURL:")
         console.log(l)
         return request.post({
@@ -669,7 +669,7 @@ async function saveEmploymentSurveyToSP(values) {
           json: true,
           body: {
             "__metadata": {
-              "type": `SP.Data.A2TApplicationsListItem`
+              "type": `SP.Data.A2TApplicationsTestListItem`
             },
             "employmentFound": values.employmentFound,
             "employmentStatus": values.employmentStatus,
@@ -716,7 +716,7 @@ async function saveListClientSurvey(values) {
         //console.log(response)
         headers = response
         return request.post({
-          url: listWebURL + '/AccessToTechnology/_api/contextInfo',
+          url: listWebURL + '/A2TTest/_api/contextInfo',
           headers: headers,
           json: true,
         })
@@ -728,7 +728,7 @@ async function saveListClientSurvey(values) {
         headers['X-RequestDigest'] = response
         headers['Content-Type'] = "application/json;odata=verbose"
         // change to local AccesLs to Technology list
-        var l = listWebURL + `/AccessToTechnology/_api/web/lists/getByTitle('A2TClientSurvey')/items`
+        var l = listWebURL + `/A2TTest/_api/web/lists/getByTitle('A2TClientSurvey')/items`
         console.log("webURL:")
         console.log(l)
         return request.post({
@@ -789,7 +789,7 @@ async function saveListProviderSurvey(values) {
         //console.log(response)
         headers = response
         return request.post({
-          url: listWebURL + '/AccessToTechnology/_api/contextInfo',
+          url: listWebURL + '/A2TTest/_api/contextInfo',
           headers: headers,
           json: true,
         })
@@ -801,7 +801,7 @@ async function saveListProviderSurvey(values) {
         headers['X-RequestDigest'] = response
         headers['Content-Type'] = "application/json;odata=verbose"
         // change to local AccesLs to Technology list
-        var l = listWebURL + `/AccessToTechnology/_api/web/lists/getByTitle('A2TServiceProviderSurvey')/items`
+        var l = listWebURL + `/A2TTest/_api/web/lists/getByTitle('A2TServiceProviderSurvey')/items`
         console.log("webURL:")
         console.log(l)
         return request.post({
