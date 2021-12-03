@@ -49,7 +49,8 @@ class FormStep3 extends Component {
                                         <li >Income assistance or hardship assistance under the Employment and Assistance Act (British Columbia);</li>
                                         <li >Disability assistance or hardship assistance under the Employment and Assistance for Persons with Disabilities Act (British Columbia);</li>
                                         <li >Social assistance provided by Indigenous Services Canada (ISC) for persons living on a First Nation Reserve;</li>
-                                        <li >Assistance from the British Columbia Ministry of Children and Family Development under an Agreement with a Young Adult.</li>
+                                        <li >Assistance from the British Columbia Ministry of Children and Family Development under an Agreement with a Young Adult.<br/> or <br/></li>
+                                        <li >Meets the definition of Employment Insurance Client or a General Client assessed as having financial need.</li>
                                     </ol>
                                 <li >Has reviewed the COLLECTION NOTICE and is aware they must sign an electronic Applicant Consent form; and</li>
 

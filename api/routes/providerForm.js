@@ -98,7 +98,6 @@ async function sendEmails(values) {
 
 router.get('/', csrfProtection, (req, res) => {
   //saveList()
-
   var token = req.csrfToken()
   res.cookie('XSRF-TOKEN', token)
   res.send({
