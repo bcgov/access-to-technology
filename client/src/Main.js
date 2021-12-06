@@ -11,8 +11,8 @@ import ThankYouParticipant from './components/Forms/ParticipantForm/thankyouPart
 import SendConsentForm from './components/Forms/SendConsentForm/SendConsentForm'
 import ThankYouSendConsent from './components/Forms/SendConsentForm/thankyouSendConsent'
 
-import ServiceProviderSurvey from './components/Forms/ServiceProviderSurvey/ServiceProviderSurvey'
-import ThankYouServiceProviderSurvey from './components/Forms/ServiceProviderSurvey/ThankYouServiceProviderSurvey'
+//import ServiceProviderSurvey from './components/Forms/ServiceProviderSurvey/ServiceProviderSurvey'
+//import ThankYouServiceProviderSurvey from './components/Forms/ServiceProviderSurvey/ThankYouServiceProviderSurvey'
 
 import CourseCompletionSurvey from './components/Forms/CourseCompletionSurvey/CourseCompletionSurvey'
 import ThankYouCourseCompletion from './components/Forms/CourseCompletionSurvey/thankyouCourseCompletion'
@@ -42,9 +42,6 @@ function Main() {
                     
                     <Route path="/SendConsentForm" component={SendConsentForm} />
                     <Route path="/thankyouSendConsent" component={ThankYouSendConsent} />
-                    
-                    <Route path="/ServiceProviderSurvey/:id/" component={ServiceProviderSurvey} />
-                    <Route path="/thankyouServiceProviderSurvey" component={ThankYouServiceProviderSurvey} />
 
                     <Route path="/courseCompletionSurvey/:id/:token/" component={CourseCompletionSurvey} />
                     <Route path="/thankyouCourseCompletion" component={ThankYouCourseCompletion} />
