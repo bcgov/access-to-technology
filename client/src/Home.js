@@ -13,6 +13,10 @@ function Home() {
                                         <strong>IMPORTANT NOTICE:</strong> <br />Due to anticipated delays in postal shipping times this upcoming holiday season, it is recommended that Service Providers complete the A2T application process
                                          by no later than  <strong>November 26, 2021</strong> to ensure clients receive their laptop for training starting in <strong>January 2022</strong>.   
                                     </div>
+                                    <div className="alert alert-dismissible alert-info">
+                                        <button type="button" className="close" data-dismiss="alert">×</button>
+                                        Effective December 13, 2021 Client eligibility criteria has been expanded. See the <a href="/PDF/A2TServiceProviderGuide.pdf#page=5" target="_blank" rel="noopener noreferrer">Access to Technology Service Provider Guide</a>.
+                                    </div>
                                 </div>
                             </div>
                         <div className="form-row col-md-6">
@@ -22,7 +26,6 @@ function Home() {
                                     training programs administered by Social Development and Poverty Reduction (SDPR), 
                                     Advanced Education and Skills Training (AEST) and Indigenous Skills and Employment Training (ISET), which:</p>
                                 <ul>
-                                    <li>Start on or after August 15, 2021;</li>
                                     <li>Have an online learning component;</li>
                                     <li>Leads to employment;</li>
                                     <li>Is a minimum of four consecutive weeks; and</li>
@@ -54,7 +57,7 @@ function Home() {
                                     </ul>
                                 <b className="text-primary">Indigenous Skills and Employment Training: </b>
                                 <ul>
-                                    <li>Skills training programs, as identified by each participating ISET Service Provider, and confirmed by the Ministry of Social Development and Poverty Reduction.</li>
+                                    <li>Skills training programs, as identified by each participating ISET Service Provider.</li>
                                 </ul>
                                 <p><b>Note</b>: The organization that is responsible for administering the majority share of funding for the approved skills training program must complete the A2T application form on their client’s behalf. </p>
                             </div>
