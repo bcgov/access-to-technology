@@ -706,18 +706,18 @@ class FormStep1 extends Component {
                                 className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "BCEAorFederalOnReserve")}`}
                                 type="checkbox"
                                 name="BCEAorFederalOnReserve"
-                                value="Employment Insurance Client assessed as having financial need."
+                                value="Employment Insurance (EI) Client assessed as having financial need."
                             />
-                            <label className="form-check-label" htmlFor="BCEAorFederalOnReserve">Employment Insurance Client assessed as having financial need.</label>
+                            <label className="form-check-label" htmlFor="BCEAorFederalOnReserve">Employment Insurance (EI) Client assessed as having financial need.</label>
                         </div>
                         <div className="form-check">
                             <Field
                                 className={`form-check-input ${feedBackClassName(this.props.errors, this.props.touched, "BCEAorFederalOnReserve")}`}
                                 type="checkbox"
                                 name="BCEAorFederalOnReserve"
-                                value="General Client assessed as having financial need."
+                                value="General Client who is either unemployed or precariously employed, is not identified as an EI or BCEA client and is assessed as having financial need."
                             />
-                            <label className="form-check-label" htmlFor="BCEAorFederalOnReserve">General Client assessed as having financial need.</label>
+                            <label className="form-check-label" htmlFor="BCEAorFederalOnReserve">General Client who is either unemployed or precariously employed, is not identified as an EI or BCEA client and is assessed as having financial need.</label>
                         </div>
                         {feedBackInvalid(this.props.errors, this.props.touched, "BCEAorFederalOnReserve")}
                     </div> 
