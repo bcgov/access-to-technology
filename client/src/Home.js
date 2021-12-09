@@ -49,7 +49,7 @@ function Home() {
                                         <li>Occupational Skills Training</li>
                                         <li>BC Adult Graduation Diploma</li>
                                     </ul>
-                                    <b className="text-primary">Workforce Innovation and Skills Training:  </b>
+                                    <b className="text-primary">Workforce Development and Skills Training:  </b>
                                     <ul>
                                         <li>Skills Training for Employment</li>
                                         <li>ITA Funded Pre-Apprenticeship Training</li>
