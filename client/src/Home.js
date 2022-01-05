@@ -8,11 +8,6 @@ function Home() {
                     <div className="form-row">
                             <div className="col-md-12">
                                 <div>
-                                    <div className="alert alert-dismissible alert-warning">
-                                        <button type="button" className="close" data-dismiss="alert">×</button>
-                                        <strong>IMPORTANT NOTICE:</strong> <br />Due to anticipated delays in postal shipping times this upcoming holiday season, it is recommended that Service Providers complete the A2T application process
-                                         by no later than  <strong>November 26, 2021</strong> to ensure clients receive their laptop for training starting in <strong>January 2022</strong>.   
-                                    </div>
                                     <div className="alert alert-dismissible alert-info">
                                         <button type="button" className="close" data-dismiss="alert">×</button>
                                         Effective December 13, 2021 Client eligibility criteria has been expanded. See the <a href="/PDF/A2TServiceProviderGuide.pdf#page=5" target="_blank" rel="noopener noreferrer">Access to Technology Service Provider Guide</a>.
