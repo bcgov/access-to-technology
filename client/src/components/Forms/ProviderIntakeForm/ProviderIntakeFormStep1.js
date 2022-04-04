@@ -536,6 +536,7 @@ class FormStep1 extends Component {
                         <option value="Short Duration Training">Short Duration Training</option>
                         <option value="Occupational Skills Training">Occupational Skills Training</option>
                         <option value="BC Adult Graduation Diploma">BC Adult Graduation Diploma</option>
+                        <option value="Other Eligible Services">Other Eligible Services</option>
                     </Field>
                     <small className="text-muted" id="trainingProgram">  This dropdown list is determined by the Referring Ministry selected above.</small>
                     {feedBackInvalid(this.props.errors, this.props.touched, "trainingProgram")}

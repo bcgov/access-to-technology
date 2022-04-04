@@ -10,7 +10,7 @@ function Home() {
                                 <div>
                                     <div className="alert alert-dismissible alert-info">
                                         <button type="button" className="close" data-dismiss="alert">×</button>
-                                        Effective December 13, 2021 Client eligibility criteria has been expanded. See the <a href="/PDF/A2TServiceProviderGuide.pdf#page=5" target="_blank" rel="noopener noreferrer">Access to Technology Service Provider Guide</a>.
+                                        Client eligibility criteria has been expanded. See the <a href="/PDF/A2TServiceProviderGuide.pdf#page=5" target="_blank" rel="noopener noreferrer">Access to Technology Service Provider Guide</a>.
                                     </div>
                                 </div>
                             </div>
@@ -43,6 +43,7 @@ function Home() {
                                         <li>Short Duration Training</li>
                                         <li>Occupational Skills Training</li>
                                         <li>BC Adult Graduation Diploma</li>
+                                        <li>Other Eligible Services</li>
                                     </ul>
                                     <b className="text-primary">Workforce Development and Skills Training:  </b>
                                     <ul>
