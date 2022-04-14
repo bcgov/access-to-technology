@@ -1,3 +1,3 @@
 # Access To Techonology
 
-Repository to hold Access To Technology. 
+Repository to hold Access To Technology code.
