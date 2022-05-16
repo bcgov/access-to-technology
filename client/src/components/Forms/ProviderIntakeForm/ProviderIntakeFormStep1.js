@@ -338,7 +338,7 @@ class FormStep1 extends Component {
     }
     get ApplicableProgramForm(){
         if (this.props.values.fundingSource === "ISET") {
-            if(this.props.values.serviceProviderName === "NENAS - North-East Native Advancing Society"){
+            if(this.props.values.serviceProviderName === "NENAS - North-East Native Advancing Society"){
                 return (<div className="form-row">
                 <div className="form-group col-md-6">
                     <label className="col-form-label control-label" htmlFor="trainingProgram">Eligible Skills Training Program<span
@@ -362,7 +362,7 @@ class FormStep1 extends Component {
                 </div>
             </div>)
             }
-            else if(this.props.values.serviceProviderName === "MNBC - Métis Nation of British Columbia"){
+            else if(this.props.values.serviceProviderName === "MNBC - Métis Nation of British Columbia"){
                 return (<div className="form-row">
                 <div className="form-group col-md-6">
                     <label className="col-form-label control-label" htmlFor="trainingProgram">Eligible Skills Training Program<span
@@ -382,7 +382,7 @@ class FormStep1 extends Component {
                 </div>
             </div>)
             }
-            else if(this.props.values.serviceProviderName === "NETP - Nuu-chah-nulth Employment and Training Program"){
+            else if(this.props.values.serviceProviderName === "NETP - Nuu-chah-nulth Employment and Training Program"){
                 return (<div className="form-row">
                 <div className="form-group col-md-6">
                     <label className="col-form-label control-label" htmlFor="trainingProgram">Eligible Skills Training Program<span
@@ -404,7 +404,7 @@ class FormStep1 extends Component {
                 </div>
             </div>)
             }
-            else if(this.props.values.serviceProviderName === "NVIATS - North Vancouver Island Aboriginal Training Society"){
+            else if(this.props.values.serviceProviderName === "NVIATS - North Vancouver Island Aboriginal Training Society"){
                 return (<div className="form-row">
                 <div className="form-group col-md-6">
                     <label className="col-form-label control-label" htmlFor="trainingProgram">Eligible Skills Training Program<span
@@ -427,7 +427,7 @@ class FormStep1 extends Component {
                 </div>
             </div>)
             }
-            else if(this.props.values.serviceProviderName === "PGNAETA - Prince George Nechako Aboriginal Employment and Training Association"){
+            else if(this.props.values.serviceProviderName === "PGNAETA - Prince George Nechako Aboriginal Employment and Training Association"){
                 return (<div className="form-row">
                 <div className="form-group col-md-6">
                     <label className="col-form-label control-label" htmlFor="trainingProgram">Eligible Skills Training Program<span
@@ -451,7 +451,7 @@ class FormStep1 extends Component {
                 </div>
             </div>)
             }
-            else if(this.props.values.serviceProviderName === "TRICORP - Tribal Resources Investment Corporation"){
+            else if(this.props.values.serviceProviderName === "TRICORP - Tribal Resources Investment Corporation"){
                 return (<div className="form-row">
                 <div className="form-group col-md-6">
                     <label className="col-form-label control-label" htmlFor="trainingProgram">Eligible Skills Training Program<span
@@ -475,7 +475,7 @@ class FormStep1 extends Component {
                 </div>
             </div>)
             }
-            else if(this.props.values.serviceProviderName === "SNTC - Shuswap Nation Tribal Council (formerly Central Interior Partners in Human Resource Development)" || this.props.values.serviceProviderName === "LTC - Lillooet Tribal Council" || this.props.values.serviceProviderName === "KNC - Ktunaxa Nation Council"){
+            else if(this.props.values.serviceProviderName === "SNTC - Shuswap Nation Tribal Council (formerly Central Interior Partners in Human Resource Development)" || this.props.values.serviceProviderName === "LTC - Lillooet Tribal Council" || this.props.values.serviceProviderName === "KNC - Ktunaxa Nation Council"){
                 return (<div className="form-row">
                 <div className="form-group col-md-6">
                     <label className="col-form-label control-label" htmlFor="trainingProgram">Eligible Skills Training Program<span
