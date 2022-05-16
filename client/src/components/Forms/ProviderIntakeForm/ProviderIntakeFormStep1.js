@@ -382,7 +382,7 @@ class FormStep1 extends Component {
                 </div>
             </div>)
             }
-            else if(this.props.values.serviceProviderName === "NETP - Nuu-chah-nulth Employment and Training Program"){
+            else if(this.props.values.serviceProviderName === "NETP - Nuu-chah-nulth Employment and Training Program"){
                 return (<div className="form-row">
                 <div className="form-group col-md-6">
                     <label className="col-form-label control-label" htmlFor="trainingProgram">Eligible Skills Training Program<span
