@@ -129,7 +129,7 @@ router.get('/getData/:id/:token', csrfProtection, async(req, res) => {
 
 
     
-router.post('/', csrfProtection, async (req, res) => {
+router.post('/', async (req, res) => {
   //clean the body
   //console.log(req.body)
   console.log("POST request received to " + req.get("host") + req.originalUrl);
