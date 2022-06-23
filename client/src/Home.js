@@ -26,7 +26,7 @@ function Home() {
                                     <li>Is a minimum of four consecutive weeks; and</li>
                                     <li>Is on the list of approved skills training programs.</li>
                                 </ul>
-                                <p>For additional Service Provider Information see the <a href="/PDF/A2TServiceProviderGuide.pdf" target="_blank" rel="noopener noreferrer" >Access to Technology (A2T) Service Provider Guide</a> and the <a href="https://www.youtube.com/watch?v=-uge63dLsOk" target="_blank" rel="noopener noreferrer" >Access to Technology (A2T) Session Video</a>.</p>
+                                <p>For additional Service Provider Information see the <a href="https://sdpr.sp.gov.bc.ca/sites/Workbcextranet/Resources/Access%20to%20Technology%20A2T%20Resources/A2T%20Service%20Provider%20Guide.pdf" target="_blank" rel="noopener noreferrer" >A2T Service Provider Guide</a> and the <a href="https://sdpr.sp.gov.bc.ca/sites/Workbcextranet/Resources/Access%20to%20Technology%20A2T%20Resources/A2T%20Service%20Provider%20Overview.pptx?d=w464f1eca8da841568c8af1955e86780a" target="_blank" rel="noopener noreferrer" >Access to Technology (A2T) Service Provider Overview</a>.</p>
                                 <p>In order to submit an application for a client to access the A2T Program, you will need the following: </p>
                                 <ol style={{listStyleType:"decimal"}}>
                                     <li>Training Program start and end dates</li>
