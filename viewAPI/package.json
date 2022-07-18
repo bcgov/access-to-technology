@@ -1,5 +1,5 @@
 {
-  "main": "dist/viewAPI/src/app.js",
+  "main": "dist/app.js",
   "name": "workbc-a2t-view-api",
   "version": "0.0.0",
   "private": true,
