@@ -18,7 +18,7 @@ const viewRouter = require('./routes/view.route')
 
 app.use(morgan('[:date] :method :url :status :res[content-length] - :remote-addr - :response-time ms'));
 app.set('trust proxy', 'loopback, linklocal, uniquelocal')
-app.use(basicAuth({users}))
+//app.use(basicAuth({users}))
 
 app.use(express.json({limit: "6mb"}));
 app.use(express.urlencoded({ extended: false }));
