@@ -34,6 +34,7 @@ app.use(helmet.contentSecurityPolicy({
 }))
 
 app.use(cors())
+app.options('*', cors())
 
 app.use('/view', viewRouter)
 
