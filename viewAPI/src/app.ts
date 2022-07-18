@@ -13,7 +13,7 @@ console.log('**** users: ', users);
 const app = express();
 const basicAuth = require('express-basic-auth')
 const morgan = require('morgan')
-
+const corsOptions = { origin: "*", "methods": "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS", preflightContinue: false, "optionsSuccessStatus": 204 }
 const viewRouter = require('./routes/view.route')
 
 app.use(morgan('[:date] :method :url :status :res[content-length] - :remote-addr - :response-time ms'));
@@ -33,7 +33,7 @@ app.use(helmet.contentSecurityPolicy({
   }
 }))
 
-app.use(cors())
+app.use(cors(corsOptions))
 app.options('*', cors())
 
 app.use('/view', viewRouter)
