@@ -30,7 +30,7 @@ export const sendMessage = async (token: string, content: string, title: string,
 export const getAllProviderIntakes = async (): Promise<any> => {
     try {
         const data = await getProviderIntakeAll();
-        console.log('**** data: ', data);
+        //console.log('**** data: ', data);
         return data;
     } catch (error: any) {
         console.log(error)

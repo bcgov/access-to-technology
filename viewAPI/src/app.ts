@@ -18,7 +18,16 @@ const viewRouter = require('./routes/view.route')
 
 app.use(morgan('[:date] :method :url :status :res[content-length] - :remote-addr - :response-time ms'));
 app.set('trust proxy', 'loopback, linklocal, uniquelocal')
-//app.use(basicAuth({users}))
+
+const shouldAuthenticate=(req: express.Request)=>{
+  console.log(req.method)
+  if(req.method==='OPTIONS')
+    return false;
+  return true;
+}
+
+const basicAuthMiddleware = basicAuth({users});
+app.use((req, res, next) => shouldAuthenticate(req) ? basicAuthMiddleware(req, res, next) : next());
 
 app.use(express.json({limit: "6mb"}));
 app.use(express.urlencoded({ extended: false }));

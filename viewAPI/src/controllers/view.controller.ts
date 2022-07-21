@@ -8,7 +8,7 @@ export const getAllProviders = async (req: express.Request, res: express.Respons
         const response = await viewService.getAllProviderIntakes()
         // Response is a message ID string.
         //console.log('Successfully sent message:', response);
-        console.log("RESPONSE: ", response)
+        //console.log("RESPONSE: ", response)
         return res.status(200).send(response);
     } catch (e: any) {
         console.log("catching")
