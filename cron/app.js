@@ -1084,7 +1084,7 @@ async function sendEmail(values, message) {
               [
                 `Hello ${values.serviceProviderContact},`,
                 `You’re receiving this email because you have an eligible client participating in the Access to Technology (A2T) program.<br/>
-              We would like to request information on the client’s progress in their training program. Your response will help determine if the client gets to keep their laptop. Providing this information will take less than a minute.<br/>`,
+              We would like to request information on the client’s progress in their training program. Providing this information will take less than a minute.<br/>`,
                 `PLEASE <a href="https://access-to-technology.es.workbc.ca/courseCompletionSurvey/${values.applicationId}/${values._token}" style=" bgcolor: #ffffff; background-color: #ffffff;font-family: Helvetica, Arial, sans-serif; font-size: 14px; color: #294266 ! important; text-decoration: none; font-weight: bold; display: inline-block;" >CLICK HERE</a>, to submit this information.<br/>`,
 
                 `Application details are included below for your reference.<br/>
