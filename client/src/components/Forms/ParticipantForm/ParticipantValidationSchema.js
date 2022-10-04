@@ -9,8 +9,10 @@ export const ParticipantValidationSchema = yup.object().shape({
     _token:yup.string().required("Please enter the application token.")
     .min(25, "Must be 25 characters")
     .max(25, "Must be 25 characters"),
+    clientName: yup.string().required('Please enter your first name'),
+    clientLastName: yup.string().required('Please enter your last name'),
     clientSignature: yup.string()
-        .required('Please select the service provider name'),
+        .required('Please enter your full name'),
     clientConsent: yup.boolean()
         .oneOf([true],"You must agree before submitting."),
     clientConsentDate: yup.date()
