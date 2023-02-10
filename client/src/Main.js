@@ -32,6 +32,7 @@ function Main() {
         <main role="main">
             <Router>
                 <Switch>
+                    {/*
                     <Route path="/ProviderIntake" component={ProviderIntakeForm} />
                     <Route path="/ProviderIntake/:id/:token/" component={ProviderIntakeForm} />
                     <Route path="/thankyouProviderIntake" component={ThankYouProviderIntake}  />
@@ -42,6 +43,7 @@ function Main() {
                     
                     <Route path="/SendConsentForm" component={SendConsentForm} />
                     <Route path="/thankyouSendConsent" component={ThankYouSendConsent} />
+                    */}
 
                     <Route path="/courseCompletionSurvey/:id/:token/" component={CourseCompletionSurvey} />
                     <Route path="/thankyouCourseCompletion" component={ThankYouCourseCompletion} />
