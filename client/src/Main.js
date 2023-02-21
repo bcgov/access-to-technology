@@ -23,6 +23,8 @@ import ThankYouEmploymentSurvey from './components/Forms/EmploymentSurvey/thanky
 import ParticipantSurvey from './components/Forms/ParticipantSurvey/ParticipantSurvey'
 import ThankYouParticipantSurvey from './components/Forms/ParticipantSurvey/thankyouParticipantSurvey'
 
+import SurveyNotAvailable from './components/Forms/SurveyNotAvailable/SurveyNotAvailable'
+
 
 
 
@@ -32,7 +34,6 @@ function Main() {
         <main role="main">
             <Router>
                 <Switch>
-                    {/*
                     <Route path="/ProviderIntake" component={ProviderIntakeForm} />
                     <Route path="/ProviderIntake/:id/:token/" component={ProviderIntakeForm} />
                     <Route path="/thankyouProviderIntake" component={ThankYouProviderIntake}  />
@@ -43,18 +44,17 @@ function Main() {
                     
                     <Route path="/SendConsentForm" component={SendConsentForm} />
                     <Route path="/thankyouSendConsent" component={ThankYouSendConsent} />
-                    */}
 
-                    <Route path="/courseCompletionSurvey/:id/:token/" component={CourseCompletionSurvey} />
+                    <Route path="/courseCompletionSurvey/:id/:token/" component={SurveyNotAvailable} />
                     <Route path="/thankyouCourseCompletion" component={ThankYouCourseCompletion} />
 
-                    <Route path="/EmploymentSurvey/:id/:token/" component={EmploymentSurvey} />
+                    <Route path="/EmploymentSurvey/:id/:token/" component={SurveyNotAvailable} />
                     <Route path="/thankyouEmploymentSurvey" component={ThankYouEmploymentSurvey} />
 
-                    <Route path="/ParticipantSurvey/:id/:token/" component={ParticipantSurvey} />
+                    <Route path="/ParticipantSurvey/:id/:token/" component={SurveyNotAvailable} />
                     <Route path="/thankyouParticipantSurvey" component={ThankYouParticipantSurvey}  />
 
-                    <Route path="/ServiceProviderSurvey/:id/" component={ServiceProviderSurvey} />
+                    <Route path="/ServiceProviderSurvey/:id/" component={SurveyNotAvailable} />
                     <Route path="/thankyouServiceProviderSurvey" component={ThankYouServiceProviderSurvey} />
 
                     <Route path="/">
