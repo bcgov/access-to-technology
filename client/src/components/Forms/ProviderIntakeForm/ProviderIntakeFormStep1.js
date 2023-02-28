@@ -626,7 +626,7 @@ class FormStep1 extends Component {
                             name="periodStart1"
                             className={`form-control ${feedBackClassName(this.props.errors, this.props.touched, "periodStart1")}`}
                             minDate={new Date(new Date().getTime() + 24 * 60 * 60 * 1000)}
-                            maxDate={new Date(2023,2,2)}
+                            maxDate={new Date(2023,5,31)}
                         />
                         <small className="text-muted" id="periodStart1"> Note: Application for a laptop must be for a future training program start date as Clients are not eligible to receive a laptop when their training program has already started.</small>
                         {feedBackInvalid(this.props.errors, this.props.touched, "periodStart1")}
