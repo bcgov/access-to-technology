@@ -34,15 +34,10 @@ function Main() {
         <main role="main">
             <Router>
                 <Switch>
-                    <Route path="/ProviderIntake" component={ProviderIntakeForm} />
-                    <Route path="/ProviderIntake/:id/:token/" component={ProviderIntakeForm} />
                     <Route path="/thankyouProviderIntake" component={ThankYouProviderIntake}  />
                     
-                    
-                    <Route path="/clientConsent/:id/:token/" component={ParticipantIntakeForm} />
                     <Route path="/thankyouParticipant" component={ThankYouParticipant} />
                     
-                    <Route path="/SendConsentForm" component={SendConsentForm} />
                     <Route path="/thankyouSendConsent" component={ThankYouSendConsent} />
 
                     <Route path="/courseCompletionSurvey/:id/:token/" component={SurveyNotAvailable} />

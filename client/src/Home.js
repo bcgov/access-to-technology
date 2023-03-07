@@ -10,7 +10,8 @@ function Home() {
                                 <div>
                                     <div className="alert alert-dismissible alert-info">
                                         <button type="button" className="close" data-dismiss="alert">×</button>
-                                        Client eligibility criteria has been expanded. See the <a href="/PDF/A2TServiceProviderGuide.pdf#page=5" target="_blank" rel="noopener noreferrer">Access to Technology Service Provider Guide</a>.
+                                        <b>Thank you for your participation in the Access to Technology (A2T) program.</b>  We have distributed all our supply of laptops and this one-time program initiative is now over. <br />
+                                        Technical support remains in place until September 2023. Should your client have a technical or hardware issue please call <b>1-877-250-9936</b> (Monday – Friday 8:30 – 4:30 PST).
                                     </div>
                                 </div>
                             </div>
@@ -57,16 +58,6 @@ function Home() {
                                 </ul>
                                 <p><b>Note</b>: The organization that is responsible for administering the majority share of funding for the approved skills training program must complete the A2T application form on their client’s behalf. </p>
                             </div>
-                        </div>
-                    </div>
-                    <div className="form-row">
-                        <div className="form-row col-md-6">
-                            <h3>Step 1 - Send Client Consent and Agreement form</h3>
-                            <p><a href="/SendConsentForm" className="btn btn-lg btn-primary">Start</a><br/></p>
-                        </div>
-                        <div className="form-row col-md-6">
-                            <h3>Step 2 – Complete Application</h3>
-                            <p>Once your client has completed the Client Consent and Agreement form, you will receive an email with a link to the online application form. Please use the link to complete the application on your client’s behalf.<br/></p>
                         </div>
                     </div>
                 </div>
