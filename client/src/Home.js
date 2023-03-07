@@ -9,9 +9,8 @@ function Home() {
                             <div className="col-md-12">
                                 <div>
                                     <div className="alert alert-dismissible alert-info">
-                                        <button type="button" className="close" data-dismiss="alert">×</button>
-                                        <b>Thank you for your participation in the Access to Technology (A2T) program.</b>  We have distributed all our supply of laptops and this one-time program initiative is now over. <br />
-                                        Technical support remains in place until September 2023. Should your client have a technical or hardware issue please call <b>1-877-250-9936</b> (Monday – Friday 8:30 – 4:30 PST).
+                                        <p><b>Thank you for your participation in the Access to Technology (A2T) program.</b>  We have distributed all our supply of laptops and this one-time program initiative is now over.</p>
+                                        <p>Technical support remains in place until September 2023. Should your client have a technical or hardware issue please call <b>1-877-250-9936</b> (Monday – Friday 8:30 – 4:30 PST).</p>
                                     </div>
                                 </div>
                             </div>
